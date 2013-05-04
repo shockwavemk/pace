@@ -16,5 +16,17 @@ namespace PaceClient
         {
             InitializeComponent();
         }
+
+        private void MainClientForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MainClientForm_Resize(object sender, EventArgs e)
+        {
+            MessageBox.Show("Hello, C# World!", "Howdy", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            if (FormWindowState.Minimized == WindowState)
+                Hide();
+        }
     }
 }
