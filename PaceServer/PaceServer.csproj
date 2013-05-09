@@ -75,6 +75,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClientConnection.cs" />
+    <Compile Include="NetworkServer.cs" />
     <Compile Include="MainServerForm.cs">
       <SubType>Form</SubType>
     </Compile>
