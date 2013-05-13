@@ -5,13 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaceServer", "PaceServer\Pa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaceClient", "PaceClient\PaceClient.csproj", "{B93112F3-B781-4E39-B685-66D6BF455BD4}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dokumente", "Dokumente", "{7A146B0B-1251-4389-A702-35E208763064}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Protokolle", "Protokolle", "{77274E79-6169-4A39-80D9-A94D6C305E76}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\..\..\Desktop\Protokoll 12-04-2013.docx = ..\..\..\..\Desktop\Protokoll 12-04-2013.docx
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,8 +22,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{77274E79-6169-4A39-80D9-A94D6C305E76} = {7A146B0B-1251-4389-A702-35E208763064}
 	EndGlobalSection
 EndGlobal
