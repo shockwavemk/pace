@@ -102,6 +102,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="Dokumente\Protolle\Protokoll 15-05-2013.docx" />
     <None Include="Dokumente\Vorstellung\Masterarbeit_MK.pptx" />
     <None Include="PaceClient_TemporaryKey.pfx" />
     <None Include="Properties\app.manifest" />
