@@ -13,10 +13,11 @@ namespace PaceServer
     {
         public TcpClient TcpClient;
         private Thread ThreadConnection;
-        private StreamReader ClientReceiver;
-        private StreamWriter ClientSender;
+        private StreamReader ConnectionReceiver;
+        private StreamWriter ConnectionSender;
 
         private bool _connectionEstablished;
+        private string _clientResponse;
 
         public ClientConnection(TcpClient tcpConnection)
         {
@@ -25,18 +26,17 @@ namespace PaceServer
             ThreadConnection.Start();
         }
 
-        public void AcceptClient()
+        private void AcceptClient()
         {
             #region Registration
             try
             {
-                ClientReceiver = new StreamReader(TcpClient.GetStream());
-                ClientSender = new StreamWriter(TcpClient.GetStream());
+                ConnectionReceiver = new StreamReader(TcpClient.GetStream());
+                ConnectionSender = new StreamWriter(TcpClient.GetStream());
 
                 // TODO Registration / Identification
-                bool Register = false; // TODO
-                int ClientId = 0; // TODO
-
+                bool Register = false; // TODO remove this
+                
                 if (Register)
                 {
                     CloseConnection();
@@ -44,17 +44,11 @@ namespace PaceServer
                 }
                 else
                 {
-                    _connectionEstablished = true;
-                    ClientInformation clientInformation = ClientInformation.GetClientInformation(ClientId);
-                    // Tell the Client: everything is fine
-                    ClientSender.WriteLine("1"); // TODO Add conversation in external function
-                    ClientSender.WriteLine("Welcome");
-                    ClientSender.Flush();
+                    HandleAdd();
                 }
             }
             catch (Exception)
             {
-
                 throw new NotImplementedException();
             }
             #endregion
@@ -62,14 +56,40 @@ namespace PaceServer
             #region Responses
             try
             {
-
+                while ((_clientResponse = ConnectionReceiver.ReadLine()) != "")
+                {
+                    if (_clientResponse == null)
+                    {
+                        CloseConnection();
+                    }
+                    else
+                    {
+                        HandleResponse(_clientResponse);
+                    }
+                }
             }
             catch (Exception)
             {
-
                 throw new NotImplementedException();
             }
             #endregion
+        }
+
+
+        private void HandleAdd()
+        {
+            int ClientId = 0; // TODO remove this
+            _connectionEstablished = true;
+            ClientInformation clientInformation = ClientInformation.GetClientInformation(ClientId); // first line for identification of client
+            // Tell the Client: everything is fine
+            ConnectionSender.WriteLine("1"); // TODO Add conversation in external function
+            ConnectionSender.WriteLine("Welcome");
+            ConnectionSender.Flush();
+        }
+
+        private void HandleResponse(string rawResponse)
+        {
+            throw new NotImplementedException();
         }
 
         public void CloseConnection()
