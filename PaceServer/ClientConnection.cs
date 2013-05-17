@@ -13,6 +13,9 @@ namespace PaceServer
     {
         public TcpClient TcpClient;
         private Thread ThreadConnection;
+        private StreamReader ClientReceiver;
+        private StreamWriter ClientSender;
+
         private bool _connectionEstablished;
 
         public ClientConnection(TcpClient tcpConnection)
@@ -24,6 +27,7 @@ namespace PaceServer
 
         public void AcceptClient()
         {
+            #region Registration
             try
             {
                 ClientReceiver = new StreamReader(TcpClient.GetStream());
@@ -42,15 +46,30 @@ namespace PaceServer
                 {
                     _connectionEstablished = true;
                     ClientInformation clientInformation = ClientInformation.GetClientInformation(ClientId);
-
+                    // Tell the Client: everything is fine
+                    ClientSender.WriteLine("1"); // TODO Add conversation in external function
+                    ClientSender.WriteLine("Welcome");
+                    ClientSender.Flush();
                 }
+            }
+            catch (Exception)
+            {
+
+                throw new NotImplementedException();
+            }
+            #endregion
+
+            #region Responses
+            try
+            {
 
             }
             catch (Exception)
             {
-                
-                throw;
+
+                throw new NotImplementedException();
             }
+            #endregion
         }
 
         public void CloseConnection()
