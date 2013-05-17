@@ -12,9 +12,9 @@ namespace PaceServer
     class ClientConnection
     {
         public TcpClient TcpClient;
-        private Thread ThreadConnection;
-        private StreamReader ConnectionReceiver;
-        private StreamWriter ConnectionSender;
+        private Thread _threadConnection;
+        private StreamReader _connectionReceiver;
+        private StreamWriter _connectionSender;
 
         private bool _connectionEstablished;
         private string _clientResponse;
@@ -22,8 +22,8 @@ namespace PaceServer
         public ClientConnection(TcpClient tcpConnection)
         {
             TcpClient = tcpConnection;
-            ThreadConnection = new Thread(AcceptClient);
-            ThreadConnection.Start();
+            _threadConnection = new Thread(AcceptClient);
+            _threadConnection.Start();
         }
 
         private void AcceptClient()
@@ -31,8 +31,8 @@ namespace PaceServer
             #region Registration
             try
             {
-                ConnectionReceiver = new StreamReader(TcpClient.GetStream());
-                ConnectionSender = new StreamWriter(TcpClient.GetStream());
+                _connectionReceiver = new StreamReader(TcpClient.GetStream());
+                _connectionSender = new StreamWriter(TcpClient.GetStream());
 
                 // TODO Registration / Identification
                 bool Register = false; // TODO remove this
@@ -56,7 +56,7 @@ namespace PaceServer
             #region Responses
             try
             {
-                while ((_clientResponse = ConnectionReceiver.ReadLine()) != "")
+                while ((_clientResponse = _connectionReceiver.ReadLine()) != "")
                 {
                     if (_clientResponse == null)
                     {
@@ -82,9 +82,9 @@ namespace PaceServer
             _connectionEstablished = true;
             ClientInformation clientInformation = ClientInformation.GetClientInformation(ClientId); // first line for identification of client
             // Tell the Client: everything is fine
-            ConnectionSender.WriteLine("1"); // TODO Add conversation in external function
-            ConnectionSender.WriteLine("Welcome");
-            ConnectionSender.Flush();
+            _connectionSender.WriteLine("1"); // TODO Add conversation in external function
+            _connectionSender.WriteLine("Welcome");
+            _connectionSender.Flush();
         }
 
         private void HandleResponse(string rawResponse)
@@ -95,7 +95,7 @@ namespace PaceServer
         public void CloseConnection()
         {
             TcpClient.Close();
-            ThreadConnection.Abort();
+            _threadConnection.Abort();
         }
     }
 }
