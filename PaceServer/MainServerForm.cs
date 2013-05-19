@@ -13,29 +13,35 @@ namespace PaceServer
 {
     public partial class MainServerForm : Form
     {
+        private delegate void UpdateStatusCallback(string strMessage);
         public MainServerForm()
         {
             InitializeComponent();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void MainServerForm_Load(object sender, EventArgs e)
         {
             try
             {
-                IPAddress ipAddr = IPAddress.Parse("127.0.0.1");
                 var tempServer = new NetworkServer();
-                NetworkServer.StatusChanged += new StatusChangedEventHandler(TempServer_StatusChanged);
-                tempServer.StartListening();
+                tempServer.SetIpAddress("127.0.0.1");
+                tempServer.SetPort(10111);
+                NetworkServer.ClientChange += new NetworkServer.ClientChangeEventHandler(tempServer_ClientChange);
+                tempServer.Start();
             }
             catch (Exception ex)
             {
-                TraceOps.Out(ex.Message + "\r\n");
+                TraceOps.Out(ex.Message);
             }
+        }
+
+        private void tempServer_ClientChange(object sender, ClientChangeEventArgs e)
+        {
+            this.Invoke(new UpdateStatusCallback(this.UpdateStatus), new object[] { e.EventMessage });
+        }
+        private void UpdateStatus(string strMessage)
+        {
+            TraceOps.Out(strMessage);
         }
     }
 }

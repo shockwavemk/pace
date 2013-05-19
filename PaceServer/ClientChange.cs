@@ -10,11 +10,11 @@ namespace PaceServer
     {
     }
 
-    public class ClientChangedEventArgs : EventArgs
+    public class ClientChangeEventArgs : EventArgs
     {
         public string EventMessage { get; set; }
 
-        public ClientChangedEventArgs(string eventMsg)
+        public ClientChangeEventArgs(string eventMsg)
         {
             EventMessage = eventMsg;
         }

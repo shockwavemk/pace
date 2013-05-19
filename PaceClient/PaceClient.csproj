@@ -82,6 +82,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HashOps.cs" />
     <Compile Include="MainClientForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -18,8 +18,8 @@ namespace PaceServer
         private IPAddress _ipAddress;
         private bool _serverRunning = true;
         private Thread _threadListener;
-        public delegate void StatusChangedEventHandler(object sender, ClientChangedEventArgs e);
-        public static event StatusChangedEventHandler StatusChanged;
+        public delegate void ClientChangeEventHandler(object sender, ClientChangeEventArgs e);
+        public static event ClientChangeEventHandler ClientChange;
 
         public void SetPort(int port)
         {
