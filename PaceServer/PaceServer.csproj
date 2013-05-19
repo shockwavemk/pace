@@ -87,6 +87,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TraceOps.cs" />
     <EmbeddedResource Include="MainServerForm.resx">
       <DependentUpon>MainServerForm.cs</DependentUpon>
     </EmbeddedResource>

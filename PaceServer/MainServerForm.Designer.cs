@@ -51,6 +51,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainServerForm";
             this.Text = "PaCE Server Application";
+            this.Load += new System.EventHandler(this.MainServerForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
