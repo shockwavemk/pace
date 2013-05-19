@@ -34,7 +34,7 @@ namespace PaceServer
             }
             catch (Exception ex)
             {
-                txtLog.AppendText(ex.Message + "\r\n");
+                TraceOps.Out(ex.Message + "\r\n");
             }
         }
     }

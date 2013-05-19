@@ -18,6 +18,8 @@ namespace PaceServer
         private IPAddress _ipAddress;
         private bool _serverRunning = true;
         private Thread _threadListener;
+        public delegate void StatusChangedEventHandler(object sender, ClientChangedEventArgs e);
+        public static event StatusChangedEventHandler StatusChanged;
 
         public void SetPort(int port)
         {
@@ -63,7 +65,7 @@ namespace PaceServer
             while (_serverRunning == true)
             {
                 tcpClient = _serverSocket.AcceptTcpClient();
-                Connection newConnection = new Connection(tcpClient);
+                ClientConnection newConnection = new ClientConnection(tcpClient);
             }
         }
     }
