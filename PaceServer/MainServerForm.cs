@@ -1,12 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PaceServer
@@ -26,7 +18,7 @@ namespace PaceServer
                 var tempServer = new NetworkServer();
                 tempServer.SetIpAddress("127.0.0.1");
                 tempServer.SetPort(10111);
-                NetworkServer.ClientChange += new NetworkServer.ClientChangeEventHandler(tempServer_ClientChange);
+                NetworkServer.ClientChange += tempServer_ClientChange;
                 tempServer.Start();
             }
             catch (Exception ex)
@@ -37,7 +29,7 @@ namespace PaceServer
 
         private void tempServer_ClientChange(object sender, ClientChangeEventArgs e)
         {
-            this.Invoke(new UpdateStatusCallback(this.UpdateStatus), new object[] { e.EventMessage });
+            Invoke(new UpdateStatusCallback(UpdateStatus), new object[] { e.EventMessage });
         }
         private void UpdateStatus(string strMessage)
         {
