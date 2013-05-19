@@ -31,7 +31,7 @@ namespace PaceServer
             return 0;
         }
 
-        public System.Net.IPAddress GetIpAddress()
+        public IPAddress GetIpAddress()
         {
             return _ipAddress;
         }
@@ -64,8 +64,17 @@ namespace PaceServer
         {
             while (_serverRunning == true)
             {
-                tcpClient = _serverSocket.AcceptTcpClient();
-                ClientConnection newConnection = new ClientConnection(tcpClient);
+                _clientSocket = _serverSocket.AcceptTcpClient();
+                var newConnection = new ClientConnection(_clientSocket);
+            }
+        }
+
+        public static void OnClientChange(ClientChangeEventArgs e)
+        {
+            ClientChangeEventHandler statusHandler = ClientChange;
+            if (statusHandler != null)
+            {
+                statusHandler(null, e);
             }
         }
     }

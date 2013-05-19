@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace PaceServer
 {
@@ -68,9 +64,9 @@ namespace PaceServer
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-                throw new NotImplementedException();
+                TraceOps.Out(exception.ToString());
             }
             #endregion
         }
@@ -89,7 +85,7 @@ namespace PaceServer
 
         private void HandleResponse(string rawResponse)
         {
-            throw new NotImplementedException();
+            TraceOps.Out(rawResponse);
         }
 
         public void CloseConnection()

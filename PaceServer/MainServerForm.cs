@@ -31,9 +31,15 @@ namespace PaceServer
         {
             Invoke(new UpdateStatusCallback(UpdateStatus), new object[] { e.EventMessage });
         }
+
         private void UpdateStatus(string strMessage)
         {
             TraceOps.Out(strMessage);
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
