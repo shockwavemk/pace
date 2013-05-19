@@ -17,7 +17,7 @@ namespace PaceServer
             {
                 var tempServer = new NetworkServer();
                 tempServer.SetIpAddress("127.0.0.1");
-                tempServer.SetPort(10111);
+                tempServer.SetPort(1987);
                 NetworkServer.ClientChange += tempServer_ClientChange;
                 tempServer.Start();
             }

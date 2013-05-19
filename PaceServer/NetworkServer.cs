@@ -48,7 +48,6 @@ namespace PaceServer
         {
             _serverSocket = new TcpListener(this.GetIpAddress(),this.GetPort());
             _clientSocket = default(TcpClient);
-            int counter = 0;
             _serverRunning = true;
 
             _serverSocket.Start();
