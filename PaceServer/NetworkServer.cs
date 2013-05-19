@@ -16,19 +16,20 @@ namespace PaceServer
         private TcpListener _serverSocket;
         private TcpClient _clientSocket;
         private IPAddress _ipAddress;
+        private int _port;
         private bool _serverRunning = true;
         private Thread _threadListener;
         public delegate void ClientChangeEventHandler(object sender, ClientChangeEventArgs e);
         public static event ClientChangeEventHandler ClientChange;
 
-        public void SetPort(int port)
-        {
-
-        }
-
         public int GetPort()
         {
-            return 0;
+            return _port;
+        }
+
+        public void SetPort(int port)
+        {
+            _port = port;
         }
 
         public IPAddress GetIpAddress()
