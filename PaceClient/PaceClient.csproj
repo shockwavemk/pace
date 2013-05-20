@@ -89,6 +89,7 @@
     <Compile Include="MainClientForm.Designer.cs">
       <DependentUpon>MainClientForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="NetworkClient.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="MainClientForm.resx">

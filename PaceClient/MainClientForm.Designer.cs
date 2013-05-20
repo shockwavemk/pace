@@ -32,16 +32,18 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainClientForm));
             this.label1 = new System.Windows.Forms.Label();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.status = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(65, 96);
+            this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(33, 13);
+            this.label1.Size = new System.Drawing.Size(71, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Client";
+            this.label1.Text = "Server Status";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // notifyIcon
             // 
@@ -49,11 +51,22 @@
             this.notifyIcon.Text = "Pace Client";
             this.notifyIcon.Visible = true;
             // 
+            // status
+            // 
+            this.status.AutoSize = true;
+            this.status.Location = new System.Drawing.Point(98, 9);
+            this.status.Name = "status";
+            this.status.Size = new System.Drawing.Size(53, 13);
+            this.status.TabIndex = 1;
+            this.status.Text = "Unknown";
+            this.status.Click += new System.EventHandler(this.label2_Click);
+            // 
             // MainClientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(429, 329);
+            this.ClientSize = new System.Drawing.Size(484, 405);
+            this.Controls.Add(this.status);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainClientForm";
@@ -68,6 +81,7 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NotifyIcon notifyIcon;
+        private System.Windows.Forms.Label status;
     }
 }
 
