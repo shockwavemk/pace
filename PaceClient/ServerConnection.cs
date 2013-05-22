@@ -3,9 +3,9 @@ using System.IO;
 using System.Net.Sockets;
 using System.Threading;
 
-namespace PaceServer
+namespace PaceClient
 {
-    class ClientConnection
+    class ServerConnection
     {
         public TcpClient TcpClient;
         private Thread _threadConnection;
@@ -13,54 +13,39 @@ namespace PaceServer
         private StreamWriter _connectionSender;
 
         private bool _connectionEstablished;
-        private string _clientResponse;
+        private string _serverResponse;
 
-        public ClientConnection(TcpClient tcpConnection)
+        public ServerConnection(TcpClient tcpConnection)
         {
             TcpClient = tcpConnection;
             _threadConnection = new Thread(Communication);
             _threadConnection.Start();
         }
 
-        private void Communication()
+        public void Communication()
         {
-            #region Registration
             try
             {
                 _connectionReceiver = new StreamReader(TcpClient.GetStream());
                 _connectionSender = new StreamWriter(TcpClient.GetStream());
-
-                // TODO Registration / Identification
-                bool Register = false; // TODO remove this
-                
-                if (Register)
-                {
-                    CloseConnection();
-                    return;
-                }
-                else
-                {
-                    HandleAdd();
-                }
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-                throw new NotImplementedException();
+                TraceOps.Out(exception.ToString());
             }
-            #endregion
 
             #region Responses
             try
             {
-                while ((_clientResponse = _connectionReceiver.ReadLine()) != "")
+                while ((_serverResponse = _connectionReceiver.ReadLine()) != "")
                 {
-                    if (_clientResponse == null)
+                    if (_serverResponse == null)
                     {
                         CloseConnection();
                     }
                     else
                     {
-                        HandleResponse(_clientResponse);
+                        HandleResponse(_serverResponse);
                     }
                 }
             }
@@ -69,18 +54,6 @@ namespace PaceServer
                 TraceOps.Out(exception.ToString());
             }
             #endregion
-        }
-
-
-        private void HandleAdd()
-        {
-            int ClientId = 0; // TODO remove this
-            _connectionEstablished = true;
-            ClientInformation clientInformation = ClientInformation.GetClientInformation(ClientId); // first line for identification of client
-            // Tell the Client: everything is fine
-            _connectionSender.WriteLine("1"); // TODO Add conversation in external function
-            _connectionSender.WriteLine("Welcome");
-            _connectionSender.Flush();
         }
 
         private void HandleResponse(string rawResponse)

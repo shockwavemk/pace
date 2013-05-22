@@ -42,26 +42,52 @@ namespace PaceClient
             try
             {
                 _clientSocket = new TcpClient();
-                _clientSocket.Connect(reader.GetIP(), 1987);
-                NetworkStream stream = tcp.GetStream();
-                StreamWriter sw = new StreamWriter(stream);
-                sw.Flush();
-                status.Text = "Online"; status.ForeColor = Color.DarkGreen;
-                button1.Image = button1.ImageList.Images[0];
-                button1.ImageAlign = ContentAlignment.MiddleRight;
+                _clientSocket.Connect(GetIpAddress(), GetPort());
+
+                FlushStream();
+                UpdateGuiOnline(); // TODO remove Gui related from class
             }
-            catch 
+            catch
             {
-                status.Text = "Offline"; 
-                status.ForeColor = Color.DarkRed;
-                button1.Image = button1.ImageList.Images[1];
-                button1.ImageAlign = ContentAlignment.MiddleRight;
+                UpdateGuiOffline(); // TODO remove Gui related from class
             }
         }
 
         public void Stop()
         {
             
+        }
+
+        //TODO: refactor this functions
+
+        private void FlushStream()
+        {
+            var stream = _clientSocket.GetStream();
+            var sw = new StreamWriter(stream);
+            sw.Flush();
+        }
+
+
+        private static void UpdateGuiOnline()
+        {
+            throw new NotImplementedException();
+            /*
+             *  status.Text = "Online"; 
+             *  status.ForeColor = Color.DarkGreen;
+             *  button1.Image = button1.ImageList.Images[0];
+             *  button1.ImageAlign = ContentAlignment.MiddleRight;
+             */
+        }
+
+        private static void UpdateGuiOffline()
+        {
+            throw new NotImplementedException();
+            /*
+             *  status.Text = "Offline"; 
+             *  status.ForeColor = Color.DarkRed;
+             *  button1.Image = button1.ImageList.Images[1];
+             *  button1.ImageAlign = ContentAlignment.MiddleRight;
+             */
         }
     }
 }
