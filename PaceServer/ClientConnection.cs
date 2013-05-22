@@ -93,5 +93,12 @@ namespace PaceServer
             TcpClient.Close();
             _threadConnection.Abort();
         }
+
+        public void SendMessage(string message)
+        {
+            TraceOps.Out(">>" + message);
+            _connectionSender.WriteLine(message);
+            _connectionSender.Flush();
+        }
     }
 }
