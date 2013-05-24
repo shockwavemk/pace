@@ -54,12 +54,12 @@
             // status
             // 
             this.status.AutoSize = true;
-            this.status.Location = new System.Drawing.Point(98, 9);
+            this.status.Location = new System.Drawing.Point(102, 12);
             this.status.Name = "status";
-            this.status.Size = new System.Drawing.Size(53, 13);
+            this.status.Size = new System.Drawing.Size(35, 13);
             this.status.TabIndex = 1;
-            this.status.Text = "Unknown";
-            this.status.Click += new System.EventHandler(this.label2_Click);
+            this.status.Text = "label2";
+            this.status.Click += new System.EventHandler(this.status_Click);
             // 
             // MainClientForm
             // 

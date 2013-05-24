@@ -46,13 +46,22 @@ namespace PaceServer
 
         public void Start()
         {
-            _serverSocket = new TcpListener(this.GetIpAddress(),this.GetPort());
-            _clientSocket = default(TcpClient);
-            _serverRunning = true;
+            try
+            {
+                _serverSocket = new TcpListener(this.GetIpAddress(), this.GetPort());
+                _clientSocket = default(TcpClient);
+                _serverRunning = true;
 
-            _serverSocket.Start();
-            _threadListener = new Thread(ListenForNewClients);
-            _threadListener.Start();
+                _serverSocket.Start();
+                _threadListener = new Thread(ListenForNewClients);
+                _threadListener.Start();
+
+                ClientChange.Invoke(null, new ClientChangeEventArgs("Online"));
+            }
+            catch
+            {
+                ClientChange.Invoke(null, new ClientChangeEventArgs("Offline"));
+            }
         }
 
         public void Stop()

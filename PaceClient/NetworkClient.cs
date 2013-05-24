@@ -16,6 +16,8 @@ namespace PaceClient
         private IPAddress _ipAddress;
         private int _port;
         private bool _clientConnected = false;
+        public delegate void ServerChangeEventHandler(object sender, ServerChangeEventArgs e);
+        public static event ServerChangeEventHandler ServerChange;
 
         public int GetPort()
         {
@@ -45,11 +47,11 @@ namespace PaceClient
                 _clientSocket.Connect(GetIpAddress(), GetPort());
 
                 FlushStream();
-                UpdateGuiOnline(); // TODO remove Gui related from class
+                ServerChange.Invoke(null, new ServerChangeEventArgs("Online"));
             }
             catch
             {
-                UpdateGuiOffline(); // TODO remove Gui related from class
+                ServerChange.Invoke(null, new ServerChangeEventArgs("Offline"));
             }
         }
 
@@ -67,27 +69,13 @@ namespace PaceClient
             sw.Flush();
         }
 
-
-        private static void UpdateGuiOnline()
+        public static void OnServerChange(ServerChangeEventArgs e)
         {
-            throw new NotImplementedException();
-            /*
-             *  status.Text = "Online"; 
-             *  status.ForeColor = Color.DarkGreen;
-             *  button1.Image = button1.ImageList.Images[0];
-             *  button1.ImageAlign = ContentAlignment.MiddleRight;
-             */
-        }
-
-        private static void UpdateGuiOffline()
-        {
-            throw new NotImplementedException();
-            /*
-             *  status.Text = "Offline"; 
-             *  status.ForeColor = Color.DarkRed;
-             *  button1.Image = button1.ImageList.Images[1];
-             *  button1.ImageAlign = ContentAlignment.MiddleRight;
-             */
+            ServerChangeEventHandler statusHandler = ServerChange;
+            if (statusHandler != null)
+            {
+                statusHandler(null, e);
+            }
         }
     }
 }

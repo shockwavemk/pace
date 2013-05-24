@@ -14,7 +14,7 @@ namespace PaceClient
     public partial class MainClientForm : Form
     {
         private ContextMenu tray_menu;
-
+        private delegate void UpdateStatusCallback(string strMessage);
         public MainClientForm()
         {
             InitializeComponent();
@@ -29,6 +29,29 @@ namespace PaceClient
             notifyIcon.DoubleClick += new EventHandler(notifyIcon_DoubleClick);
             notifyIcon.ContextMenu = tray_menu;
             notifyIcon.MouseClick += new MouseEventHandler(notifyIcon_MouseUp);
+
+            try
+            {
+                var tempClient = new NetworkClient();
+                tempClient.SetIpAddress("127.0.0.1");
+                tempClient.SetPort(1987);
+                NetworkClient.ServerChange += tempClient_ServerChange;
+                tempClient.Start();
+            }
+            catch (Exception ex)
+            {
+                TraceOps.Out(ex.Message);
+            }
+        }
+
+        private void tempClient_ServerChange(object sender, ServerChangeEventArgs e)
+        {
+            Invoke(new UpdateStatusCallback(UpdateStatus), new object[] { e.EventMessage });
+        }
+
+        private void UpdateStatus(string strMessage)
+        {
+            TraceOps.Out(strMessage);
         }
 
         private void MainClientForm_Resize(object sender, EventArgs e)
@@ -63,12 +86,30 @@ namespace PaceClient
             }
         }
 
+        private static void UpdateGuiOnline()
+        {
+            throw new NotImplementedException();
+             status.Text = "Online"; 
+             status.ForeColor = Color.DarkGreen;
+        }
+
+        private static void UpdateGuiOffline()
+        {
+            throw new NotImplementedException();
+            /*
+             *  status.Text = "Offline"; 
+             *  status.ForeColor = Color.DarkRed;
+             *  button1.Image = button1.ImageList.Images[1];
+             *  button1.ImageAlign = ContentAlignment.MiddleRight;
+             */
+        }
+
         private void label1_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void status_Click(object sender, EventArgs e)
         {
 
         }
