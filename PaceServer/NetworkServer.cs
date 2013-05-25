@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace PaceServer
 {
@@ -56,11 +51,11 @@ namespace PaceServer
                 _threadListener = new Thread(ListenForNewClients);
                 _threadListener.Start();
 
-                ClientChange.Invoke(null, new ClientChangeEventArgs("Online"));
+                ClientChange.Invoke(null, new ClientChangeEventArgs("Server Online"));
             }
             catch
             {
-                ClientChange.Invoke(null, new ClientChangeEventArgs("Offline"));
+                ClientChange.Invoke(null, new ClientChangeEventArgs("Server Offline"));
             }
         }
 
@@ -71,7 +66,7 @@ namespace PaceServer
 
         private void ListenForNewClients()
         {
-            while (_serverRunning == true)
+            while (_serverRunning)
             {
                 _clientSocket = _serverSocket.AcceptTcpClient();
                 var newConnection = new ClientConnection(_clientSocket);
@@ -80,7 +75,7 @@ namespace PaceServer
 
         public static void OnClientChange(ClientChangeEventArgs e)
         {
-            ClientChangeEventHandler statusHandler = ClientChange;
+            var statusHandler = ClientChange;
             if (statusHandler != null)
             {
                 statusHandler(null, e);

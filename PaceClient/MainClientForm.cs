@@ -86,22 +86,16 @@ namespace PaceClient
             }
         }
 
-        private static void UpdateGuiOnline()
+        private void UpdateGuiOnline()
         {
-            throw new NotImplementedException();
-             status.Text = "Online"; 
-             status.ForeColor = Color.DarkGreen;
+            status.Text = "Online"; 
+            status.ForeColor = Color.DarkGreen;
         }
 
-        private static void UpdateGuiOffline()
+        private void UpdateGuiOffline()
         {
-            throw new NotImplementedException();
-            /*
-             *  status.Text = "Offline"; 
-             *  status.ForeColor = Color.DarkRed;
-             *  button1.Image = button1.ImageList.Images[1];
-             *  button1.ImageAlign = ContentAlignment.MiddleRight;
-             */
+            status.Text = "Offline"; 
+            status.ForeColor = Color.DarkRed;
         }
 
         private void label1_Click(object sender, EventArgs e)

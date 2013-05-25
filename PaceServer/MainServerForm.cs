@@ -41,5 +41,10 @@ namespace PaceServer
         {
 
         }
+
+        private void status_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

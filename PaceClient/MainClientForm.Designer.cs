@@ -53,6 +53,7 @@
             // 
             // status
             // 
+            this.status.AccessibleName = "status";
             this.status.AutoSize = true;
             this.status.Location = new System.Drawing.Point(102, 12);
             this.status.Name = "status";
@@ -65,7 +66,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(484, 405);
+            this.ClientSize = new System.Drawing.Size(534, 518);
             this.Controls.Add(this.status);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

@@ -11,7 +11,8 @@ namespace PaceClient
     {
         public static void Out(string output)
         {
-            Trace.WriteLine(output); // Add Output methods later
+            Trace.WriteLine(output);
+            Console.WriteLine(output);
         }
    }
 }

@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace PaceClient
 {
@@ -15,7 +9,8 @@ namespace PaceClient
         private TcpClient _clientSocket;
         private IPAddress _ipAddress;
         private int _port;
-        private bool _clientConnected = false;
+        private bool _clientRunning = false;
+        private Thread _threadListener;
         public delegate void ServerChangeEventHandler(object sender, ServerChangeEventArgs e);
         public static event ServerChangeEventHandler ServerChange;
 
@@ -43,35 +38,36 @@ namespace PaceClient
         {
             try
             {
-                _clientSocket = new TcpClient();
-                _clientSocket.Connect(GetIpAddress(), GetPort());
-
-                FlushStream();
-                ServerChange.Invoke(null, new ServerChangeEventArgs("Online"));
+                _threadListener = new Thread(ConnectionWithServer);
+                ServerChange.Invoke(null, new ServerChangeEventArgs("Client Online"));
             }
             catch
             {
-                ServerChange.Invoke(null, new ServerChangeEventArgs("Offline"));
+                ServerChange.Invoke(null, new ServerChangeEventArgs("Client Offline"));
+            }
+        }
+
+        private void ConnectionWithServer()
+        {
+           while (_clientRunning)
+            {
+                if (!_clientSocket.Connected)
+                {
+                    _clientSocket = new TcpClient();
+                    _clientSocket.Connect(GetIpAddress(), GetPort());
+                    var newConnection = new ServerConnection(_clientSocket);
+                }
             }
         }
 
         public void Stop()
         {
-            
+            _clientRunning = false;
         }
-
-        //TODO: refactor this functions
-
-        private void FlushStream()
-        {
-            var stream = _clientSocket.GetStream();
-            var sw = new StreamWriter(stream);
-            sw.Flush();
-        }
-
+        
         public static void OnServerChange(ServerChangeEventArgs e)
         {
-            ServerChangeEventHandler statusHandler = ServerChange;
+            var statusHandler = ServerChange;
             if (statusHandler != null)
             {
                 statusHandler(null, e);

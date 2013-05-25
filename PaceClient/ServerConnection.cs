@@ -17,6 +17,7 @@ namespace PaceClient
 
         public ServerConnection(TcpClient tcpConnection)
         {
+            TraceOps.Out("New ServerConnection created");
             TcpClient = tcpConnection;
             _threadConnection = new Thread(Communication);
             _threadConnection.Start();
@@ -37,10 +38,12 @@ namespace PaceClient
             #region Responses
             try
             {
+                TraceOps.Out("Client waiting for Responses to Act");
                 while ((_serverResponse = _connectionReceiver.ReadLine()) != "")
                 {
                     if (_serverResponse == null)
                     {
+                        TraceOps.Out("Verbindung geschlossen");
                         CloseConnection();
                     }
                     else
@@ -48,6 +51,7 @@ namespace PaceClient
                         HandleResponse(_serverResponse);
                     }
                 }
+                TraceOps.Out("Client: End of server responses");
             }
             catch (Exception exception)
             {
@@ -58,7 +62,7 @@ namespace PaceClient
 
         private void HandleResponse(string rawResponse)
         {
-            TraceOps.Out(rawResponse);
+            TraceOps.Out("Server answers:"+rawResponse);
         }
 
         public void CloseConnection()
@@ -69,7 +73,7 @@ namespace PaceClient
 
         public void SendMessage(string message)
         {
-            TraceOps.Out(">>" + message);
+            TraceOps.Out("Client send Message: " + message);
             _connectionSender.WriteLine(message);
             _connectionSender.Flush();
         }

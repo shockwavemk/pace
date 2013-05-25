@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net.Sockets;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace PaceServer
 {
@@ -17,6 +18,7 @@ namespace PaceServer
 
         public ClientConnection(TcpClient tcpConnection)
         {
+            TraceOps.Out("New ClientConnection created");
             TcpClient = tcpConnection;
             _threadConnection = new Thread(Communication);
             _threadConnection.Start();
@@ -43,15 +45,16 @@ namespace PaceServer
                     HandleAdd();
                 }
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-                throw new NotImplementedException();
+                TraceOps.Out(exception.ToString());
             }
             #endregion
 
             #region Responses
             try
             {
+                TraceOps.Out("Server waiting for Responses to Act");
                 while ((_clientResponse = _connectionReceiver.ReadLine()) != "")
                 {
                     if (_clientResponse == null)
@@ -74,18 +77,17 @@ namespace PaceServer
 
         private void HandleAdd()
         {
-            int ClientId = 0; // TODO remove this
+            var random = new Random();
+            int clientId = random.Next(0, 10000);
             _connectionEstablished = true;
-            ClientInformation clientInformation = ClientInformation.GetClientInformation(ClientId); // first line for identification of client
+            ClientInformation clientInformation = ClientInformation.GetClientInformation(clientId); // first line for identification of client
             // Tell the Client: everything is fine
-            _connectionSender.WriteLine("1"); // TODO Add conversation in external function
-            _connectionSender.WriteLine("Welcome");
-            _connectionSender.Flush();
+            SendMessage("Hello client! You are now named client["+ clientId+"]");
         }
 
         private void HandleResponse(string rawResponse)
         {
-            TraceOps.Out(rawResponse);
+            TraceOps.Out("Client answers:" + rawResponse);
         }
 
         public void CloseConnection()
@@ -96,7 +98,7 @@ namespace PaceServer
 
         public void SendMessage(string message)
         {
-            TraceOps.Out(">>" + message);
+            TraceOps.Out("Server send Message:" + message);
             _connectionSender.WriteLine(message);
             _connectionSender.Flush();
         }
