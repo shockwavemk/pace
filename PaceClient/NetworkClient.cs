@@ -9,7 +9,7 @@ namespace PaceClient
         private TcpClient _clientSocket;
         private IPAddress _ipAddress;
         private int _port;
-        private bool _clientRunning = false;
+        private bool _clientRunning = true;
         private Thread _threadListener;
         public delegate void ServerChangeEventHandler(object sender, ServerChangeEventArgs e);
         public static event ServerChangeEventHandler ServerChange;
@@ -39,6 +39,7 @@ namespace PaceClient
             try
             {
                 _threadListener = new Thread(ConnectionWithServer);
+                _threadListener.Start();
                 ServerChange.Invoke(null, new ServerChangeEventArgs("Client Online"));
             }
             catch
@@ -49,11 +50,12 @@ namespace PaceClient
 
         private void ConnectionWithServer()
         {
+           _clientSocket = new TcpClient();
+
            while (_clientRunning)
             {
                 if (!_clientSocket.Connected)
                 {
-                    _clientSocket = new TcpClient();
                     _clientSocket.Connect(GetIpAddress(), GetPort());
                     var newConnection = new ServerConnection(_clientSocket);
                 }
