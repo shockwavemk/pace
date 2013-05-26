@@ -2,7 +2,6 @@
 using System.IO;
 using System.Net.Sockets;
 using System.Threading;
-using System.Windows.Forms;
 
 namespace PaceServer
 {
@@ -15,6 +14,8 @@ namespace PaceServer
 
         private bool _connectionEstablished;
         private string _clientResponse;
+        public delegate void ClientChangeEventHandler(object sender, ClientChangeEventArgs e);
+        public static event ClientChangeEventHandler ClientChange;
 
         public ClientConnection(TcpClient tcpConnection)
         {
@@ -83,6 +84,8 @@ namespace PaceServer
             ClientInformation clientInformation = ClientInformation.GetClientInformation(clientId); // first line for identification of client
             // Tell the Client: everything is fine
             SendMessage("Hello client! You are now named client["+ clientId+"]");
+
+            ClientChange.Invoke(null, new ClientChangeEventArgs("ClientAdded"));
         }
 
         private void HandleResponse(string rawResponse)
