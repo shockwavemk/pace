@@ -142,6 +142,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="img\iconmonstr-computer-4-icon.ico" />
+    <Content Include="img\iconmonstr-computer-4-icon.png" />
     <Content Include="ps.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

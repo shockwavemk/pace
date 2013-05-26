@@ -58,9 +58,14 @@ namespace PaceServer
 
         private void LoadClientsTable()
         {
-            var clientsTableForm = new ClientsTable { TopLevel = false, FormBorderStyle = FormBorderStyle.SizableToolWindow };
+            var clientsTableForm = new ClientsTable { TopLevel = false, FormBorderStyle = FormBorderStyle.Sizable, AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, };
             mainPanel.Controls.Add(clientsTableForm);
             clientsTableForm.Visible = true;
+        }
+
+        private void mainPanel_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
