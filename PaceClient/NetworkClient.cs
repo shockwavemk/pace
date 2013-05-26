@@ -10,7 +10,6 @@ namespace PaceClient
         private IPAddress _ipAddress;
         private int _port;
         private bool _clientRunning = true;
-        private Thread _threadListener;
         public delegate void ServerChangeEventHandler(object sender, ServerChangeEventArgs e);
         public static event ServerChangeEventHandler ServerChange;
 

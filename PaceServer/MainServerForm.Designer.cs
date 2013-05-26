@@ -57,11 +57,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(451, 488);
+            this.ClientSize = new System.Drawing.Size(384, 461);
             this.Controls.Add(this.status);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Location = new System.Drawing.Point(501, 0);
             this.Name = "MainServerForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "PaCE Server Application";
             this.Load += new System.EventHandler(this.MainServerForm_Load);
             this.ResumeLayout(false);
