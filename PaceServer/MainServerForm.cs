@@ -51,16 +51,6 @@ namespace PaceServer
             TraceOps.Out(strMessage);
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void status_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void clientsTableToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LoadClientsTable();
