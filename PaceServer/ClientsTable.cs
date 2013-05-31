@@ -16,5 +16,10 @@ namespace PaceServer
         {
             InitializeComponent();
         }
+
+        private void ClientsTable_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
