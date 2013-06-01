@@ -43,11 +43,12 @@ namespace PaceServer
 
         private void tempServer_ClientChange(object sender, ClientChangeEventArgs e)
         {
-            Invoke(new UpdateStatusCallback(UpdateStatus), new object[] { e.EventMessage });
+           Invoke(new UpdateStatusCallback(UpdateStatus), new object[] { e.EventMessage });
         }
 
         private void UpdateStatus(string strMessage)
         {
+            // changes in system
             TraceOps.Out(strMessage);
         }
 

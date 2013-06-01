@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 
@@ -76,6 +77,26 @@ namespace PaceClient
             TraceOps.Out("Client send Message: " + message);
             _connectionSender.WriteLine(message);
             _connectionSender.Flush();
+        }
+
+        public string CalculateConnectionHash()
+        {
+            // try to use static information of system to (re-)identify a client - for example if ip changed because of reconnect or restart of system
+            // TODO: make it more secure
+            return HashOps.CreateStringHash(GetFqdn());
+        }
+
+        public static string GetFqdn()
+        {
+            string domainName = System.Net.NetworkInformation.IPGlobalProperties.GetIPGlobalProperties().DomainName;
+            string hostName = Dns.GetHostName();
+            string fqdn;
+            if (!hostName.Contains(domainName))
+                fqdn = hostName + "." + domainName;
+            else
+                fqdn = hostName;
+
+            return fqdn;
         }
     }
 }

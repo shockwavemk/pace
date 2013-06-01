@@ -37,6 +37,12 @@
             this.clientListView = new System.Windows.Forms.ListView();
             this.clientListImageList = new System.Windows.Forms.ImageList(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.actionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.startZLeafToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stopZLeafToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.startSoftwareToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stopSoftwareToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // clientListView
@@ -67,11 +73,48 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.actionsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(312, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // actionsToolStripMenuItem
+            // 
+            this.actionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.startZLeafToolStripMenuItem,
+            this.stopZLeafToolStripMenuItem,
+            this.startSoftwareToolStripMenuItem,
+            this.stopSoftwareToolStripMenuItem});
+            this.actionsToolStripMenuItem.Name = "actionsToolStripMenuItem";
+            this.actionsToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.actionsToolStripMenuItem.Text = "Actions";
+            // 
+            // startZLeafToolStripMenuItem
+            // 
+            this.startZLeafToolStripMenuItem.Name = "startZLeafToolStripMenuItem";
+            this.startZLeafToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.startZLeafToolStripMenuItem.Text = "Start z-Leaf";
+            // 
+            // stopZLeafToolStripMenuItem
+            // 
+            this.stopZLeafToolStripMenuItem.Name = "stopZLeafToolStripMenuItem";
+            this.stopZLeafToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.stopZLeafToolStripMenuItem.Text = "Stop z-Leaf";
+            // 
+            // startSoftwareToolStripMenuItem
+            // 
+            this.startSoftwareToolStripMenuItem.Name = "startSoftwareToolStripMenuItem";
+            this.startSoftwareToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.startSoftwareToolStripMenuItem.Text = "Start software";
+            // 
+            // stopSoftwareToolStripMenuItem
+            // 
+            this.stopSoftwareToolStripMenuItem.Name = "stopSoftwareToolStripMenuItem";
+            this.stopSoftwareToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.stopSoftwareToolStripMenuItem.Text = "Stop software";
             // 
             // ClientsTable
             // 
@@ -88,6 +131,8 @@
             this.Text = "Client\'s Table";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.ClientsTable_Load);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -98,6 +143,11 @@
         private System.Windows.Forms.ListView clientListView;
         private System.Windows.Forms.ImageList clientListImageList;
         private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem actionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem startZLeafToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem stopZLeafToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem startSoftwareToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem stopSoftwareToolStripMenuItem;
 
 
     }

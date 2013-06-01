@@ -70,6 +70,7 @@ namespace PaceServer
             {
                 _clientSocket = _serverSocket.AcceptTcpClient();
                 var newConnection = new ClientConnection(_clientSocket);
+                ClientList.Add(_clientSocket, newConnection);
             }
         }
 
