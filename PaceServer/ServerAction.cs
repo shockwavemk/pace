@@ -8,6 +8,7 @@ namespace PaceServer
 {
     class ServerAction: PaceCommon.Message
     {
+        public string Destination;
 
     }
 }
