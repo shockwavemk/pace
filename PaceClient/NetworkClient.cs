@@ -2,7 +2,7 @@
 using System.Net.Sockets;
 using System.Threading;
 
-namespace PaceClient
+namespace PaceCommon
 {
     class NetworkClient
     {

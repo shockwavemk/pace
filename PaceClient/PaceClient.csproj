@@ -7,7 +7,7 @@
     <ProjectGuid>{B93112F3-B781-4E39-B685-66D6BF455BD4}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PaceClient</RootNamespace>
+    <RootNamespace>PaceCommon</RootNamespace>
     <AssemblyName>PaceClient</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -82,7 +82,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HashOps.cs" />
     <Compile Include="MainClientForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,7 +93,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerChange.cs" />
     <Compile Include="ServerConnection.cs" />
-    <Compile Include="TraceOps.cs" />
     <EmbeddedResource Include="MainClientForm.resx">
       <DependentUpon>MainClientForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -106,6 +104,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Dokumente\Protolle\Protokoll 15-05-2013.docx" />
     <None Include="Dokumente\Vorstellung\Masterarbeit_MK.pptx" />
@@ -144,6 +143,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="pc.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PaceCommon\PaceCommon.csproj">
+      <Project>{954E69C6-8CEC-4DF7-98B2-0D4C8F84A19B}</Project>
+      <Name>PaceCommon</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

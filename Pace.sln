@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaceServer", "PaceServer\Pa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaceClient", "PaceClient\PaceClient.csproj", "{B93112F3-B781-4E39-B685-66D6BF455BD4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaceCommon", "PaceCommon\PaceCommon.csproj", "{954E69C6-8CEC-4DF7-98B2-0D4C8F84A19B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{B93112F3-B781-4E39-B685-66D6BF455BD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B93112F3-B781-4E39-B685-66D6BF455BD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B93112F3-B781-4E39-B685-66D6BF455BD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{954E69C6-8CEC-4DF7-98B2-0D4C8F84A19B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{954E69C6-8CEC-4DF7-98B2-0D4C8F84A19B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{954E69C6-8CEC-4DF7-98B2-0D4C8F84A19B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{954E69C6-8CEC-4DF7-98B2-0D4C8F84A19B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

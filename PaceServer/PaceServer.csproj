@@ -84,7 +84,6 @@
     <Compile Include="ClientsTable.Designer.cs">
       <DependentUpon>ClientsTable.cs</DependentUpon>
     </Compile>
-    <Compile Include="HashOps.cs" />
     <Compile Include="NetworkServer.cs" />
     <Compile Include="MainServerForm.cs">
       <SubType>Form</SubType>
@@ -96,7 +95,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerAction.cs" />
-    <Compile Include="TraceOps.cs" />
     <EmbeddedResource Include="ClientsTable.resx">
       <DependentUpon>ClientsTable.cs</DependentUpon>
     </EmbeddedResource>
@@ -147,6 +145,12 @@
     <Content Include="img\iconmonstr-computer-4-icon.ico" />
     <Content Include="img\iconmonstr-computer-4-icon.png" />
     <Content Include="ps.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PaceCommon\PaceCommon.csproj">
+      <Project>{954e69c6-8cec-4df7-98b2-0d4c8f84a19b}</Project>
+      <Name>PaceCommon</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

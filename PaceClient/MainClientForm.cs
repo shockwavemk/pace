@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Reflection;
 using System.Windows.Forms;
 
-namespace PaceClient
+namespace PaceCommon
 {
     public partial class MainClientForm : Form
     {

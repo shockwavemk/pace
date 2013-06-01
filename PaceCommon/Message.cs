@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PaceServer
+namespace PaceCommon
 {
-    class ServerAction: PaceCommon.Message
+    public class Message
     {
-
     }
 }

@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace PaceClient
+namespace PaceCommon
 {
     /*
      * Verifing that a String is Uncorrupted during Transmission - Reference: 690ff c# Cookbook
