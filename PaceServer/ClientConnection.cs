@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net.Sockets;
 using System.Threading;
+using PaceClient;
 using PaceCommon;
 
 namespace PaceServer
@@ -34,18 +36,7 @@ namespace PaceServer
                 _connectionReceiver = new StreamReader(TcpClient.GetStream());
                 _connectionSender = new StreamWriter(TcpClient.GetStream());
 
-                // TODO Registration / Identification
-                bool Register = false; // TODO remove this
-                
-                if (Register)
-                {
-                    CloseConnection();
-                    return;
-                }
-                else
-                {
-                    HandleAdd();
-                }
+                HandleAdd();
             }
             catch (Exception exception)
             {
@@ -83,8 +74,9 @@ namespace PaceServer
             int clientId = random.Next(0, 10000);
             _connectionEstablished = true;
             ClientInformation clientInformation = ClientInformation.GetClientInformation(clientId); // first line for identification of client
-            // Tell the Client: everything is fine
-            SendMessage("Hello client! You are now named client["+ clientId+"]");
+            
+            var m = new Message(new List<string>(), true, "register", "client");
+            SendMessage(m.ToSoap());
 
             ClientChange.Invoke(null, new ClientChangeEventArgs("ClientAdded"));
         }

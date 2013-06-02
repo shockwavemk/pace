@@ -3,8 +3,10 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using PaceClient;
+using PaceCommon;
 
-namespace PaceCommon
+namespace PaceClient
 {
     class ServerConnection
     {
@@ -63,6 +65,7 @@ namespace PaceCommon
 
         private void HandleResponse(string rawResponse)
         {
+            var m = new Message();
             TraceOps.Out("Server answers:"+rawResponse);
         }
 

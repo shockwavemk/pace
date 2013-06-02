@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace PaceServer
 {
+    [Serializable]
     class ServerAction: PaceCommon.Message
     {
-        public string Destination;
+        public ServerAction(List<string> parameter, bool acknowledgement, string command, string destination) : base(parameter, acknowledgement, command, destination)
+        {
 
+        }
     }
 }

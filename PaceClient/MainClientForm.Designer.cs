@@ -1,4 +1,4 @@
-﻿namespace PaceCommon
+﻿namespace PaceClient
 {
     partial class MainClientForm
     {

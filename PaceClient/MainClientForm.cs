@@ -8,8 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
 using System.Windows.Forms;
+using PaceClient;
+using PaceCommon;
 
-namespace PaceCommon
+namespace PaceClient
 {
     public partial class MainClientForm : Form
     {

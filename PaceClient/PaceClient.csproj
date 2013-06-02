@@ -7,7 +7,7 @@
     <ProjectGuid>{B93112F3-B781-4E39-B685-66D6BF455BD4}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PaceCommon</RootNamespace>
+    <RootNamespace>PaceClient</RootNamespace>
     <AssemblyName>PaceClient</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
