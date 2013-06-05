@@ -8,11 +8,23 @@ using System.Text;
 namespace PaceCommon
 {
     [Serializable]
-    public class Message : ISerializable
+    public class Message
     {
+        private string Destination { get; set; }
+        private string Command { get; set; }
+        private Array _parameter;
+        
+        private bool Acknowledgement { get; set; }
+
+        public Array Parameter
+        {
+            get { return _parameter; }
+            set { _parameter = value; }
+        }
+
         public Message(List<string> parameter, bool acknowledgement, string command, string destination)
         {
-            Parameter = parameter;
+            Parameter = parameter.ToArray();
             Acknowledgement = acknowledgement;
             Command = command;
             Destination = destination;
@@ -20,20 +32,10 @@ namespace PaceCommon
 
         public Message()
         {
-            Parameter = new List<string>();
+            _parameter = new string[1];
             Acknowledgement = false;
             Command = "test command";
             Destination = "server";
-        }
-
-        private string Destination { get; set; }
-        private string Command { get; set; }
-        private List<string> Parameter { get; set; }
-        private bool Acknowledgement { get; set; }
-
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            throw new NotImplementedException();
         }
 
         public string ToSoap()
@@ -50,8 +52,7 @@ namespace PaceCommon
                 memStream = new MemoryStream();
                 IFormatter formatter = new SoapFormatter();
                 formatter.Serialize(memStream, objToSoap);
-                strObject =
-                   Encoding.ASCII.GetString(memStream.GetBuffer());
+                strObject = Encoding.ASCII.GetString(memStream.GetBuffer());
                 var index = strObject.IndexOf("\0", StringComparison.Ordinal);
                 if (index > 0)
                 {
@@ -84,6 +85,13 @@ namespace PaceCommon
                 if (memStream != null) memStream.Close();
             }
             return objectFromSoap;
+        }
+
+        public void Send(StreamWriter streamWriter)
+        {
+            IFormatter formatter = new SoapFormatter();
+            formatter.Serialize(streamWriter.BaseStream, this);
+            streamWriter.Flush();
         }
     }
 }

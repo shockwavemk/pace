@@ -32,26 +32,17 @@ namespace PaceClient
             {
                 _connectionReceiver = new StreamReader(TcpClient.GetStream());
                 _connectionSender = new StreamWriter(TcpClient.GetStream());
-            }
-            catch (Exception exception)
-            {
-                TraceOps.Out(exception.ToString());
-            }
-
-            #region Responses
-            try
-            {
+            
                 TraceOps.Out("Client waiting for Responses to Act");
                 while ((_serverResponse = _connectionReceiver.ReadLine()) != "")
                 {
-                    if (_serverResponse == null)
+                    if (_serverResponse != "</SOAP-ENV:Envelope>")
                     {
-                        TraceOps.Out("Verbindung geschlossen");
-                        CloseConnection();
+                        
                     }
                     else
                     {
-                        HandleResponse(_serverResponse);
+                        var m = new Message();
                     }
                 }
                 TraceOps.Out("Client: End of server responses");

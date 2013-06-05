@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Sockets;
 using System.Threading;
-using PaceClient;
 using PaceCommon;
 
 namespace PaceServer
@@ -76,9 +75,7 @@ namespace PaceServer
             ClientInformation clientInformation = ClientInformation.GetClientInformation(clientId); // first line for identification of client
             
             var m = new Message(new List<string>(), true, "register", "client");
-            SendMessage(m.ToSoap());
-
-            ClientChange.Invoke(null, new ClientChangeEventArgs("ClientAdded"));
+            m.Send(_connectionSender);
         }
 
         private void HandleResponse(string rawResponse)
@@ -90,13 +87,6 @@ namespace PaceServer
         {
             TcpClient.Close();
             _threadConnection.Abort();
-        }
-
-        public void SendMessage(string message)
-        {
-            TraceOps.Out("Server send Message:" + message);
-            _connectionSender.WriteLine(message);
-            _connectionSender.Flush();
         }
     }
 }

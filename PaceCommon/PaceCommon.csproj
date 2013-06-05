@@ -7,7 +7,7 @@
     <ProjectGuid>{954E69C6-8CEC-4DF7-98B2-0D4C8F84A19B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PaceClient</RootNamespace>
+    <RootNamespace>PaceCommon</RootNamespace>
     <AssemblyName>PaceCommon</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
