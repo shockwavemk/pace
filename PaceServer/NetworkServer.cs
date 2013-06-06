@@ -16,6 +16,9 @@ namespace PaceServer
         private int _port;
         private bool _serverRunning = true;
         private Thread _threadListener;
+        private ConcurrentQueue<Message> _outQueue;
+        private ConcurrentQueue<Message> _inQueue;
+
         public delegate void ClientChangeEventHandler(object sender, ClientChangeEventArgs e);
         public static event ClientChangeEventHandler ClientChange;
 
@@ -38,8 +41,6 @@ namespace PaceServer
         {
             _ipAddress = IPAddress.Parse(address);
         }
-
-        
 
         public void Start()
         {
@@ -87,12 +88,12 @@ namespace PaceServer
 
         public void SetOutQueue(ref ConcurrentQueue<Message> outQueue)
         {
-            throw new System.NotImplementedException();
+            _outQueue = outQueue;
         }
 
         public void SetInQueue(ref ConcurrentQueue<Message> inQueue)
         {
-            throw new System.NotImplementedException();
+            _inQueue = inQueue;
         }
     }
 }

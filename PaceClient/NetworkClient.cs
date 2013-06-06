@@ -1,6 +1,8 @@
-﻿using System.Net;
+﻿using System.Collections.Concurrent;
+using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using PaceCommon;
 
 namespace PaceClient
 {
@@ -10,6 +12,9 @@ namespace PaceClient
         private IPAddress _ipAddress;
         private int _port;
         private bool _clientRunning = true;
+        private ConcurrentQueue<Message> _outQueue;
+        private ConcurrentQueue<Message> _inQueue;
+
         public delegate void ServerChangeEventHandler(object sender, ServerChangeEventArgs e);
         public static event ServerChangeEventHandler ServerChange;
 
@@ -65,6 +70,16 @@ namespace PaceClient
             {
                 statusHandler(null, e);
             }
+        }
+
+        public void SetOutQueue(ref ConcurrentQueue<Message> outQueue)
+        {
+            _outQueue = outQueue;
+        }
+
+        public void SetInQueue(ref ConcurrentQueue<Message> inQueue)
+        {
+            _inQueue = inQueue;
         }
     }
 }
