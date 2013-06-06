@@ -106,8 +106,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="Dokumente\Modell des Problembereichs.vsd" />
-    <None Include="Dokumente\Protolle\Protokoll 15-05-2013.docx" />
+    <None Include="Dokumente\Modelle\Modell des Problembereichs.vsdx" />
+    <None Include="Dokumente\Protokolle\Protokoll 15-05-2013.docx" />
     <None Include="Dokumente\Vorstellung\Masterarbeit_MK.pptx" />
     <None Include="PaceClient_TemporaryKey.pfx" />
     <None Include="Properties\app.manifest" />
@@ -120,7 +120,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Dokumente\Protolle\Protokoll 12-04-2013.docx" />
+    <None Include="Dokumente\Protokolle\Protokoll 12-04-2013.docx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
