@@ -1,7 +1,9 @@
 ﻿using System.Collections;
+using System.Collections.Concurrent;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using PaceCommon;
 
 namespace PaceServer
 {
@@ -81,6 +83,16 @@ namespace PaceServer
             {
                 statusHandler(null, e);
             }
+        }
+
+        public void SetOutQueue(ref ConcurrentQueue<Message> outQueue)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void SetInQueue(ref ConcurrentQueue<Message> inQueue)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

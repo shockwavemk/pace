@@ -30,6 +30,15 @@ namespace PaceCommon
             Destination = destination;
         }
 
+        public Message(string soap)
+        {
+            var m = (Message) SoapTo(soap);
+            _parameter = m.Parameter;
+            Acknowledgement = m.Acknowledgement;
+            Command = m.Command;
+            Destination = m.Destination;
+        }
+
         public Message()
         {
             _parameter = new string[1];

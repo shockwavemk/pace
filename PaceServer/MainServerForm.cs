@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Windows.Forms;
 using PaceCommon;
 
@@ -17,18 +18,17 @@ namespace PaceServer
         {
             try
             {
-                /*
-                 * Starting Network-Server on local host
-                 */
+                var inQueue = new ConcurrentQueue<PaceCommon.Message>();
+                var outQueue = new ConcurrentQueue<PaceCommon.Message>();
+
                 var tempServer = new NetworkServer();
                 tempServer.SetIpAddress("127.0.0.1");
                 tempServer.SetPort(1987);
+                tempServer.SetInQueue(ref inQueue);
+                tempServer.SetOutQueue(ref outQueue);
                 NetworkServer.ClientChange += tempServer_ClientChange;
                 tempServer.Start();
 
-                /*
-                 * Starting SubForm ClientsTable for start
-                 */
                 LoadClientsTable();
             }
             catch (Exception ex)
@@ -66,6 +66,11 @@ namespace PaceServer
         }
 
         private void mainPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
         }

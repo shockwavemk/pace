@@ -32,14 +32,14 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clientsTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutPaCEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.clientsTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutPaCEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -58,6 +58,7 @@
             this.menuStrip1.Size = new System.Drawing.Size(350, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // fileToolStripMenuItem
             // 
@@ -71,6 +72,12 @@
             this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
             this.editToolStripMenuItem.Text = "Edit";
             // 
+            // runToolStripMenuItem
+            // 
+            this.runToolStripMenuItem.Name = "runToolStripMenuItem";
+            this.runToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
+            this.runToolStripMenuItem.Text = "Run";
+            // 
             // viewToolStripMenuItem
             // 
             this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -79,11 +86,12 @@
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.viewToolStripMenuItem.Text = "View";
             // 
-            // runToolStripMenuItem
+            // clientsTableToolStripMenuItem
             // 
-            this.runToolStripMenuItem.Name = "runToolStripMenuItem";
-            this.runToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
-            this.runToolStripMenuItem.Text = "Run";
+            this.clientsTableToolStripMenuItem.Name = "clientsTableToolStripMenuItem";
+            this.clientsTableToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.clientsTableToolStripMenuItem.Text = "Clients\' Table";
+            this.clientsTableToolStripMenuItem.Click += new System.EventHandler(this.clientsTableToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -92,6 +100,12 @@
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutPaCEToolStripMenuItem
+            // 
+            this.aboutPaCEToolStripMenuItem.Name = "aboutPaCEToolStripMenuItem";
+            this.aboutPaCEToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.aboutPaCEToolStripMenuItem.Text = "About PaCE";
             // 
             // statusStrip1
             // 
@@ -115,19 +129,6 @@
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
             this.toolStripStatusLabel2.Size = new System.Drawing.Size(38, 17);
             this.toolStripStatusLabel2.Text = "status";
-            // 
-            // clientsTableToolStripMenuItem
-            // 
-            this.clientsTableToolStripMenuItem.Name = "clientsTableToolStripMenuItem";
-            this.clientsTableToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.clientsTableToolStripMenuItem.Text = "Clients\' Table";
-            this.clientsTableToolStripMenuItem.Click += new System.EventHandler(this.clientsTableToolStripMenuItem_Click);
-            // 
-            // aboutPaCEToolStripMenuItem
-            // 
-            this.aboutPaCEToolStripMenuItem.Name = "aboutPaCEToolStripMenuItem";
-            this.aboutPaCEToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.aboutPaCEToolStripMenuItem.Text = "About PaCE";
             // 
             // mainPanel
             // 

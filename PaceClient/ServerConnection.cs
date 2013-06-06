@@ -15,8 +15,8 @@ namespace PaceClient
         private StreamReader _connectionReceiver;
         private StreamWriter _connectionSender;
 
-        private bool _connectionEstablished;
-        private string _serverResponse;
+        private bool _connectionEstablished = true;
+        private string _buffer;
 
         public ServerConnection(TcpClient tcpConnection)
         {
@@ -32,32 +32,26 @@ namespace PaceClient
             {
                 _connectionReceiver = new StreamReader(TcpClient.GetStream());
                 _connectionSender = new StreamWriter(TcpClient.GetStream());
-            
-                TraceOps.Out("Client waiting for Responses to Act");
-                while ((_serverResponse = _connectionReceiver.ReadLine()) != "")
+
+                while (_connectionEstablished)
                 {
-                    if (_serverResponse != "</SOAP-ENV:Envelope>")
-                    {
-                        
-                    }
-                    else
-                    {
-                        var m = new Message();
-                    }
+                    HandleResponse(_connectionReceiver.ReadLine());
                 }
-                TraceOps.Out("Client: End of server responses");
             }
             catch (Exception exception)
             {
                 TraceOps.Out(exception.ToString());
             }
-            #endregion
         }
 
-        private void HandleResponse(string rawResponse)
+        private void HandleResponse(string s)
         {
-            var m = new Message();
-            TraceOps.Out("Server answers:"+rawResponse);
+            if (s == "</SOAP-ENV:Envelope>")
+            { 
+                var m = new Message(_buffer);
+                _buffer = "";
+            }
+            _buffer += s;
         }
 
         public void CloseConnection()
