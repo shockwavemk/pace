@@ -42,9 +42,20 @@ namespace PaceCommon
         public Message()
         {
             _parameter = new string[1];
+            _parameter.SetValue("testparameter",0);
             Acknowledgement = false;
-            Command = "test command";
-            Destination = "server";
+            Command = "ping";
+            Destination = "all";
+        }
+
+        public string GetDestination()
+        {
+            return Destination;
+        }
+
+        public string GetCommand()
+        {
+            return Command;
         }
 
         public string ToSoap()

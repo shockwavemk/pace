@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Sockets;
@@ -16,54 +17,44 @@ namespace PaceServer
 
         private bool _connectionEstablished;
         private string _clientResponse;
-        public delegate void ClientChangeEventHandler(object sender, ClientChangeEventArgs e);
-        public static event ClientChangeEventHandler ClientChange;
+        private string _buffer;
+        public ConcurrentQueue<Message> OutQueue;
+        private ConcurrentQueue<Message> _inQueue;
 
-        public ClientConnection(TcpClient tcpConnection)
+        public delegate void ConnectionRegistrationEventHandler(ClientConnection sender, ConnectionRegistrationEventArgs e);
+        public event ConnectionRegistrationEventHandler ConnectionRegistration;
+
+        public ClientConnection(TcpClient tcpConnection, ref ConcurrentQueue<Message> inQueue)
         {
             TraceOps.Out("New ClientConnection created");
             TcpClient = tcpConnection;
+            OutQueue = new ConcurrentQueue<Message>();
+            _inQueue = inQueue;
             _threadConnection = new Thread(Communication);
             _threadConnection.Start();
         }
 
         private void Communication()
         {
-            #region Registration
             try
             {
                 _connectionReceiver = new StreamReader(TcpClient.GetStream());
                 _connectionSender = new StreamWriter(TcpClient.GetStream());
 
                 HandleAdd();
-            }
-            catch (Exception exception)
-            {
-                TraceOps.Out(exception.ToString());
-            }
-            #endregion
-
-            #region Responses
-            try
-            {
+            
                 TraceOps.Out("Server waiting for Responses to Act");
-                while ((_clientResponse = _connectionReceiver.ReadLine()) != "")
+                while (_connectionEstablished)
                 {
-                    if (_clientResponse == null)
-                    {
-                        CloseConnection();
-                    }
-                    else
-                    {
-                        HandleResponse(_clientResponse);
-                    }
+                    Thread.Sleep(500);
+                    _clientResponse = _connectionReceiver.ReadLine();
+                    HandleResponse(_clientResponse);
                 }
             }
             catch (Exception exception)
             {
                 TraceOps.Out(exception.ToString());
             }
-            #endregion
         }
 
 
@@ -78,15 +69,45 @@ namespace PaceServer
             m.Send(_connectionSender);
         }
 
-        private void HandleResponse(string rawResponse)
+        private void HandleResponse(string s)
         {
-            TraceOps.Out("Client answers:" + rawResponse);
+            _buffer += s;
+            if (s == "</SOAP-ENV:Envelope>")
+            {
+                try
+                {
+                    var m = new Message(_buffer);
+                    
+                    // Directly catch identification
+                    if (m.GetCommand() == "register")
+                    {
+                        ConnectionRegistration.Invoke(this, new ConnectionRegistrationEventArgs((string) m.Parameter.GetValue(0)));
+                    }
+                    else
+                    {
+                        _inQueue.Enqueue(m);
+                    }
+
+                    _buffer = "";
+                }
+                catch (Exception exception)
+                {
+                    // TODO: Secure Transmission of Objects
+                    TraceOps.Out(exception.ToString());
+                }
+            }
         }
 
         public void CloseConnection()
         {
+            _connectionEstablished = false;
             TcpClient.Close();
             _threadConnection.Abort();
+        }
+
+        public void Stop()
+        {
+            //throw new NotImplementedException();
         }
     }
 }

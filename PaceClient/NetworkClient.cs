@@ -1,4 +1,5 @@
-﻿using System.Collections.Concurrent;
+﻿using System.Collections;
+using System.Collections.Concurrent;
 using System.Net;
 using System.Net.Sockets;
 using PaceCommon;
@@ -7,10 +8,10 @@ namespace PaceClient
 {
     class NetworkClient
     {
+        public static Hashtable ServerList = new Hashtable();
         private TcpClient _clientSocket;
         private IPAddress _ipAddress;
         private int _port;
-        private bool _clientRunning = true;
         private ConcurrentQueue<Message> _outQueue;
         private ConcurrentQueue<Message> _inQueue;
 
@@ -55,11 +56,16 @@ namespace PaceClient
            _clientSocket = new TcpClient();
            _clientSocket.Connect(GetIpAddress(), GetPort());
            var newConnection = new ServerConnection(_clientSocket);
+           ServerList.Add(_clientSocket, newConnection);
         }
 
         public void Stop()
         {
-            _clientRunning = false;
+            foreach (DictionaryEntry item in ServerList)
+            {
+                var sc = (ServerConnection) item.Value;
+                sc.Stop();
+            }
         }
         
         public static void OnServerChange(ServerChangeEventArgs e)

@@ -46,12 +46,12 @@ namespace PaceClient
 
         private void HandleResponse(string s)
         {
+            _buffer += s;
             if (s == "</SOAP-ENV:Envelope>")
             { 
                 var m = new Message(_buffer);
                 _buffer = "";
             }
-            _buffer += s;
         }
 
         public void CloseConnection()
@@ -85,6 +85,11 @@ namespace PaceClient
                 fqdn = hostName;
 
             return fqdn;
+        }
+
+        public void Stop()
+        {
+            //throw new NotImplementedException();
         }
     }
 }
