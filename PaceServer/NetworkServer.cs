@@ -22,7 +22,6 @@ namespace PaceServer
         
         private ConcurrentQueue<Message> _inQueue;
         private ConcurrentQueue<Message> _outQueue;
-        public ConcurrentQueue<Message> OutQueue;
 
         public delegate void ClientChangeEventHandler(object sender, ClientChangeEventArgs e);
         public static event ClientChangeEventHandler ClientChange;
@@ -70,7 +69,7 @@ namespace PaceServer
                 _threadListener = new Thread(ListenForNewClients);
                 _threadListener.Start();
 
-                _threadMessages = new Thread(SortOutMessages);
+                _threadMessages = new Thread(MessageWorker);
                 _threadMessages.Start();
 
                 ClientChange.Invoke(null, new ClientChangeEventArgs("Server Online"));
@@ -102,13 +101,13 @@ namespace PaceServer
             }
         }
 
-        private void SortOutMessages()
+        private void MessageWorker()
         {
             while (_serverRunning)
             {
                 Thread.Sleep(500);
                 Message m; 
-                var message = OutQueue.TryDequeue(out m) ? m : null;
+                var message = _outQueue.TryDequeue(out m) ? m : null;
 
                 if (message != null)
                 {
@@ -120,7 +119,7 @@ namespace PaceServer
                     }
                     else
                     {
-                        OutQueue.Enqueue(message);
+                        _outQueue.Enqueue(message);
                     }
                 }
             }

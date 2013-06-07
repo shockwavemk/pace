@@ -60,11 +60,7 @@ namespace PaceServer
 
         private void HandleAdd()
         {
-            var random = new Random();
-            int clientId = random.Next(0, 10000);
             _connectionEstablished = true;
-            ClientInformation clientInformation = ClientInformation.GetClientInformation(clientId); // first line for identification of client
-            
             var m = new Message(new List<string>(), true, "register", "client");
             m.Send(_connectionSender);
         }
@@ -78,7 +74,7 @@ namespace PaceServer
                 {
                     var m = new Message(_buffer);
                     
-                    // Directly catch identification
+                    // Directly catch registration - all other messages are added to queue for delegation
                     if (m.GetCommand() == "register")
                     {
                         ConnectionRegistration.Invoke(this, new ConnectionRegistrationEventArgs((string) m.Parameter.GetValue(0)));
