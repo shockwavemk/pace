@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -34,9 +35,14 @@ namespace PaceClient
 
             try
             {
+                var inQueue = new ConcurrentQueue<PaceCommon.Message>();
+                var outQueue = new ConcurrentQueue<PaceCommon.Message>();
+                
                 var tempClient = new NetworkClient();
                 tempClient.SetIpAddress("127.0.0.1");
                 tempClient.SetPort(1987);
+                tempClient.SetInQueue(ref inQueue);
+                tempClient.SetOutQueue(ref outQueue);
                 NetworkClient.ServerChange += tempClient_ServerChange;
                 tempClient.Start();
             }

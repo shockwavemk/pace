@@ -16,7 +16,6 @@ namespace PaceServer
         private StreamWriter _connectionSender;
 
         private bool _connectionEstablished;
-        private string _clientResponse;
         private string _buffer;
         public ConcurrentQueue<Message> OutQueue;
         private ConcurrentQueue<Message> _inQueue;
@@ -30,6 +29,10 @@ namespace PaceServer
             TcpClient = tcpConnection;
             OutQueue = new ConcurrentQueue<Message>();
             _inQueue = inQueue;
+
+            _connectionReceiver = new StreamReader(TcpClient.GetStream());
+            _connectionSender = new StreamWriter(TcpClient.GetStream());
+
             _threadConnection = new Thread(Communication);
             _threadConnection.Start();
         }
@@ -38,17 +41,13 @@ namespace PaceServer
         {
             try
             {
-                _connectionReceiver = new StreamReader(TcpClient.GetStream());
-                _connectionSender = new StreamWriter(TcpClient.GetStream());
-
                 HandleAdd();
             
                 TraceOps.Out("Server waiting for Responses to Act");
                 while (_connectionEstablished)
                 {
                     Thread.Sleep(500);
-                    _clientResponse = _connectionReceiver.ReadLine();
-                    HandleResponse(_clientResponse);
+                    HandleResponse(_connectionReceiver.ReadLine());
                 }
             }
             catch (Exception exception)
@@ -61,7 +60,8 @@ namespace PaceServer
         private void HandleAdd()
         {
             _connectionEstablished = true;
-            var m = new Message(new List<string>(), true, "register", "client");
+            var rlist = new List<string> {HashOps.GetFqdn()};
+            var m = new Message(rlist, true, "register", "");
             m.Send(_connectionSender);
         }
 

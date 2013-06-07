@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.IO;
-using System.Net;
 using System.Net.Sockets;
 using System.Threading;
-using PaceClient;
 using PaceCommon;
 
 namespace PaceClient
@@ -17,24 +17,35 @@ namespace PaceClient
 
         private bool _connectionEstablished = true;
         private string _buffer;
+        public ConcurrentQueue<Message> OutQueue;
+        private ConcurrentQueue<Message> _inQueue;
 
-        public ServerConnection(TcpClient tcpConnection)
+        public delegate void ConnectionRegistrationEventHandler(ServerConnection sender, ConnectionRegistrationEventArgs e);
+        public event ConnectionRegistrationEventHandler ConnectionRegistration;
+
+        public ServerConnection(TcpClient tcpConnection, ref ConcurrentQueue<Message> inQueue)
         {
             TraceOps.Out("New ServerConnection created");
             TcpClient = tcpConnection;
+            OutQueue = new ConcurrentQueue<Message>();
+            _inQueue = inQueue;
+
+            _connectionReceiver = new StreamReader(TcpClient.GetStream());
+            _connectionSender = new StreamWriter(TcpClient.GetStream());
+
             _threadConnection = new Thread(Communication);
-            _threadConnection.Start();
+            _threadConnection.Start(); 
         }
 
         public void Communication()
         {
             try
             {
-                _connectionReceiver = new StreamReader(TcpClient.GetStream());
-                _connectionSender = new StreamWriter(TcpClient.GetStream());
+                HandleAdd();
 
                 while (_connectionEstablished)
                 {
+                    Thread.Sleep(500);
                     HandleResponse(_connectionReceiver.ReadLine());
                 }
             }
@@ -44,13 +55,40 @@ namespace PaceClient
             }
         }
 
+        private void HandleAdd()
+        {
+            _connectionEstablished = true;
+            var rlist = new List<string> { HashOps.GetFqdn() };
+            var m = new Message(rlist, true, "register", "");
+            m.Send(_connectionSender);
+        }
+
         private void HandleResponse(string s)
         {
             _buffer += s;
             if (s == "</SOAP-ENV:Envelope>")
-            { 
-                var m = new Message(_buffer);
-                _buffer = "";
+            {
+                try
+                {
+                    var m = new Message(_buffer);
+
+                    // Directly catch registration - all other messages are added to queue for delegation
+                    if (m.GetCommand() == "register")
+                    {
+                        ConnectionRegistration.Invoke(this, new ConnectionRegistrationEventArgs((string)m.Parameter.GetValue(0)));
+                    }
+                    else
+                    {
+                        _inQueue.Enqueue(m);
+                    }
+
+                    _buffer = "";
+                }
+                catch (Exception exception)
+                {
+                    // TODO: Secure Transmission of Objects
+                    TraceOps.Out(exception.ToString());
+                }
             }
         }
 
@@ -58,33 +96,6 @@ namespace PaceClient
         {
             TcpClient.Close();
             _threadConnection.Abort();
-        }
-
-        public void SendMessage(string message)
-        {
-            TraceOps.Out("Client send Message: " + message);
-            _connectionSender.WriteLine(message);
-            _connectionSender.Flush();
-        }
-
-        public string CalculateConnectionHash()
-        {
-            // try to use static information of system to (re-)identify a client - for example if ip changed because of reconnect or restart of system
-            // TODO: make it more secure
-            return HashOps.CreateStringHash(GetFqdn());
-        }
-
-        public static string GetFqdn()
-        {
-            string domainName = System.Net.NetworkInformation.IPGlobalProperties.GetIPGlobalProperties().DomainName;
-            string hostName = Dns.GetHostName();
-            string fqdn;
-            if (!hostName.Contains(domainName))
-                fqdn = hostName + "." + domainName;
-            else
-                fqdn = hostName;
-
-            return fqdn;
         }
 
         public void Stop()

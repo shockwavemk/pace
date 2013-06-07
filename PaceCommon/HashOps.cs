@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -56,6 +57,26 @@ namespace PaceCommon
 
             hashingObj.Clear();
             return (hasBeenTamperedWith);
+        }
+
+        public string CalculateConnectionHash()
+        {
+            // try to use static information of system to (re-)identify a client - for example if ip changed because of reconnect or restart of system
+            // TODO: make it more secure
+            return CreateStringHash(GetFqdn());
+        }
+
+        public static string GetFqdn()
+        {
+            string domainName = System.Net.NetworkInformation.IPGlobalProperties.GetIPGlobalProperties().DomainName;
+            string hostName = Dns.GetHostName();
+            string fqdn;
+            if (!hostName.Contains(domainName))
+                fqdn = hostName + "." + domainName;
+            else
+                fqdn = hostName;
+
+            return fqdn;
         }
     }
 }
