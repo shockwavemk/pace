@@ -1,12 +1,20 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Threading;
 using System.Windows.Forms;
 using PaceCommon;
+using Message = PaceCommon.Message;
 
 namespace PaceServer
 {
     public partial class MainServerForm : Form
     {
+        private Thread _threadWorker;
+        private bool _running = true;
+        private ConcurrentQueue<PaceCommon.Message> _inQueue;
+        private ConcurrentQueue<PaceCommon.Message> _outQueue;
+
         private delegate void UpdateStatusCallback(string strMessage);
         public MainServerForm()
         {
@@ -18,22 +26,48 @@ namespace PaceServer
         {
             try
             {
-                var inQueue = new ConcurrentQueue<PaceCommon.Message>();
-                var outQueue = new ConcurrentQueue<PaceCommon.Message>();
+                _inQueue = new ConcurrentQueue<PaceCommon.Message>();
+                _outQueue = new ConcurrentQueue<PaceCommon.Message>();
 
                 var tempServer = new NetworkServer();
                 tempServer.SetIpAddress("127.0.0.1");
                 tempServer.SetPort(1987);
-                tempServer.SetInQueue(ref inQueue);
-                tempServer.SetOutQueue(ref outQueue);
+                tempServer.SetInQueue(ref _inQueue);
+                tempServer.SetOutQueue(ref _outQueue);
                 NetworkServer.ClientChange += tempServer_ClientChange;
                 tempServer.Start();
+
+                _threadWorker = new Thread(Tasks);
+                _threadWorker.Start();
 
                 LoadClientsTable();
             }
             catch (Exception ex)
             {
                 TraceOps.Out(ex.Message);
+            }
+        }
+
+        private void Tasks()
+        {
+            try
+            {
+                TraceOps.Out("Server: Start to work on Messages");
+                while (_running)
+                {
+                    Thread.Sleep(500);
+                    Message m;
+                    var message = _outQueue.TryDequeue(out m) ? m : null;
+
+                    if (message != null)
+                    {
+                        MessageBox.Show("Command: " + message.GetCommand() + " Destination: " +  message.GetDestination(), "Message from Client", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                TraceOps.Out(exception.ToString());
             }
         }
 
