@@ -1,16 +1,10 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Reflection;
 using System.Windows.Forms;
-using PaceClient;
 using PaceCommon;
 using Message = PaceCommon.Message;
 
@@ -71,7 +65,7 @@ namespace PaceClient
                 {
                     Thread.Sleep(500);
                     Message m;
-                    var message = _outQueue.TryDequeue(out m) ? m : null;
+                    var message = _inQueue.TryDequeue(out m) ? m : null;
 
                     if (message != null)
                     {
@@ -147,6 +141,13 @@ namespace PaceClient
         private void status_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var rlist = new List<string> { "" };
+            var m = new Message(rlist, true, "ping", "server");
+            _outQueue.Enqueue(m);
         }
     }
 }

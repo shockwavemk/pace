@@ -85,19 +85,37 @@ namespace PaceClient
             {
                 Thread.Sleep(500);
                 Message m;
-                var message = _outQueue.TryDequeue(out m) ? m : null;
+                var message = _outQueue.TryDequeue(out m);
 
-                if (message != null)
+                if (message)
                 {
-                    var destination = message.GetDestination();
-                    var cq = (ConcurrentQueue<Message>)RecipientList[destination];
-                    if (cq != null)
+                    var destination = m.GetDestination();
+                    if(destination != "")
                     {
-                        cq.Enqueue(message);
+                        var cq = (ConcurrentQueue<Message>)RecipientList[destination];
+                        if (cq != null)
+                        {
+                            cq.Enqueue(m);
+                        }
+                        else
+                        {
+                            _outQueue.Enqueue(m);
+                        }
                     }
                     else
                     {
-                        _outQueue.Enqueue(message);
+                        foreach (DictionaryEntry item in RecipientList)
+                        {
+                            var cq = (ConcurrentQueue<Message>)item.Value;
+                            if (cq != null)
+                            {
+                                cq.Enqueue(m);
+                            }
+                            else
+                            {
+                                _outQueue.Enqueue(m);
+                            }
+                        }
                     }
                 }
             }

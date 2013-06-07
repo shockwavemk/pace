@@ -33,6 +33,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.status = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -62,11 +63,22 @@
             this.status.Text = "label2";
             this.status.Click += new System.EventHandler(this.status_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(84, 144);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(208, 122);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Send Ping";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // MainClientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(383, 461);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.status);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -85,6 +97,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NotifyIcon notifyIcon;
         private System.Windows.Forms.Label status;
+        private System.Windows.Forms.Button button1;
     }
 }
 

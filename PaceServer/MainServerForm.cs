@@ -57,7 +57,7 @@ namespace PaceServer
                 {
                     Thread.Sleep(500);
                     Message m;
-                    var message = _outQueue.TryDequeue(out m) ? m : null;
+                    var message = _inQueue.TryDequeue(out m) ? m : null;
 
                     if (message != null)
                     {
