@@ -12,7 +12,6 @@ namespace PaceClient
         private const int Threshold = 1;
         public static Hashtable ServerList = new Hashtable();
         public static Hashtable RecipientList = new Hashtable();
-        private TcpClient _clientSocket;
         private IPAddress _ipAddress;
         private int _port;
         private bool _clientRunning = true;
@@ -73,11 +72,9 @@ namespace PaceClient
 
         private void ConnectionWithServer()
         {
-           _clientSocket = new TcpClient();
-           _clientSocket.Connect(GetIpAddress(), GetPort());
-           var newConnection = new ServerConnection(_clientSocket, ref _inQueue);
+           var newConnection = new ServerConnection(ref _inQueue, _port);
            newConnection.ConnectionRegistration += OnConnectionRegistration;
-           ServerList.Add(_clientSocket, newConnection);
+           ServerList.Add(newConnection, newConnection);
         }
 
         private void MessageWorker()
@@ -95,10 +92,10 @@ namespace PaceClient
                     
                     if(destination != "")
                     {
-                        var cq = (ConcurrentQueue<Message>)RecipientList[destination];
+                        var cq = (MessageQueue)RecipientList[destination];
                         if (cq != null)
                         {
-                            cq.Enqueue(m);
+                            cq.ClientToServerEnqueue(m);
                         }
                         else
                         {
@@ -109,9 +106,9 @@ namespace PaceClient
                     {
                         foreach (DictionaryEntry item in RecipientList)
                         {
-                            var cq = (ConcurrentQueue<Message>)item.Value;
+                            var cq = (MessageQueue)item.Value;
                             TraceOps.Out("All - Message: " + command + " Destination: " + destination);
-                            cq.Enqueue(m);
+                            cq.ClientToServerEnqueue(m);
                         }
                     }
                 }
@@ -140,7 +137,7 @@ namespace PaceClient
         {
             var destination = connectionRegistrationEventArgs.ConnectionHash;
             TraceOps.Out("Registration: " + destination);
-            RecipientList.Add(destination, sender.OutQueue);
+            RecipientList.Add(destination, sender.MessageQueue);
         }
     }
 }

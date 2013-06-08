@@ -1,8 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Net;
-using System.Net.Sockets;
+using System.Runtime.Remoting;
+using System.Runtime.Remoting.Channels;
+using System.Runtime.Remoting.Channels.Http;
 using System.Threading;
 using PaceCommon;
 
@@ -13,8 +16,6 @@ namespace PaceServer
         private const int Threshold = 1;
         public static Hashtable ClientList = new Hashtable();
         public static Hashtable RecipientList = new Hashtable();
-        private TcpListener _serverSocket;
-        private TcpClient _clientSocket;
         private IPAddress _ipAddress;
         private int _port;
         private bool _serverRunning = true;
@@ -57,15 +58,25 @@ namespace PaceServer
             _inQueue = inQueue;
         }
 
+        public NetworkServer()
+        {
+            var chnl = new HttpChannel(_port);
+            ChannelServices.RegisterChannel(chnl, false);
+
+            RemotingConfiguration.RegisterWellKnownServiceType(typeof(MessageQueue),
+                "MessageQueue.soap",
+                WellKnownObjectMode.Singleton);
+
+            var soap = "http://localhost:" + _port + "/MessageQueue.soap";
+            MessageQueue = (MessageQueue)Activator.GetObject(typeof(MessageQueue), soap);
+        }
+
         public void Start()
         {
             try
             {
-                _serverSocket = new TcpListener(this.GetIpAddress(), this.GetPort());
-                _clientSocket = default(TcpClient);
+                
                 _serverRunning = true;
-
-                _serverSocket.Start();
 
                 _threadListener = new Thread(ListenForNewClients);
                 _threadListener.Start();

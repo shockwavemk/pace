@@ -52,6 +52,7 @@
     <Compile Include="ConnectionRegistration.cs" />
     <Compile Include="HashOps.cs" />
     <Compile Include="Message.cs" />
+    <Compile Include="MessageQueue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TraceOps.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
