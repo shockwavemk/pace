@@ -57,11 +57,11 @@ namespace PaceServer
                 {
                     Thread.Sleep(500);
                     Message m;
-                    var message = _inQueue.TryDequeue(out m) ? m : null;
+                    var message = _inQueue.TryDequeue(out m);
 
-                    if (message != null)
+                    if (message && m != null)
                     {
-                        MessageBox.Show("Command: " + message.GetCommand() + " Destination: " +  message.GetDestination(), "Message from Client", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        MessageBox.Show("Command: " + m.GetCommand() + " Destination: " +  m.GetDestination(), "Message from Client", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
                 }
             }

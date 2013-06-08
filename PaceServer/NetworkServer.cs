@@ -109,7 +109,7 @@ namespace PaceServer
                 Message m; 
                 var message = _outQueue.TryDequeue(out m);
 
-                if (message)
+                if (message && m != null)
                 {
                     var destination = m.GetDestination();
                     var cq = (ConcurrentQueue<Message>) RecipientList[destination];

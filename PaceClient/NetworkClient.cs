@@ -87,9 +87,11 @@ namespace PaceClient
                 Message m;
                 var message = _outQueue.TryDequeue(out m);
 
-                if (message)
+                if (message && m != null)
                 {
                     var destination = m.GetDestination();
+                    var command = m.GetCommand();
+                    
                     if(destination != "")
                     {
                         var cq = (ConcurrentQueue<Message>)RecipientList[destination];
@@ -107,14 +109,8 @@ namespace PaceClient
                         foreach (DictionaryEntry item in RecipientList)
                         {
                             var cq = (ConcurrentQueue<Message>)item.Value;
-                            if (cq != null)
-                            {
-                                cq.Enqueue(m);
-                            }
-                            else
-                            {
-                                _outQueue.Enqueue(m);
-                            }
+                            TraceOps.Out("All - Message: " + command + " Destination: " + destination);
+                            cq.Enqueue(m);
                         }
                     }
                 }
@@ -142,6 +138,7 @@ namespace PaceClient
         public static void OnConnectionRegistration(ServerConnection sender, ConnectionRegistrationEventArgs connectionRegistrationEventArgs)
         {
             var destination = connectionRegistrationEventArgs.ConnectionHash;
+            TraceOps.Out("Registration: " + destination);
             RecipientList.Add(destination, sender.OutQueue);
         }
     }

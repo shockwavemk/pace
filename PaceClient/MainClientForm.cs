@@ -65,11 +65,11 @@ namespace PaceClient
                 {
                     Thread.Sleep(500);
                     Message m;
-                    var message = _inQueue.TryDequeue(out m) ? m : null;
+                    var message = _inQueue.TryDequeue(out m);
 
-                    if (message != null)
+                    if (message && m != null)
                     {
-                        MessageBox.Show("Command: " + message.GetCommand() + " Destination: " + message.GetDestination(), "Message from Server", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        MessageBox.Show("Command: " + m.GetCommand() + " Destination: " + m.GetDestination(), "Message from Server", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
                 }
             }
@@ -146,7 +146,7 @@ namespace PaceClient
         private void button1_Click(object sender, EventArgs e)
         {
             var rlist = new List<string> { "" };
-            var m = new Message(rlist, true, "ping", "server");
+            var m = new Message(rlist, true, "ping", "");
             _outQueue.Enqueue(m);
         }
     }

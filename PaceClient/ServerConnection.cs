@@ -46,7 +46,12 @@ namespace PaceClient
                 while (_connectionEstablished)
                 {
                     Thread.Sleep(500);
-                    HandleResponse(_connectionReceiver.ReadLine());
+                    TraceOps.Out("ServerConnectionThread");
+                    _connectionReceiver.ReadLine();
+                    _connectionSender.WriteLine("");
+                    _connectionSender.Flush();
+                    //HandleResponse(_connectionReceiver.ReadLine());
+                    //HandleMessage();
                 }
             }
             catch (Exception exception)
@@ -63,8 +68,32 @@ namespace PaceClient
             m.Send(_connectionSender);
         }
 
+        private void HandleMessage()
+        {
+            try
+            {
+                TraceOps.Out("HandleMessage");
+                Message m;
+                var message = OutQueue.TryDequeue(out m);
+
+                if (message && m != null)
+                {
+                    var destination = m.GetDestination();
+                    var command = m.GetCommand();
+                    TraceOps.Out("Inside ServerConnection - Message: " + command + " Destination: " + destination);
+                    //m.Send(_connectionSender);
+                }
+
+            }
+            catch (Exception exception)
+            {
+                TraceOps.Out(exception.ToString());
+            }
+        }
+
         private void HandleResponse(string s)
         {
+            TraceOps.Out("HandleResponse");
             _buffer += s;
             if (s == "</SOAP-ENV:Envelope>")
             {
@@ -75,20 +104,19 @@ namespace PaceClient
                     // Directly catch registration - all other messages are added to queue for delegation
                     if (m.GetCommand() == "register")
                     {
-                        ConnectionRegistration.Invoke(this, new ConnectionRegistrationEventArgs((string)m.Parameter.GetValue(0)));
+                        //ConnectionRegistration.Invoke(this, new ConnectionRegistrationEventArgs((string)m.Parameter.GetValue(0)));
                     }
                     else
                     {
                         _inQueue.Enqueue(m);
                     }
-
-                    _buffer = "";
                 }
                 catch (Exception exception)
                 {
                     // TODO: Secure Transmission of Objects
                     TraceOps.Out(exception.ToString());
                 }
+                _buffer = "";
             }
         }
 
