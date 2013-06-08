@@ -10,6 +10,7 @@ namespace PaceServer
 {
     class ClientConnection
     {
+        private const int Threshold = 1;
         public TcpClient TcpClient;
         private Thread _threadConnection;
         private StreamReader _connectionReceiver;
@@ -27,6 +28,8 @@ namespace PaceServer
         {
             TraceOps.Out("New ClientConnection created");
             TcpClient = tcpConnection;
+           
+            
             OutQueue = new ConcurrentQueue<Message>();
             _inQueue = inQueue;
 
@@ -41,24 +44,29 @@ namespace PaceServer
         {
             try
             {
+                KeepAlive();
                 HandleAdd();
             
                 TraceOps.Out("Server waiting for Responses to Act");
                 while (_connectionEstablished)
                 {
-                    Thread.Sleep(500);
-                    TraceOps.Out("ClientConnectionThread");
-                    _connectionReceiver.ReadLine();
-                    _connectionSender.WriteLine("");
-                    _connectionSender.Flush();
-                    //HandleResponse(_connectionReceiver.ReadLine());
-                    //HandleMessage();
+                    KeepAlive();
+                    Thread.Sleep(Threshold);
+                    KeepAlive();
+                    HandleResponse(_connectionReceiver.ReadLine());
+                    HandleMessage();
                 }
             }
             catch (Exception exception)
             {
                 TraceOps.Out(exception.ToString());
             }
+        }
+
+        private void KeepAlive()
+        {
+            _connectionSender.WriteLine("");
+            _connectionSender.Flush();
         }
 
 
@@ -74,7 +82,6 @@ namespace PaceServer
         {
             try
             {
-                TraceOps.Out("HandleMessage");
                 Message m;
                 var message = OutQueue.TryDequeue(out m);
 
@@ -83,7 +90,7 @@ namespace PaceServer
                     var destination = m.GetDestination();
                     var command = m.GetCommand();
                     TraceOps.Out("Inside ClientConnection - Message: " + command + " Destination: " + destination);
-                    //m.Send(_connectionSender);
+                    m.Send(_connectionSender);
                 }
             }
             catch (Exception exception)
@@ -94,10 +101,15 @@ namespace PaceServer
 
         private void HandleResponse(string s)
         {
-            TraceOps.Out("HandleResponse");
-            _buffer += s;
-            if (s == "</SOAP-ENV:Envelope>")
+            if (s != "")
             {
+                _buffer += s;
+                TraceOps.Out(s);
+            }
+            
+            if (s == "</SOAP-ENV:Envelope>" && s != "")
+            {
+                
                 try
                 {
                     var m = new Message(_buffer);
@@ -105,7 +117,7 @@ namespace PaceServer
                     // Directly catch registration - all other messages are added to queue for delegation
                     if (m.GetCommand() == "register")
                     {
-                        //ConnectionRegistration.Invoke(this, new ConnectionRegistrationEventArgs((string) m.Parameter.GetValue(0)));
+                        ConnectionRegistration.Invoke(this, new ConnectionRegistrationEventArgs((string) m.Parameter.GetValue(0)));
                     }
                     else
                     {

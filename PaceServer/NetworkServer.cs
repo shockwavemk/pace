@@ -10,6 +10,7 @@ namespace PaceServer
 {
     class NetworkServer
     {
+        private const int Threshold = 1;
         public static Hashtable ClientList = new Hashtable();
         public static Hashtable RecipientList = new Hashtable();
         private TcpListener _serverSocket;
@@ -93,7 +94,7 @@ namespace PaceServer
         {
             while (_serverRunning)
             {
-                Thread.Sleep(500);
+                Thread.Sleep(Threshold);
                 _clientSocket = _serverSocket.AcceptTcpClient();
                 var newConnection = new ClientConnection(_clientSocket, ref _inQueue);
                 newConnection.ConnectionRegistration += OnConnectionRegistration;
@@ -105,7 +106,7 @@ namespace PaceServer
         {
             while (_serverRunning)
             {
-                Thread.Sleep(500);
+                Thread.Sleep(Threshold);
                 Message m; 
                 var message = _outQueue.TryDequeue(out m);
 

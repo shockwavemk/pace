@@ -9,6 +9,7 @@ namespace PaceClient
 {
     class NetworkClient
     {
+        private const int Threshold = 1;
         public static Hashtable ServerList = new Hashtable();
         public static Hashtable RecipientList = new Hashtable();
         private TcpClient _clientSocket;
@@ -83,7 +84,7 @@ namespace PaceClient
         {
             while (_clientRunning)
             {
-                Thread.Sleep(500);
+                Thread.Sleep(Threshold);
                 Message m;
                 var message = _outQueue.TryDequeue(out m);
 
