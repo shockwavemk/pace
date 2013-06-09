@@ -17,8 +17,12 @@ namespace PaceCommon
         public Message ServerToClientTryDequeue()
         {
             Message m;
-            ServerToClientQueue.TryDequeue(out m);
-            return m;
+            var message = ServerToClientQueue.TryDequeue(out m);
+            if (message && m != null)
+            {
+                return m;
+            }
+            return null;
         }
 
         public void ServerToClientEnqueue(Message m)
@@ -29,8 +33,12 @@ namespace PaceCommon
         public Message ClientToServerTryDequeue()
         {
             Message m;
-            ClientToServerQueue.TryDequeue(out m);
-            return m;
+            var message = ClientToServerQueue.TryDequeue(out m);
+            if (message && m != null)
+            {
+                return m;
+            }
+            return null;
         }
 
         public void ClientToServerEnqueue(Message m)

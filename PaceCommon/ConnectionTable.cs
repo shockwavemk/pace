@@ -6,23 +6,43 @@ namespace PaceCommon
     [Serializable]
     public class ConnectionTable : MarshalByRefObject
     {
-        private string ServerUrl { get; set; }
-        public delegate void ConnectionRegistrationEventHandler(ClientConnection sender, ConnectionRegistrationEventArgs e);
+        private string _serverUrl;
+        private string _serverPort;
+
+        public delegate void ConnectionRegistrationEventHandler(ClientInformation clientInformation);
         public event ConnectionRegistrationEventHandler ConnectionRegistration;
 
         public ConnectionTable()
         {
-            ServerUrl = "127.0.0.1";
+            _serverUrl = "localhost";
+            _serverPort = "1234";
         }
 
         public string GetServerUrl()
         {
-            return ServerUrl;
+            return _serverUrl;
         }
 
-        public ClientInformation GetClient()
+        public void SetServerUrl(string serverurl)
         {
-            return ClientInformation.GetClientInformation(0);
+            _serverUrl = serverurl;
+        }
+
+        public string GetServerPort()
+        {
+            return _serverPort;
+        }
+
+        public void SetServerPort(string serverport)
+        {
+            _serverPort = serverport;
+        }
+
+        public ClientInformation GetNew(string name, string port, string url)
+        {
+            var ci = new ClientInformation(name, port, url);
+            ConnectionRegistration.Invoke(ci);
+            return ci;
         }
 
         public class ClientInformation
@@ -36,11 +56,6 @@ namespace PaceCommon
                 Name = name;
                 Port = port;
                 Url = url;
-            }
-
-            public static ClientInformation GetClientInformation(int clientId)
-            {
-                return new ClientInformation("TestClient" + clientId, "1234", "localhost");
             }
         }
     }

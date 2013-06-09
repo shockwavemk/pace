@@ -14,17 +14,19 @@ namespace PaceServer
     class NetworkServer
     {
         private const int Threshold = 1;
+        private const int Waiting = 1000;
         public static Hashtable ClientList = new Hashtable();
-        public static Hashtable RecipientList = new Hashtable();
-        private string _ipAddress;
+        private string _url;
         private int _port;
         private bool _serverRunning = true;
+        private bool _serviceReady = false;
         private Thread _threadMessages;
         
         private ConcurrentQueue<Message> _inQueue;
         private ConcurrentQueue<Message> _outQueue;
 
         private ConnectionTable _connectionTable;
+        private ConnectionTable _connectionTableInternal;
 
         public delegate void ClientChangeEventHandler(object sender, ClientChangeEventArgs e);
         public static event ClientChangeEventHandler ClientChange;
@@ -39,14 +41,14 @@ namespace PaceServer
             _port = port;
         }
 
-        public string GetIpAddress()
+        public string GetUrl()
         {
-            return _ipAddress;
+            return _url;
         }
 
-        public void SetIpAddress(string address)
+        public void SetUrl(string url)
         {
-            _ipAddress = address;
+            _url = url;
         }
 
         public void SetOutQueue(ref ConcurrentQueue<Message> outQueue)
@@ -61,33 +63,31 @@ namespace PaceServer
 
         public NetworkServer()
         {
-            var chnl = new HttpChannel(_port);
-            ChannelServices.RegisterChannel(chnl, false);
+            _connectionTableInternal = new ConnectionTable();
+            try
+            {
+                /*
+                HttpServerChannel serverChannel = new HttpServerChannel(9090);
+                ChannelServices.RegisterChannel(serverChannel, false);
 
-            RemotingConfiguration.RegisterWellKnownServiceType(typeof(ConnectionTable),
-                "ConnectionTable.soap",
-                WellKnownObjectMode.Singleton);
-
-            var soap = "http://"+ _ipAddress +":" + _port + "/ConnectionTable.soap";
-            _connectionTable = (ConnectionTable)Activator.GetObject(typeof(ConnectionTable), soap);
-            _connectionTable.ConnectionRegistration += OnConnectionRegistration;
+                RemotingConfiguration.RegisterWellKnownServiceType(
+            typeof(RemoteObject), "RemoteObject.rem",
+            WellKnownObjectMode.Singleton);
+                //RemotingConfiguration.RegisterWellKnownServiceType(typeof(ConnectionTable), "ConnectionTable.xml", WellKnownObjectMode.Singleton);
+                 */
+            }
+            catch (Exception e)
+            {
+               TraceOps.Out(e.ToString());
+            }
+            
         }
 
         public void Start()
         {
-            try
-            {
-                _serverRunning = true;
-
-                _threadMessages = new Thread(MessageWorker);
-                _threadMessages.Start();
-
-                ClientChange.Invoke(null, new ClientChangeEventArgs("Server Online"));
-            }
-            catch
-            {
-                ClientChange.Invoke(null, new ClientChangeEventArgs("Server Offline"));
-            }
+            _serverRunning = true;
+            _threadMessages = new Thread(MessageWorker);
+            _threadMessages.Start();
         }
 
         public void Stop()
@@ -101,25 +101,54 @@ namespace PaceServer
 
         private void MessageWorker()
         {
-            while (_serverRunning)
+            try
             {
-                Thread.Sleep(Threshold);
-                Message m; 
-                var message = _outQueue.TryDequeue(out m);
-
-                if (message && m != null)
+                TraceOps.Out("Try Service: http://" + _url + ":" + _port + "/ConnectionTable.xml");
+                while (_serverRunning)
                 {
-                    var destination = m.GetDestination();
-                    var cq = (ConcurrentQueue<Message>) RecipientList[destination];
-                    if (cq != null)
+                    if (_serviceReady)
                     {
-                        cq.Enqueue(m);
+                        Thread.Sleep(Threshold);
+                        Message m;
+                        var message = _outQueue.TryDequeue(out m);
+
+                        if (message && m != null)
+                        {
+                            var destination = m.GetDestination();
+                            var cc = (ClientConnection) ClientList[destination];
+                            if (cc != null)
+                            {
+                                cc.OutQueue.Enqueue(m);
+                            }
+                            else
+                            {
+                                _outQueue.Enqueue(m);
+                            }
+                        }
                     }
                     else
                     {
-                        _outQueue.Enqueue(m);
+                        Thread.Sleep(Waiting);
+                        
+                        /*
+                        if (_connectionTable != null)
+                        {
+                            _serviceReady = true;
+                            _connectionTable.ConnectionRegistration += OnConnectionRegistration;
+                            TraceOps.Out("Service Ready");
+                        }
+                        else
+                        {
+                            var soap = "http://" + _url + ":" + _port + "/ConnectionTable.soap";
+                            _connectionTable = (ConnectionTable)Activator.GetObject(typeof(ConnectionTable), soap);
+                        }
+                        */
                     }
                 }
+            }
+            catch (Exception exception)
+            {
+                TraceOps.Out(exception.ToString());
             }
         }
 
@@ -132,13 +161,10 @@ namespace PaceServer
             }
         }
 
-        public static void OnConnectionRegistration(ClientConnection sender, ConnectionRegistrationEventArgs connectionRegistrationEventArgs)
+        public static void OnConnectionRegistration(ConnectionTable.ClientInformation sender)
         {
-            var destination = connectionRegistrationEventArgs.ConnectionHash;
-            RecipientList.Add(destination, sender.OutQueue);
-
-            var newConnection = new ClientConnection(_connectionTable.GetClient(), ref _inQueue);
-            ClientList.Add(newConnection, newConnection);
+            var newConnection = new ClientConnection(sender);
+            ClientList.Add(sender.Name, newConnection);
         }
     }
 }

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.IO;
-using System.Net.Sockets;
 using System.Threading;
 using PaceCommon;
 
@@ -15,12 +12,11 @@ namespace PaceServer
         private Thread _threadInConnection, _threadOutConnection;
         
         private bool _connectionEstablished;
-        private string _buffer;
         public ConcurrentQueue<Message> OutQueue;
-        private ConcurrentQueue<Message> _inQueue;
+        public ConcurrentQueue<Message> InQueue;
         public MessageQueue MessageQueue;
 
-        public ClientConnection(ConnectionTable.ClientInformation clientInformation, ref ConcurrentQueue<Message> inQueue)
+        public ClientConnection(ConnectionTable.ClientInformation clientInformation)
         {
             var soap = "http://" + clientInformation.Url + ":" + clientInformation.Port + "/MessageQueue.soap";
             MessageQueue = (MessageQueue)Activator.GetObject(typeof(MessageQueue), soap);
@@ -28,7 +24,7 @@ namespace PaceServer
             TraceOps.Out("New ClientConnection created");
             
             OutQueue = new ConcurrentQueue<Message>();
-            _inQueue = inQueue;
+            InQueue = new ConcurrentQueue<Message>();
 
             _threadInConnection = new Thread(InCommunication);
             _threadInConnection.Start();
@@ -45,7 +41,7 @@ namespace PaceServer
                 {
                     Thread.Sleep(Threshold);
                     var m = MessageQueue.ClientToServerTryDequeue();
-                    _inQueue.Enqueue(m);
+                    if (m != null) InQueue.Enqueue(m);
                 }
             }
             catch (Exception exception)
@@ -58,18 +54,19 @@ namespace PaceServer
         {
             try
             {
-                
-
-                while (_connectionEstablished)
+               while (_connectionEstablished)
                 {
                     Thread.Sleep(Threshold);
                     Message m;
-                    OutQueue.TryDequeue(out m);
-                    MessageQueue.ClientToServerEnqueue(m);
+                    var message = OutQueue.TryDequeue(out m);
+                    if (message && m != null)
+                    {
+                        MessageQueue.ClientToServerEnqueue(m);
 
-                    var destination = m.GetDestination();
-                    var command = m.GetCommand();
-                    TraceOps.Out("Inside ClientConnection - Message: " + command + " Destination: " + destination);
+                        var destination = m.GetDestination();
+                        var command = m.GetCommand();
+                        TraceOps.Out("Inside ClientConnection - Message: " + command + " Destination: " + destination);
+                    }
                 }
             }
             catch (Exception exception)

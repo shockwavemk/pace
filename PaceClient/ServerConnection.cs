@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels;
 using System.Runtime.Remoting.Channels.Http;
@@ -22,9 +21,6 @@ namespace PaceClient
         private ConcurrentQueue<Message> _inQueue;
         public ConcurrentQueue<Message> OutQueue;
         public MessageQueue MessageQueue;
-
-        public delegate void ConnectionRegistrationEventHandler(ServerConnection sender, ConnectionRegistrationEventArgs e);
-        public event ConnectionRegistrationEventHandler ConnectionRegistration;
 
         public ServerConnection(ref ConcurrentQueue<Message> inQueue, int port, string ipaddress)
         {
@@ -58,7 +54,7 @@ namespace PaceClient
                 {
                     Thread.Sleep(Threshold);
                     var m = MessageQueue.ServerToClientTryDequeue();
-                    _inQueue.Enqueue(m);
+                    if (m != null) _inQueue.Enqueue(m);
                 }
             }
             catch (Exception exception)
@@ -75,12 +71,15 @@ namespace PaceClient
                 {
                     Thread.Sleep(Threshold);
                     Message m;
-                    OutQueue.TryDequeue(out m);
-                    MessageQueue.ClientToServerEnqueue(m);
+                    var message = OutQueue.TryDequeue(out m);
+                    if (message && m != null)
+                    {
+                        MessageQueue.ClientToServerEnqueue(m);
 
-                    var destination = m.GetDestination();
-                    var command = m.GetCommand();
-                    TraceOps.Out("Inside ServerConnection - Message: " + command + " Destination: " + destination);
+                        var destination = m.GetDestination();
+                        var command = m.GetCommand();
+                        TraceOps.Out("Inside ServerConnection - Message: " + command + " Destination: " + destination);
+                    }
                 }
             }
             catch (Exception exception)

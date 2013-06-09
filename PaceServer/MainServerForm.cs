@@ -30,8 +30,8 @@ namespace PaceServer
                 _outQueue = new ConcurrentQueue<PaceCommon.Message>();
 
                 var tempServer = new NetworkServer();
-                tempServer.SetIpAddress("127.0.0.1");
-                tempServer.SetPort(1987);
+                tempServer.SetUrl("localhost");
+                tempServer.SetPort(9090);
                 tempServer.SetInQueue(ref _inQueue);
                 tempServer.SetOutQueue(ref _outQueue);
                 NetworkServer.ClientChange += tempServer_ClientChange;

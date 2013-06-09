@@ -1,7 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Concurrent;
-using System.Net;
-using System.Net.Sockets;
 using System.Threading;
 using PaceCommon;
 
@@ -73,7 +71,6 @@ namespace PaceClient
         private void ConnectionWithServer()
         {
            var newConnection = new ServerConnection(ref _inQueue, _port, _ipAddress);
-           newConnection.ConnectionRegistration += OnConnectionRegistration;
            ServerList.Add(newConnection, newConnection);
         }
 
@@ -131,13 +128,6 @@ namespace PaceClient
             {
                 statusHandler(null, e);
             }
-        }
-
-        public static void OnConnectionRegistration(ServerConnection sender, ConnectionRegistrationEventArgs connectionRegistrationEventArgs)
-        {
-            var destination = connectionRegistrationEventArgs.ConnectionHash;
-            TraceOps.Out("Registration: " + destination);
-            RecipientList.Add(destination, sender.MessageQueue);
         }
     }
 }

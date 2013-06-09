@@ -1,22 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting;
+using System.Runtime.Remoting.Channels;
+using System.Runtime.Remoting.Channels.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PaceCommon;
 
 namespace PaceServer
 {
-    static class Program
+    class Program
     {
-        /// <summary>
-        /// Der Haupteinstiegspunkt für die Anwendung.
-        /// </summary>
-        [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainServerForm());
+            // Create the server channel.
+            HttpServerChannel serverChannel = new HttpServerChannel(9090);
+
+            // Register the server channel.
+            ChannelServices.RegisterChannel(serverChannel);
+
+            // Expose an object for remote calls.
+            RemotingConfiguration.RegisterWellKnownServiceType(
+                typeof(RemoteObject), "RemoteObject.rem",
+                WellKnownObjectMode.Singleton);
+
+            // Wait for the user prompt.
+            Console.WriteLine("Press ENTER to exit the server.");
+            Console.ReadLine();
+            Console.WriteLine("The server is exiting.");
         }
     }
 }
