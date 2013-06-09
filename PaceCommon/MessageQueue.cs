@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 
 namespace PaceCommon
 {
+    [Serializable]
     public class MessageQueue : MarshalByRefObject
     {
         public ConcurrentQueue<Message> ServerToClientQueue, ClientToServerQueue;

@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="ConnectionChange.cs" />
     <Compile Include="ConnectionRegistration.cs" />
+    <Compile Include="ConnectionTable.cs" />
     <Compile Include="HashOps.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="MessageQueue.cs" />

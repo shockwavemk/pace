@@ -16,14 +16,15 @@ namespace PaceServer
         private const int Threshold = 1;
         public static Hashtable ClientList = new Hashtable();
         public static Hashtable RecipientList = new Hashtable();
-        private IPAddress _ipAddress;
+        private string _ipAddress;
         private int _port;
         private bool _serverRunning = true;
-        private Thread _threadListener;
         private Thread _threadMessages;
         
         private ConcurrentQueue<Message> _inQueue;
         private ConcurrentQueue<Message> _outQueue;
+
+        private ConnectionTable _connectionTable;
 
         public delegate void ClientChangeEventHandler(object sender, ClientChangeEventArgs e);
         public static event ClientChangeEventHandler ClientChange;
@@ -38,14 +39,14 @@ namespace PaceServer
             _port = port;
         }
 
-        public IPAddress GetIpAddress()
+        public string GetIpAddress()
         {
             return _ipAddress;
         }
 
         public void SetIpAddress(string address)
         {
-            _ipAddress = IPAddress.Parse(address);
+            _ipAddress = address;
         }
 
         public void SetOutQueue(ref ConcurrentQueue<Message> outQueue)
@@ -63,23 +64,20 @@ namespace PaceServer
             var chnl = new HttpChannel(_port);
             ChannelServices.RegisterChannel(chnl, false);
 
-            RemotingConfiguration.RegisterWellKnownServiceType(typeof(MessageQueue),
-                "MessageQueue.soap",
+            RemotingConfiguration.RegisterWellKnownServiceType(typeof(ConnectionTable),
+                "ConnectionTable.soap",
                 WellKnownObjectMode.Singleton);
 
-            var soap = "http://localhost:" + _port + "/MessageQueue.soap";
-            MessageQueue = (MessageQueue)Activator.GetObject(typeof(MessageQueue), soap);
+            var soap = "http://"+ _ipAddress +":" + _port + "/ConnectionTable.soap";
+            _connectionTable = (ConnectionTable)Activator.GetObject(typeof(ConnectionTable), soap);
+            _connectionTable.ConnectionRegistration += OnConnectionRegistration;
         }
 
         public void Start()
         {
             try
             {
-                
                 _serverRunning = true;
-
-                _threadListener = new Thread(ListenForNewClients);
-                _threadListener.Start();
 
                 _threadMessages = new Thread(MessageWorker);
                 _threadMessages.Start();
@@ -98,18 +96,6 @@ namespace PaceServer
             foreach (var cc in from DictionaryEntry item in ClientList select (ClientConnection)item.Value)
             {
                 cc.Stop();
-            }
-        }
-
-        private void ListenForNewClients()
-        {
-            while (_serverRunning)
-            {
-                Thread.Sleep(Threshold);
-                _clientSocket = _serverSocket.AcceptTcpClient();
-                var newConnection = new ClientConnection(_clientSocket, ref _inQueue);
-                newConnection.ConnectionRegistration += OnConnectionRegistration;
-                ClientList.Add(_clientSocket, newConnection);
             }
         }
 
@@ -150,6 +136,9 @@ namespace PaceServer
         {
             var destination = connectionRegistrationEventArgs.ConnectionHash;
             RecipientList.Add(destination, sender.OutQueue);
+
+            var newConnection = new ClientConnection(_connectionTable.GetClient(), ref _inQueue);
+            ClientList.Add(newConnection, newConnection);
         }
     }
 }

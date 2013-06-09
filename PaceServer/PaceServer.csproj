@@ -78,7 +78,6 @@
   <ItemGroup>
     <Compile Include="ClientChange.cs" />
     <Compile Include="ClientConnection.cs" />
-    <Compile Include="ClientInformation.cs" />
     <Compile Include="ClientsTable.cs">
       <SubType>Form</SubType>
     </Compile>

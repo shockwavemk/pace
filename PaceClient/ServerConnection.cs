@@ -13,10 +13,11 @@ namespace PaceClient
     {
         private const int Threshold = 1;
         
-
         private Thread _threadInConnection, _threadOutConnection;
 
         private int _port = 1234;
+        private string _ipAddress;
+
         private bool _connectionEstablished = true;
         private ConcurrentQueue<Message> _inQueue;
         public ConcurrentQueue<Message> OutQueue;
@@ -25,9 +26,10 @@ namespace PaceClient
         public delegate void ConnectionRegistrationEventHandler(ServerConnection sender, ConnectionRegistrationEventArgs e);
         public event ConnectionRegistrationEventHandler ConnectionRegistration;
 
-        public ServerConnection(ref ConcurrentQueue<Message> inQueue, int port)
+        public ServerConnection(ref ConcurrentQueue<Message> inQueue, int port, string ipaddress)
         {
             _port = port;
+            _ipAddress = ipaddress;
             var chnl = new HttpChannel(_port);
             ChannelServices.RegisterChannel(chnl, false);
 
@@ -35,7 +37,7 @@ namespace PaceClient
                 "MessageQueue.soap",
                 WellKnownObjectMode.Singleton);
 
-            var soap = "http://localhost:" + _port + "/MessageQueue.soap";
+            var soap = "http://" + _ipAddress + ":" + _port + "/MessageQueue.soap";
             MessageQueue = (MessageQueue)Activator.GetObject(typeof(MessageQueue), soap);
 
             _inQueue = inQueue;
@@ -57,11 +59,6 @@ namespace PaceClient
                     Thread.Sleep(Threshold);
                     var m = MessageQueue.ServerToClientTryDequeue();
                     _inQueue.Enqueue(m);
-
-                    if (m.GetCommand() == "register")
-                    {
-                        ConnectionRegistration.Invoke(this, new ConnectionRegistrationEventArgs((string)m.Parameter.GetValue(0)));
-                    }
                 }
             }
             catch (Exception exception)
@@ -74,10 +71,6 @@ namespace PaceClient
         {
             try
             {
-                var rlist = new List<string> { HashOps.GetFqdn() };
-                var registerMessage = new Message(rlist, true, "register", "");
-                OutQueue.Enqueue(registerMessage);
-
                 while (_connectionEstablished)
                 {
                     Thread.Sleep(Threshold);

@@ -11,50 +11,41 @@ namespace PaceServer
     class ClientConnection
     {
         private const int Threshold = 1;
-        public TcpClient TcpClient;
-        private Thread _threadConnection;
-        private StreamReader _connectionReceiver;
-        private StreamWriter _connectionSender;
 
+        private Thread _threadInConnection, _threadOutConnection;
+        
         private bool _connectionEstablished;
         private string _buffer;
         public ConcurrentQueue<Message> OutQueue;
         private ConcurrentQueue<Message> _inQueue;
+        public MessageQueue MessageQueue;
 
-        public delegate void ConnectionRegistrationEventHandler(ClientConnection sender, ConnectionRegistrationEventArgs e);
-        public event ConnectionRegistrationEventHandler ConnectionRegistration;
-
-        public ClientConnection(TcpClient tcpConnection, ref ConcurrentQueue<Message> inQueue)
+        public ClientConnection(ConnectionTable.ClientInformation clientInformation, ref ConcurrentQueue<Message> inQueue)
         {
+            var soap = "http://" + clientInformation.Url + ":" + clientInformation.Port + "/MessageQueue.soap";
+            MessageQueue = (MessageQueue)Activator.GetObject(typeof(MessageQueue), soap);
+
             TraceOps.Out("New ClientConnection created");
-            TcpClient = tcpConnection;
-           
             
             OutQueue = new ConcurrentQueue<Message>();
             _inQueue = inQueue;
 
-            _connectionReceiver = new StreamReader(TcpClient.GetStream());
-            _connectionSender = new StreamWriter(TcpClient.GetStream());
+            _threadInConnection = new Thread(InCommunication);
+            _threadInConnection.Start();
 
-            _threadConnection = new Thread(Communication);
-            _threadConnection.Start();
+            _threadOutConnection = new Thread(OutCommunication);
+            _threadOutConnection.Start(); 
         }
 
-        private void Communication()
+        private void InCommunication()
         {
             try
             {
-                KeepAlive();
-                HandleAdd();
-            
-                TraceOps.Out("Server waiting for Responses to Act");
                 while (_connectionEstablished)
                 {
-                    KeepAlive();
                     Thread.Sleep(Threshold);
-                    KeepAlive();
-                    HandleResponse(_connectionReceiver.ReadLine());
-                    HandleMessage();
+                    var m = MessageQueue.ClientToServerTryDequeue();
+                    _inQueue.Enqueue(m);
                 }
             }
             catch (Exception exception)
@@ -63,86 +54,33 @@ namespace PaceServer
             }
         }
 
-        private void KeepAlive()
-        {
-            _connectionSender.WriteLine("");
-            _connectionSender.Flush();
-        }
-
-
-        private void HandleAdd()
-        {
-            _connectionEstablished = true;
-            var rlist = new List<string> {HashOps.GetFqdn()};
-            var m = new Message(rlist, true, "register", "");
-            m.Send(_connectionSender);
-        }
-
-        private void HandleMessage()
+        public void OutCommunication()
         {
             try
             {
-                Message m;
-                var message = OutQueue.TryDequeue(out m);
+                
 
-                if (message && m != null)
+                while (_connectionEstablished)
                 {
+                    Thread.Sleep(Threshold);
+                    Message m;
+                    OutQueue.TryDequeue(out m);
+                    MessageQueue.ClientToServerEnqueue(m);
+
                     var destination = m.GetDestination();
                     var command = m.GetCommand();
                     TraceOps.Out("Inside ClientConnection - Message: " + command + " Destination: " + destination);
-                    m.Send(_connectionSender);
                 }
             }
             catch (Exception exception)
             {
                 TraceOps.Out(exception.ToString());
             }
-        }
-
-        private void HandleResponse(string s)
-        {
-            if (s != "")
-            {
-                _buffer += s;
-                TraceOps.Out(s);
-            }
-            
-            if (s == "</SOAP-ENV:Envelope>" && s != "")
-            {
-                
-                try
-                {
-                    var m = new Message(_buffer);
-                    
-                    // Directly catch registration - all other messages are added to queue for delegation
-                    if (m.GetCommand() == "register")
-                    {
-                        ConnectionRegistration.Invoke(this, new ConnectionRegistrationEventArgs((string) m.Parameter.GetValue(0)));
-                    }
-                    else
-                    {
-                        _inQueue.Enqueue(m);
-                    }
-                }
-                catch (Exception exception)
-                {
-                    // TODO: Secure Transmission of Objects
-                    TraceOps.Out(exception.ToString());
-                }
-                _buffer = "";
-            }
-        }
-
-        public void CloseConnection()
-        {
-            _connectionEstablished = false;
-            TcpClient.Close();
-            _threadConnection.Abort();
         }
 
         public void Stop()
         {
-            //throw new NotImplementedException();
+            _connectionEstablished = false;
         }
     }
 }

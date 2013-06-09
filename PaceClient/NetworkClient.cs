@@ -12,7 +12,7 @@ namespace PaceClient
         private const int Threshold = 1;
         public static Hashtable ServerList = new Hashtable();
         public static Hashtable RecipientList = new Hashtable();
-        private IPAddress _ipAddress;
+        private string _ipAddress;
         private int _port;
         private bool _clientRunning = true;
         private Thread _threadMessages;
@@ -33,14 +33,14 @@ namespace PaceClient
             _port = port;
         }
 
-        public IPAddress GetIpAddress()
+        public string GetIpAddress()
         {
             return _ipAddress;
         }
 
         public void SetIpAddress(string address)
         {
-            _ipAddress = IPAddress.Parse(address);
+            _ipAddress = address;
         }
 
         public void SetOutQueue(ref ConcurrentQueue<Message> outQueue)
@@ -72,7 +72,7 @@ namespace PaceClient
 
         private void ConnectionWithServer()
         {
-           var newConnection = new ServerConnection(ref _inQueue, _port);
+           var newConnection = new ServerConnection(ref _inQueue, _port, _ipAddress);
            newConnection.ConnectionRegistration += OnConnectionRegistration;
            ServerList.Add(newConnection, newConnection);
         }
