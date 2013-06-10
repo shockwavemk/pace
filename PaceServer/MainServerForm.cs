@@ -15,6 +15,7 @@ namespace PaceServer
         {
             Services.PrepareSetService(9090);
             Services.SetService(typeof(ConnectionTable));
+            Services.SetService(typeof(MessageQueue));
         }
     }
 }

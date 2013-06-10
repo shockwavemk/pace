@@ -6,8 +6,8 @@ namespace PaceClient
 {
     public partial class MainClientForm : Form
     {
-        private RemoteObject _service;
         private ConnectionTable _connectionTable;
+        private MessageQueue _messageQueue;
 
         public MainClientForm()
         {
@@ -18,15 +18,17 @@ namespace PaceClient
         {
             Services.PrepareGetService();
             Services.GetService("localhost", 9090, typeof(ConnectionTable));
-            _service = new RemoteObject();
+            Services.GetService("localhost", 9090, typeof(MessageQueue));
             _connectionTable = new ConnectionTable();
+            _messageQueue = new MessageQueue();
         }
 
         
 
         private void button1_Click(object sender, EventArgs e)
         {
-           Console.WriteLine("Port {0} .", _connectionTable.GetServerPort());
+           Console.WriteLine("Port: {0}.", _connectionTable.GetServerPort());
+           Console.WriteLine("MessageQueue: {0}.", _messageQueue.Test());
         }
     }
 }
