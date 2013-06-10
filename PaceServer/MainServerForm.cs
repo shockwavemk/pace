@@ -12,6 +12,7 @@ namespace PaceServer
         //private NetworkServer _networkServer;
         private ConnectionTable _connectionTable;
         private MessageQueue _messageQueue;
+        private NetworkServer _networkServer;
 
         private delegate void UpdateStatusCallback(string strMessage);
         public MainServerForm()
@@ -31,9 +32,7 @@ namespace PaceServer
             
             try
             {
-                //_networkServer = new NetworkServer();
-                //NetworkServer.ClientChange += tempServer_ClientChange;
-
+                _networkServer = new NetworkServer();
                 _threadWorker = new Thread(Tasks);
                 _threadWorker.Start();
 
@@ -52,7 +51,7 @@ namespace PaceServer
                 TraceOps.Out("Server: Start to work on Messages");
                 while (_running)
                 {
-                    Thread.Sleep(500);
+                    Thread.Sleep(1000);
                     /*
                     Message m;
                     var message = _inQueue.TryDequeue(out m);
@@ -75,13 +74,6 @@ namespace PaceServer
             Environment.Exit(0);
         }
 
-        /*
-        private void tempServer_ClientChange(object sender, ClientChangeEventArgs e)
-        {
-            Invoke(new UpdateStatusCallback(UpdateStatus), new object[] { e.EventMessage });
-        }
-         */
-
         private void UpdateStatus(string strMessage)
         {
             // changes in system
@@ -95,11 +87,9 @@ namespace PaceServer
 
         private void LoadClientsTable()
         {
-            /*
             var clientsTableForm = new ClientsTable { TopLevel = false, FormBorderStyle = FormBorderStyle.Sizable, AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, };
             mainPanel.Controls.Add(clientsTableForm);
             clientsTableForm.Visible = true;
-             */
         }
 
         private void mainPanel_Paint(object sender, PaintEventArgs e)

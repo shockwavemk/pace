@@ -18,3 +18,4 @@ C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj\Debug\PaceServer.csproj.GenerateResource.Cache
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceServer\bin\Debug\PaceCommon.dll
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceServer\bin\Debug\PaceCommon.pdb
+C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj\Debug\PaceServer.ClientsTable.resources
