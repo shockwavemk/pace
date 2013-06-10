@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PaceServer
+namespace PaceCommon
 {
     public class RemoteObject : MarshalByRefObject
     {

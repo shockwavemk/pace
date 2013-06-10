@@ -53,7 +53,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RemoteObject.cs" />
     <EmbeddedResource Include="MainServerForm.resx">
       <DependentUpon>MainServerForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -78,6 +77,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PaceCommon\PaceCommon.csproj">
+      <Project>{27991f0d-6e24-47df-83d6-08f921a134eb}</Project>
+      <Name>PaceCommon</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

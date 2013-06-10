@@ -79,9 +79,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PaceServer\PaceServer.csproj">
-      <Project>{9D9DAD6A-3E9A-4D8F-9DC0-A7FFF408F162}</Project>
-      <Name>PaceServer</Name>
+    <ProjectReference Include="..\PaceCommon\PaceCommon.csproj">
+      <Project>{27991f0d-6e24-47df-83d6-08f921a134eb}</Project>
+      <Name>PaceCommon</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
