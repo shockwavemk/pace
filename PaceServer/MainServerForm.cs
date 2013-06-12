@@ -9,7 +9,6 @@ namespace PaceServer
     {
         private Thread _threadWorker;
         private bool _running = true;
-        //private NetworkServer _networkServer;
         private ConnectionTable _connectionTable;
         private MessageQueue _messageQueue;
         private NetworkServer _networkServer;
@@ -31,7 +30,7 @@ namespace PaceServer
             
             try
             {
-                _networkServer = new NetworkServer(ref _messageQueue, ref _connectionTable);
+                _networkServer = new NetworkServer(ref _messageQueue);
                 _threadWorker = new Thread(Tasks);
                 _threadWorker.Start();
 
@@ -50,15 +49,13 @@ namespace PaceServer
                 while (_running)
                 {
                     Thread.Sleep(1000);
-                    /*
-                    Message m;
-                    var message = _inQueue.TryDequeue(out m);
+                    var m = _messageQueue.ServerToClientTryDequeue(_messageQueue.Server);
 
-                    if (message && m != null)
+                    if (m != null)
                     {
-                        //MessageBox.Show("Command: " + m.GetCommand() + " Destination: " + m.GetDestination(), "Message from Client", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        MessageBox.Show("Command: " + m.GetCommand() + " Destination: " + m.GetDestination(), "Message from Client", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
-                     */
+                    
                 }
             }
             catch (Exception exception)

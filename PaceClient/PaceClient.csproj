@@ -51,6 +51,7 @@
     <Compile Include="MainClientForm.Designer.cs">
       <DependentUpon>MainClientForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="NetworkClient.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="MainClientForm.resx">
@@ -83,6 +84,9 @@
       <Project>{27991f0d-6e24-47df-83d6-08f921a134eb}</Project>
       <Name>PaceCommon</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="pc.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
