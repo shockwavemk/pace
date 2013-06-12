@@ -14,7 +14,6 @@ namespace PaceServer
         private MessageQueue _messageQueue;
         private NetworkServer _networkServer;
 
-        private delegate void UpdateStatusCallback(string strMessage);
         public MainServerForm()
         {
             InitializeComponent();
@@ -32,7 +31,7 @@ namespace PaceServer
             
             try
             {
-                _networkServer = new NetworkServer();
+                _networkServer = new NetworkServer(ref _messageQueue, ref _connectionTable);
                 _threadWorker = new Thread(Tasks);
                 _threadWorker.Start();
 
@@ -48,7 +47,6 @@ namespace PaceServer
         {
             try
             {
-                TraceOps.Out("Server: Start to work on Messages");
                 while (_running)
                 {
                     Thread.Sleep(1000);
@@ -72,12 +70,6 @@ namespace PaceServer
         private void MainServerForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Environment.Exit(0);
-        }
-
-        private void UpdateStatus(string strMessage)
-        {
-            // changes in system
-            TraceOps.Out(strMessage);
         }
 
         private void clientsTableToolStripMenuItem_Click(object sender, EventArgs e)

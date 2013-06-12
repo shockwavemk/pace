@@ -8,23 +8,16 @@ namespace PaceServer
     class ClientConnection
     {
         private const int Threshold = 1;
-
         private Thread _threadInConnection, _threadOutConnection;
-        
         private bool _connectionEstablished;
-        //public ConcurrentQueue<Message> OutQueue;
-        //public ConcurrentQueue<Message> InQueue;
-        public MessageQueue MessageQueue;
+        private MessageQueue _messageQueue;
+        private string _name;
 
-        public ClientConnection(ConnectionTable.ClientInformation clientInformation)
+        public ClientConnection(ref MessageQueue messageQueue, string name)
         {
-            var soap = "http://" + clientInformation.Url + ":" + clientInformation.Port + "/MessageQueue.soap";
-            MessageQueue = (MessageQueue)Activator.GetObject(typeof(MessageQueue), soap);
-
             TraceOps.Out("New ClientConnection created");
-            
-            //OutQueue = new ConcurrentQueue<Message>();
-            //InQueue = new ConcurrentQueue<Message>();
+            _messageQueue = messageQueue;
+            _name = name;
 
             _threadInConnection = new Thread(InCommunication);
             _threadInConnection.Start();
@@ -40,8 +33,8 @@ namespace PaceServer
                 while (_connectionEstablished)
                 {
                     Thread.Sleep(Threshold);
-                    // var m = MessageQueue.ClientToServerTryDequeue();
-                    // if (m != null) InQueue.Enqueue(m);
+                    var m = _messageQueue.ClientToServerTryDequeue(_messageQueue.Get(_name));
+                    if (m != null) _messageQueue.ClientToServerEnqueue(m, _messageQueue.Server);
                 }
             }
             catch (Exception exception)
@@ -57,18 +50,12 @@ namespace PaceServer
                while (_connectionEstablished)
                 {
                     Thread.Sleep(Threshold);
-                    /*
-                    Message m;
-                    var message = OutQueue.TryDequeue(out m);
-                    if (message && m != null)
+                    
+                    var m = _messageQueue.ServerToClientTryDequeue(_messageQueue.Server);
+                    if (m != null)
                     {
-                        MessageQueue.ClientToServerEnqueue(m);
-
-                        var destination = m.GetDestination();
-                        var command = m.GetCommand();
-                        TraceOps.Out("Inside ClientConnection - Message: " + command + " Destination: " + destination);
+                        _messageQueue.ClientToServerEnqueue(m, _messageQueue.Get(_name));
                     }
-                     */
                 }
             }
             catch (Exception exception)

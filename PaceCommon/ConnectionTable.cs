@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using PaceCommon;
 
 namespace PaceCommon
@@ -6,56 +7,35 @@ namespace PaceCommon
     [Serializable]
     public class ConnectionTable : MarshalByRefObject
     {
-        private string _serverUrl;
-        private string _serverPort;
+        private Hashtable _hashTable;
 
         public delegate void ConnectionRegistrationEventHandler(ClientInformation clientInformation);
         public event ConnectionRegistrationEventHandler ConnectionRegistration;
 
         public ConnectionTable()
         {
-            _serverUrl = "localhost";
-            _serverPort = "1234";
+            _hashTable = new Hashtable();
         }
 
-        public string GetServerUrl()
+        public ClientInformation Get(string name)
         {
-            return _serverUrl;
-        }
-
-        public void SetServerUrl(string serverurl)
-        {
-            _serverUrl = serverurl;
-        }
-
-        public string GetServerPort()
-        {
-            return _serverPort;
-        }
-
-        public void SetServerPort(string serverport)
-        {
-            _serverPort = serverport;
-        }
-
-        public ClientInformation GetNew(string name, string port, string url)
-        {
-            var ci = new ClientInformation(name, port, url);
-            ConnectionRegistration.Invoke(ci);
-            return ci;
+            var clientInformation = (ClientInformation)_hashTable[name];
+            if (clientInformation == null)
+            {
+                clientInformation = new ClientInformation(name);
+                ConnectionRegistration.Invoke(clientInformation);
+                _hashTable.Add(name, clientInformation);
+            }
+            return clientInformation;
         }
 
         public class ClientInformation
         {
             public string Name { get; set; }
-            public string Port { get; set; }
-            public string Url { get; set; }
 
-            public ClientInformation(string name, string port, string url)
+            public ClientInformation(string name)
             {
                 Name = name;
-                Port = port;
-                Url = url;
             }
         }
     }

@@ -27,7 +27,7 @@ namespace PaceClient
 
         private void button1_Click(object sender, EventArgs e)
         {
-           Console.WriteLine("Port: {0}.", _connectionTable.GetServerPort());
+           Console.WriteLine("Hash: {0}.", _connectionTable.GetHashCode());
            Console.WriteLine("MessageQueue: {0}.", _messageQueue.Test());
         }
     }

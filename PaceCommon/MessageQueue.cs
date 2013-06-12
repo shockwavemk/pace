@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 
@@ -7,18 +8,30 @@ namespace PaceCommon
     [Serializable]
     public class MessageQueue : MarshalByRefObject
     {
-        public ConcurrentQueue<Message> ServerToClientQueue, ClientToServerQueue;
+        private Hashtable _hashTable;
+        public InOutQueue Server;
 
         public MessageQueue()
         {
-            ServerToClientQueue = new ConcurrentQueue<Message>();
-            ClientToServerQueue = new ConcurrentQueue<Message>();
+            _hashTable = new Hashtable();
+            Server = new InOutQueue();
         }
 
-        public Message ServerToClientTryDequeue()
+        public InOutQueue Get(string destination)
+        {
+            var inOutQueue = (InOutQueue)_hashTable[destination];
+            if (inOutQueue == null)
+            {
+                inOutQueue = new InOutQueue();
+                _hashTable.Add(destination, inOutQueue);
+            }
+            return inOutQueue;
+        }
+
+        public Message ServerToClientTryDequeue(InOutQueue inOutQueue)
         {
             Message m;
-            var message = ServerToClientQueue.TryDequeue(out m);
+            var message = inOutQueue.ServerToClientQueue.TryDequeue(out m);
             if (message && m != null)
             {
                 return m;
@@ -26,15 +39,15 @@ namespace PaceCommon
             return null;
         }
 
-        public void ServerToClientEnqueue(Message m)
+        public void ServerToClientEnqueue(Message m, InOutQueue inOutQueue)
         {
-            ServerToClientQueue.Enqueue(m);
+            inOutQueue.ServerToClientQueue.Enqueue(m);
         }
 
-        public Message ClientToServerTryDequeue()
+        public Message ClientToServerTryDequeue(InOutQueue inOutQueue)
         {
             Message m;
-            var message = ClientToServerQueue.TryDequeue(out m);
+            var message = inOutQueue.ClientToServerQueue.TryDequeue(out m);
             if (message && m != null)
             {
                 return m;
@@ -42,14 +55,26 @@ namespace PaceCommon
             return null;
         }
 
-        public void ClientToServerEnqueue(Message m)
+        public void ClientToServerEnqueue(Message m, InOutQueue inOutQueue)
         {
-            ClientToServerQueue.Enqueue(m);
+            inOutQueue.ClientToServerQueue.Enqueue(m);
         }
 
         public string Test()
         {
             return "Test!";
+        }
+
+        [Serializable]
+        public class InOutQueue
+        {
+            public ConcurrentQueue<Message> ServerToClientQueue, ClientToServerQueue;
+            
+            public InOutQueue()
+            {
+                ServerToClientQueue = new ConcurrentQueue<Message>();
+                ClientToServerQueue = new ConcurrentQueue<Message>();
+            }
         }
 
 
