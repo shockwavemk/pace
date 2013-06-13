@@ -20,8 +20,6 @@ C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceServer\bin
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceServer\bin\Debug\PaceCommon.pdb
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj\Debug\PaceServer.ClientsTable.resources
 M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\bin\Debug\PaceServer.exe.config
-M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj\Debug\PaceServer.exe
-M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj\Debug\PaceServer.pdb
 M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\bin\Debug\PaceServer.exe
 M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\bin\Debug\PaceServer.pdb
 M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\bin\Debug\PaceCommon.dll
@@ -31,3 +29,5 @@ M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj\Debug\PaceServer.Cl
 M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj\Debug\PaceServer.MainServerForm.resources
 M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj\Debug\PaceServer.Properties.Resources.resources
 M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj\Debug\PaceServer.csproj.GenerateResource.Cache
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj\Debug\PaceServer.exe
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj\Debug\PaceServer.pdb

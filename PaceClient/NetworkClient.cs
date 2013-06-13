@@ -29,12 +29,14 @@ namespace PaceClient
                 while (_clientRunning)
                 {
                     Thread.Sleep(Threshold);
-
+                    
+                    /*
                     var m = _messageQueue.ServerToClientTryDequeue(_messageQueue.Server);
                     if (m != null)
                     {
                         _messageQueue.ClientToServerEnqueue(m, _messageQueue.Get(_name));
                     }
+                     */
                 }
             }
             catch (Exception exception)

@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Windows.Forms;
 using PaceCommon;
+using Message = PaceCommon.Message;
 
 namespace PaceServer
 {
@@ -12,6 +14,7 @@ namespace PaceServer
         private ConnectionTable _connectionTable;
         private MessageQueue _messageQueue;
         private NetworkServer _networkServer;
+        private InOutQueue _serverInOut;
 
         public MainServerForm()
         {
@@ -25,12 +28,16 @@ namespace PaceServer
             Services.SetService(typeof(ConnectionTable));
             Services.SetService(typeof(MessageQueue));
 
-            _connectionTable = new ConnectionTable();
-            _messageQueue = new MessageQueue();
-            
+            _connectionTable = (ConnectionTable)System.Activator.GetObject(typeof(ConnectionTable), "http://localhost:9090/ConnectionTable.rem");
+            _messageQueue = (MessageQueue)System.Activator.GetObject(typeof(MessageQueue), "http://localhost:9090/MessageQueue.rem");
+
+            var rlist = new List<string> { "" };
+            var m = new Message(rlist, true, "dynamic test", "");
+            _messageQueue.ServerEnqueue(m);
+
             try
             {
-                _networkServer = new NetworkServer(ref _messageQueue);
+                //_networkServer = new NetworkServer(ref _messageQueue);
                 _threadWorker = new Thread(Tasks);
                 _threadWorker.Start();
 
@@ -49,12 +56,14 @@ namespace PaceServer
                 while (_running)
                 {
                     Thread.Sleep(1000);
+                    /*
                     var m = _messageQueue.ServerToClientTryDequeue(_messageQueue.Server);
 
                     if (m != null)
                     {
                         MessageBox.Show("Command: " + m.GetCommand() + " Destination: " + m.GetDestination(), "Message from Client", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
+                     */
                     
                 }
             }

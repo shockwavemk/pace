@@ -16,5 +16,12 @@ namespace PaceCommon
             ServerToClientQueue = new ConcurrentQueue<Message>();
             ClientToServerQueue = new ConcurrentQueue<Message>();
         }
+
+        public Message Test()
+        {
+            Message m;
+            var b = ServerToClientQueue.TryDequeue(out m);
+            return m;
+        }
     }
 }

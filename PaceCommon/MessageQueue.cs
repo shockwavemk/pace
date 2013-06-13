@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 
 namespace PaceCommon
@@ -10,64 +9,40 @@ namespace PaceCommon
     {
         private Hashtable _hashTable;
         public InOutQueue Server;
+        public int test;
 
         public MessageQueue()
         {
             _hashTable = new Hashtable();
             Server = new InOutQueue();
-        }
-
-        public InOutQueue Get(string destination)
-        {
-            var inOutQueue = (InOutQueue)_hashTable[destination];
-            if (inOutQueue == null)
-            {
-                inOutQueue = new InOutQueue();
-                _hashTable.Add(destination, inOutQueue);
-            }
-            return inOutQueue;
-        }
-
-        public Message ServerToClientTryDequeue(InOutQueue inOutQueue)
-        {
-            Message m;
-            var message = inOutQueue.ServerToClientQueue.TryDequeue(out m);
-            if (message && m != null)
-            {
-                return m;
-            }
-            return null;
-        }
-
-        public void ServerToClientEnqueue(Message m, InOutQueue inOutQueue)
-        {
-            inOutQueue.ServerToClientQueue.Enqueue(m);
-        }
-
-        public Message ClientToServerTryDequeue(InOutQueue inOutQueue)
-        {
-            Message m;
-            var message = inOutQueue.ClientToServerQueue.TryDequeue(out m);
-            if (message && m != null)
-            {
-                return m;
-            }
-            return null;
-        }
-
-        public void ClientToServerEnqueue(Message m, InOutQueue inOutQueue)
-        {
-            inOutQueue.ClientToServerQueue.Enqueue(m);
+            test = 5;
         }
 
         public string Test()
         {
-            return "Test!";
+            return "Test: "+ test;
         }
 
-        public InOutQueue getServer()
+        public Message GetMessage(string destination)
         {
-            return Server;
+            var rlist = new List<string> { "" };
+            Message m;
+            if (destination == "server")
+            {
+                var b = Server.ServerToClientQueue.TryDequeue(out m);
+                //m = new Message(rlist, true, "ping:"+test, "");
+            }
+            else
+            {
+                m = new Message(rlist, true, "ping2", "");
+            }
+            return m;
+        }
+
+        public void ServerEnqueue(Message message)
+        {
+            Server.ServerToClientQueue.Enqueue(message);
+            Server.ClientToServerQueue.Enqueue(message);
         }
     }
 }

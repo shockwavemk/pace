@@ -20,14 +20,14 @@ C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClient\obj
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClient\obj\Debug\PaceClient.csproj.GenerateResource.Cache
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClient\bin\Debug\PaceCommon.dll
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClient\bin\Debug\PaceCommon.pdb
-M:\Documents\Visual Studio 2012\Projects\Pace\PaceClient\bin\Debug\PaceClient.exe.config
-M:\Documents\Visual Studio 2012\Projects\Pace\PaceClient\obj\Debug\PaceClient.exe
 M:\Documents\Visual Studio 2012\Projects\Pace\PaceClient\obj\Debug\PaceClient.pdb
-M:\Documents\Visual Studio 2012\Projects\Pace\PaceClient\bin\Debug\PaceClient.exe
-M:\Documents\Visual Studio 2012\Projects\Pace\PaceClient\bin\Debug\PaceClient.pdb
-M:\Documents\Visual Studio 2012\Projects\Pace\PaceClient\bin\Debug\PaceCommon.dll
-M:\Documents\Visual Studio 2012\Projects\Pace\PaceClient\bin\Debug\PaceCommon.pdb
 M:\Documents\Visual Studio 2012\Projects\Pace\PaceClient\obj\Debug\PaceClient.csprojResolveAssemblyReference.cache
 M:\Documents\Visual Studio 2012\Projects\Pace\PaceClient\obj\Debug\PaceClient.MainClientForm.resources
 M:\Documents\Visual Studio 2012\Projects\Pace\PaceClient\obj\Debug\PaceClient.Properties.Resources.resources
 M:\Documents\Visual Studio 2012\Projects\Pace\PaceClient\obj\Debug\PaceClient.csproj.GenerateResource.Cache
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceClient\bin\Debug\PaceClient.exe.config
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceClient\bin\Debug\PaceClient.exe
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceClient\bin\Debug\PaceClient.pdb
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceClient\bin\Debug\PaceCommon.dll
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceClient\bin\Debug\PaceCommon.pdb
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceClient\obj\Debug\PaceClient.exe

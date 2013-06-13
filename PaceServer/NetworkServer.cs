@@ -31,7 +31,7 @@ namespace PaceServer
                 while (_serverRunning)
                 {
                     Thread.Sleep(Threshold);
-                    
+                    /*
                     var m = _messageQueue.ServerToClientTryDequeue(_messageQueue.Server);
                         
                     if (m != null)
@@ -47,6 +47,7 @@ namespace PaceServer
                             _messageQueue.Server.ServerToClientQueue.Enqueue(m);
                         }
                     }
+                     */
                 }
     
             }
