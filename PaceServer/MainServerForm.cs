@@ -31,9 +31,7 @@ namespace PaceServer
             _connectionTable = (ConnectionTable)System.Activator.GetObject(typeof(ConnectionTable), "http://localhost:9090/ConnectionTable.rem");
             _messageQueue = (MessageQueue)System.Activator.GetObject(typeof(MessageQueue), "http://localhost:9090/MessageQueue.rem");
 
-            var rlist = new List<string> { "" };
-            var m = new Message(rlist, true, "dynamic test", "client1");
-            _messageQueue.SetMessage(m);
+            
 
             try
             {
@@ -56,15 +54,12 @@ namespace PaceServer
                 while (_running)
                 {
                     Thread.Sleep(1000);
-                    /*
-                    var m = _messageQueue.ServerToClientTryDequeue(_messageQueue.Server);
-
+                    
+                    var m = _messageQueue.GetMessage("server");
                     if (m != null)
                     {
                         MessageBox.Show("Command: " + m.GetCommand() + " Destination: " + m.GetDestination(), "Message from Client", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
-                     */
-                    
                 }
             }
             catch (Exception exception)
