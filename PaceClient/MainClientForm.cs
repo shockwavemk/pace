@@ -73,7 +73,8 @@ namespace PaceClient
             var rlist = new List<string> { "" };
             var m = new Message(rlist, true, "ping", "");
 
-            var gm = _messageQueue.GetMessage("server");
+            var gm = _messageQueue.GetMessage("client1");
+            _messageQueue.SetMessage(m);
 
             MessageBox.Show(gm.GetCommand());
             //_messageQueue.ClientToServerEnqueue(m, _messageQueue.getServer());

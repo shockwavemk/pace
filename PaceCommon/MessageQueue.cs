@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 
 namespace PaceCommon
@@ -9,40 +10,46 @@ namespace PaceCommon
     {
         private Hashtable _hashTable;
         public InOutQueue Server;
-        public int test;
 
         public MessageQueue()
         {
             _hashTable = new Hashtable();
-            Server = new InOutQueue();
-            test = 5;
-        }
-
-        public string Test()
-        {
-            return "Test: "+ test;
         }
 
         public Message GetMessage(string destination)
         {
-            var rlist = new List<string> { "" };
+            var cq = (ConcurrentQueue<Message>)_hashTable[destination];
             Message m;
-            if (destination == "server")
+            if (cq == null)
             {
-                var b = Server.ServerToClientQueue.TryDequeue(out m);
-                //m = new Message(rlist, true, "ping:"+test, "");
+                cq = new ConcurrentQueue<Message>();
+                _hashTable.Add(destination, cq);
+
+                var rlist = new List<string> { "" };
+                m = new Message(rlist, true, "registered", "");
             }
             else
             {
-                m = new Message(rlist, true, "ping2", "");
+                cq.TryDequeue(out m);
             }
+
             return m;
         }
 
-        public void ServerEnqueue(Message message)
+        public void SetMessage(Message message)
         {
-            Server.ServerToClientQueue.Enqueue(message);
-            Server.ClientToServerQueue.Enqueue(message);
+            var cq = (ConcurrentQueue<Message>)_hashTable[message.GetDestination()];
+            if (cq == null)
+            {
+                cq = new ConcurrentQueue<Message>();
+                _hashTable.Add(message.GetDestination(), cq);
+
+                cq.Enqueue(message);
+            }
+            else
+            {
+                cq.Enqueue(message);
+            }
         }
     }
 }

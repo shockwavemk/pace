@@ -32,8 +32,8 @@ namespace PaceServer
             _messageQueue = (MessageQueue)System.Activator.GetObject(typeof(MessageQueue), "http://localhost:9090/MessageQueue.rem");
 
             var rlist = new List<string> { "" };
-            var m = new Message(rlist, true, "dynamic test", "");
-            _messageQueue.ServerEnqueue(m);
+            var m = new Message(rlist, true, "dynamic test", "client1");
+            _messageQueue.SetMessage(m);
 
             try
             {
