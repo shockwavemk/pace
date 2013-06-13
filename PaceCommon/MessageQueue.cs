@@ -65,58 +65,9 @@ namespace PaceCommon
             return "Test!";
         }
 
-        public class InOutQueue
+        public InOutQueue getServer()
         {
-            public ConcurrentQueue<Message> ServerToClientQueue, ClientToServerQueue;
-            
-            public InOutQueue()
-            {
-                ServerToClientQueue = new ConcurrentQueue<Message>();
-                ClientToServerQueue = new ConcurrentQueue<Message>();
-            }
-        }
-
-
-        
-        public class Message
-        {
-            private string Destination { get; set; }
-            private string Command { get; set; }
-            private Array _parameter;
-            private bool Acknowledgement { get; set; }
-
-            public Array Parameter
-            {
-                get { return _parameter; }
-                set { _parameter = value; }
-            }
-
-            public Message(List<string> parameter, bool acknowledgement, string command, string destination)
-            {
-                Parameter = parameter.ToArray();
-                Acknowledgement = acknowledgement;
-                Command = command;
-                Destination = destination;
-            }
-
-            public Message()
-            {
-                _parameter = new string[1];
-                _parameter.SetValue("testparameter",0);
-                Acknowledgement = false;
-                Command = "ping";
-                Destination = "all";
-            }
-
-            public string GetDestination()
-            {
-                return Destination;
-            }
-
-            public string GetCommand()
-            {
-                return Command;
-            }
+            return Server;
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Windows.Forms;
 using PaceCommon;
+using Message = PaceCommon.Message;
 
 namespace PaceClient
 {
@@ -69,8 +70,8 @@ namespace PaceClient
         private void button1_Click(object sender, EventArgs e)
         {
            var rlist = new List<string> { "" };
-           var m = new MessageQueue.Message(rlist, true, "ping", "");
-           _messageQueue.ClientToServerEnqueue(m, _messageQueue.Server);
+           var m = new Message(rlist, true, "ping", "");
+           //_messageQueue.ClientToServerEnqueue(m, _messageQueue.getServer());
         }
     }
 }
