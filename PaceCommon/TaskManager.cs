@@ -6,7 +6,7 @@ using Message = PaceCommon.Message;
 
 namespace PaceServer
 {
-    class TaskManager
+    public class TaskManager
     {
         private const int Threshold = 1;
         private bool _running = true;

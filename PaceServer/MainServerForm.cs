@@ -46,7 +46,18 @@ namespace PaceServer
 
         private void TaskManagerOnTask(Message message)
         {
-            TraceOps.Out(message.GetCommand());
+            switch (message.GetCommand())
+            {
+                case "":
+                    Console.WriteLine("Case 1");
+                    break;
+                case "a":
+                    Console.WriteLine("Case 2");
+                    break;
+                default:
+                    TraceOps.Out(message.GetCommand());
+                    break;
+            }
         }
 
         private void MainServerForm_FormClosing(object sender, FormClosingEventArgs e)

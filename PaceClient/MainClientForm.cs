@@ -4,12 +4,14 @@ using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 using PaceCommon;
+using PaceServer;
 using Message = PaceCommon.Message;
 
 namespace PaceClient
 {
     public partial class MainClientForm : Form
     {
+        private const int Threshold = 1;
         private ContextMenu tray_menu;
         private ConnectionTable _connectionTable;
         private MessageQueue _messageQueue;
@@ -17,6 +19,7 @@ namespace PaceClient
         private bool _running = true;
         private string _name;
         private Thread _threadWorker;
+        private TaskManager _taskManager;
 
         public MainClientForm()
         {
@@ -45,8 +48,8 @@ namespace PaceClient
             try
             {
                 _networkClient = new NetworkClient(ref _messageQueue, ref _connectionTable, _name);
-                _threadWorker = new Thread(Tasks);
-                _threadWorker.Start();
+                _taskManager = new TaskManager(ref _messageQueue);
+                _taskManager.Task += TaskManagerOnTask;
             }
             catch (Exception ex)
             {
@@ -54,25 +57,19 @@ namespace PaceClient
             }
         }
 
-        private void Tasks()
+        private void TaskManagerOnTask(Message message)
         {
-            try
+            switch (message.GetCommand())
             {
-                while (_running)
-                {
-                    Thread.Sleep(1000);
-                    
-                    var m = _messageQueue.GetMessage(_name);
-                    if (m != null)
-                    {
-                        MessageBox.Show("Command: " + m.GetCommand() + " Destination: " + m.GetDestination(), "Message from Server", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    }
-                    
-                }
-            }
-            catch (Exception exception)
-            {
-                TraceOps.Out(exception.ToString());
+                case "":
+                    Console.WriteLine("Case 1");
+                    break;
+                case "a":
+                    Console.WriteLine("Case 2");
+                    break;
+                default:
+                    TraceOps.Out(message.GetCommand());
+                    break;
             }
         }
 
