@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 using PaceCommon;
@@ -9,6 +10,7 @@ namespace PaceClient
 {
     public partial class MainClientForm : Form
     {
+        private ContextMenu tray_menu;
         private ConnectionTable _connectionTable;
         private MessageQueue _messageQueue;
         private NetworkClient _networkClient;
@@ -19,6 +21,11 @@ namespace PaceClient
         public MainClientForm()
         {
             InitializeComponent();
+            tray_menu = new ContextMenu();
+            tray_menu.MenuItems.Add(0, new MenuItem("Show", new EventHandler(notifyIcon_DoubleClick)));
+            tray_menu.MenuItems.Add(0, new MenuItem("Exit", new EventHandler(MainClientForm_Exit)));
+
+            this.FormClosing += new FormClosingEventHandler(MainClientForm_FormClosing);
         }
 
         private void MainClientForm_Load(object sender, EventArgs e)
@@ -30,9 +37,14 @@ namespace PaceClient
             _messageQueue = (MessageQueue)System.Activator.GetObject(typeof(MessageQueue), "http://localhost:9090/MessageQueue.rem");
             _name = HashOps.GetFqdn();
 
+            Resize += new EventHandler(MainClientForm_Resize);
+            notifyIcon.DoubleClick += new EventHandler(notifyIcon_DoubleClick);
+            notifyIcon.ContextMenu = tray_menu;
+            notifyIcon.MouseClick += new MouseEventHandler(notifyIcon_MouseUp);
+
             try
             {
-                //_networkClient = new NetworkClient(ref _messageQueue, _name);
+                _networkClient = new NetworkClient(ref _messageQueue, ref _connectionTable, _name);
                 _threadWorker = new Thread(Tasks);
                 _threadWorker.Start();
             }
@@ -41,7 +53,6 @@ namespace PaceClient
                 TraceOps.Out(ex.Message);
             }
         }
-
 
         private void Tasks()
         {
@@ -65,13 +76,48 @@ namespace PaceClient
             }
         }
 
-        
-
         private void button1_Click(object sender, EventArgs e)
         {
             var rlist = new List<string> { "" };
             var m = new Message(rlist, true, "ping", "server");
             _messageQueue.SetMessage(m);
+        }
+
+        private void MainClientForm_Resize(object sender, EventArgs e)
+        {
+            if (FormWindowState.Minimized == WindowState)
+            {
+                Hide();
+            }
+
+        }
+
+        protected void MainClientForm_Exit(Object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void notifyIcon_DoubleClick(object sender, EventArgs e)
+        {
+            if (FormWindowState.Minimized == WindowState)
+            {
+                Show();
+                WindowState = FormWindowState.Normal;
+            }
+        }
+
+        private void notifyIcon_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                MethodInfo mi = typeof(NotifyIcon).GetMethod("ShowContextMenu", BindingFlags.Instance | BindingFlags.NonPublic);
+                mi.Invoke(notifyIcon, null);
+            }
+        }
+
+        private void MainClientForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Environment.Exit(0);
         }
     }
 }

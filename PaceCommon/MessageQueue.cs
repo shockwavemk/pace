@@ -35,7 +35,7 @@ namespace PaceCommon
             return m;
         }
 
-        public void SetMessage(Message message)
+        public bool SetMessage(Message message)
         {
             var cq = (ConcurrentQueue<Message>)_hashTable[message.GetDestination()];
             if (cq == null)
@@ -49,6 +49,7 @@ namespace PaceCommon
             {
                 cq.Enqueue(message);
             }
+            return true;
         }
     }
 }

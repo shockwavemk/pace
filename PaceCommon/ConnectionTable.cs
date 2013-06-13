@@ -8,9 +8,6 @@ namespace PaceCommon
     {
         private Hashtable _hashTable;
 
-        public delegate void ConnectionRegistrationEventHandler(ClientInformation clientInformation);
-        public event ConnectionRegistrationEventHandler ConnectionRegistration;
-
         public ConnectionTable()
         {
             _hashTable = new Hashtable();
@@ -22,24 +19,30 @@ namespace PaceCommon
             if (clientInformation == null)
             {
                 clientInformation = new ClientInformation(name);
-                ConnectionRegistration.Invoke(clientInformation);
+                //ConnectionRegistration.Invoke(clientInformation);
                 _hashTable.Add(name, clientInformation);
             }
             return clientInformation;
         }
 
-        public ArrayList GetAll()
+        public Array GetAll()
         {
-            return new ArrayList(_hashTable.Values);
+            return new ArrayList(_hashTable.Values).ToArray();
         }
 
+        [Serializable]
         public class ClientInformation
         {
-            public string Name { get; set; }
+            private string _name;
 
             public ClientInformation(string name)
             {
-                Name = name;
+                _name = name;
+            }
+
+            public string GetName()
+            {
+                return _name;
             }
         }
     }

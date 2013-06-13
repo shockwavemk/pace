@@ -8,15 +8,15 @@ namespace PaceServer
     {
         private const int Threshold = 1;
         private bool _serverRunning = true;
-        private Thread _threadMessages;
+        private Thread _threadPing;
         private MessageQueue _messageQueue;
 
-        public NetworkServer(ref MessageQueue messageQueue)
+        public NetworkServer(ref MessageQueue messageQueue, ref ConnectionTable connectionTable)
         {
             _serverRunning = true;
             _messageQueue = messageQueue;
-            _threadMessages = new Thread(MessageWorker);
-            _threadMessages.Start();
+            _threadPing = new Thread(MessageWorker);
+            _threadPing.Start();
         }
 
         public void Stop()
@@ -47,6 +47,9 @@ namespace PaceServer
                             _messageQueue.Server.ServerToClientQueue.Enqueue(m);
                         }
                     }
+                     * Task task = new Task(() => { try { obj.Ping(); } catch {} });
+                        task.Start();
+                        if(!task.Wait(1000)) throw new TimeoutException();
                      */
                 }
     

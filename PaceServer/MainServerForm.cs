@@ -9,12 +9,10 @@ namespace PaceServer
 {
     public partial class MainServerForm : Form
     {
-        private Thread _threadWorker;
         private bool _running = true;
         private ConnectionTable _connectionTable;
         private MessageQueue _messageQueue;
-        private NetworkServer _networkServer;
-        private InOutQueue _serverInOut;
+        private TaskManager _taskManager;
 
         public MainServerForm()
         {
@@ -24,21 +22,20 @@ namespace PaceServer
 
         private void MainServerForm_Load(object sender, EventArgs e)
         {
-            Services.PrepareSetService(9090);
-            Services.SetService(typeof(ConnectionTable));
-            Services.SetService(typeof(MessageQueue));
-
-            _connectionTable = (ConnectionTable)System.Activator.GetObject(typeof(ConnectionTable), "http://localhost:9090/ConnectionTable.rem");
-            _messageQueue = (MessageQueue)System.Activator.GetObject(typeof(MessageQueue), "http://localhost:9090/MessageQueue.rem");
-
-            
-
             try
             {
-                //_networkServer = new NetworkServer(ref _messageQueue);
-                _threadWorker = new Thread(Tasks);
-                _threadWorker.Start();
+                Services.PrepareSetService(9090);
+                Services.SetService(typeof(ConnectionTable));
+                Services.SetService(typeof(MessageQueue));
 
+                _connectionTable = (ConnectionTable)System.Activator.GetObject(typeof(ConnectionTable), "http://localhost:9090/ConnectionTable.rem");
+                
+                _messageQueue = (MessageQueue)System.Activator.GetObject(typeof(MessageQueue), "http://localhost:9090/MessageQueue.rem");
+
+                _taskManager = new TaskManager(ref _messageQueue);
+                _taskManager.Task += TaskManagerOnTask;
+                
+                //Open ClientsTable by Default
                 LoadClientsTable();
             }
             catch (Exception ex)
@@ -47,25 +44,9 @@ namespace PaceServer
             }
         }
 
-        private void Tasks()
+        private void TaskManagerOnTask(Message message)
         {
-            try
-            {
-                while (_running)
-                {
-                    Thread.Sleep(1000);
-                    
-                    var m = _messageQueue.GetMessage("server");
-                    if (m != null)
-                    {
-                        MessageBox.Show("Command: " + m.GetCommand() + " Destination: " + m.GetDestination(), "Message from Client", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    }
-                }
-            }
-            catch (Exception exception)
-            {
-                TraceOps.Out(exception.ToString());
-            }
+            TraceOps.Out(message.GetCommand());
         }
 
         private void MainServerForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -84,7 +65,7 @@ namespace PaceServer
             mainPanel.Controls.Add(clientsTableForm);
             clientsTableForm.Visible = true;
         }
-
+        
         private void mainPanel_Paint(object sender, PaintEventArgs e)
         {
 

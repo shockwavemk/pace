@@ -64,6 +64,7 @@
             this.clientListView.SmallImageList = this.clientListImageList;
             this.clientListView.TabIndex = 0;
             this.clientListView.UseCompatibleStateImageBehavior = false;
+            this.clientListView.SelectedIndexChanged += new System.EventHandler(this.clientListView_SelectedIndexChanged);
             // 
             // clientListImageList
             // 
@@ -95,25 +96,25 @@
             // startZLeafToolStripMenuItem
             // 
             this.startZLeafToolStripMenuItem.Name = "startZLeafToolStripMenuItem";
-            this.startZLeafToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.startZLeafToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.startZLeafToolStripMenuItem.Text = "Start z-Leaf";
             // 
             // stopZLeafToolStripMenuItem
             // 
             this.stopZLeafToolStripMenuItem.Name = "stopZLeafToolStripMenuItem";
-            this.stopZLeafToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.stopZLeafToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.stopZLeafToolStripMenuItem.Text = "Stop z-Leaf";
             // 
             // startSoftwareToolStripMenuItem
             // 
             this.startSoftwareToolStripMenuItem.Name = "startSoftwareToolStripMenuItem";
-            this.startSoftwareToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.startSoftwareToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.startSoftwareToolStripMenuItem.Text = "Start software";
             // 
             // stopSoftwareToolStripMenuItem
             // 
             this.stopSoftwareToolStripMenuItem.Name = "stopSoftwareToolStripMenuItem";
-            this.stopSoftwareToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.stopSoftwareToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.stopSoftwareToolStripMenuItem.Text = "Stop software";
             // 
             // ClientsTable
