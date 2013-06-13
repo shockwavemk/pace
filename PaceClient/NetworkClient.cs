@@ -19,8 +19,7 @@ namespace PaceClient
             _messageQueue = messageQueue;
 
             _threadMessages = new Thread(MessageWorker);
-            _threadMessages.Start(); 
-
+            _threadMessages.Start();
         }
 
         public void MessageWorker()

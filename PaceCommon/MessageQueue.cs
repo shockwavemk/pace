@@ -65,7 +65,6 @@ namespace PaceCommon
             return "Test!";
         }
 
-        [Serializable]
         public class InOutQueue
         {
             public ConcurrentQueue<Message> ServerToClientQueue, ClientToServerQueue;
@@ -78,7 +77,7 @@ namespace PaceCommon
         }
 
 
-        [Serializable]
+        
         public class Message
         {
             private string Destination { get; set; }
