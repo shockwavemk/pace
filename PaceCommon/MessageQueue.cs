@@ -9,7 +9,6 @@ namespace PaceCommon
     public class MessageQueue : MarshalByRefObject
     {
         private Hashtable _hashTable;
-        public InOutQueue Server;
 
         public MessageQueue()
         {

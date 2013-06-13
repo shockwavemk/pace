@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using PaceCommon;
 
 namespace PaceCommon
 {
@@ -27,6 +26,11 @@ namespace PaceCommon
                 _hashTable.Add(name, clientInformation);
             }
             return clientInformation;
+        }
+
+        public ArrayList GetAll()
+        {
+            return new ArrayList(_hashTable.Values);
         }
 
         public class ClientInformation
