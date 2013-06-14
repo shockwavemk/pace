@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaceCommon", "PaceCommon\Pa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaceServer", "PaceServer\PaceServer.csproj", "{9D9DAD6A-3E9A-4D8F-9DC0-A7FFF408F162}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZtreeControl", "ZtreeControl\ZtreeControl.csproj", "{070074BF-E0E7-4676-B140-000B9CB2D8CD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{9D9DAD6A-3E9A-4D8F-9DC0-A7FFF408F162}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D9DAD6A-3E9A-4D8F-9DC0-A7FFF408F162}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9D9DAD6A-3E9A-4D8F-9DC0-A7FFF408F162}.Release|Any CPU.Build.0 = Release|Any CPU
+		{070074BF-E0E7-4676-B140-000B9CB2D8CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{070074BF-E0E7-4676-B140-000B9CB2D8CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{070074BF-E0E7-4676-B140-000B9CB2D8CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{070074BF-E0E7-4676-B140-000B9CB2D8CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
