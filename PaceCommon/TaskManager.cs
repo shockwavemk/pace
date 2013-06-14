@@ -13,17 +13,19 @@ namespace PaceServer
         private Thread _threadTasks;
         private MessageQueue _messageQueue;
         private Hashtable _hashTable;
+        private string _name;
 
         public delegate void TaskEventHandler(Message message);
         public event TaskEventHandler Task;
 
-        public TaskManager(ref MessageQueue messageQueue)
+        public TaskManager(ref MessageQueue messageQueue, ref string name)
         {
             _running = true;
             _messageQueue = messageQueue;
             _hashTable = new Hashtable();
             _threadTasks = new Thread(Tasks);
             _threadTasks.Start();
+            _name = name;
         }
 
         public void Stop()
@@ -39,7 +41,7 @@ namespace PaceServer
                 {
                     Thread.Sleep(Threshold);
 
-                    var m = _messageQueue.GetMessage("server");
+                    var m = _messageQueue.GetMessage(_name);
                     if (m != null)
                     {
                         Task.Invoke(m);

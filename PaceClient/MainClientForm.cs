@@ -48,7 +48,7 @@ namespace PaceClient
             try
             {
                 _networkClient = new NetworkClient(ref _messageQueue, ref _connectionTable, _name);
-                _taskManager = new TaskManager(ref _messageQueue);
+                _taskManager = new TaskManager(ref _messageQueue, ref _name);
                 _taskManager.Task += TaskManagerOnTask;
             }
             catch (Exception ex)
@@ -76,7 +76,7 @@ namespace PaceClient
         private void button1_Click(object sender, EventArgs e)
         {
             var rlist = new List<string> { "" };
-            var m = new Message(rlist, true, "ping", "server");
+            var m = new Message(rlist, true, "ping", "Server");
             _messageQueue.SetMessage(m);
         }
 

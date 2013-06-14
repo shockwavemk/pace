@@ -13,6 +13,7 @@ namespace PaceServer
         private ConnectionTable _connectionTable;
         private MessageQueue _messageQueue;
         private TaskManager _taskManager;
+        private string _name;
 
         public MainServerForm()
         {
@@ -28,12 +29,19 @@ namespace PaceServer
                 Services.SetService(typeof(ConnectionTable));
                 Services.SetService(typeof(MessageQueue));
 
+                _name = "Server";
+
                 _connectionTable = (ConnectionTable)System.Activator.GetObject(typeof(ConnectionTable), "http://localhost:9090/ConnectionTable.rem");
                 
                 _messageQueue = (MessageQueue)System.Activator.GetObject(typeof(MessageQueue), "http://localhost:9090/MessageQueue.rem");
 
-                _taskManager = new TaskManager(ref _messageQueue);
+                _taskManager = new TaskManager(ref _messageQueue, ref _name);
                 _taskManager.Task += TaskManagerOnTask;
+
+                //Set Own Information
+                var ci = new ConnectionTable.ClientInformation(_name);
+                ci.SetGroup("server");
+                _connectionTable.Set(_name, ci);
                 
                 //Open ClientsTable by Default
                 LoadClientsTable();
