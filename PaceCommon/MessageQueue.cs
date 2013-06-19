@@ -17,22 +17,26 @@ namespace PaceCommon
 
         public Message GetMessage(string destination)
         {
-            var cq = (ConcurrentQueue<Message>)_hashTable[destination];
-            Message m;
-            if (cq == null)
+            if (destination != null)
             {
-                cq = new ConcurrentQueue<Message>();
-                _hashTable.Add(destination, cq);
+                var cq = (ConcurrentQueue<Message>) _hashTable[destination];
+                Message m;
+                if (cq == null)
+                {
+                    cq = new ConcurrentQueue<Message>();
+                    _hashTable.Add(destination, cq);
 
-                var rlist = new List<string> { "" };
-                m = new Message(rlist, true, "registered", "");
-            }
-            else
-            {
-                cq.TryDequeue(out m);
-            }
+                    var rlist = new List<string> {""};
+                    m = new Message(rlist, true, "registered", "");
+                }
+                else
+                {
+                    cq.TryDequeue(out m);
+                }
 
-            return m;
+                return m;
+            }
+            return null;
         }
 
         public bool SetMessage(Message message)
