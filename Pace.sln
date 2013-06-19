@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaceServer", "PaceServer\Pa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZtreeControl", "ZtreeControl\ZtreeControl.csproj", "{070074BF-E0E7-4676-B140-000B9CB2D8CD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebControl", "WebControl\WebControl.csproj", "{B38E22C4-35D2-4B5A-BD7F-385104A8397A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExternalControl", "ExternalControl\ExternalControl.csproj", "{F5CE8C1C-CFA4-4997-B73E-BD0A48500700}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +35,14 @@ Global
 		{070074BF-E0E7-4676-B140-000B9CB2D8CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{070074BF-E0E7-4676-B140-000B9CB2D8CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{070074BF-E0E7-4676-B140-000B9CB2D8CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B38E22C4-35D2-4B5A-BD7F-385104A8397A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B38E22C4-35D2-4B5A-BD7F-385104A8397A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B38E22C4-35D2-4B5A-BD7F-385104A8397A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B38E22C4-35D2-4B5A-BD7F-385104A8397A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5CE8C1C-CFA4-4997-B73E-BD0A48500700}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5CE8C1C-CFA4-4997-B73E-BD0A48500700}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5CE8C1C-CFA4-4997-B73E-BD0A48500700}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5CE8C1C-CFA4-4997-B73E-BD0A48500700}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

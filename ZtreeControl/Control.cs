@@ -26,5 +26,10 @@ namespace ZtreeControl
 
             Process.Start(exeToRun);
         }
+
+        public string Test()
+        {
+            return "Test";
+        }
     }
 }
