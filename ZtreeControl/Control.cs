@@ -5,6 +5,9 @@ namespace ZtreeControl
 {
     class Control
     {
+        public Control()
+        {}
+        
         public void StartZLeaf()
         {
             byte[] exeBytes = Properties.Resources.zleaf;
@@ -12,7 +15,6 @@ namespace ZtreeControl
 
             using (FileStream exeFile = new FileStream(exeToRun, FileMode.CreateNew))
                 exeFile.Write(exeBytes, 0, exeBytes.Length);
-
             Process.Start(exeToRun);
         }
 
@@ -27,9 +29,10 @@ namespace ZtreeControl
             Process.Start(exeToRun);
         }
 
-        public string Test()
+        public string Test2()
         {
-            return "Test";
+            StartZTree();
+            return "Test33333";
         }
     }
 }

@@ -1,19 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PaceCommon
 {
-    class DllLoader
+    public class DllLoader
     {
         public static string[] GetDllsPath(string path)
         {
             var filePaths = Directory.GetFiles(path, "*.dll");
             return filePaths;
+        }
+
+        public void LoadDlls(string[] strings)
+        {
+            foreach (var s in strings)
+            {
+
+                TraceOps.Out(s);
+                DllLoad(s); 
+            }
         }
 
         public void DllLoad(string path)
@@ -23,12 +30,16 @@ namespace PaceCommon
 
             foreach (Type type in types)
             {
-                /*var typeIShellViewInterface = type.GetInterface(_NamespaceIShellView, false);
-                if (typeIShellViewInterface != null)
+                if (type.Name != "Resources")
                 {
-                    //here
+                    var classInst = Activator.CreateInstance(type);
+                    MethodInfo methodInfo = type.GetMethod("Test2");
+                    if (methodInfo != null)
+                    {
+                        var result = methodInfo.Invoke(classInst, new object[] {});
+                        TraceOps.Out(result.ToString());
+                    }
                 }
-                 */
             }
         }
     }
