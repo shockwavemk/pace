@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConnectionTable.cs" />
+    <Compile Include="DllLoader.cs" />
     <Compile Include="HashOps.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="MessageQueue.cs" />
