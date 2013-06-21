@@ -84,7 +84,44 @@ namespace PaceServer
             mainPanel.Controls.Add(clientsTableForm);
             clientsTableForm.Visible = true;
         }
-        
+
+        private void LoadPlugIns(IPlugin[] plugins)
+        {
+            // Take each plugin object and start initialization methods
+            foreach (var plugin in plugins)
+            {
+                // Load New Main Menu Entries
+                ToolStripMenuItem mainMenu = plugin.View.CreateMainMenu();
+                // Load New Clients-Table Menu
+                ToolStripMenuItem clientsTableMenu = plugin.View.CreateClientsTableMenu();
+                // Load Additional entries to existing standard-menu
+                ToolStripMenuItem fileMenu = plugin.View.CreateMainMenuEntryFile();
+                ToolStripMenuItem editMenu = plugin.View.CreateMainMenuEntryEdit();
+                ToolStripMenuItem runMenu = plugin.View.CreateMainMenuEntryRun();
+                ToolStripMenuItem viewMenu = plugin.View.CreateMainMenuEntryView();
+                ToolStripMenuItem helpMenu = plugin.View.CreateMainMenuEntryHelp();
+
+                menuStrip1.Items.Add(mainMenu);
+                // Assign new entries to existing menu
+                ToolStripMenuItem item;
+
+                item = (ToolStripMenuItem) menuStrip1.Items["File"];
+                item.DropDownItems.Add(fileMenu);
+
+                item = (ToolStripMenuItem)menuStrip1.Items["Edit"];
+                item.DropDownItems.Add(editMenu);
+
+                item = (ToolStripMenuItem)menuStrip1.Items["Run"];
+                item.DropDownItems.Add(runMenu);
+
+                item = (ToolStripMenuItem)menuStrip1.Items["View"];
+                item.DropDownItems.Add(viewMenu);
+
+                item = (ToolStripMenuItem)menuStrip1.Items["Help"];
+                item.DropDownItems.Add(helpMenu);
+            }
+        }
+
         private void mainPanel_Paint(object sender, PaintEventArgs e)
         {
 

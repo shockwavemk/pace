@@ -30,12 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainServerForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.File = new System.Windows.Forms.ToolStripMenuItem();
+            this.Edit = new System.Windows.Forms.ToolStripMenuItem();
+            this.Run = new System.Windows.Forms.ToolStripMenuItem();
+            this.runZTreeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.View = new System.Windows.Forms.ToolStripMenuItem();
             this.clientsTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Help = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutPaCEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -48,11 +49,11 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.editToolStripMenuItem,
-            this.runToolStripMenuItem,
-            this.viewToolStripMenuItem,
-            this.helpToolStripMenuItem});
+            this.File,
+            this.Edit,
+            this.Run,
+            this.View,
+            this.Help});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(350, 24);
@@ -60,51 +61,59 @@
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
-            // fileToolStripMenuItem
+            // File
             // 
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "File";
+            this.File.Name = "File";
+            this.File.Size = new System.Drawing.Size(37, 20);
+            this.File.Text = "File";
             // 
-            // editToolStripMenuItem
+            // Edit
             // 
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
-            this.editToolStripMenuItem.Text = "Edit";
+            this.Edit.Name = "Edit";
+            this.Edit.Size = new System.Drawing.Size(39, 20);
+            this.Edit.Text = "Edit";
             // 
-            // runToolStripMenuItem
+            // Run
             // 
-            this.runToolStripMenuItem.Name = "runToolStripMenuItem";
-            this.runToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
-            this.runToolStripMenuItem.Text = "Run";
+            this.Run.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.runZTreeToolStripMenuItem});
+            this.Run.Name = "Run";
+            this.Run.Size = new System.Drawing.Size(40, 20);
+            this.Run.Text = "Run";
             // 
-            // viewToolStripMenuItem
+            // runZTreeToolStripMenuItem
             // 
-            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.runZTreeToolStripMenuItem.Name = "runZTreeToolStripMenuItem";
+            this.runZTreeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.runZTreeToolStripMenuItem.Text = "Run z-Tree";
+            // 
+            // View
+            // 
+            this.View.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.clientsTableToolStripMenuItem});
-            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.viewToolStripMenuItem.Text = "View";
+            this.View.Name = "View";
+            this.View.Size = new System.Drawing.Size(44, 20);
+            this.View.Text = "View";
             // 
             // clientsTableToolStripMenuItem
             // 
             this.clientsTableToolStripMenuItem.Name = "clientsTableToolStripMenuItem";
-            this.clientsTableToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.clientsTableToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.clientsTableToolStripMenuItem.Text = "Clients\' Table";
             this.clientsTableToolStripMenuItem.Click += new System.EventHandler(this.clientsTableToolStripMenuItem_Click);
             // 
-            // helpToolStripMenuItem
+            // Help
             // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Help.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutPaCEToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
+            this.Help.Name = "Help";
+            this.Help.Size = new System.Drawing.Size(44, 20);
+            this.Help.Text = "Help";
             // 
             // aboutPaCEToolStripMenuItem
             // 
             this.aboutPaCEToolStripMenuItem.Name = "aboutPaCEToolStripMenuItem";
-            this.aboutPaCEToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.aboutPaCEToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.aboutPaCEToolStripMenuItem.Text = "About PaCE";
             // 
             // statusStrip1
@@ -170,17 +179,18 @@
         #endregion
 
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem runToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem File;
+        private System.Windows.Forms.ToolStripMenuItem Edit;
+        private System.Windows.Forms.ToolStripMenuItem View;
+        private System.Windows.Forms.ToolStripMenuItem Run;
+        private System.Windows.Forms.ToolStripMenuItem Help;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripMenuItem clientsTableToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutPaCEToolStripMenuItem;
         private System.Windows.Forms.Panel mainPanel;
+        private System.Windows.Forms.ToolStripMenuItem runZTreeToolStripMenuItem;
     }
 }
 

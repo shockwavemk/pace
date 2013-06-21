@@ -1,9 +1,15 @@
 ﻿using System.Collections;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace ZtreeControl
 {
     class View
     {
+        private ToolStripMenuItem _toolStripMenuItem;
+        private ToolStripMenuItem _startZLeafToolStripMenuItem;
+        private ToolStripMenuItem _stopZLeafToolStripMenuItem;
+
         public View()
         {}
 
@@ -16,32 +22,27 @@ namespace ZtreeControl
         {
             return new ArrayList();
         }
-    }
-}
 
-/*
- * 
- * // Check if user has access to requested .dll.
-string strDllPath = Path.GetFullPath(strSomePath);
-if (File.Exists(strDllPath))
-{
-    // Execute the method from the requested .dll using reflection (System.Reflection).
-    Assembly DLL = Assembly.LoadFrom(strDllPath);
-    Type classType = DLL.GetType(String.Format("{0}.{1}", strNmSpaceNm, strClassNm));
-    if (classType != null)
-    {
-        // Create class instance.
-        classInst = Activator.CreateInstance(classType);
-
-        // Invoke required method.
-        MethodInfo methodInfo = classType.GetMethod(strMethodName);
-        if (methodInfo != null)
+        public ToolStripMenuItem CreateMenu()
         {
-            object result = null;
-            result = methodInfo.Invoke(classInst, new object[] { dllParams });
-            return result.ToString();
+            _toolStripMenuItem = new ToolStripMenuItem();
+            _startZLeafToolStripMenuItem = new ToolStripMenuItem();
+            _stopZLeafToolStripMenuItem = new ToolStripMenuItem();
+            
+            _toolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] {_startZLeafToolStripMenuItem,_stopZLeafToolStripMenuItem});
+            _toolStripMenuItem.Name = "actionsToolStripMenuItem";
+            _toolStripMenuItem.Size = new Size(47, 20);
+            _toolStripMenuItem.Text = "zTree";
+            
+            _startZLeafToolStripMenuItem.Name = "startZLeafToolStripMenuItem";
+            _startZLeafToolStripMenuItem.Size = new Size(152, 22);
+            _startZLeafToolStripMenuItem.Text = "Start z-Leaf";
+           
+            _stopZLeafToolStripMenuItem.Name = "stopZLeafToolStripMenuItem";
+            _stopZLeafToolStripMenuItem.Size = new Size(152, 22);
+            _stopZLeafToolStripMenuItem.Text = "Stop z-Leaf";
+
+            return _toolStripMenuItem;
         }
     }
 }
- * 
- */
