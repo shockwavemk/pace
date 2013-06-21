@@ -85,7 +85,7 @@ namespace PaceServer
             clientsTableForm.Visible = true;
         }
 
-        private void LoadPlugIns(IPlugin[] plugins)
+        private void LoadPlugIns(Plugin[] plugins)
         {
             // Take each plugin object and start initialization methods
             foreach (var plugin in plugins)

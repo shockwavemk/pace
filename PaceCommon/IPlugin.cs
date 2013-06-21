@@ -2,7 +2,7 @@
 
 namespace PaceCommon
 {
-    public abstract class IPlugin
+    public abstract class Plugin
     {
         public Control Control;
         public View View;

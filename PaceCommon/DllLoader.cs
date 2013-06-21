@@ -28,16 +28,23 @@ namespace PaceCommon
             var pluginLibrary = Assembly.LoadFrom(path);
             IEnumerable<Type> types = pluginLibrary.GetTypes();
 
-            foreach (Type type in types)
+            foreach (var type in types)
             {
-                if (type.Name != "Resources")
+                if (type.BaseType != null && type.BaseType.Name == "IPlugin")
                 {
                     var classInst = Activator.CreateInstance(type);
                     MethodInfo methodInfo = type.GetMethod("Test2");
                     if (methodInfo != null)
                     {
-                        var result = methodInfo.Invoke(classInst, new object[] {});
-                        TraceOps.Out(result.ToString());
+                        try
+                        {
+                            var result = methodInfo.Invoke(classInst, new object[] { });
+                            TraceOps.Out(result.ToString());
+                        }
+                        catch (Exception exception)
+                        {
+                            TraceOps.Out(exception.ToString());
+                        }
                     }
                 }
             }

@@ -17,8 +17,16 @@ namespace ZtreeControl
                 var exeBytes = Properties.Resources.zleaf;
                 var exeToRun = Path.Combine(Path.GetTempPath(), "zleaf.exe");
 
+
+                if (File.Exists(exeToRun))
+                {
+                    File.Delete(exeToRun);
+                }
+
                 using (var exeFile = new FileStream(exeToRun, FileMode.CreateNew))
+                {
                     exeFile.Write(exeBytes, 0, exeBytes.Length);
+                }
                 Process.Start(exeToRun);
             }
             catch (Exception exception)
@@ -33,9 +41,16 @@ namespace ZtreeControl
             {
                 var exeBytes = Properties.Resources.ztree;
                 var exeToRun = Path.Combine(Path.GetTempPath(), "ztree.exe");
-            
+
+                if (File.Exists(exeToRun))
+                {
+                    File.Delete(exeToRun);
+                }
+
                 using (var exeFile = new FileStream(exeToRun, FileMode.CreateNew))
+                {
                     exeFile.Write(exeBytes, 0, exeBytes.Length);
+                }
                 Process.Start(exeToRun);
             }
             catch (Exception exception)
