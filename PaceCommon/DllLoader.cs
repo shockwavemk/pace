@@ -33,7 +33,7 @@ namespace PaceCommon
                 if (type.BaseType != null && type.BaseType.Name == "IPlugin")
                 {
                     var classInst = Activator.CreateInstance(type);
-                    MethodInfo methodInfo = type.GetMethod("Test2");
+                    var methodInfo = type.GetMethod("Test2");
                     if (methodInfo != null)
                     {
                         try
