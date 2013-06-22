@@ -11,9 +11,9 @@ namespace PaceServer
         private ConnectionTable _connectionTable;
         private MessageQueue _messageQueue;
         private ListViewGroup _local, _remote, _server, _group;
-        private Object[] _plugins;
+        private IPlugin[] _plugins;
 
-        public ClientsTable(object[] plugins)
+        public ClientsTable(IPlugin[] plugins)
         {
             _plugins = plugins;
             InitializeComponent();
@@ -71,14 +71,14 @@ namespace PaceServer
         private void LoadPlugIns()
         {
             // Take each plugin object and start initialization methods
-            foreach (Type plugin in _plugins)
+            foreach (IPlugin plugin in _plugins)
             {
                 if (plugin != null)
                 {
                     // Load New Main Menu Entries
-                    var clientsTableMenu = (ToolStripMenuItem)DllLoader.ViewInvoke(plugin, "CreateClientsTableMenu", new object[] { });
-                    clientsTableMenu.Click += ItemOnClick(plugin, "File");
-                    menuStrip1.Items.Add(clientsTableMenu);
+                    //var clientsTableMenu = (ToolStripMenuItem)DllLoader.ViewInvoke(plugin, "CreateClientsTableMenu", new object[] { });
+                    //clientsTableMenu.Click += ItemOnClick(plugin, "File");
+                    //menuStrip1.Items.Add(clientsTableMenu);
                 }
             }
         }
@@ -87,9 +87,9 @@ namespace PaceServer
         {
             return delegate(object sender, EventArgs args)
             {
-                var temp = (string)DllLoader.ControlInvoke(plugin, action, new object[] { });
-                var m = DllLoader.SoapToObject<Message>(temp);
-                _messageQueue.SetMessage(m);
+                //var temp = (string)DllLoader.ControlInvoke(plugin, action, new object[] { });
+                //var m = DllLoader.SoapToObject<Message>(temp);
+                //_messageQueue.SetMessage(m);
             };
         }
     }

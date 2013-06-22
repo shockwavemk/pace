@@ -2,3 +2,4 @@ C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\WebControl\bin
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\WebControl\bin\Debug\WebControl.pdb
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\WebControl\obj\Debug\WebControl.dll
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\WebControl\obj\Debug\WebControl.pdb
+C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\WebControl\obj\Debug\WebControl.csprojResolveAssemblyReference.cache

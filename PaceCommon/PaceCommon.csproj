@@ -45,7 +45,10 @@
     <Compile Include="ConnectionTable.cs" />
     <Compile Include="DllLoader.cs" />
     <Compile Include="HashOps.cs" />
+    <Compile Include="IControl.cs" />
+    <Compile Include="IModel.cs" />
     <Compile Include="IPlugin.cs" />
+    <Compile Include="IView.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="MessageQueue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

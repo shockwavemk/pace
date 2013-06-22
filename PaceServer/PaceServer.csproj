@@ -91,6 +91,8 @@
     <ProjectReference Include="..\PaceCommon\PaceCommon.csproj">
       <Project>{27991f0d-6e24-47df-83d6-08f921a134eb}</Project>
       <Name>PaceCommon</Name>
+      <Private>False</Private>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
