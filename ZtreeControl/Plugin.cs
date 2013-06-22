@@ -18,6 +18,7 @@ namespace ZtreeControl
         private TaskManager _taskManager;
         private string _name;
         private MessageQueue _messageQueue;
+        private Form _form;
 
         public Plugin()
         {
@@ -44,6 +45,11 @@ namespace ZtreeControl
         public void SetQueue(ref MessageQueue messageQueue)
         {
             _messageQueue = messageQueue;
+        }
+
+        public void SetForm(Form form)
+        {
+            _form = form;
         }
 
         public string Test()

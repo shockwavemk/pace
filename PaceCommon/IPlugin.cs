@@ -1,4 +1,6 @@
-﻿namespace PaceCommon
+﻿using System.Windows.Forms;
+
+namespace PaceCommon
 {
     public interface IPlugin
     {
@@ -9,5 +11,6 @@
         void Start(string name);
         string Name();
         void SetQueue(ref MessageQueue messageQueue);
+        void SetForm(Form mainPanel);
     }
 }

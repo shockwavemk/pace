@@ -27,7 +27,7 @@ namespace PaceCommon
                     _hashTable.Add(destination, cq);
 
                     var rlist = new List<string> {""};
-                    m = new Message(rlist, true, "registered", "");
+                    m = new Message(rlist, true, "registered as '"+destination+"'", "");
                 }
                 else
                 {

@@ -76,9 +76,8 @@ namespace PaceServer
                 if (plugin != null)
                 {
                     // Load New Main Menu Entries
-                    //var clientsTableMenu = (ToolStripMenuItem)DllLoader.ViewInvoke(plugin, "CreateClientsTableMenu", new object[] { });
-                    //clientsTableMenu.Click += ItemOnClick(plugin, "File");
-                    //menuStrip1.Items.Add(clientsTableMenu);
+                    var clientsTableMenu = (ToolStripMenuItem)plugin.GetView().CreateClientsTableMenu();
+                    menuStrip1.Items.Add(clientsTableMenu);
                 }
             }
         }

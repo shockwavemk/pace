@@ -53,10 +53,7 @@ namespace ZtreeControl
 
         public ToolStripMenuItem CreateMainMenuEntryFile()
         {
-            var mi = new ToolStripMenuItem();
-            mi.Name = "loadfile";
-            mi.Size = new Size(152, 22);
-            mi.Text = "Load File";
+            var mi = new ToolStripMenuItem("Test0");
             return mi;
         }
 
@@ -67,7 +64,9 @@ namespace ZtreeControl
 
         public ToolStripMenuItem CreateMainMenuEntryRun()
         {
-            return new ToolStripMenuItem("Test2");
+            var mi = new ToolStripMenuItem("Test0");
+            mi.Click += Control.StartZTree;
+            return mi;
         }
 
         public ToolStripMenuItem CreateMainMenuEntryView()

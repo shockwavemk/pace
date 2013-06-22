@@ -2,25 +2,16 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading;
 using PaceCommon;
+using Message = PaceCommon.Message;
 
 namespace ZtreeControl
 {
     public class Control : PaceCommon.IControl
     {
-        private static MessageQueue _messageQueue;
-
-        public static Message GetMessage()
-        {
-            return _messageQueue.GetMessage("ZtreeControl");
-        }
-
-        public static bool SetMessage(Message message)
-        {
-            _messageQueue.SetMessage(message);
-            return true;
-        }
+        private static Process _processZTree;
+        private static IntPtr hcalc;
 
         public void StartZLeaf(object sender, EventArgs eventArgs)
         {
@@ -52,8 +43,27 @@ namespace ZtreeControl
         {
             try
             {
+                hcalc = IntPtr.Zero;
+                
                 var exeBytes = Properties.Resources.ztree;
                 var exeToRun = Path.Combine(Path.GetTempPath(), "ztree.exe");
+
+                _processZTree = new Process();
+                _processZTree.StartInfo.FileName = exeToRun;
+                Thread thread = new Thread(new ThreadStart(() =>
+                {
+                    while (hcalc == IntPtr.Zero)
+                    {
+                        Thread.Sleep(10);
+                        //hcalc = FindWindow(null, "zTree");
+                    }
+                }));
+                thread.Start();
+
+
+
+                //if(_processZTree._processZTree.Kill();
+                
 
                 if (System.IO.File.Exists(exeToRun))
                 {
@@ -64,7 +74,7 @@ namespace ZtreeControl
                 {
                     exeFile.Write(exeBytes, 0, exeBytes.Length);
                 }
-                Process.Start(exeToRun);
+                _processZTree.Start();
             }
             catch (Exception exception)
             {
