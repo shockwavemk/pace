@@ -52,6 +52,7 @@ namespace PaceCommon
         public static object Invoke(object o, string s, object[] p)
         {
             var inst = o.GetType();
+            
             var methodInfo = inst.GetMethod(s);
             return methodInfo.Invoke(o, p);
         }

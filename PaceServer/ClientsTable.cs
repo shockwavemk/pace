@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using PaceCommon;
+using Message = PaceCommon.Message;
 
 namespace PaceServer
 {
@@ -9,10 +11,13 @@ namespace PaceServer
         private ConnectionTable _connectionTable;
         private MessageQueue _messageQueue;
         private ListViewGroup _local, _remote, _server, _group;
+        private Object[] _plugins;
 
-        public ClientsTable()
+        public ClientsTable(object[] plugins)
         {
+            _plugins = plugins;
             InitializeComponent();
+            LoadPlugIns();
         }
 
         private void ClientsTable_Load(object sender, EventArgs e)
@@ -61,6 +66,31 @@ namespace PaceServer
                 clientListView.Items.Add(listViewItem);
             }
             clientListView.Update();
+        }
+
+        private void LoadPlugIns()
+        {
+            // Take each plugin object and start initialization methods
+            foreach (Type plugin in _plugins)
+            {
+                if (plugin != null)
+                {
+                    // Load New Main Menu Entries
+                    var clientsTableMenu = (ToolStripMenuItem)DllLoader.ViewInvoke(plugin, "CreateClientsTableMenu", new object[] { });
+                    clientsTableMenu.Click += ItemOnClick(plugin, "File");
+                    menuStrip1.Items.Add(clientsTableMenu);
+                }
+            }
+        }
+
+        private EventHandler ItemOnClick(Type plugin, string action)
+        {
+            return delegate(object sender, EventArgs args)
+            {
+                var temp = (string)DllLoader.ControlInvoke(plugin, action, new object[] { });
+                var m = DllLoader.SoapToObject<Message>(temp);
+                _messageQueue.SetMessage(m);
+            };
         }
     }
 }

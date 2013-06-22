@@ -17,11 +17,13 @@ namespace PaceServer
         private MessageQueue _messageQueue;
         private TaskManager _taskManager;
         private string _name;
+        private object[] _plugins;
 
         public MainServerForm(object[] plugins)
         {
+            _plugins = plugins;
             InitializeComponent();
-            LoadPlugIns(plugins);
+            LoadPlugIns();
             this.FormClosing += new FormClosingEventHandler(MainServerForm_FormClosing);
         }
 
@@ -84,34 +86,32 @@ namespace PaceServer
 
         private void LoadClientsTable()
         {
-            var clientsTableForm = new ClientsTable { TopLevel = false, FormBorderStyle = FormBorderStyle.Sizable, AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, };
+            var clientsTableForm = new ClientsTable(_plugins)
+                {
+                    TopLevel = false,
+                    FormBorderStyle = FormBorderStyle.Sizable,
+                    AutoSize = true,
+                    AutoSizeMode = AutoSizeMode.GrowAndShrink
+                };
             mainPanel.Controls.Add(clientsTableForm);
             clientsTableForm.Visible = true;
         }
 
-        private void LoadPlugIns(Object[] plugins)
+        private void LoadPlugIns()
         {
             // Take each plugin object and start initialization methods
-            foreach (Type plugin in plugins)
+            foreach (Type plugin in _plugins)
             {
                 if (plugin != null)
                 {
                     // Load New Main Menu Entries
                     var mainMenu = (ToolStripMenuItem) DllLoader.ViewInvoke(plugin, "CreateMainMenu", new object[] {});
-                    // Load New Clients-Table Menu
-                    var clientsTableMenu =
-                        (ToolStripMenuItem) DllLoader.ViewInvoke(plugin, "CreateClientsTableMenu", new object[] {});
                     // Load Additional entries to existing standard-menu
-                    var fileMenu =
-                        (ToolStripMenuItem) DllLoader.ViewInvoke(plugin, "CreateMainMenuEntryFile", new object[] {});
-                    var editMenu =
-                        (ToolStripMenuItem) DllLoader.ViewInvoke(plugin, "CreateMainMenuEntryEdit", new object[] {});
-                    var runMenu =
-                        (ToolStripMenuItem) DllLoader.ViewInvoke(plugin, "CreateMainMenuEntryRun", new object[] {});
-                    var viewMenu =
-                        (ToolStripMenuItem) DllLoader.ViewInvoke(plugin, "CreateMainMenuEntryView", new object[] {});
-                    var helpMenu =
-                        (ToolStripMenuItem) DllLoader.ViewInvoke(plugin, "CreateMainMenuEntryHelp", new object[] {});
+                    var fileMenu = (ToolStripMenuItem) DllLoader.ViewInvoke(plugin, "CreateMainMenuEntryFile", new object[] {});
+                    var editMenu = (ToolStripMenuItem) DllLoader.ViewInvoke(plugin, "CreateMainMenuEntryEdit", new object[] {});
+                    var runMenu  = (ToolStripMenuItem) DllLoader.ViewInvoke(plugin, "CreateMainMenuEntryRun", new object[] {});
+                    var viewMenu = (ToolStripMenuItem) DllLoader.ViewInvoke(plugin, "CreateMainMenuEntryView", new object[] {});
+                    var helpMenu = (ToolStripMenuItem) DllLoader.ViewInvoke(plugin, "CreateMainMenuEntryHelp", new object[] {});
 
                     menuStrip1.Items.Add(mainMenu);
                     

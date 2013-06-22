@@ -11,6 +11,17 @@ namespace ZtreeControl
     {
         private static MessageQueue _messageQueue;
 
+        public static Message GetMessage()
+        {
+            return _messageQueue.GetMessage("ZtreeControl");
+        }
+
+        public static bool SetMessage(Message message)
+        {
+            _messageQueue.SetMessage(message);
+            return true;
+        }
+
         public void StartZLeaf(object sender, EventArgs eventArgs)
         {
             try
@@ -61,9 +72,18 @@ namespace ZtreeControl
             }
         }
 
-        public static void StartRemoteZLeaf(object sender, EventArgs eventArgs)
+        public string StartRemoteZLeaf()
         {
-            
+            var rlist = new List<string> { "" };
+            var m = new Message(rlist, true, "start_zleaf", "server");
+            return DllLoader.ObjectToSoap(m);
+        }
+
+        public string StopRemoteZLeaf()
+        {
+            var rlist = new List<string> { "" };
+            var m = new Message(rlist, true, "stop_zleaf", "server");
+            return DllLoader.ObjectToSoap(m);
         }
 
         public string Test()
@@ -74,7 +94,35 @@ namespace ZtreeControl
         public string File()
         {
             var rlist = new List<string> { "" };
-            var m = new Message(rlist, true, "ping", "Server");
+            var m = new Message(rlist, true, "file", "Server");
+            return DllLoader.ObjectToSoap(m);
+        }
+
+        public string Edit()
+        {
+            var rlist = new List<string> { "" };
+            var m = new Message(rlist, true, "edit", "Server");
+            return DllLoader.ObjectToSoap(m);
+        }
+
+        public string View()
+        {
+            var rlist = new List<string> { "" };
+            var m = new Message(rlist, true, "view", "Server");
+            return DllLoader.ObjectToSoap(m);
+        }
+
+        public string Run()
+        {
+            var rlist = new List<string> { "" };
+            var m = new Message(rlist, true, "run", "Server");
+            return DllLoader.ObjectToSoap(m);
+        }
+
+        public string Help()
+        {
+            var rlist = new List<string> { "" };
+            var m = new Message(rlist, true, "help", "Server");
             return DllLoader.ObjectToSoap(m);
         }
     }

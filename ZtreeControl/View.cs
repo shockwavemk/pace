@@ -57,8 +57,6 @@ namespace ZtreeControl
             mi.Name = "loadfile";
             mi.Size = new Size(152, 22);
             mi.Text = "Load File";
-            mi.Click += Control.StartRemoteZLeaf;
-
             return mi;
         }
 
