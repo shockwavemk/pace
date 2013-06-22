@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Drawing;
 using System.Windows.Forms;
 using PaceCommon;
@@ -10,7 +11,7 @@ namespace ZtreeControl
         private ToolStripMenuItem _toolStripMenuItem;
         private ToolStripMenuItem _startZLeafToolStripMenuItem;
         private ToolStripMenuItem _stopZLeafToolStripMenuItem;
-
+        
         public View()
         {}
 
@@ -43,7 +44,8 @@ namespace ZtreeControl
             _startZLeafToolStripMenuItem.Name = "startZLeafToolStripMenuItem";
             _startZLeafToolStripMenuItem.Size = new Size(152, 22);
             _startZLeafToolStripMenuItem.Text = "Start z-Leaf";
-
+            _startZLeafToolStripMenuItem.Click += Control.StartZLeafToolStripMenuItemOnClick;
+             
             _stopZLeafToolStripMenuItem.Name = "stopZLeafToolStripMenuItem";
             _stopZLeafToolStripMenuItem.Size = new Size(152, 22);
             _stopZLeafToolStripMenuItem.Text = "Stop z-Leaf";

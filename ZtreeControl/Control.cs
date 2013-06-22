@@ -5,6 +5,7 @@ using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using PaceCommon;
+using ZtreeControl.Properties;
 using Message = PaceCommon.Message;
 
 namespace ZtreeControl
@@ -146,7 +147,7 @@ namespace ZtreeControl
                 var exeToRun = Path.Combine(Path.GetTempPath(), "ztree.exe");
                 if (FindProcess("ztree"))
                 {
-                    DialogResult dialogResult = MessageBox.Show("Are you sure to restart z-Tree?", "z-Tree is still running", MessageBoxButtons.YesNo);
+                    DialogResult dialogResult = MessageBox.Show(Resources.Control_StartZTree_Are_you_sure_to_restart_z_Tree_, Resources.Control_StartZTree_z_Tree_is_still_running, MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.No)
                     {
                         return;
@@ -217,6 +218,16 @@ namespace ZtreeControl
             var rlist = new List<string> { "" };
             var m = new Message(rlist, true, "help", "Server");
             return ""; // DllLoader.ObjectToSoap(m);
+        }
+
+        public static void StartZLeafToolStripMenuItemOnClick(object sender, EventArgs e)
+        {
+            var connectionTable = (ConnectionTable)System.Activator.GetObject(typeof(ConnectionTable), "http://localhost:9090/ConnectionTable.rem");
+            var sc = connectionTable.GetSelected();
+            foreach (ConnectionTable.ClientInformation clientInformation in sc)
+            {
+                TraceOps.Out(clientInformation.GetName());
+            }
         }
     }
 }

@@ -61,6 +61,24 @@ namespace ZtreeControl.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Are you sure to restart z-Tree? ähnelt.
+        /// </summary>
+        internal static string Control_StartZTree_Are_you_sure_to_restart_z_Tree_ {
+            get {
+                return ResourceManager.GetString("Control_StartZTree_Are_you_sure_to_restart_z_Tree_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die z-Tree is still running ähnelt.
+        /// </summary>
+        internal static string Control_StartZTree_z_Tree_is_still_running {
+            get {
+                return ResourceManager.GetString("Control_StartZTree_z_Tree_is_still_running", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Byte[].
         /// </summary>
         internal static byte[] zleaf {

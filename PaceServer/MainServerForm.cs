@@ -19,6 +19,7 @@ namespace PaceServer
         private string _name;
         private IPlugin[] _plugins;
         private MainServerForm _msf;
+        private ClientsTable _clientsTableForm;
 
         public MainServerForm(IPlugin[] plugins)
         {
@@ -98,15 +99,15 @@ namespace PaceServer
 
         private void LoadClientsTable()
         {
-            var clientsTableForm = new ClientsTable(_plugins)
+            _clientsTableForm = new ClientsTable(_plugins)
                 {
                     TopLevel = false,
                     FormBorderStyle = FormBorderStyle.Sizable,
                     AutoSize = true,
                     AutoSizeMode = AutoSizeMode.GrowAndShrink
                 };
-            mainPanel.Controls.Add(clientsTableForm);
-            clientsTableForm.Visible = true;
+            mainPanel.Controls.Add(_clientsTableForm);
+            _clientsTableForm.Visible = true;
         }
 
         private void LoadPlugIns()
@@ -116,8 +117,6 @@ namespace PaceServer
             {
                 if (plugin != null)
                 {
-                    //TraceOps.Out("Test:"+plugin.GetView().Test());
-
                     // Load New Main Menu Entries
                     var mainMenu = (ToolStripMenuItem)plugin.GetView().CreateMainMenu();
                     // Load Additional entries to existing standard-menu

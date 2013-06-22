@@ -124,4 +124,10 @@
   <data name="ztree" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\ztree\ztree.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Control_StartZTree_Are_you_sure_to_restart_z_Tree_" xml:space="preserve">
+    <value>Are you sure to restart z-Tree?</value>
+  </data>
+  <data name="Control_StartZTree_z_Tree_is_still_running" xml:space="preserve">
+    <value>z-Tree is still running</value>
+  </data>
 </root>

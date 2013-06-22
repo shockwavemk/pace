@@ -25,6 +25,23 @@ namespace PaceCommon
             return clientInformation;
         }
 
+        public Array GetSelected()
+        {
+            var al = new ArrayList(_hashTable.Values);
+            var alnew = new ArrayList();
+            foreach (ClientInformation ci in al)
+            {
+                if (ci.GetSelected())
+                {
+                    alnew.Add(ci);
+                }
+            }
+            
+            var alta = alnew.ToArray();
+            return alta;
+        }
+
+
         public void Set(string name, ClientInformation clientInformation)
         {
             _hashTable.Add(name, clientInformation);
@@ -40,11 +57,13 @@ namespace PaceCommon
         {
             private string _name;
             private string _group;
+            private bool _selected;
 
             public ClientInformation(string name)
             {
                 _name = name;
                 _group = "Clients";
+                _selected = false;
             }
 
             public string GetName()
@@ -61,6 +80,22 @@ namespace PaceCommon
             {
                 return _group;
             }
+
+            public void SetSelected(bool selected)
+            {
+                _selected = selected;
+            }
+
+            public bool GetSelected()
+            {
+                return _selected;
+            }
+        }
+
+        public void SetSelected(string text)
+        {
+            var citemp = Get(text);
+            citemp.SetSelected(true);
         }
     }
 }

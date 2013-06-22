@@ -12,6 +12,7 @@ namespace PaceServer
         private MessageQueue _messageQueue;
         private ListViewGroup _local, _remote, _server, _group;
         private IPlugin[] _plugins;
+        public ListView.SelectedListViewItemCollection SelectedListViewItemCollection;
 
         public ClientsTable(IPlugin[] plugins)
         {
@@ -31,7 +32,10 @@ namespace PaceServer
 
         private void clientListView_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            foreach (ListViewItem si in clientListView.SelectedItems)
+            {
+                _connectionTable.SetSelected(si.Text);
+            }
         }
 
         private void CreateGroups()
@@ -80,16 +84,6 @@ namespace PaceServer
                     menuStrip1.Items.Add(clientsTableMenu);
                 }
             }
-        }
-
-        private EventHandler ItemOnClick(Type plugin, string action)
-        {
-            return delegate(object sender, EventArgs args)
-            {
-                //var temp = (string)DllLoader.ControlInvoke(plugin, action, new object[] { });
-                //var m = DllLoader.SoapToObject<Message>(temp);
-                //_messageQueue.SetMessage(m);
-            };
         }
     }
 }
