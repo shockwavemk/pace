@@ -1,19 +1,39 @@
-﻿namespace ZtreeControl
+﻿using System.Windows.Forms;
+using PaceCommon;
+
+namespace ZtreeControl
 {
-    class Plugin : PaceCommon.Plugin
+    class Plugin
     {
-        public new Control Control;
-        public new View View;
+        private Control _control;
+        private View _view;
+        private Model _model;
         
         public Plugin()
         {
-            Control = new Control();
-            View = new View();
+            _control = new Control();
+            _view = new View();
+            _model = new Model();
         }
 
-        public string Test2()
+        public View GetView()
         {
-            return "innerTest";
+            return _view;
+        }
+
+        public Control GetControl()
+        {
+            return _control;
+        }
+
+        public Model GetModel()
+        {
+            return _model;
+        }
+
+        public string Test()
+        {
+            return "Plugin Test";
         }
     }
 }

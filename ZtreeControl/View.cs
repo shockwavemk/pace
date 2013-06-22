@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Drawing;
 using System.Windows.Forms;
+using PaceCommon;
 
 namespace ZtreeControl
 {
-    class View
+    class View : IView
     {
         private ToolStripMenuItem _toolStripMenuItem;
         private ToolStripMenuItem _startZLeafToolStripMenuItem;
@@ -22,27 +23,68 @@ namespace ZtreeControl
         {
             return new ArrayList();
         }
+        
+        public ToolStripMenuItem CreateMainMenu()
+        {
+            return new ToolStripMenuItem("Ztree New");
+        }
 
-        public ToolStripMenuItem CreateMenu()
+        public ToolStripMenuItem CreateClientsTableMenu()
         {
             _toolStripMenuItem = new ToolStripMenuItem();
             _startZLeafToolStripMenuItem = new ToolStripMenuItem();
             _stopZLeafToolStripMenuItem = new ToolStripMenuItem();
-            
-            _toolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] {_startZLeafToolStripMenuItem,_stopZLeafToolStripMenuItem});
+
+            _toolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { _startZLeafToolStripMenuItem, _stopZLeafToolStripMenuItem });
             _toolStripMenuItem.Name = "actionsToolStripMenuItem";
             _toolStripMenuItem.Size = new Size(47, 20);
             _toolStripMenuItem.Text = "zTree";
-            
+
             _startZLeafToolStripMenuItem.Name = "startZLeafToolStripMenuItem";
             _startZLeafToolStripMenuItem.Size = new Size(152, 22);
             _startZLeafToolStripMenuItem.Text = "Start z-Leaf";
-           
+
             _stopZLeafToolStripMenuItem.Name = "stopZLeafToolStripMenuItem";
             _stopZLeafToolStripMenuItem.Size = new Size(152, 22);
             _stopZLeafToolStripMenuItem.Text = "Stop z-Leaf";
 
             return _toolStripMenuItem;
+        }
+
+        public ToolStripMenuItem CreateMainMenuEntryFile()
+        {
+            var mi = new ToolStripMenuItem();
+            mi.Name = "loadfile";
+            mi.Size = new Size(152, 22);
+            mi.Text = "Load File";
+            mi.Click += Control.StartRemoteZLeaf;
+
+            return mi;
+        }
+
+        public ToolStripMenuItem CreateMainMenuEntryEdit()
+        {
+            return new ToolStripMenuItem("Test1");
+        }
+
+        public ToolStripMenuItem CreateMainMenuEntryRun()
+        {
+            return new ToolStripMenuItem("Test2");
+        }
+
+        public ToolStripMenuItem CreateMainMenuEntryView()
+        {
+            return new ToolStripMenuItem("Test3");
+        }
+
+        public ToolStripMenuItem CreateMainMenuEntryHelp()
+        {
+            return new ToolStripMenuItem("Test4");
+        }
+
+        public string Test()
+        {
+            return "View Test";
         }
     }
 }

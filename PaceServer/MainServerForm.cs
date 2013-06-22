@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 using PaceCommon;
 using Message = PaceCommon.Message;
 
@@ -15,9 +18,10 @@ namespace PaceServer
         private TaskManager _taskManager;
         private string _name;
 
-        public MainServerForm()
+        public MainServerForm(object[] plugins)
         {
             InitializeComponent();
+            LoadPlugIns(plugins);
             this.FormClosing += new FormClosingEventHandler(MainServerForm_FormClosing);
         }
 
@@ -85,42 +89,64 @@ namespace PaceServer
             clientsTableForm.Visible = true;
         }
 
-        private void LoadPlugIns(Plugin[] plugins)
+        private void LoadPlugIns(Object[] plugins)
         {
             // Take each plugin object and start initialization methods
-            foreach (var plugin in plugins)
+            foreach (Type plugin in plugins)
             {
-                // Load New Main Menu Entries
-                ToolStripMenuItem mainMenu = plugin.View.CreateMainMenu();
-                // Load New Clients-Table Menu
-                ToolStripMenuItem clientsTableMenu = plugin.View.CreateClientsTableMenu();
-                // Load Additional entries to existing standard-menu
-                ToolStripMenuItem fileMenu = plugin.View.CreateMainMenuEntryFile();
-                ToolStripMenuItem editMenu = plugin.View.CreateMainMenuEntryEdit();
-                ToolStripMenuItem runMenu = plugin.View.CreateMainMenuEntryRun();
-                ToolStripMenuItem viewMenu = plugin.View.CreateMainMenuEntryView();
-                ToolStripMenuItem helpMenu = plugin.View.CreateMainMenuEntryHelp();
+                if(plugin != null)
+                {
+                    // Load New Main Menu Entries
+                    var mainMenu = (ToolStripMenuItem)DllLoader.ViewInvoke(plugin, "CreateMainMenu", new object[] { });
+                    // Load New Clients-Table Menu
+                    var clientsTableMenu = (ToolStripMenuItem)DllLoader.ViewInvoke(plugin, "CreateClientsTableMenu", new object[] { });
+                    // Load Additional entries to existing standard-menu
+                    var fileMenu = (ToolStripMenuItem)DllLoader.ViewInvoke(plugin, "CreateMainMenuEntryFile", new object[] { });
+                    var editMenu = (ToolStripMenuItem)DllLoader.ViewInvoke(plugin, "CreateMainMenuEntryEdit", new object[] { });
+                    var runMenu = (ToolStripMenuItem)DllLoader.ViewInvoke(plugin, "CreateMainMenuEntryRun", new object[] { });
+                    var viewMenu = (ToolStripMenuItem)DllLoader.ViewInvoke(plugin, "CreateMainMenuEntryView", new object[] { });
+                    var helpMenu = (ToolStripMenuItem)DllLoader.ViewInvoke(plugin, "CreateMainMenuEntryHelp", new object[] { });
 
-                menuStrip1.Items.Add(mainMenu);
-                // Assign new entries to existing menu
-                ToolStripMenuItem item;
+                    menuStrip1.Items.Add(mainMenu);
 
-                item = (ToolStripMenuItem) menuStrip1.Items["File"];
-                item.DropDownItems.Add(fileMenu);
+                    // Assign Listener
+                    fileMenu.Click += ItemOnClick(plugin, "File");
+                    editMenu.Click += ItemOnClick(plugin, "Edit");
+                    runMenu.Click += ItemOnClick(plugin, "Run");
+                    viewMenu.Click += ItemOnClick(plugin, "View");
+                    helpMenu.Click += ItemOnClick(plugin, "Help");
 
-                item = (ToolStripMenuItem)menuStrip1.Items["Edit"];
-                item.DropDownItems.Add(editMenu);
+                    // Assign new entries to existing menu
+                    ToolStripMenuItem item;
 
-                item = (ToolStripMenuItem)menuStrip1.Items["Run"];
-                item.DropDownItems.Add(runMenu);
+                    item = (ToolStripMenuItem) menuStrip1.Items["File"];
+                    item.DropDownItems.Add(fileMenu);
 
-                item = (ToolStripMenuItem)menuStrip1.Items["View"];
-                item.DropDownItems.Add(viewMenu);
+                    item = (ToolStripMenuItem)menuStrip1.Items["Edit"];
+                    item.DropDownItems.Add(editMenu);
 
-                item = (ToolStripMenuItem)menuStrip1.Items["Help"];
-                item.DropDownItems.Add(helpMenu);
+                    item = (ToolStripMenuItem)menuStrip1.Items["Run"];
+                    item.DropDownItems.Add(runMenu);
+
+                    item = (ToolStripMenuItem)menuStrip1.Items["View"];
+                    item.DropDownItems.Add(viewMenu);
+
+                    item = (ToolStripMenuItem)menuStrip1.Items["Help"];
+                    item.DropDownItems.Add(helpMenu);
+                }
             }
         }
+
+        private EventHandler ItemOnClick(Type plugin, string action)
+        {
+            return delegate(object sender, EventArgs args)
+            {
+                var temp = (string)DllLoader.ControlInvoke(plugin, action, new object[] { });
+                var m = DllLoader.SoapToObject<Message>(temp);
+                _messageQueue.SetMessage(m);
+            };
+        }
+        
 
         private void mainPanel_Paint(object sender, PaintEventArgs e)
         {

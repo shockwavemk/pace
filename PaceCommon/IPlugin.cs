@@ -2,24 +2,33 @@
 
 namespace PaceCommon
 {
-    public abstract class Plugin
+    public interface IPlugin
     {
-        public Control Control;
-        public View View;
+        IView GetView();
+        IControl GetControl();
+        IModel GetModel();
+        string Test();
     }
 
-    public abstract class View
+    public interface IControl
     {
-        public abstract ToolStripMenuItem CreateMainMenu();
-        public abstract ToolStripMenuItem CreateClientsTableMenu();
-        public abstract ToolStripMenuItem CreateMainMenuEntryFile();
-        public abstract ToolStripMenuItem CreateMainMenuEntryEdit();
-        public abstract ToolStripMenuItem CreateMainMenuEntryRun();
-        public abstract ToolStripMenuItem CreateMainMenuEntryView();
-        public abstract ToolStripMenuItem CreateMainMenuEntryHelp();
+        string Test();
     }
 
-    public abstract class Control
+    public interface IView
     {
+        string Test();
+        ToolStripMenuItem CreateMainMenu();
+        ToolStripMenuItem CreateClientsTableMenu();
+        ToolStripMenuItem CreateMainMenuEntryFile();
+        ToolStripMenuItem CreateMainMenuEntryEdit();
+        ToolStripMenuItem CreateMainMenuEntryRun();
+        ToolStripMenuItem CreateMainMenuEntryView();
+        ToolStripMenuItem CreateMainMenuEntryHelp();
+    }
+
+    public interface IModel
+    {
+        string Test();
     }
 }
