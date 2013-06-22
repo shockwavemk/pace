@@ -64,7 +64,7 @@ namespace ZtreeControl
 
         public ToolStripMenuItem CreateMainMenuEntryRun()
         {
-            var mi = new ToolStripMenuItem("Test0");
+            var mi = new ToolStripMenuItem("Start z-Tree");
             mi.Click += Control.StartZTree;
             return mi;
         }

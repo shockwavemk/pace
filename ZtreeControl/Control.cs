@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
+using System.Windows.Forms;
 using PaceCommon;
 using Message = PaceCommon.Message;
 
@@ -13,6 +14,101 @@ namespace ZtreeControl
         private static Process _processZTree;
         private static IntPtr hcalc;
 
+        public static string[] GetGsfPaths(string path)
+        {
+            var filePaths = Directory.GetFiles(path, "*.gsf");
+            return filePaths;
+        }
+
+        public static bool FindAndKillProcess(string name)
+        {
+            foreach (Process clsProcess in Process.GetProcesses())
+            {
+                if (clsProcess.ProcessName.StartsWith(name))
+                {
+                    try
+                    {
+                        clsProcess.Kill();
+                    }
+                    catch
+                    {
+                        return false;
+                    }
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public static bool FindProcess(string name)
+        {
+            foreach (Process clsProcess in Process.GetProcesses())
+            {
+                if (clsProcess.ProcessName.StartsWith(name))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public static void FindAndDeleteGsf(string path)
+        {
+            var gsfs = GetGsfPaths(path);
+            foreach (var gsf in gsfs)
+            {
+                if (System.IO.File.Exists(gsf))
+                {
+                    System.IO.File.Delete(gsf);
+                }
+            }
+        }
+
+        public static void FindDeleteFileAndStartAgain(string path, string process)
+        {
+            var thread = new Thread(new ThreadStart(() =>
+                {
+                    var found = true;
+                    while (found)
+                    {
+                        Thread.Sleep(10);
+                        found = false;
+                        foreach (Process clsProcess in Process.GetProcesses())
+                        {
+                            if (clsProcess.ProcessName.StartsWith(process))
+                            {
+                                found = true;
+                                try
+                                {
+                                    clsProcess.Kill();
+                                }
+                                catch
+                                {
+                                
+                                }
+                            }
+                        }
+                    }
+
+                    while (System.IO.File.Exists(path))
+                    {
+                        System.IO.File.Delete(path);
+                        FindAndDeleteGsf(AppDomain.CurrentDomain.BaseDirectory);
+                    }
+
+                    var exeBytes = Properties.Resources.ztree;
+                    _processZTree = new Process { StartInfo = { FileName = path } };
+
+                    using (var exeFile = new FileStream(path, FileMode.CreateNew))
+                    {
+                        exeFile.Write(exeBytes, 0, exeBytes.Length);
+                    }
+                    
+                    _processZTree.Start();
+            }));
+            thread.Start();
+        }
+
         public void StartZLeaf(object sender, EventArgs eventArgs)
         {
             try
@@ -20,8 +116,11 @@ namespace ZtreeControl
                 var exeBytes = Properties.Resources.zleaf;
                 var exeToRun = Path.Combine(Path.GetTempPath(), "zleaf.exe");
 
+                
 
+                //FindAndKillProcess("zTree");
 
+                /*
                 if (System.IO.File.Exists(exeToRun))
                 {
                     System.IO.File.Delete(exeToRun);
@@ -32,6 +131,7 @@ namespace ZtreeControl
                     exeFile.Write(exeBytes, 0, exeBytes.Length);
                 }
                 Process.Start(exeToRun);
+                */
             }
             catch (Exception exception)
             {
@@ -43,43 +143,22 @@ namespace ZtreeControl
         {
             try
             {
-                hcalc = IntPtr.Zero;
-                
-                var exeBytes = Properties.Resources.ztree;
                 var exeToRun = Path.Combine(Path.GetTempPath(), "ztree.exe");
-
-                _processZTree = new Process();
-                _processZTree.StartInfo.FileName = exeToRun;
-                Thread thread = new Thread(new ThreadStart(() =>
+                if (FindProcess("ztree"))
                 {
-                    while (hcalc == IntPtr.Zero)
+                    DialogResult dialogResult = MessageBox.Show("Are you sure to restart z-Tree?", "z-Tree is still running", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.No)
                     {
-                        Thread.Sleep(10);
-                        //hcalc = FindWindow(null, "zTree");
+                        return;
                     }
-                }));
-                thread.Start();
-
-
-
-                //if(_processZTree._processZTree.Kill();
-                
-
-                if (System.IO.File.Exists(exeToRun))
-                {
-                    System.IO.File.Delete(exeToRun);
                 }
-
-                using (var exeFile = new FileStream(exeToRun, FileMode.CreateNew))
-                {
-                    exeFile.Write(exeBytes, 0, exeBytes.Length);
-                }
-                _processZTree.Start();
+                FindDeleteFileAndStartAgain(exeToRun, "ztree");
             }
             catch (Exception exception)
             {
                 TraceOps.Out(exception.ToString());
             }
+            TraceOps.Out("finished");
         }
 
         public string StartRemoteZLeaf()

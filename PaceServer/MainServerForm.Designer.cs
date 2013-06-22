@@ -33,7 +33,6 @@
             this.File = new System.Windows.Forms.ToolStripMenuItem();
             this.Edit = new System.Windows.Forms.ToolStripMenuItem();
             this.Run = new System.Windows.Forms.ToolStripMenuItem();
-            this.runZTreeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.View = new System.Windows.Forms.ToolStripMenuItem();
             this.clientsTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Help = new System.Windows.Forms.ToolStripMenuItem();
@@ -75,17 +74,9 @@
             // 
             // Run
             // 
-            this.Run.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.runZTreeToolStripMenuItem});
             this.Run.Name = "Run";
             this.Run.Size = new System.Drawing.Size(40, 20);
             this.Run.Text = "Run";
-            // 
-            // runZTreeToolStripMenuItem
-            // 
-            this.runZTreeToolStripMenuItem.Name = "runZTreeToolStripMenuItem";
-            this.runZTreeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.runZTreeToolStripMenuItem.Text = "Run z-Tree";
             // 
             // View
             // 
@@ -190,7 +181,6 @@
         private System.Windows.Forms.ToolStripMenuItem clientsTableToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutPaCEToolStripMenuItem;
         private System.Windows.Forms.Panel mainPanel;
-        private System.Windows.Forms.ToolStripMenuItem runZTreeToolStripMenuItem;
     }
 }
 

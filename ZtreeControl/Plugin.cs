@@ -13,8 +13,6 @@ namespace ZtreeControl
         public Control Control;
         public View View;
         public Model Model;
-        private bool _running = true;
-        private int Threshold = 1000;
         private TaskManager _taskManager;
         private string _name;
         private MessageQueue _messageQueue;

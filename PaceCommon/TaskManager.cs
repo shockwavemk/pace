@@ -8,7 +8,7 @@ namespace PaceServer
 {
     public class TaskManager
     {
-        private const int Threshold = 1;
+        private const int Threshold = 100;
         private bool _running = true;
         private Thread _threadTasks;
         private MessageQueue _messageQueue;
