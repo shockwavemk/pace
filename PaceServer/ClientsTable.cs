@@ -23,8 +23,8 @@ namespace PaceServer
 
         private void ClientsTable_Load(object sender, EventArgs e)
         {
-            _connectionTable = (ConnectionTable)System.Activator.GetObject(typeof(ConnectionTable), "http://localhost:9090/ConnectionTable.rem");
-            _messageQueue = (MessageQueue)System.Activator.GetObject(typeof(MessageQueue), "http://localhost:9090/MessageQueue.rem");
+            _connectionTable = ConnectionTable.GetRemote();
+            _messageQueue = MessageQueue.GetRemote();
 
             CreateGroups();
             UpdateClientTable();

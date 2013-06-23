@@ -11,7 +11,7 @@ namespace ZtreeControl
     public class Control : IControl
     {
         private static Process _processZTree;
-        private static ConnectionTable connectionTable = (ConnectionTable)Activator.GetObject(typeof(ConnectionTable), "http://localhost:9090/ConnectionTable.rem");
+        private static ConnectionTable connectionTable = ConnectionTable.GetRemote();
 
         public static string[] GetGsfPaths(string path)
         {

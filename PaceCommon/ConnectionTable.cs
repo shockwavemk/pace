@@ -13,6 +13,11 @@ namespace PaceCommon
             _hashTable = new Hashtable();
         }
 
+        public static ConnectionTable GetRemote()
+        {
+            return (ConnectionTable)Activator.GetObject(typeof(ConnectionTable), "http://localhost:9090/ConnectionTable.rem");
+        }
+
         public ClientInformation Get(string name)
         {
             var clientInformation = (ClientInformation)_hashTable[name];

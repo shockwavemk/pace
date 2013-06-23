@@ -15,6 +15,11 @@ namespace PaceCommon
             _hashTable = new Hashtable();
         }
 
+        public static MessageQueue GetRemote()
+        {
+            return (MessageQueue)Activator.GetObject(typeof(MessageQueue), "http://localhost:9090/MessageQueue.rem");
+        }
+
         public Message GetMessage(string destination)
         {
             if (destination != null)

@@ -34,15 +34,14 @@ namespace PaceServer
         {
             try
             {
+                _name = "Server";
+
                 Services.PrepareSetService(9090);
                 Services.SetService(typeof(ConnectionTable));
                 Services.SetService(typeof(MessageQueue));
 
-                _name = "Server";
-
-                _connectionTable = (ConnectionTable)System.Activator.GetObject(typeof(ConnectionTable), "http://localhost:9090/ConnectionTable.rem");
-                
-                _messageQueue = (MessageQueue)System.Activator.GetObject(typeof(MessageQueue), "http://localhost:9090/MessageQueue.rem");
+                _connectionTable = ConnectionTable.GetRemote();
+                _messageQueue = MessageQueue.GetRemote();
 
                 _taskManager = new TaskManager(ref _messageQueue, ref _name);
                 _taskManager.Task += TaskManagerOnTask;
