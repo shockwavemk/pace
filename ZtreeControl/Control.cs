@@ -1,19 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using PaceCommon;
 using ZtreeControl.Properties;
-using Message = PaceCommon.Message;
 
 namespace ZtreeControl
 {
-    public class Control : PaceCommon.IControl
+    public class Control : IControl
     {
         private static Process _processZTree;
-        private static IntPtr hcalc;
+        private static ConnectionTable connectionTable = (ConnectionTable)Activator.GetObject(typeof(ConnectionTable), "http://localhost:9090/ConnectionTable.rem");
 
         public static string[] GetGsfPaths(string path)
         {
@@ -164,19 +162,12 @@ namespace ZtreeControl
 
         public string StartRemoteZLeaf()
         {
-            var rlist = new List<string> { "" };
-            var m = new Message(rlist, true, "start_zleaf", "server");
-            return ""; //DllLoader.ObjectToSoap(m);
+            return "";
         }
 
         public string StopRemoteZLeaf()
         {
-            /*
-            var rlist = new List<string> { "" };
-            var m = new Message(rlist, true, "stop_zleaf", "server");
-            return DllLoader.ObjectToSoap(m);
-             */
-            return "";
+           return "";
         }
 
         public string Test()
@@ -186,45 +177,34 @@ namespace ZtreeControl
 
         public string File()
         {
-            //var rlist = new List<string> { "" };
-            //var m = new Message(rlist, true, "file", "Server");
-            //return DllLoader.ObjectToSoap(m);
             return "File";
         }
 
         public string Edit()
         {
-            var rlist = new List<string> { "" };
-            var m = new Message(rlist, true, "edit", "Server");
-            return ""; // DllLoader.ObjectToSoap(m);
+            return "";
         }
 
         public string View()
         {
-            var rlist = new List<string> { "" };
-            var m = new Message(rlist, true, "view", "Server");
-            return ""; // DllLoader.ObjectToSoap(m);
+            return ""; 
         }
 
         public string Run()
         {
-            var rlist = new List<string> { "" };
-            var m = new Message(rlist, true, "run", "Server");
-            return ""; // DllLoader.ObjectToSoap(m);
+            return "";
         }
 
         public string Help()
         {
-            var rlist = new List<string> { "" };
-            var m = new Message(rlist, true, "help", "Server");
-            return ""; // DllLoader.ObjectToSoap(m);
+            return "";
         }
+
+        // Actions performed by GUI
 
         public static void StartZLeafToolStripMenuItemOnClick(object sender, EventArgs e)
         {
-            var connectionTable = (ConnectionTable)System.Activator.GetObject(typeof(ConnectionTable), "http://localhost:9090/ConnectionTable.rem");
-            var sc = connectionTable.GetSelected();
-            foreach (ConnectionTable.ClientInformation clientInformation in sc)
+            foreach (ConnectionTable.ClientInformation clientInformation in connectionTable.GetSelected())
             {
                 TraceOps.Out(clientInformation.GetName());
             }
