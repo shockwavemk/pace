@@ -12,7 +12,6 @@ namespace PaceServer
         private MessageQueue _messageQueue;
         private ListViewGroup _local, _remote, _server, _group;
         private IPlugin[] _plugins;
-        public ListView.SelectedListViewItemCollection SelectedListViewItemCollection;
 
         public ClientsTable(IPlugin[] plugins)
         {
@@ -32,10 +31,12 @@ namespace PaceServer
 
         private void clientListView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            foreach (ListViewItem si in clientListView.SelectedItems)
+            var strings = new string[clientListView.SelectedItems.Count];
+            for (int index = 0; index < clientListView.SelectedItems.Count; index++)
             {
-                _connectionTable.SetSelected(si.Text);
+                strings[index] = clientListView.SelectedItems[index].Text;
             }
+            _connectionTable.SetSelection(strings);
         }
 
         private void CreateGroups()

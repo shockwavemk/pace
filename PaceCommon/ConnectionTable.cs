@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Concurrent;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace PaceCommon
 {
     [Serializable]
     public class ConnectionTable : MarshalByRefObject
     {
-        private Hashtable _hashTable;
+        private ConcurrentDictionary<string, ClientInformation> _concurrentDictionary;
 
         public ConnectionTable()
         {
-            _hashTable = new Hashtable();
+            _concurrentDictionary = new ConcurrentDictionary<string,ClientInformation>();
         }
 
         public static ConnectionTable GetRemote()
@@ -20,41 +23,23 @@ namespace PaceCommon
 
         public ClientInformation Get(string name)
         {
-            var clientInformation = (ClientInformation)_hashTable[name];
-            if (clientInformation == null)
-            {
-                clientInformation = new ClientInformation(name);
-                //ConnectionRegistration.Invoke(clientInformation);
-                _hashTable.Add(name, clientInformation);
-            }
-            return clientInformation;
+            return _concurrentDictionary.GetOrAdd(name, new ClientInformation(name));
         }
 
         public Array GetSelected()
         {
-            var al = new ArrayList(_hashTable.Values);
-            var alnew = new ArrayList();
-            foreach (ClientInformation ci in al)
-            {
-                if (ci.GetSelected())
-                {
-                    alnew.Add(ci);
-                }
-            }
-            
-            var alta = alnew.ToArray();
-            return alta;
+            return _concurrentDictionary.Where(pair => pair.Value.GetSelected()).Select(pair => pair.Value).ToArray();
         }
 
 
         public void Set(string name, ClientInformation clientInformation)
         {
-            _hashTable.Add(name, clientInformation);
+            _concurrentDictionary.AddOrUpdate(name, clientInformation, (s, information) => clientInformation);
         }
 
         public Array GetAll()
         {
-            return new ArrayList(_hashTable.Values).ToArray();
+            return _concurrentDictionary.Values.ToArray();
         }
 
         [Serializable]
@@ -97,10 +82,17 @@ namespace PaceCommon
             }
         }
 
-        public void SetSelected(string text)
+        public void SetSelection(string[] strings)
         {
-            var citemp = Get(text);
-            citemp.SetSelected(true);
+            foreach (ClientInformation clientInformation in _concurrentDictionary.Values)
+            {
+                clientInformation.SetSelected(false);
+            }
+            
+            foreach (var s in strings)
+            {
+                _concurrentDictionary[s].SetSelected(true);
+            }
         }
     }
 }
