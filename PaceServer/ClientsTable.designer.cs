@@ -30,47 +30,77 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Local clients", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
-            "Client 1",
-            "SubClient 1"}, 0);
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Client 1, test", 0);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClientsTable));
             this.clientListView = new System.Windows.Forms.ListView();
+            this.CName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.CCpu = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.CQueue = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.CApplications = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clientListImageList = new System.Windows.Forms.ImageList(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.SuspendLayout();
             // 
             // clientListView
             // 
-            this.clientListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.clientListView.CheckBoxes = true;
+            this.clientListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.CName,
+            this.CCpu,
+            this.CQueue,
+            this.CApplications});
+            this.clientListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.clientListView.FullRowSelect = true;
+            this.clientListView.GridLines = true;
             listViewGroup1.Header = "Local clients";
             listViewGroup1.Name = "standardListViewGroup";
             this.clientListView.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
             listViewGroup1});
             listViewItem1.Group = listViewGroup1;
+            listViewItem1.StateImageIndex = 0;
+            listViewItem1.Tag = "test";
+            listViewItem1.ToolTipText = "ToolTipText";
             this.clientListView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1});
             this.clientListView.LargeImageList = this.clientListImageList;
-            this.clientListView.Location = new System.Drawing.Point(0, 27);
+            this.clientListView.Location = new System.Drawing.Point(0, 24);
             this.clientListView.Name = "clientListView";
-            this.clientListView.Size = new System.Drawing.Size(312, 377);
-            this.clientListView.SmallImageList = this.clientListImageList;
+            this.clientListView.Size = new System.Drawing.Size(384, 537);
+            this.clientListView.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.clientListView.TabIndex = 0;
             this.clientListView.UseCompatibleStateImageBehavior = false;
+            this.clientListView.View = System.Windows.Forms.View.Details;
             this.clientListView.SelectedIndexChanged += new System.EventHandler(this.clientListView_SelectedIndexChanged);
+            // 
+            // CName
+            // 
+            this.CName.Text = "Name";
+            this.CName.Width = 84;
+            // 
+            // CCpu
+            // 
+            this.CCpu.Text = "Cpu";
+            // 
+            // CQueue
+            // 
+            this.CQueue.Text = "Queue";
+            // 
+            // CApplications
+            // 
+            this.CApplications.Text = "Applications";
+            this.CApplications.Width = 25;
             // 
             // clientListImageList
             // 
-            this.clientListImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("clientListImageList.ImageStream")));
+            this.clientListImageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.clientListImageList.ImageSize = new System.Drawing.Size(64, 64);
             this.clientListImageList.TransparentColor = System.Drawing.Color.Transparent;
-            this.clientListImageList.Images.SetKeyName(0, "iconmonstr-computer-4-icon.png");
             // 
             // menuStrip1
             // 
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(312, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(384, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -80,15 +110,21 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(312, 404);
+            this.ClientSize = new System.Drawing.Size(384, 561);
             this.Controls.Add(this.clientListView);
             this.Controls.Add(this.menuStrip1);
+            this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximumSize = new System.Drawing.Size(1600, 1200);
+            this.MinimumSize = new System.Drawing.Size(300, 500);
             this.Name = "ClientsTable";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Client\'s Table";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.ClientsTable_Load);
+            this.Resize += new System.EventHandler(this.OnResize);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -99,6 +135,10 @@
         private System.Windows.Forms.ListView clientListView;
         private System.Windows.Forms.ImageList clientListImageList;
         private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ColumnHeader CName;
+        private System.Windows.Forms.ColumnHeader CCpu;
+        private System.Windows.Forms.ColumnHeader CQueue;
+        private System.Windows.Forms.ColumnHeader CApplications;
 
 
     }

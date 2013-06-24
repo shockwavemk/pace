@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Windows.Forms;
 using PaceCommon;
 using Message = PaceCommon.Message;
@@ -12,6 +13,9 @@ namespace PaceServer
         private MessageQueue _messageQueue;
         private ListViewGroup _local, _remote, _server, _group;
         private IPlugin[] _plugins;
+        private bool _running;
+        delegate void UpdateClientTableCallback();
+
 
         public ClientsTable(IPlugin[] plugins)
         {
@@ -20,23 +24,52 @@ namespace PaceServer
             LoadPlugIns();
         }
 
+        private void OnResize(object sender, EventArgs eventArgs)
+        {
+            clientListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            clientListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+        }
+
         private void ClientsTable_Load(object sender, EventArgs e)
         {
+            _running = true;
             _connectionTable = ConnectionTable.GetRemote();
             _messageQueue = MessageQueue.GetRemote();
-
+            clientListView.ItemChecked += clientListView_CheckedIndexChanged;
+            
             CreateGroups();
-            UpdateClientTable();
+
+            Thread thread = new Thread(new ThreadStart(() =>
+            {
+                while (_running)
+                {
+                    UpdateClientTable();
+                    Thread.Sleep(2000);
+                }
+            }));
+            thread.Start();
         }
 
         private void clientListView_SelectedIndexChanged(object sender, EventArgs e)
         {
             var strings = new string[clientListView.SelectedItems.Count];
-            for (int index = 0; index < clientListView.SelectedItems.Count; index++)
+
+            for (var index = 0; index < clientListView.SelectedItems.Count; index++)
             {
                 strings[index] = clientListView.SelectedItems[index].Text;
             }
             _connectionTable.SetSelection(strings);
+        }
+
+        private void clientListView_CheckedIndexChanged(object sender, EventArgs e)
+        {
+            var strings = new string[clientListView.CheckedItems.Count];
+
+            for (var index = 0; index < clientListView.CheckedItems.Count; index++)
+            {
+                strings[index] = clientListView.CheckedItems[index].Text;
+            }
+            _connectionTable.SetChecked(strings);
         }
 
         private void CreateGroups()
@@ -50,27 +83,56 @@ namespace PaceServer
 
         private void UpdateClientTable()
         {
-            var ctall = _connectionTable.GetAll();
-            clientListView.Items.Clear();
-            
-            foreach (ConnectionTable.ClientInformation ct in ctall)
+            if (clientListView.InvokeRequired)
             {
-                ListViewItem listViewItem;
-                switch (ct.GetGroup())
-                {
-                    case "server":
-                        listViewItem = new ListViewItem(ct.GetName(), 0) {Group = _server};
-                        break;
-                    case "remote":
-                        listViewItem = new ListViewItem(ct.GetName(), 0) { Group = _remote };
-                        break;
-                    default:
-                        listViewItem = new ListViewItem(ct.GetName(), 0) { Group = _local };
-                        break;
-                }
-                clientListView.Items.Add(listViewItem);
+                var d = new UpdateClientTableCallback(UpdateClientTable);
+                this.Invoke(d, new object[] {});
             }
-            clientListView.Update();
+            else
+            {
+                clientListView.BeginUpdate();
+                var ctall = _connectionTable.GetAll();
+
+                clientListView.Items.Clear();
+
+                foreach (ConnectionTable.ClientInformation ct in ctall)
+                {
+                    ListViewItem listViewItem;
+                    switch (ct.GetGroup())
+                    {
+                        case "server":
+                            listViewItem =
+                                new ListViewItem(
+                                    new string[]
+                                        {
+                                            ct.GetName(), ct.GetPerformance(), ct.GetMessagesInQueue().ToString(),
+                                            ct.GetApplicationNames()
+                                        }, 0) { Group = _server, Checked = ct.GetChecked(), Selected = ct.GetSelected() };
+                            break;
+                        case "remote":
+                            listViewItem =
+                                new ListViewItem(
+                                    new string[]
+                                        {
+                                            ct.GetName(), ct.GetPerformance(), ct.GetMessagesInQueue().ToString(),
+                                            ct.GetApplicationNames()
+                                        }, 0) { Group = _remote, Checked = ct.GetChecked(), Selected = ct.GetSelected() };
+                            break;
+                        default:
+                            listViewItem =
+                                new ListViewItem(
+                                    new string[]
+                                        {
+                                            ct.GetName(), ct.GetPerformance(), ct.GetMessagesInQueue().ToString(),
+                                            ct.GetApplicationNames()
+                                        }, 0) { Group = _local, Checked = ct.GetChecked(), Selected = ct.GetSelected()};
+                            break;
+                    }
+                    
+                    clientListView.Items.Add(listViewItem);
+                }
+                clientListView.EndUpdate();
+            }
         }
 
         private void LoadPlugIns()

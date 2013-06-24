@@ -89,7 +89,7 @@
             // clientsTableToolStripMenuItem
             // 
             this.clientsTableToolStripMenuItem.Name = "clientsTableToolStripMenuItem";
-            this.clientsTableToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.clientsTableToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.clientsTableToolStripMenuItem.Text = "Clients\' Table";
             this.clientsTableToolStripMenuItem.Click += new System.EventHandler(this.clientsTableToolStripMenuItem_Click);
             // 
@@ -104,7 +104,7 @@
             // aboutPaCEToolStripMenuItem
             // 
             this.aboutPaCEToolStripMenuItem.Name = "aboutPaCEToolStripMenuItem";
-            this.aboutPaCEToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutPaCEToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.aboutPaCEToolStripMenuItem.Text = "About PaCE";
             // 
             // statusStrip1
@@ -132,14 +132,12 @@
             // 
             // mainPanel
             // 
-            this.mainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.mainPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.mainPanel.Location = new System.Drawing.Point(0, 27);
+            this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainPanel.Location = new System.Drawing.Point(0, 24);
             this.mainPanel.MinimumSize = new System.Drawing.Size(300, 400);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(350, 430);
+            this.mainPanel.Size = new System.Drawing.Size(350, 436);
             this.mainPanel.TabIndex = 4;
             this.mainPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.mainPanel_Paint);
             // 
@@ -151,11 +149,13 @@
             this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
+            this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.IsMdiContainer = true;
             this.Location = new System.Drawing.Point(501, 0);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainServerForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PaCE Server Application";
             this.Load += new System.EventHandler(this.MainServerForm_Load);
             this.menuStrip1.ResumeLayout(false);

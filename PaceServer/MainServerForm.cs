@@ -20,6 +20,7 @@ namespace PaceServer
         private IPlugin[] _plugins;
         private MainServerForm _msf;
         private ClientsTable _clientsTableForm;
+        public delegate void FormResizeEventHandler();
 
         public MainServerForm(IPlugin[] plugins)
         {
@@ -28,6 +29,15 @@ namespace PaceServer
             InitializeComponent();
             LoadPlugIns();
             this.FormClosing += new FormClosingEventHandler(MainServerForm_FormClosing);
+            this.Resize += new EventHandler(OnResize);
+        }
+
+        private void OnResize(object sender, EventArgs e)
+        {
+            if (_clientsTableForm.WindowState == FormWindowState.Maximized)
+            {
+                
+            }
         }
 
         private void MainServerForm_Load(object sender, EventArgs e)
@@ -98,13 +108,8 @@ namespace PaceServer
 
         private void LoadClientsTable()
         {
-            _clientsTableForm = new ClientsTable(_plugins)
-                {
-                    TopLevel = false,
-                    FormBorderStyle = FormBorderStyle.Sizable,
-                    AutoSize = true,
-                    AutoSizeMode = AutoSizeMode.GrowAndShrink
-                };
+            _clientsTableForm = new ClientsTable(_plugins) { TopLevel = false };
+               
             mainPanel.Controls.Add(_clientsTableForm);
             _clientsTableForm.Visible = true;
         }
@@ -188,4 +193,6 @@ namespace PaceServer
 
         }
     }
+
+    
 }

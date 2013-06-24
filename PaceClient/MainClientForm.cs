@@ -15,11 +15,9 @@ namespace PaceClient
         private ContextMenu tray_menu;
         private ConnectionTable _connectionTable;
         private MessageQueue _messageQueue;
-        private NetworkClient _networkClient;
-        private bool _running = true;
         private string _name;
-        private Thread _threadWorker;
         private TaskManager _taskManager;
+        private NetworkClient _networkClient;
 
         public MainClientForm()
         {
@@ -36,8 +34,8 @@ namespace PaceClient
             Services.PrepareGetService();
             Services.GetService("localhost", 9090, typeof(ConnectionTable));
             Services.GetService("localhost", 9090, typeof(MessageQueue));
-            _connectionTable = (ConnectionTable)System.Activator.GetObject(typeof(ConnectionTable), "http://localhost:9090/ConnectionTable.rem");
-            _messageQueue = (MessageQueue)System.Activator.GetObject(typeof(MessageQueue), "http://localhost:9090/MessageQueue.rem");
+            _connectionTable = ConnectionTable.GetRemote();
+            _messageQueue = MessageQueue.GetRemote();
             _name = HashOps.GetFqdn();
 
             Resize += new EventHandler(MainClientForm_Resize);
@@ -48,6 +46,7 @@ namespace PaceClient
             try
             {
                 _networkClient = new NetworkClient(ref _messageQueue, ref _connectionTable, _name);
+
                 _taskManager = new TaskManager(ref _messageQueue, ref _name);
                 _taskManager.Task += TaskManagerOnTask;
             }

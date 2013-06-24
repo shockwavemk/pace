@@ -31,6 +31,11 @@ namespace PaceCommon
             return _concurrentDictionary.Where(pair => pair.Value.GetSelected()).Select(pair => pair.Value).ToArray();
         }
 
+        public Array GetChecked()
+        {
+            return _concurrentDictionary.Where(pair => pair.Value.GetChecked()).Select(pair => pair.Value).ToArray();
+        }
+
 
         public void Set(string name, ClientInformation clientInformation)
         {
@@ -48,12 +53,19 @@ namespace PaceCommon
             private string _name;
             private string _group;
             private bool _selected;
+            private int _messages_in_queue;
+            private float _cpu;
+            private string _applications;
+            private bool _checked;
 
             public ClientInformation(string name)
             {
                 _name = name;
                 _group = "Clients";
                 _selected = false;
+                _checked = false;
+                _messages_in_queue = 0;
+                _cpu = 0;
             }
 
             public string GetName()
@@ -80,6 +92,46 @@ namespace PaceCommon
             {
                 return _selected;
             }
+
+            public void SetChecked(bool check)
+            {
+                _checked = check;
+            }
+
+            public bool GetChecked()
+            {
+                return _checked;
+            }
+
+            public int GetMessagesInQueue()
+            {
+                return _messages_in_queue;
+            }
+
+            public void SetMessagesInQueue(int n)
+            {
+                _messages_in_queue = n;
+            }
+
+            public string GetPerformance()
+            {
+                return Math.Round(_cpu, 0) + " %";
+            }
+
+            public void SetPerformance(float cpu)
+            {
+                _cpu = cpu;
+            }
+
+            public string GetApplicationNames()
+            {
+                return _applications;
+            }
+
+            public void SetApplicationNames(string applications)
+            {
+                _applications = applications;
+            }
         }
 
         public void SetSelection(string[] strings)
@@ -92,6 +144,19 @@ namespace PaceCommon
             foreach (var s in strings)
             {
                 _concurrentDictionary[s].SetSelected(true);
+            }
+        }
+
+        public void SetChecked(string[] strings)
+        {
+            foreach (ClientInformation clientInformation in _concurrentDictionary.Values)
+            {
+                clientInformation.SetChecked(false);
+            }
+
+            foreach (var s in strings)
+            {
+                _concurrentDictionary[s].SetChecked(true);
             }
         }
     }

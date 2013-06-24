@@ -204,7 +204,7 @@ namespace ZtreeControl
 
         public static void StartZLeafToolStripMenuItemOnClick(object sender, EventArgs e)
         {
-            foreach (ConnectionTable.ClientInformation clientInformation in connectionTable.GetSelected())
+            foreach (ConnectionTable.ClientInformation clientInformation in connectionTable.GetChecked())
             {
                 TraceOps.Out(clientInformation.GetName());
             }
