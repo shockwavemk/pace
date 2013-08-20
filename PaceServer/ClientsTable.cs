@@ -14,6 +14,8 @@ namespace PaceServer
         private ListViewGroup _local, _remote, _server, _group;
         private IPlugin[] _plugins;
         private bool _running;
+        private NewConnection _newConnectionForm;
+
         delegate void UpdateClientTableCallback();
 
 
@@ -151,7 +153,9 @@ namespace PaceServer
 
         private void newConnectionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            _newConnectionForm = new NewConnection() { TopLevel = true };
+            _newConnectionForm.ShowDialog();
+            
         }
     }
 }
