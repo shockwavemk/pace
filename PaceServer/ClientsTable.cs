@@ -148,5 +148,10 @@ namespace PaceServer
                 }
             }
         }
+
+        private void newConnectionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

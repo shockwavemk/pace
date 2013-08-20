@@ -57,6 +57,7 @@ namespace PaceCommon
             private float _cpu;
             private string _applications;
             private bool _checked;
+            private string _ip;
 
             public ClientInformation(string name)
             {
@@ -66,6 +67,7 @@ namespace PaceCommon
                 _checked = false;
                 _messages_in_queue = 0;
                 _cpu = 0;
+                _ip = "unknown";
             }
 
             public string GetName()
@@ -81,6 +83,16 @@ namespace PaceCommon
             public string GetGroup()
             {
                 return _group;
+            }
+
+            public void SetIp(string ip)
+            {
+                _ip = ip;
+            }
+
+            public string GetIp()
+            {
+                return _ip;
             }
 
             public void SetSelected(bool selected)

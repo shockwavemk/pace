@@ -14,6 +14,7 @@ namespace PaceClient
         private const int Threshold = 1;
         private ContextMenu tray_menu;
         private ConnectionTable _connectionTable;
+        private ConnectionConfig _connectionConfig;
         private MessageQueue _messageQueue;
         private string _name;
         private TaskManager _taskManager;
@@ -30,6 +31,13 @@ namespace PaceClient
         }
 
         private void MainClientForm_Load(object sender, EventArgs e)
+        {
+            _connectionConfig = ConnectionConfig.GetRemote();
+            
+            //ConnectToServer();
+        }
+
+        private void ConnectToServer()
         {
             Services.PrepareGetService();
             Services.GetService("localhost", 9090, typeof(ConnectionTable));

@@ -9,17 +9,6 @@ c:\users\martin kramer\documents\visual studio 2012\Projects\Pace3\PaceClient\ob
 c:\users\martin kramer\documents\visual studio 2012\Projects\Pace3\PaceClient\obj\Debug\PaceClient.MainClientForm.resources
 c:\users\martin kramer\documents\visual studio 2012\Projects\Pace3\PaceClient\bin\Debug\PaceServer.exe
 c:\users\martin kramer\documents\visual studio 2012\Projects\Pace3\PaceClient\bin\Debug\PaceServer.pdb
-C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClient\bin\Debug\PaceClient.exe.config
-C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClient\obj\Debug\PaceClient.exe
-C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClient\obj\Debug\PaceClient.pdb
-C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClient\bin\Debug\PaceClient.exe
-C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClient\bin\Debug\PaceClient.pdb
-C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClient\obj\Debug\PaceClient.csprojResolveAssemblyReference.cache
-C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClient\obj\Debug\PaceClient.MainClientForm.resources
-C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClient\obj\Debug\PaceClient.Properties.Resources.resources
-C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClient\obj\Debug\PaceClient.csproj.GenerateResource.Cache
-C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClient\bin\Debug\PaceCommon.dll
-C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClient\bin\Debug\PaceCommon.pdb
 M:\Documents\Visual Studio 2012\Projects\Pace\PaceClient\obj\Debug\PaceClient.pdb
 M:\Documents\Visual Studio 2012\Projects\Pace\PaceClient\obj\Debug\PaceClient.csprojResolveAssemblyReference.cache
 M:\Documents\Visual Studio 2012\Projects\Pace\PaceClient\obj\Debug\PaceClient.MainClientForm.resources
@@ -31,3 +20,4 @@ M:\Documents\Visual Studio 2012\Projects\Pace\PaceClient\bin\Debug\PaceClient.pd
 M:\Documents\Visual Studio 2012\Projects\Pace\PaceClient\bin\Debug\PaceCommon.dll
 M:\Documents\Visual Studio 2012\Projects\Pace\PaceClient\bin\Debug\PaceCommon.pdb
 M:\Documents\Visual Studio 2012\Projects\Pace\PaceClient\obj\Debug\PaceClient.exe
+C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClient\bin\Debug\PaceClient.exe.config
