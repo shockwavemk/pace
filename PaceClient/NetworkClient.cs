@@ -28,7 +28,14 @@ namespace PaceClient
 
         private void Register()
         {
-            _connectionTable.Get(_name);
+            var ci = _connectionTable.Get(_name);
+
+            //TODO Demo
+            ci.SetApplicationNames("Demo Application 1, Demo Application 2");
+            ci.SetIp("localhost");
+            ci.SetPort(9091);
+
+            _connectionTable.Set(_name, ci);
         }
 
         private void MessageWorker()

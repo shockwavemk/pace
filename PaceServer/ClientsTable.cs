@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
@@ -200,7 +201,7 @@ namespace PaceServer
             var openFileDialog = new OpenFileDialog
                 {
                     RestoreDirectory = true,
-                    Filter = "All Connection Xml files (*.XML)|*.XML"
+                    Filter = "All Connection Xml files (*.PXML)|*.PXML"
                 };
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
@@ -230,32 +231,29 @@ namespace PaceServer
 
         private void LoadConnections(Connections connections)
         {
-            //this.EmailsListBox.Items.Clear();
-
-            // Add EmailAddresses collection to the ListBox on the Form...
-            /*
-            foreach (ClientInformation clientInformation in connections.ClientInformations)
+            foreach (Connection connection in connections.ConnectionList)
             {
-                // Convert the enumerated object into its string representation.
-                string Destination = Enum.GetName(typeof(EmailDestination), emailAddress.Destination);
-
-                this.EmailsListBox.Items.Add(emailAddress.Address + " - " + Destination);
+                if (connection.name != "Server" && connection.ip != "unknown" && connection.port != 0)
+                {
+                    SetUpClientConnectionConfig(connection.ip, connection.port);
+                }
             }
-            */
         }
+
+        
 
         private void saveConnectionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (this.ConnectionsIsValid())
             {
-                Connections connections = this.CreateConnections();
+                var connections = new Connections {ConnectionList = CreateConnections()};
 
                 try
                 {
                     var openFileDialog = new SaveFileDialog
                     {
                         RestoreDirectory = true,
-                        Filter = "All Connection Xml files (*.XML)|*.XML"
+                        Filter = "All Connection Xml files (*.PXML)|*.PXML"
                     };
 
                     if (openFileDialog.ShowDialog() == DialogResult.OK)
@@ -272,16 +270,27 @@ namespace PaceServer
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Unable to save customer object!" + Environment.NewLine + Environment.NewLine + ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Unable to save connection object!" + Environment.NewLine + Environment.NewLine + ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
 
-        private Connections CreateConnections()
+        private ArrayList CreateConnections()
         {
-            return new Connections(); //TODO
-        }
+            var ctall = _connectionTable.GetAll();
+            var connections = new ArrayList();
 
+            foreach (ConnectionTable.ClientInformation ct in ctall)
+            {
+                if (ct.GetName() != "Server")
+                {
+                    var connection = new Connection {ip = ct.GetIp(), name = ct.GetName(), port = ct.GetPort()};
+                    connections.Add(connection);
+                }
+            }
+            return connections;
+        }
+        
         private bool ConnectionsIsValid()
         {
             return true; //TODO

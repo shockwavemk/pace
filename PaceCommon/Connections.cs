@@ -13,7 +13,7 @@ namespace PaceCommon
 		[XmlAttributeAttribute(DataType="date")]
 		public System.DateTime DateTimeValue;
 
-		[XmlArray ("ClientInformations"), XmlArrayItem("ClientInformation", typeof(ConnectionTable.ClientInformation))]
-        public System.Collections.ArrayList ClientInformations = new System.Collections.ArrayList();
+		[XmlArray ("ConnectionList"), XmlArrayItem("Connection", typeof(Connection))]
+        public System.Collections.ArrayList ConnectionList = new System.Collections.ArrayList();
 	}
 }

@@ -58,6 +58,7 @@ namespace PaceCommon
             private string _applications;
             private bool _checked;
             private string _ip;
+            private int _port;
 
             public ClientInformation(string name)
             {
@@ -67,6 +68,7 @@ namespace PaceCommon
                 _checked = false;
                 _messages_in_queue = 0;
                 _cpu = 0;
+                _port = 0;
                 _ip = "unknown";
             }
 
@@ -93,6 +95,16 @@ namespace PaceCommon
             public string GetIp()
             {
                 return _ip;
+            }
+
+            public void SetPort(int port)
+            {
+                _port = port;
+            }
+
+            public int GetPort()
+            {
+                return _port;
             }
 
             public void SetSelected(bool selected)

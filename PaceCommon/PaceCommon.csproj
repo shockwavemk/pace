@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connection.cs" />
     <Compile Include="Connections.cs" />
     <Compile Include="ConnectionConfig.cs" />
     <Compile Include="ConnectionTable.cs" />
