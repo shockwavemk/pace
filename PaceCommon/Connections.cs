@@ -14,6 +14,6 @@ namespace PaceCommon
 		public System.DateTime DateTimeValue;
 
 		[XmlArray ("ClientInformations"), XmlArrayItem("ClientInformation", typeof(ConnectionTable.ClientInformation))]
-		public System.Collections.ArrayList EmailAddresses = new System.Collections.ArrayList();
+        public System.Collections.ArrayList ClientInformations = new System.Collections.ArrayList();
 	}
 }

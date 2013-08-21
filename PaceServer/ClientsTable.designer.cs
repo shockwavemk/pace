@@ -133,6 +133,7 @@
             this.saveConnectionsToolStripMenuItem.Name = "saveConnectionsToolStripMenuItem";
             this.saveConnectionsToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.saveConnectionsToolStripMenuItem.Text = "Save Connections";
+            this.saveConnectionsToolStripMenuItem.Click += new System.EventHandler(this.saveConnectionsToolStripMenuItem_Click);
             // 
             // loadConnectionsToolStripMenuItem
             // 

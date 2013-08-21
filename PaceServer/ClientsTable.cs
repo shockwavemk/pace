@@ -234,7 +234,7 @@ namespace PaceServer
 
             // Add EmailAddresses collection to the ListBox on the Form...
             /*
-            foreach (EmailAddress emailAddress in customer.EmailAddresses)
+            foreach (ClientInformation clientInformation in connections.ClientInformations)
             {
                 // Convert the enumerated object into its string representation.
                 string Destination = Enum.GetName(typeof(EmailDestination), emailAddress.Destination);
@@ -242,6 +242,49 @@ namespace PaceServer
                 this.EmailsListBox.Items.Add(emailAddress.Address + " - " + Destination);
             }
             */
+        }
+
+        private void saveConnectionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.ConnectionsIsValid())
+            {
+                Connections connections = this.CreateConnections();
+
+                try
+                {
+                    var openFileDialog = new SaveFileDialog
+                    {
+                        RestoreDirectory = true,
+                        Filter = "All Connection Xml files (*.XML)|*.XML"
+                    };
+
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        var fileName = openFileDialog.FileName;
+
+                        ObjectToXml<Connections>.Save(connections, fileName);
+                        MessageBox.Show("Customer saved to XML file '" + fileName + "'!", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("File can not be saved. Please try again.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Unable to save customer object!" + Environment.NewLine + Environment.NewLine + ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private Connections CreateConnections()
+        {
+            return new Connections(); //TODO
+        }
+
+        private bool ConnectionsIsValid()
+        {
+            return true; //TODO
         }
     }
 }
