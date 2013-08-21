@@ -151,11 +151,41 @@ namespace PaceServer
             }
         }
 
+        private void SetUpClientConnectionConfig(string uri, int port)
+        {
+            Services.GetService(uri, port, typeof(ConnectionConfig));
+            var url = "http://" + uri + ":" + port + "/ConnectionConfig.rem";
+            ConnectionConfig externalConfig = (ConnectionConfig)Activator.GetObject(typeof(ConnectionConfig), url);
+
+            //TODO
+            externalConfig.SetServerPort(9090);
+            externalConfig.SetServerUri("localhost");
+        }
+
+
         private void newConnectionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _newConnectionForm = new NewConnection() { TopLevel = true };
-            _newConnectionForm.ShowDialog();
-            
+            if (_newConnectionForm.ShowDialog() == DialogResult.OK)
+            {
+                var portval = 0;
+                try
+                {
+                     portval = Convert.ToInt32(_newConnectionForm.textBoxPort.Text);
+                }
+                catch (FormatException formatException)
+                {
+                    TraceOps.Out("Input string is not a sequence of digits.");
+                }
+                catch (OverflowException overflowException)
+                {
+                    TraceOps.Out("The number cannot fit in an Int32.");
+                }
+                finally
+                {
+                    SetUpClientConnectionConfig(_newConnectionForm.textBoxUri.Text, portval);
+                }
+            }
         }
     }
 }

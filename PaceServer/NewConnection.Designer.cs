@@ -46,7 +46,7 @@
             // 
             // buttonConnect
             // 
-            this.buttonConnect.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.buttonConnect.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonConnect.Location = new System.Drawing.Point(12, 83);
             this.buttonConnect.Name = "buttonConnect";
             this.buttonConnect.Size = new System.Drawing.Size(116, 24);
@@ -120,11 +120,11 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBoxUri;
         private System.Windows.Forms.Button buttonConnect;
         private System.Windows.Forms.Label labelUri;
         private System.Windows.Forms.Button buttonAbort;
         private System.Windows.Forms.Label labelPort;
-        private System.Windows.Forms.TextBox textBoxPort;
+        public System.Windows.Forms.TextBox textBoxUri;
+        public System.Windows.Forms.TextBox textBoxPort;
     }
 }

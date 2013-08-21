@@ -32,25 +32,31 @@ namespace PaceClient
 
         private void MainClientForm_Load(object sender, EventArgs e)
         {
-            _connectionConfig = ConnectionConfig.GetRemote();
-            
-            //ConnectToServer();
-        }
-
-        private void ConnectToServer()
-        {
-            Services.PrepareGetService();
-            Services.GetService("localhost", 9090, typeof(ConnectionTable));
-            Services.GetService("localhost", 9090, typeof(MessageQueue));
-            _connectionTable = ConnectionTable.GetRemote();
-            _messageQueue = MessageQueue.GetRemote();
-            _name = HashOps.GetFqdn();
-
             Resize += new EventHandler(MainClientForm_Resize);
             notifyIcon.DoubleClick += new EventHandler(notifyIcon_DoubleClick);
             notifyIcon.ContextMenu = tray_menu;
             notifyIcon.MouseClick += new MouseEventHandler(notifyIcon_MouseUp);
+            
+            Services.PrepareGetService();
+            _connectionConfig = ConnectionConfig.GetRemote();
+            //MessageBox.Show(_connectionConfig.GetTest());
+            _connectionConfig.Changed += ConnectionConfigOnChanged;
+        }
 
+        private void ConnectionConfigOnChanged(object sender, EventArgs eventArgs)
+        {
+            ConnectToServer(_connectionConfig.GetRemoteConfig());
+        }
+
+        private void ConnectToServer(RemoteConfiguration getRemoteConfig)
+        {
+            
+            Services.GetService(getRemoteConfig.GetUri(), getRemoteConfig.GetPort(), typeof(ConnectionTable));
+            Services.GetService(getRemoteConfig.GetUri(), getRemoteConfig.GetPort(), typeof(MessageQueue));
+            _connectionTable = ConnectionTable.GetRemote();
+            _messageQueue = MessageQueue.GetRemote();
+            _name = HashOps.GetFqdn();
+            
             try
             {
                 _networkClient = new NetworkClient(ref _messageQueue, ref _connectionTable, _name);

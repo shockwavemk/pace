@@ -12,23 +12,56 @@ namespace PaceCommon
     {
         private static RemoteConfiguration _remoteConfigurationPublished;
         private static RemoteConfiguration _remoteConfigurationUsedForServerConnectionLater;
+        public delegate void ChangedEventHandler(object sender, EventArgs e);
+
+        public event ChangedEventHandler Changed;
+
+        protected virtual void OnChanged(EventArgs e)
+        {
+            if (Changed != null)
+                Changed(this, e);
+        }
 
         public ConnectionConfig()
         {
-
+            _remoteConfigurationUsedForServerConnectionLater = new RemoteConfiguration();
         }
 
         public static ConnectionConfig GetRemote()
         {
             _remoteConfigurationPublished = new RemoteConfiguration();
-            SetPublicService();
+
+            Services.PrepareSetService(_remoteConfigurationPublished.GetPort());
+            Services.SetService(typeof(ConnectionConfig));
+            
             return (ConnectionConfig)Activator.GetObject(typeof(ConnectionConfig), _remoteConfigurationPublished.GetServiceUrl());
         }
 
-        public static void SetPublicService()
+        public void SetServer(string uri, int port)
         {
-            Services.PrepareSetService(_remoteConfigurationPublished.GetPort());
-            Services.SetService(typeof(ConnectionConfig));
+            _remoteConfigurationUsedForServerConnectionLater.SetUri(uri);
+            _remoteConfigurationUsedForServerConnectionLater.SetPort(port);
+            OnChanged(EventArgs.Empty);
+        }
+
+        public void SetServerUri(string s)
+        {
+            _remoteConfigurationUsedForServerConnectionLater.SetUri(s);
+        }
+
+        public void SetServerPort(int p)
+        {
+            _remoteConfigurationUsedForServerConnectionLater.SetPort(p);
+        }
+
+        public RemoteConfiguration GetRemoteConfig()
+        {
+            return _remoteConfigurationUsedForServerConnectionLater;
+        }
+
+        public string GetTest()
+        {
+            return "Hallo!";
         }
     }
 
