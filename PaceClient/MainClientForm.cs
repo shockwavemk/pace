@@ -21,6 +21,9 @@ namespace PaceClient
         private string _name;
         private TaskManager _taskManager;
         private NetworkClient _networkClient;
+        private string _logstring;
+
+        delegate void UpdateLogFileCallback();
 
         public MainClientForm()
         {
@@ -86,6 +89,8 @@ namespace PaceClient
                     break;
                 default:
                     TraceOps.Out(message.GetCommand());
+                    _logstring += message.GetCommand();
+                    UpdateLogFile();
                     break;
             }
         }
@@ -132,6 +137,24 @@ namespace PaceClient
         private void MainClientForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Environment.Exit(0);
+        }
+
+        private void UpdateLogFile()
+        {
+            if (LogFile.InvokeRequired)
+            {
+                var d = new UpdateLogFileCallback(UpdateLogFile);
+                this.Invoke(d, new object[] { });
+            }
+            else
+            {
+                this.LogFile.Text = _logstring;
+            }
+        }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

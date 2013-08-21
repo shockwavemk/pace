@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
@@ -12,6 +13,8 @@ namespace ZtreeControl
     {
         private static Process _processZTree;
         private static ConnectionTable connectionTable = ConnectionTable.GetRemote();
+        private static MessageQueue messageQueue = MessageQueue.GetRemote();
+
 
         public static string[] GetGsfPaths(string path)
         {
@@ -207,6 +210,9 @@ namespace ZtreeControl
             foreach (ConnectionTable.ClientInformation clientInformation in connectionTable.GetChecked())
             {
                 TraceOps.Out(clientInformation.GetName());
+                var rlist = new List<string> { "" };
+                var m = new PaceCommon.Message(rlist, true, "start zleaf", clientInformation.GetName());
+                messageQueue.SetMessage(m);
             }
         }
     }
