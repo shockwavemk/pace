@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using PaceCommon;
@@ -153,13 +154,19 @@ namespace PaceServer
 
         private void SetUpClientConnectionConfig(string uri, int port)
         {
-            Services.GetService(uri, port, typeof(ConnectionConfig));
-            var url = "http://" + uri + ":" + port + "/ConnectionConfig.rem";
-            ConnectionConfig externalConfig = (ConnectionConfig)Activator.GetObject(typeof(ConnectionConfig), url);
+            try
+            {
+                Services.GetService(uri, port, typeof(ConnectionConfig));
+                var url = "http://" + uri + ":" + port + "/ConnectionConfig.rem";
+                ConnectionConfig externalConfig = (ConnectionConfig) Activator.GetObject(typeof (ConnectionConfig), url);
 
-            //TODO
-            externalConfig.SetServerPort(9090);
-            externalConfig.SetServerUri("localhost");
+                externalConfig.SetServer(uri,port);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Cannot establish connection to network. Please try again.");
+                TraceOps.Out(exception.ToString());
+            }
         }
 
 
@@ -186,6 +193,55 @@ namespace PaceServer
                     SetUpClientConnectionConfig(_newConnectionForm.textBoxUri.Text, portval);
                 }
             }
+        }
+
+        private void loadConnectionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var openFileDialog = new OpenFileDialog
+                {
+                    RestoreDirectory = true,
+                    Filter = "All Connection Xml files (*.XML)|*.XML"
+                };
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                var fileName = openFileDialog.FileName;
+
+                if (File.Exists(fileName) == true)
+                {
+                    Connections connections = ObjectToXml<Connections>.Load(fileName);
+
+                    if (connections == null)
+                    {
+                        MessageBox.Show("Unable to load customer object from file '" + fileName + "'!", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        this.LoadConnections(connections);
+                        MessageBox.Show("Customer loaded from file '" + fileName + "'!", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("File does not exist. Please try again.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void LoadConnections(Connections connections)
+        {
+            //this.EmailsListBox.Items.Clear();
+
+            // Add EmailAddresses collection to the ListBox on the Form...
+            /*
+            foreach (EmailAddress emailAddress in customer.EmailAddresses)
+            {
+                // Convert the enumerated object into its string representation.
+                string Destination = Enum.GetName(typeof(EmailDestination), emailAddress.Destination);
+
+                this.EmailsListBox.Items.Add(emailAddress.Address + " - " + Destination);
+            }
+            */
         }
     }
 }

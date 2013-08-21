@@ -27,9 +27,17 @@ namespace PaceCommon
 
         public static void GetService(string server, int port, Type type)
         {
-            var url = "http://" + server + ":" + port + "/" + type.Name + ".rem";
-            var remoteType = new WellKnownClientTypeEntry(type, url);
-            RemotingConfiguration.RegisterWellKnownClientType(remoteType);
+            try
+            {
+                var url = "http://" + server + ":" + port + "/" + type.Name + ".rem";
+                var remoteType = new WellKnownClientTypeEntry(type, url);
+                RemotingConfiguration.RegisterWellKnownClientType(remoteType);
+            }
+            catch (Exception exception)
+            {
+                TraceOps.Out(exception.ToString());
+            }
+            
         }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Reflection;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using PaceCommon;
 using PaceServer;
@@ -11,7 +13,7 @@ namespace PaceClient
 {
     public partial class MainClientForm : Form
     {
-        private const int Threshold = 1;
+        private const int Threshold = 100;
         private ContextMenu tray_menu;
         private ConnectionTable _connectionTable;
         private ConnectionConfig _connectionConfig;
@@ -39,18 +41,20 @@ namespace PaceClient
             
             Services.PrepareGetService();
             _connectionConfig = ConnectionConfig.GetRemote();
-            //MessageBox.Show(_connectionConfig.GetTest());
-            _connectionConfig.Changed += ConnectionConfigOnChanged;
+            var watchConfigTask = Task.Factory.StartNew(WatchConfig);
         }
 
-        private void ConnectionConfigOnChanged(object sender, EventArgs eventArgs)
+        private void WatchConfig()
         {
+            while (!_connectionConfig.GetSet())
+            {
+                Thread.Sleep(Threshold);
+            }
             ConnectToServer(_connectionConfig.GetRemoteConfig());
         }
 
         private void ConnectToServer(RemoteConfiguration getRemoteConfig)
         {
-            
             Services.GetService(getRemoteConfig.GetUri(), getRemoteConfig.GetPort(), typeof(ConnectionTable));
             Services.GetService(getRemoteConfig.GetUri(), getRemoteConfig.GetPort(), typeof(MessageQueue));
             _connectionTable = ConnectionTable.GetRemote();

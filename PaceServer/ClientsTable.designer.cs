@@ -41,6 +41,8 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.connectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveConnectionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadConnectionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -112,7 +114,9 @@
             // connectionToolStripMenuItem
             // 
             this.connectionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newConnectionToolStripMenuItem});
+            this.newConnectionToolStripMenuItem,
+            this.saveConnectionsToolStripMenuItem,
+            this.loadConnectionsToolStripMenuItem});
             this.connectionToolStripMenuItem.Name = "connectionToolStripMenuItem";
             this.connectionToolStripMenuItem.Size = new System.Drawing.Size(81, 20);
             this.connectionToolStripMenuItem.Text = "Connection";
@@ -120,9 +124,22 @@
             // newConnectionToolStripMenuItem
             // 
             this.newConnectionToolStripMenuItem.Name = "newConnectionToolStripMenuItem";
-            this.newConnectionToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.newConnectionToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.newConnectionToolStripMenuItem.Text = "New Connection";
             this.newConnectionToolStripMenuItem.Click += new System.EventHandler(this.newConnectionToolStripMenuItem_Click);
+            // 
+            // saveConnectionsToolStripMenuItem
+            // 
+            this.saveConnectionsToolStripMenuItem.Name = "saveConnectionsToolStripMenuItem";
+            this.saveConnectionsToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.saveConnectionsToolStripMenuItem.Text = "Save Connections";
+            // 
+            // loadConnectionsToolStripMenuItem
+            // 
+            this.loadConnectionsToolStripMenuItem.Name = "loadConnectionsToolStripMenuItem";
+            this.loadConnectionsToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.loadConnectionsToolStripMenuItem.Text = "Load Connections";
+            this.loadConnectionsToolStripMenuItem.Click += new System.EventHandler(this.loadConnectionsToolStripMenuItem_Click);
             // 
             // ClientsTable
             // 
@@ -162,6 +179,8 @@
         private System.Windows.Forms.ColumnHeader CApplications;
         private System.Windows.Forms.ToolStripMenuItem connectionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newConnectionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveConnectionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadConnectionsToolStripMenuItem;
 
 
     }

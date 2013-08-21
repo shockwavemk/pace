@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,15 +13,7 @@ namespace PaceCommon
     {
         private static RemoteConfiguration _remoteConfigurationPublished;
         private static RemoteConfiguration _remoteConfigurationUsedForServerConnectionLater;
-        public delegate void ChangedEventHandler(object sender, EventArgs e);
-
-        public event ChangedEventHandler Changed;
-
-        protected virtual void OnChanged(EventArgs e)
-        {
-            if (Changed != null)
-                Changed(this, e);
-        }
+        private static bool _configSet = false;
 
         public ConnectionConfig()
         {
@@ -41,17 +34,7 @@ namespace PaceCommon
         {
             _remoteConfigurationUsedForServerConnectionLater.SetUri(uri);
             _remoteConfigurationUsedForServerConnectionLater.SetPort(port);
-            OnChanged(EventArgs.Empty);
-        }
-
-        public void SetServerUri(string s)
-        {
-            _remoteConfigurationUsedForServerConnectionLater.SetUri(s);
-        }
-
-        public void SetServerPort(int p)
-        {
-            _remoteConfigurationUsedForServerConnectionLater.SetPort(p);
+            _configSet = true;
         }
 
         public RemoteConfiguration GetRemoteConfig()
@@ -59,9 +42,9 @@ namespace PaceCommon
             return _remoteConfigurationUsedForServerConnectionLater;
         }
 
-        public string GetTest()
+        public bool GetSet()
         {
-            return "Hallo!";
+            return _configSet;
         }
     }
 
