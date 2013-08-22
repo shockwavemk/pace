@@ -65,6 +65,7 @@
             this.File.Name = "File";
             this.File.Size = new System.Drawing.Size(37, 20);
             this.File.Text = "File";
+            this.File.Click += new System.EventHandler(this.File_Click);
             // 
             // Edit
             // 

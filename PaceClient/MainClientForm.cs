@@ -21,6 +21,7 @@ namespace PaceClient
         private string _name;
         private TaskManager _taskManager;
         private NetworkClient _networkClient;
+        private ConfigServer _configServer;
         private string _logstring;
 
         delegate void UpdateLogFileCallback();
@@ -42,24 +43,22 @@ namespace PaceClient
             notifyIcon.ContextMenu = tray_menu;
             notifyIcon.MouseClick += new MouseEventHandler(notifyIcon_MouseUp);
             
-            Services.PrepareGetService();
-            _connectionConfig = ConnectionConfig.GetRemote();
-            var watchConfigTask = Task.Factory.StartNew(WatchConfig);
+            _configServer = new ConfigServer();
+            _configServer.Changed += ConfigServerOnChanged;
         }
 
-        private void WatchConfig()
+        private void ConfigServerOnChanged(object sender, ChangedEventArgs eventArgs)
         {
-            while (!_connectionConfig.GetSet())
-            {
-                Thread.Sleep(Threshold);
-            }
-            ConnectToServer(_connectionConfig.GetRemoteConfig());
+            TraceOps.Out("Verbindung von: " + eventArgs.Ip + " : " + eventArgs.Port);
+            _logstring += " Verbindung von: " + eventArgs.Ip + " : " + eventArgs.Port;
+            ConnectToServer(eventArgs.Ip, eventArgs.Port);
         }
 
-        private void ConnectToServer(RemoteConfiguration getRemoteConfig)
+        private void ConnectToServer(string ip, int port)
         {
-            Services.GetService(getRemoteConfig.GetUri(), getRemoteConfig.GetPort(), typeof(ConnectionTable));
-            Services.GetService(getRemoteConfig.GetUri(), getRemoteConfig.GetPort(), typeof(MessageQueue));
+            TraceOps.Out(ip+" : "+port);
+            Services.GetService(ip, port, typeof(ConnectionTable));
+            Services.GetService(ip, port, typeof(MessageQueue));
             _connectionTable = ConnectionTable.GetRemote();
             _messageQueue = MessageQueue.GetRemote();
             _name = HashOps.GetFqdn();

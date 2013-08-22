@@ -30,3 +30,7 @@ C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj\Debug\PaceServer.csproj.GenerateResource.Cache
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj\Debug\PaceServer.exe
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj\Debug\PaceServer.pdb
+C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj\Debug\PaceServer.exe.manifest
+C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceServer\bin\Debug\PaceServer.exe.manifest
+C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceServer\bin\Debug\PaceServer.application
+C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj\Debug\PaceServer.application

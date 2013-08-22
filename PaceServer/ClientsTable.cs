@@ -2,7 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
+using System.Net.Sockets;
 using System.Runtime.Remoting;
+using System.Security;
 using System.Threading;
 using System.Windows.Forms;
 using PaceCommon;
@@ -155,21 +158,22 @@ namespace PaceServer
             }
         }
 
-        private void SetUpClientConnectionConfig(string uri, int port)
+        private void SetUpClientConnectionConfig(IPAddress ip, int port)
         {
             try
             {
-                Services.GetService(uri, port, typeof(ConnectionConfig));
-                var url = "http://" + uri + ":" + port + "/ConnectionConfig.rem";
-                
-                externalConfig = (ConnectionConfig) Activator.GetObject(typeof (ConnectionConfig), url);
-
-                externalConfig.SetServer(uri,port);
+                TraceOps.Out("try to connect to "+ ip + " : "+port);
+                var ep = new IPEndPoint(ip, port);
+                var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                socket.Connect(ep);
             }
-            catch (Exception exception)
+            catch (SecurityException ex)
             {
-                MessageBox.Show("Cannot establish connection to network. Please try again.");
-                TraceOps.Out(exception.ToString());
+                MessageBox.Show("Security error. Please try again.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Cannot establish connection to network. Please try again."+ex);
             }
         }
 
@@ -179,10 +183,23 @@ namespace PaceServer
             _newConnectionForm = new NewConnection() { TopLevel = true };
             if (_newConnectionForm.ShowDialog() == DialogResult.OK)
             {
-                var portval = 0;
+                var port = 0;
+                IPHostEntry he = Dns.GetHostEntry(_newConnectionForm.textBoxUri.Text);
+                var dns = "127.0.0.1";
                 try
                 {
-                     portval = Convert.ToInt32(_newConnectionForm.textBoxPort.Text);
+                    dns = he.AddressList[1].ToString();
+                }
+                catch (Exception)
+                {
+                    dns = he.AddressList[0].ToString();
+                }
+                var ip = IPAddress.Parse(dns);
+                //TODO Secure
+
+                try
+                {
+                     port = Convert.ToInt32(_newConnectionForm.textBoxPort.Text);
                 }
                 catch (FormatException formatException)
                 {
@@ -194,7 +211,7 @@ namespace PaceServer
                 }
                 finally
                 {
-                    SetUpClientConnectionConfig(_newConnectionForm.textBoxUri.Text, portval);
+                    SetUpClientConnectionConfig(ip, port);
                 }
             }
         }
@@ -238,7 +255,10 @@ namespace PaceServer
             {
                 if (connection.name != "Server" && connection.ip != "unknown" && connection.port != 0)
                 {
-                    SetUpClientConnectionConfig(connection.ip, connection.port);
+                    IPHostEntry he = Dns.GetHostEntry(connection.ip);
+                    var dns = he.AddressList[1].ToString();
+                    var ip = IPAddress.Parse(dns);
+                    SetUpClientConnectionConfig(ip, connection.port);
                 }
             }
         }

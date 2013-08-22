@@ -31,3 +31,7 @@ C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClient\obj
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClient\obj\Debug\PaceClient.csproj.GenerateResource.Cache
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClient\obj\Debug\PaceClient.exe
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClient\obj\Debug\PaceClient.pdb
+C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClient\bin\Debug\PaceClient.exe.manifest
+C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClient\bin\Debug\PaceClient.application
+C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClient\obj\Debug\PaceClient.exe.manifest
+C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClient\obj\Debug\PaceClient.application
