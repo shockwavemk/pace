@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels;
 using System.Runtime.Remoting.Channels.Http;
@@ -7,7 +9,6 @@ namespace PaceCommon
 {
     public class Services
     {
-
         public static void PrepareSetService(int port)
         {
             var serverChannel = new HttpServerChannel(port);
@@ -23,6 +24,8 @@ namespace PaceCommon
         {
             var clientChannel = new HttpClientChannel();
             ChannelServices.RegisterChannel(clientChannel, false);
+
+            RemotingConfiguration.CustomErrorsMode = CustomErrorsModes.Off;
         }
 
         public static void GetService(string server, int port, Type type)

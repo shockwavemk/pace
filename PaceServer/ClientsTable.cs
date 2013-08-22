@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Remoting;
 using System.Threading;
 using System.Windows.Forms;
 using PaceCommon;
@@ -17,6 +18,7 @@ namespace PaceServer
         private IPlugin[] _plugins;
         private bool _running;
         private NewConnection _newConnectionForm;
+        private static ConnectionConfig externalConfig;
 
         delegate void UpdateClientTableCallback();
 
@@ -159,7 +161,8 @@ namespace PaceServer
             {
                 Services.GetService(uri, port, typeof(ConnectionConfig));
                 var url = "http://" + uri + ":" + port + "/ConnectionConfig.rem";
-                ConnectionConfig externalConfig = (ConnectionConfig) Activator.GetObject(typeof (ConnectionConfig), url);
+                
+                externalConfig = (ConnectionConfig) Activator.GetObject(typeof (ConnectionConfig), url);
 
                 externalConfig.SetServer(uri,port);
             }
