@@ -22,6 +22,8 @@ namespace PaceServer
         private ClientsTable _clientsTableForm;
         public delegate void FormResizeEventHandler();
 
+        delegate void UpdateLogFileCallback();
+
         public MainServerForm(IPlugin[] plugins)
         {
             _msf = this;
@@ -196,6 +198,19 @@ namespace PaceServer
         private void File_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void UpdateLogFile()
+        {
+            if (LogFile.InvokeRequired)
+            {
+                var d = new UpdateLogFileCallback(UpdateLogFile);
+                this.Invoke(d, new object[] { });
+            }
+            else
+            {
+                this.LogFile.Text = TraceOps.GetLog();
+            }
         }
     }
 

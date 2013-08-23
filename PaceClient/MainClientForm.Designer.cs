@@ -77,6 +77,7 @@
             this.LogFile.Size = new System.Drawing.Size(634, 312);
             this.LogFile.TabIndex = 6;
             this.LogFile.Text = "- Client Startet -";
+            this.LogFile.TextChanged += new System.EventHandler(this.LogFile_TextChanged);
             // 
             // tableLayoutPanel1
             // 

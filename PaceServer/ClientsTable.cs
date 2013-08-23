@@ -183,9 +183,13 @@ namespace PaceServer
             _newConnectionForm = new NewConnection() { TopLevel = true };
             if (_newConnectionForm.ShowDialog() == DialogResult.OK)
             {
+                // Default values
                 var port = 0;
+                var dns = "";
+
+                // get dns entry from 
                 IPHostEntry he = Dns.GetHostEntry(_newConnectionForm.textBoxUri.Text);
-                var dns = "127.0.0.1";
+                
                 try
                 {
                     dns = he.AddressList[1].ToString();

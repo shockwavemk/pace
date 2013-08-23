@@ -22,7 +22,6 @@ namespace PaceClient
         private TaskManager _taskManager;
         private NetworkClient _networkClient;
         private ConfigServer _configServer;
-        private string _logstring;
 
         delegate void UpdateLogFileCallback();
 
@@ -50,7 +49,6 @@ namespace PaceClient
         private void ConfigServerOnChanged(object sender, ChangedEventArgs eventArgs)
         {
             TraceOps.Out("Verbindung von: " + eventArgs.Ip + " : " + eventArgs.Port);
-            _logstring += " Verbindung von: " + eventArgs.Ip + " : " + eventArgs.Port;
             ConnectToServer(eventArgs.Ip, eventArgs.Port);
         }
 
@@ -88,7 +86,6 @@ namespace PaceClient
                     break;
                 default:
                     TraceOps.Out(message.GetCommand());
-                    _logstring += message.GetCommand();
                     UpdateLogFile();
                     break;
             }
@@ -147,11 +144,16 @@ namespace PaceClient
             }
             else
             {
-                this.LogFile.Text = _logstring;
+                this.LogFile.Text = TraceOps.GetLog();
             }
         }
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void LogFile_TextChanged(object sender, EventArgs e)
         {
 
         }
