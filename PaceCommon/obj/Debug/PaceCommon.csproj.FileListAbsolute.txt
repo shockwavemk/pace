@@ -8,3 +8,5 @@ C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceCommon\bin
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceCommon\obj\Debug\PaceCommon.csprojResolveAssemblyReference.cache
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceCommon\obj\Debug\PaceCommon.dll
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceCommon\obj\Debug\PaceCommon.pdb
+C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceCommon\obj\Debug\PaceCommon.Log.resources
+C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceCommon\obj\Debug\PaceCommon.csproj.GenerateResource.Cache

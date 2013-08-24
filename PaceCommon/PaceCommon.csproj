@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
     <Reference Include="System.Windows.Forms" />
@@ -52,6 +53,12 @@
     <Compile Include="IModel.cs" />
     <Compile Include="IPlugin.cs" />
     <Compile Include="IView.cs" />
+    <Compile Include="Log.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Log.Designer.cs">
+      <DependentUpon>Log.cs</DependentUpon>
+    </Compile>
     <Compile Include="Message.cs" />
     <Compile Include="MessageQueue.cs" />
     <Compile Include="ObjectToXml.cs" />
@@ -59,6 +66,11 @@
     <Compile Include="Services.cs" />
     <Compile Include="TaskManager.cs" />
     <Compile Include="TraceOps.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Log.resx">
+      <DependentUpon>Log.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

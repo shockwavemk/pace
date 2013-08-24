@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Threading;
 using System.Windows.Forms;
-using System.Xml.Serialization;
 using PaceCommon;
 using Message = PaceCommon.Message;
 
@@ -22,16 +17,15 @@ namespace PaceServer
         private ClientsTable _clientsTableForm;
         public delegate void FormResizeEventHandler();
 
-        delegate void UpdateLogFileCallback();
-
         public MainServerForm(IPlugin[] plugins)
         {
             _msf = this;
             _plugins = plugins;
             InitializeComponent();
             LoadPlugIns();
-            this.FormClosing += new FormClosingEventHandler(MainServerForm_FormClosing);
-            this.Resize += new EventHandler(OnResize);
+            FormClosing += MainServerForm_FormClosing;
+            Resize += OnResize;
+            
         }
 
         private void OnResize(object sender, EventArgs e)
@@ -44,6 +38,7 @@ namespace PaceServer
 
         private void MainServerForm_Load(object sender, EventArgs e)
         {
+            TraceOps.LoadLog();
             try
             {
                 _name = "Server";
@@ -58,12 +53,10 @@ namespace PaceServer
                 _taskManager = new TaskManager(ref _messageQueue, ref _name);
                 _taskManager.Task += TaskManagerOnTask;
 
-                //Set Own Information
                 var ci = new ConnectionTable.ClientInformation(_name);
                 ci.SetGroup("server");
                 _connectionTable.Set(_name, ci);
-                
-                //Open ClientsTable by Default
+
                 LoadClientsTable();
 
                 foreach (IPlugin plugin in _plugins)
@@ -183,7 +176,6 @@ namespace PaceServer
             };
              
         }
-        
 
         private void mainPanel_Paint(object sender, PaintEventArgs e)
         {
@@ -200,17 +192,9 @@ namespace PaceServer
 
         }
 
-        private void UpdateLogFile()
+        private void logFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (LogFile.InvokeRequired)
-            {
-                var d = new UpdateLogFileCallback(UpdateLogFile);
-                this.Invoke(d, new object[] { });
-            }
-            else
-            {
-                this.LogFile.Text = TraceOps.GetLog();
-            }
+            TraceOps.LoadLog();
         }
     }
 

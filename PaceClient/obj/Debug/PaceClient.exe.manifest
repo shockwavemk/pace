@@ -42,26 +42,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PaceClient.exe" size="210432">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PaceClient.exe" size="208896">
       <assemblyIdentity name="PaceClient" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>wiQuDrCcrreoaGOmntBfoUfLKSj/T+heuNXdomxmyt0=</dsig:DigestValue>
+        <dsig:DigestValue>nTkVUTwyKDK57GV6Er8hWO2OkBKDi1ab0S9DUxtIZtA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PaceCommon.dll" size="20992">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PaceCommon.dll" size="23552">
       <assemblyIdentity name="PaceCommon" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>22J8yIAzmfZizN08EaU06iqirVcIcOfxXAIlRyzLIgg=</dsig:DigestValue>
+        <dsig:DigestValue>MVkxMkG3O8InVSlPulNXojKTm09oYocBc+yWuPrPgJo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

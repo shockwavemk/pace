@@ -41,10 +41,9 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.mainPanel = new System.Windows.Forms.Panel();
-            this.LogFile = new System.Windows.Forms.TextBox();
+            this.logFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
-            this.mainPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -84,7 +83,8 @@
             // View
             // 
             this.View.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.clientsTableToolStripMenuItem});
+            this.clientsTableToolStripMenuItem,
+            this.logFileToolStripMenuItem});
             this.View.Name = "View";
             this.View.Size = new System.Drawing.Size(44, 20);
             this.View.Text = "View";
@@ -92,7 +92,7 @@
             // clientsTableToolStripMenuItem
             // 
             this.clientsTableToolStripMenuItem.Name = "clientsTableToolStripMenuItem";
-            this.clientsTableToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.clientsTableToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.clientsTableToolStripMenuItem.Text = "Clients\' Table";
             this.clientsTableToolStripMenuItem.Click += new System.EventHandler(this.clientsTableToolStripMenuItem_Click);
             // 
@@ -136,7 +136,6 @@
             // mainPanel
             // 
             this.mainPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.mainPanel.Controls.Add(this.LogFile);
             this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainPanel.Location = new System.Drawing.Point(0, 24);
             this.mainPanel.MinimumSize = new System.Drawing.Size(300, 400);
@@ -145,14 +144,12 @@
             this.mainPanel.TabIndex = 4;
             this.mainPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.mainPanel_Paint);
             // 
-            // LogFile
+            // logFileToolStripMenuItem
             // 
-            this.LogFile.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LogFile.Location = new System.Drawing.Point(0, 0);
-            this.LogFile.Multiline = true;
-            this.LogFile.Name = "LogFile";
-            this.LogFile.Size = new System.Drawing.Size(451, 500);
-            this.LogFile.TabIndex = 0;
+            this.logFileToolStripMenuItem.Name = "logFileToolStripMenuItem";
+            this.logFileToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.logFileToolStripMenuItem.Text = "Logfile Viewer";
+            this.logFileToolStripMenuItem.Click += new System.EventHandler(this.logFileToolStripMenuItem_Click);
             // 
             // MainServerForm
             // 
@@ -175,8 +172,6 @@
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            this.mainPanel.ResumeLayout(false);
-            this.mainPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -196,7 +191,7 @@
         private System.Windows.Forms.ToolStripMenuItem clientsTableToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutPaCEToolStripMenuItem;
         private System.Windows.Forms.Panel mainPanel;
-        public System.Windows.Forms.TextBox LogFile;
+        private System.Windows.Forms.ToolStripMenuItem logFileToolStripMenuItem;
     }
 }
 

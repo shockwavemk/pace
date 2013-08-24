@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Reflection;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using PaceCommon;
 using PaceServer;
@@ -29,18 +26,20 @@ namespace PaceClient
         {
             InitializeComponent();
             tray_menu = new ContextMenu();
-            tray_menu.MenuItems.Add(0, new MenuItem("Show", new EventHandler(notifyIcon_DoubleClick)));
-            tray_menu.MenuItems.Add(0, new MenuItem("Exit", new EventHandler(MainClientForm_Exit)));
+            tray_menu.MenuItems.Add(0, new MenuItem("Show", notifyIcon_DoubleClick));
+            tray_menu.MenuItems.Add(0, new MenuItem("Exit", MainClientForm_Exit));
 
-            this.FormClosing += new FormClosingEventHandler(MainClientForm_FormClosing);
+            FormClosing += MainClientForm_FormClosing;
         }
 
         private void MainClientForm_Load(object sender, EventArgs e)
         {
-            Resize += new EventHandler(MainClientForm_Resize);
-            notifyIcon.DoubleClick += new EventHandler(notifyIcon_DoubleClick);
+            TraceOps.LoadLog();
+
+            Resize += MainClientForm_Resize;
+            notifyIcon.DoubleClick += notifyIcon_DoubleClick;
             notifyIcon.ContextMenu = tray_menu;
-            notifyIcon.MouseClick += new MouseEventHandler(notifyIcon_MouseUp);
+            notifyIcon.MouseClick += notifyIcon_MouseUp;
             
             _configServer = new ConfigServer();
             _configServer.Changed += ConfigServerOnChanged;
@@ -86,7 +85,6 @@ namespace PaceClient
                     break;
                 default:
                     TraceOps.Out(message.GetCommand());
-                    UpdateLogFile();
                     break;
             }
         }
@@ -133,29 +131,6 @@ namespace PaceClient
         private void MainClientForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Environment.Exit(0);
-        }
-
-        private void UpdateLogFile()
-        {
-            if (LogFile.InvokeRequired)
-            {
-                var d = new UpdateLogFileCallback(UpdateLogFile);
-                this.Invoke(d, new object[] { });
-            }
-            else
-            {
-                this.LogFile.Text = TraceOps.GetLog();
-            }
-        }
-
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void LogFile_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
