@@ -45,7 +45,6 @@
   <ItemGroup>
     <Compile Include="Connection.cs" />
     <Compile Include="Connections.cs" />
-    <Compile Include="ConnectionConfig.cs" />
     <Compile Include="ConnectionTable.cs" />
     <Compile Include="DllLoader.cs" />
     <Compile Include="HashOps.cs" />
@@ -61,6 +60,7 @@
     </Compile>
     <Compile Include="Message.cs" />
     <Compile Include="MessageQueue.cs" />
+    <Compile Include="NetworkOps.cs" />
     <Compile Include="ObjectToXml.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services.cs" />

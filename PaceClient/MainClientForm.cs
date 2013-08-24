@@ -13,7 +13,6 @@ namespace PaceClient
         private const int Threshold = 100;
         private ContextMenu tray_menu;
         private ConnectionTable _connectionTable;
-        private ConnectionConfig _connectionConfig;
         private MessageQueue _messageQueue;
         private string _name;
         private TaskManager _taskManager;
@@ -28,6 +27,7 @@ namespace PaceClient
             tray_menu = new ContextMenu();
             tray_menu.MenuItems.Add(0, new MenuItem("Show", notifyIcon_DoubleClick));
             tray_menu.MenuItems.Add(0, new MenuItem("Exit", MainClientForm_Exit));
+            LocationChanged += OnLocation;
 
             FormClosing += MainClientForm_FormClosing;
         }
@@ -35,6 +35,7 @@ namespace PaceClient
         private void MainClientForm_Load(object sender, EventArgs e)
         {
             TraceOps.LoadLog();
+            Services.PrepareGetService();
 
             Resize += MainClientForm_Resize;
             notifyIcon.DoubleClick += notifyIcon_DoubleClick;
@@ -45,25 +46,30 @@ namespace PaceClient
             _configServer.Changed += ConfigServerOnChanged;
         }
 
+        private void OnLocation(object sender, EventArgs e)
+        {
+            var location = Location;
+            location.X += Width;
+            TraceOps.SetLogPosition(location);
+        }
+
         private void ConfigServerOnChanged(object sender, ChangedEventArgs eventArgs)
         {
-            TraceOps.Out("Verbindung von: " + eventArgs.Ip + " : " + eventArgs.Port);
             ConnectToServer(eventArgs.Ip, eventArgs.Port);
         }
 
         private void ConnectToServer(string ip, int port)
         {
-            TraceOps.Out(ip+" : "+port);
+            TraceOps.Out("Connect to: " + ip + " : " + port);
             Services.GetService(ip, port, typeof(ConnectionTable));
             Services.GetService(ip, port, typeof(MessageQueue));
-            _connectionTable = ConnectionTable.GetRemote();
-            _messageQueue = MessageQueue.GetRemote();
+            _connectionTable = ConnectionTable.GetRemote(ip, port);
+            _messageQueue = MessageQueue.GetRemote(ip, port);
             _name = HashOps.GetFqdn();
             
             try
             {
                 _networkClient = new NetworkClient(ref _messageQueue, ref _connectionTable, _name);
-
                 _taskManager = new TaskManager(ref _messageQueue, ref _name);
                 _taskManager.Task += TaskManagerOnTask;
             }

@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PaceClient.exe" size="208896">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PaceClient.exe" size="209920">
       <assemblyIdentity name="PaceClient" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>nTkVUTwyKDK57GV6Er8hWO2OkBKDi1ab0S9DUxtIZtA=</dsig:DigestValue>
+        <dsig:DigestValue>on6eALk9VbSxG/zPprfxWI1a/ritCywTojIsLik427c=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -61,7 +61,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>MVkxMkG3O8InVSlPulNXojKTm09oYocBc+yWuPrPgJo=</dsig:DigestValue>
+        <dsig:DigestValue>b7P00UKLw5cj3l6CFtwO5oxsVjyvtZ+N6KCv7A053iI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

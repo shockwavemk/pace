@@ -37,6 +37,7 @@
             this.LogFile.Location = new System.Drawing.Point(0, 0);
             this.LogFile.Multiline = true;
             this.LogFile.Name = "LogFile";
+            this.LogFile.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.LogFile.Size = new System.Drawing.Size(425, 435);
             this.LogFile.TabIndex = 0;
             this.LogFile.Text = "Log-File";

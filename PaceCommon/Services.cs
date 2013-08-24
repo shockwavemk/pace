@@ -33,7 +33,10 @@ namespace PaceCommon
             try
             {
                 var url = "http://" + server + ":" + port + "/" + type.Name + ".rem";
+                TraceOps.Out("Try to get service : " + url);
                 var remoteType = new WellKnownClientTypeEntry(type, url);
+                remoteType.ApplicationUrl = url;
+                TraceOps.Out(remoteType.ObjectUrl);
                 RemotingConfiguration.RegisterWellKnownClientType(remoteType);
             }
             catch (Exception exception)

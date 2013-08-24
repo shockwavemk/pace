@@ -16,9 +16,9 @@ namespace PaceCommon
             _concurrentDictionary = new ConcurrentDictionary<string,ClientInformation>();
         }
 
-        public static ConnectionTable GetRemote()
+        public static ConnectionTable GetRemote(string ip, int port)
         {
-            return (ConnectionTable)Activator.GetObject(typeof(ConnectionTable), "http://localhost:9090/ConnectionTable.rem");
+            return (ConnectionTable)Activator.GetObject(typeof(ConnectionTable), "http://"+ip+":"+port+"/ConnectionTable.rem");
         }
 
         public ClientInformation Get(string name)

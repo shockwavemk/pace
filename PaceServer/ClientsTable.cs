@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using System.Runtime.Remoting;
 using System.Security;
 using System.Threading;
 using System.Windows.Forms;
 using PaceCommon;
-using Message = PaceCommon.Message;
 
 namespace PaceServer
 {
@@ -21,14 +18,17 @@ namespace PaceServer
         private IPlugin[] _plugins;
         private bool _running;
         private NewConnection _newConnectionForm;
-        private static ConnectionConfig externalConfig;
+        private string _ip = NetworkOps.GetIpString(HashOps.GetFqdn());
+        private int _port = 9090;
 
         delegate void UpdateClientTableCallback();
 
 
-        public ClientsTable(IPlugin[] plugins)
+        public ClientsTable(IPlugin[] plugins, int port)
         {
             _plugins = plugins;
+            _port = port;
+            _ip = HashOps.GetFqdn();
             InitializeComponent();
             LoadPlugIns();
         }
@@ -42,8 +42,8 @@ namespace PaceServer
         private void ClientsTable_Load(object sender, EventArgs e)
         {
             _running = true;
-            _connectionTable = ConnectionTable.GetRemote();
-            _messageQueue = MessageQueue.GetRemote();
+            _connectionTable = ConnectionTable.GetRemote(_ip, _port);
+            _messageQueue = MessageQueue.GetRemote(_ip, _port);
             clientListView.ItemChecked += clientListView_CheckedIndexChanged;
             
             CreateGroups();
@@ -158,22 +158,37 @@ namespace PaceServer
             }
         }
 
-        private void SetUpClientConnectionConfig(IPAddress ip, int port)
+        private void SetUpClientConnectionConfig(string ip, int port)
         {
             try
             {
                 TraceOps.Out("try to connect to "+ ip + " : "+port);
-                var ep = new IPEndPoint(ip, port);
-                var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                socket.Connect(ep);
-            }
-            catch (SecurityException ex)
-            {
-                MessageBox.Show("Security error. Please try again.");
+                var tcpClient = new TcpClient();
+                try
+                {
+                   tcpClient.Connect(ip, port);
+                   TraceOps.Out("Connected with "+ tcpClient.Client.RemoteEndPoint);
+                }
+                catch (Exception e)
+                {
+                    TraceOps.Out(e.ToString());
+                }
+                if (tcpClient.Connected)
+                {
+                    var networkStream = tcpClient.GetStream();
+                    var streamWriter = new StreamWriter(networkStream);
+                    TraceOps.Out("Send data to "+tcpClient.Client.RemoteEndPoint);
+                    streamWriter.WriteLine("<XML>");
+                    streamWriter.WriteLine("<IP>"+_ip+"</IP>");
+                    streamWriter.WriteLine("<PORT>"+_port+"</PORT>");
+                    streamWriter.WriteLine("</XML>");
+                    streamWriter.Flush();
+                    tcpClient.Close();
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Cannot establish connection to network. Please try again."+ex);
+                MessageBox.Show("Cannot establish connection to network. Please try again.\r\n"+ex);
             }
         }
 
@@ -183,40 +198,10 @@ namespace PaceServer
             _newConnectionForm = new NewConnection() { TopLevel = true };
             if (_newConnectionForm.ShowDialog() == DialogResult.OK)
             {
-                // Default values
-                var port = 0;
-                var dns = "";
-
-                // get dns entry from 
-                IPHostEntry he = Dns.GetHostEntry(_newConnectionForm.textBoxUri.Text);
+                var ip = NetworkOps.GetIpString(_newConnectionForm.textBoxUri.Text);
+                var port = NetworkOps.GetPort(_newConnectionForm.textBoxPort.Text);
                 
-                try
-                {
-                    dns = he.AddressList[1].ToString();
-                }
-                catch (Exception)
-                {
-                    dns = he.AddressList[0].ToString();
-                }
-                var ip = IPAddress.Parse(dns);
-                //TODO Secure
-
-                try
-                {
-                     port = Convert.ToInt32(_newConnectionForm.textBoxPort.Text);
-                }
-                catch (FormatException formatException)
-                {
-                    TraceOps.Out("Input string is not a sequence of digits.");
-                }
-                catch (OverflowException overflowException)
-                {
-                    TraceOps.Out("The number cannot fit in an Int32.");
-                }
-                finally
-                {
-                    SetUpClientConnectionConfig(ip, port);
-                }
+                SetUpClientConnectionConfig(ip, port);
             }
         }
 
@@ -261,7 +246,7 @@ namespace PaceServer
                 {
                     IPHostEntry he = Dns.GetHostEntry(connection.ip);
                     var dns = he.AddressList[1].ToString();
-                    var ip = IPAddress.Parse(dns);
+                    var ip = NetworkOps.GetIpString(dns);
                     SetUpClientConnectionConfig(ip, connection.port);
                 }
             }
@@ -321,6 +306,11 @@ namespace PaceServer
         private bool ConnectionsIsValid()
         {
             return true; //TODO
+        }
+
+        private void tempServerConnectionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetUpClientConnectionConfig("131.234.150.135", 9091);
         }
     }
 }

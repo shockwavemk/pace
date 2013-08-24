@@ -25,13 +25,18 @@ namespace PaceCommon
 
         public static void LoadLog()
         {
-            var mainForm = Application.OpenForms[0];
-            var location = mainForm.Location;
-            location.X += mainForm.Width;
+            SetLogPosition(new Point(0, 0));
+        }
 
-            _logForm = new Log();
+        public static void SetLogPosition(Point location)
+        {
+            if (_logForm == null)
+            {
+                _logForm = new Log();
+            }
+
             _logForm.TopLevel = true;
-            _logForm.Location = location;
+            if(location!= new Point(0,0)) {_logForm.Location = location;}
             _logForm.Show();
         }
     }

@@ -15,17 +15,20 @@ namespace PaceServer
         private IPlugin[] _plugins;
         private MainServerForm _msf;
         private ClientsTable _clientsTableForm;
+        private int _port;
+
         public delegate void FormResizeEventHandler();
 
         public MainServerForm(IPlugin[] plugins)
         {
             _msf = this;
+            _port = 9090;
             _plugins = plugins;
             InitializeComponent();
             LoadPlugIns();
             FormClosing += MainServerForm_FormClosing;
             Resize += OnResize;
-            
+            LocationChanged += OnLocation;
         }
 
         private void OnResize(object sender, EventArgs e)
@@ -36,6 +39,13 @@ namespace PaceServer
             }
         }
 
+        private void OnLocation(object sender, EventArgs e)
+        {
+            var location = Location;
+            location.X += Width;
+            TraceOps.SetLogPosition(location);
+        }
+
         private void MainServerForm_Load(object sender, EventArgs e)
         {
             TraceOps.LoadLog();
@@ -43,12 +53,12 @@ namespace PaceServer
             {
                 _name = "Server";
 
-                Services.PrepareSetService(9090);
+                Services.PrepareSetService(_port);
                 Services.SetService(typeof(ConnectionTable));
                 Services.SetService(typeof(MessageQueue));
 
-                _connectionTable = ConnectionTable.GetRemote();
-                _messageQueue = MessageQueue.GetRemote();
+                _connectionTable = ConnectionTable.GetRemote("localhost",_port);
+                _messageQueue = MessageQueue.GetRemote("localhost", _port);
 
                 _taskManager = new TaskManager(ref _messageQueue, ref _name);
                 _taskManager.Task += TaskManagerOnTask;
@@ -103,7 +113,7 @@ namespace PaceServer
 
         private void LoadClientsTable()
         {
-            _clientsTableForm = new ClientsTable(_plugins) { TopLevel = false };
+            _clientsTableForm = new ClientsTable(_plugins, _port) { TopLevel = false };
                
             mainPanel.Controls.Add(_clientsTableForm);
             _clientsTableForm.Visible = true;

@@ -15,11 +15,11 @@ namespace PaceCommon
             _concurrentDictionary = new ConcurrentDictionary<string, ConcurrentQueue<Message>>();
         }
 
-        public static MessageQueue GetRemote()
+        public static MessageQueue GetRemote(string ip, int port)
         {
-            return (MessageQueue)Activator.GetObject(typeof(MessageQueue), "http://localhost:9090/MessageQueue.rem");
+            return (MessageQueue)Activator.GetObject(typeof(MessageQueue), "http://"+ip+":"+port+"/MessageQueue.rem");
         }
-
+        
         public Message GetMessage(string destination)
         {
             if (destination != null)
@@ -47,5 +47,6 @@ namespace PaceCommon
             cq.Enqueue(message);
             return true;
         }
+
     }
 }
