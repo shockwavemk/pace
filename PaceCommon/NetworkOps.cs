@@ -27,15 +27,23 @@ namespace PaceCommon
         public static string GetIpString(string uri)
         {
             string dns = "0.0.0.0";
-            foreach (IPAddress ipAddress in Dns.GetHostEntry(uri).AddressList)
+            try
             {
-                if (ipAddress.AddressFamily == AddressFamily.InterNetwork)
+                foreach (IPAddress ipAddress in Dns.GetHostEntry(uri).AddressList)
                 {
-                    dns = ipAddress.ToString();
+                    if (ipAddress.AddressFamily == AddressFamily.InterNetwork)
+                    {
+                        dns = ipAddress.ToString();
+                    }
                 }
-            }
 
-            TraceOps.Out("Parsed DNS/IP 4: " + dns);
+                TraceOps.Out("Parsed DNS/IP 4: " + dns);
+            }
+            catch (Exception)
+            {
+                TraceOps.Out("Parsed DNS/IP 4: not parsed");
+            }
+            
             return dns;
         }
 
