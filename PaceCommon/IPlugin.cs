@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace PaceCommon
 {
@@ -13,5 +14,6 @@ namespace PaceCommon
         void SetQueue(ref MessageQueue messageQueue);
         void SetForm(Form mainPanel);
         void SetTask(Message message);
+        EventHandler SetEventHandler(object sender, EventArgs args);
     }
 }

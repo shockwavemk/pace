@@ -121,6 +121,10 @@ namespace PaceServer
                         plugin.SetQueue(ref _messageQueue);
                         plugin.SetForm(_msf);
                         plugin.Start("TODO");
+
+
+                        var plugInControl = (IServerControl) plugin.GetControl();
+                        plugInControl.Initializer("localhost", _port);
                         
                         
                         var mainMenuView = (IServerView)plugin.GetView();
@@ -149,32 +153,32 @@ namespace PaceServer
                         ToolStripMenuItem item;
                         if (fileMenu != null && fileMenu.DropDown != null)
                         {
-                            //fileMenu.Click += ItemOnClick(plugin, "File");
+                            fileMenu.Click += plugin.SetEventHandler(fileMenu, null);
                             item = (ToolStripMenuItem)menuStrip1.Items["File"];
                             item.DropDownItems.Add(fileMenu);
                         }
 
                         if (editMenu != null && editMenu.DropDown != null)
                         {
-                            //editMenu.Click += ItemOnClick(plugin, "Edit");
+                            editMenu.Click += ItemOnClick(plugin, "Edit");
                             item = (ToolStripMenuItem)menuStrip1.Items["Edit"];
                             item.DropDownItems.Add(editMenu);
                         }
                         if (runMenu != null && runMenu.DropDown != null)
                         {
-                            //runMenu.Click += ItemOnClick(plugin, "Run");
+                            runMenu.Click += ItemOnClick(plugin, "Run");
                             item = (ToolStripMenuItem)menuStrip1.Items["Run"];
                             item.DropDownItems.Add(runMenu);
                         }
                         if (viewMenu != null && viewMenu.DropDown != null)
                         {
-                            //viewMenu.Click += ItemOnClick(plugin, "View");
+                            viewMenu.Click += ItemOnClick(plugin, "View");
                             item = (ToolStripMenuItem)menuStrip1.Items["View"];
                             item.DropDownItems.Add(viewMenu);
                         }
                         if (helpMenu != null && helpMenu.DropDown != null)
                         {
-                            //helpMenu.Click += ItemOnClick(plugin, "Help");
+                            helpMenu.Click += ItemOnClick(plugin, "Help");
                             item = (ToolStripMenuItem)menuStrip1.Items["Help"];
                             item.DropDownItems.Add(helpMenu);
                         }
@@ -185,18 +189,12 @@ namespace PaceServer
             }
         }
 
-        private EventHandler ItemOnClick(Type plugin, string action)
+        private EventHandler ItemOnClick(IPlugin plugin, string action)
         {
-            
             return delegate(object sender, EventArgs args)
             {
-                /*
-                var temp = (string)DllLoader.ControlInvoke(plugin, action, new object[] { });
-                var m = DllLoader.SoapToObject<Message>(temp);
-                _messageQueue.SetMessage(m);
-                 */
+                MessageBox.Show("Test");
             };
-             
         }
 
         private void mainPanel_Paint(object sender, PaintEventArgs e)

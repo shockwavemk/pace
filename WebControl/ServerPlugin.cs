@@ -13,7 +13,7 @@ namespace WebControl
         private ServerControl _control;
         private ServerModel _model;
         private ServerView _view;
-
+        
         public IView GetView()
         {
             return _view;
@@ -64,6 +64,17 @@ namespace WebControl
         public void SetTask(Message message)
         {
             TraceOps.Out("WebControl Server recived Message: " + message.GetCommand());
+        }
+
+        public EventHandler SetEventHandler(object sender, EventArgs args)
+        {
+            return delegate 
+            {
+                
+                
+                
+                MessageBox.Show("Test"+ sender.ToString());
+            };
         }
     }
 }

@@ -61,5 +61,12 @@ namespace WebControl
         {
             TraceOps.Out("WebControl Client recived Message: "+ message.GetCommand());
         }
+
+        public EventHandler SetEventHandler(object sender, EventArgs args)
+        {
+            return delegate {
+                MessageBox.Show("Test" + sender.ToString());
+            };
+        }
     }
 }

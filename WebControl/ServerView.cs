@@ -1,18 +1,31 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 using PaceCommon;
 
 namespace WebControl
 {
     class ServerView : IServerView
     {
+        private ToolStripMenuItem WebControlMenuItem;
+
         public ToolStripMenuItem CreateMainMenu()
         {
-            return new ToolStripMenuItem();
+            return null;
         }
 
         public ToolStripMenuItem CreateClientsTableMenu()
         {
-            return null;
+            var startWebControlMenuItem = new ToolStripMenuItem("Start WebControl");
+            startWebControlMenuItem.Click += ServerControl.StartWebControlToolStripMenuItemOnClick;
+
+            WebControlMenuItem = new ToolStripMenuItem("WebControl");
+            
+            WebControlMenuItem.DropDownItems.AddRange(new ToolStripItem[] 
+            {
+                startWebControlMenuItem
+            });
+            
+            return WebControlMenuItem;
         }
 
         public ToolStripMenuItem CreateMainMenuEntryFile()

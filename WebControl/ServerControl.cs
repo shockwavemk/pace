@@ -17,5 +17,16 @@ namespace WebControl
             _connectionTable = ConnectionTable.GetRemote(ip, port);
             _messageQueue = MessageQueue.GetRemote(ip, port);
         }
+
+        public static void StartWebControlToolStripMenuItemOnClick(object sender, EventArgs e)
+        {
+            foreach (ConnectionTable.ClientInformation clientInformation in _connectionTable.GetChecked())
+            {
+                TraceOps.Out(clientInformation.GetName());
+                var rlist = new List<string> { "" };
+                var m = new PaceCommon.Message(rlist, true, "start webcontrol", clientInformation.GetName());
+                _messageQueue.SetMessage(m);
+            }
+        }
     }
 }

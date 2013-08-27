@@ -34,7 +34,7 @@ namespace PaceCommon
             _parameter.SetValue("testparameter", 0);
             Acknowledgement = false;
             Command = "ping";
-            Destination = "all";
+            Destination = "Server";
         }
 
         public string GetDestination()

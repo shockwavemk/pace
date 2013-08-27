@@ -49,19 +49,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>STBs4p0YDqF7ZUWM+a6sK4c2ul7tdOxLKZrcIozyB1s=</dsig:DigestValue>
+        <dsig:DigestValue>dvELS5DUudQSuYXZwq8wQYfIA1refGgt4PcEU2KrS4g=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PaceServer.exe" size="220672">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PaceServer.exe" size="221184">
       <assemblyIdentity name="PaceServer" version="1.0.0.0" publicKeyToken="CCCA99897E8D5282" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>dxm+gXuu86taVpTMANODei+AXB/C9UbsUAMQ303GI7c=</dsig:DigestValue>
+        <dsig:DigestValue>gvyzpDiwnKRjdhibOrWqYtmMwNfhuO1jcjZuNWUuKYg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

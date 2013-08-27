@@ -313,5 +313,10 @@ namespace PaceServer
         {
             SetUpClientConnectionConfig("131.234.150.135", 9091);
         }
+
+        private void connectionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
