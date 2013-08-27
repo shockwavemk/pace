@@ -7,7 +7,7 @@ using PaceCommon;
 
 namespace WebControl
 {
-    class ServerControl
+    class ServerControl : IServerControl
     {
         private static ConnectionTable _connectionTable;
         private static MessageQueue _messageQueue;

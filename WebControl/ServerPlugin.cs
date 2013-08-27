@@ -21,20 +21,24 @@ namespace WebControl
 
         public IControl GetControl()
         {
-            throw new NotImplementedException();
+            return _control;
         }
 
         public IModel GetModel()
         {
-            throw new NotImplementedException();
+            return _model;
+        }
+
+        public ServerPlugin()
+        {
+            _control = new ServerControl();
+            _model = new ServerModel();
+            _view = new ServerView();
         }
 
         public void Start(string name)
         {
             _name = name;
-            _control = new ClientControl();
-            _model = new ClientModel();
-            _view = new ClientView();
         }
 
         public void Test()
@@ -44,7 +48,7 @@ namespace WebControl
 
         public string Name()
         {
-            throw new NotImplementedException();
+            return _name;
         }
 
         public void SetQueue(ref MessageQueue messageQueue)

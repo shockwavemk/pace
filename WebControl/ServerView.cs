@@ -1,12 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Windows.Forms;
+using PaceCommon;
 
 namespace WebControl
 {
-    class ServerView
+    class ServerView : IServerView
     {
+        public ToolStripMenuItem CreateMainMenu()
+        {
+            return new ToolStripMenuItem();
+        }
+
+        public ToolStripMenuItem CreateClientsTableMenu()
+        {
+            return null;
+        }
+
+        public ToolStripMenuItem CreateMainMenuEntryFile()
+        {
+            return null;
+        }
+
+        public ToolStripMenuItem CreateMainMenuEntryEdit()
+        {
+            return null;
+        }
+
+        public ToolStripMenuItem CreateMainMenuEntryRun()
+        {
+            return null;
+        }
+
+        public ToolStripMenuItem CreateMainMenuEntryView()
+        {
+            return null;
+        }
+
+        public ToolStripMenuItem CreateMainMenuEntryHelp()
+        {
+            return null;
+        }
     }
 }

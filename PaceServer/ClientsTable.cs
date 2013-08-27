@@ -152,8 +152,9 @@ namespace PaceServer
                 if (plugin != null)
                 {
                     // Load New Main Menu Entries
-                    var clientsTableMenu = (ToolStripMenuItem)plugin.GetView().CreateClientsTableMenu();
-                    menuStrip1.Items.Add(clientsTableMenu);
+                    var clientsTableMenuView = (IServerView)plugin.GetView();
+                    var clientsTableMenu = clientsTableMenuView.CreateClientsTableMenu();
+                    if (clientsTableMenu != null) menuStrip1.Items.Add(clientsTableMenu);
                 }
             }
         }

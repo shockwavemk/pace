@@ -25,7 +25,7 @@ namespace PaceServer
             _port = 9090;
             _plugins = plugins;
             InitializeComponent();
-            LoadPlugIns();
+            
             FormClosing += MainServerForm_FormClosing;
             Resize += OnResize;
             LocationChanged += OnLocation;
@@ -68,21 +68,7 @@ namespace PaceServer
                 _connectionTable.Set(_name, ci);
 
                 LoadClientsTable();
-
-                if (_plugins != null)
-                {
-                    foreach (IServerPlugin plugin in _plugins)
-                    {
-                        if (plugin != null)
-                        {
-                            plugin.SetQueue(ref _messageQueue);
-                            plugin.SetForm(_msf);
-                            plugin.Start(plugin.Name());
-                        }
-                    }
-
-                    _taskManager.SetListener(_plugins);
-                }
+                LoadPlugIns();
             }
             catch (Exception ex)
             {
@@ -126,55 +112,76 @@ namespace PaceServer
 
         private void LoadPlugIns()
         {
-            // Take each plugin object and start initialization methods
-            foreach (IServerPlugin plugin in _plugins)
+            if (_plugins != null)
             {
-                if (plugin != null)
+                foreach (IServerPlugin plugin in _plugins)
                 {
-                    // Load New Main Menu Entries
-                    var mainMenu = (ToolStripMenuItem)plugin.GetView().CreateMainMenu();
-                    // Load Additional entries to existing standard-menu
-                    var fileMenu = (ToolStripMenuItem)plugin.GetView().CreateMainMenuEntryFile();
-                    var editMenu = (ToolStripMenuItem)plugin.GetView().CreateMainMenuEntryEdit();
-                    var runMenu = (ToolStripMenuItem)plugin.GetView().CreateMainMenuEntryRun();
-                    var viewMenu = (ToolStripMenuItem)plugin.GetView().CreateMainMenuEntryView();
-                    var helpMenu = (ToolStripMenuItem)plugin.GetView().CreateMainMenuEntryHelp();
+                    if (plugin != null)
+                    {
+                        plugin.SetQueue(ref _messageQueue);
+                        plugin.SetForm(_msf);
+                        plugin.Start("TODO");
+                        
+                        
+                        var mainMenuView = (IServerView)plugin.GetView();
+                        var mainMenu = mainMenuView.CreateMainMenu();
 
-                    menuStrip1.Items.Add(mainMenu);
 
-                    // Assign new entries to existing menu
-                    ToolStripMenuItem item;
-                    if (fileMenu.DropDown != null)
-                    {
-                        //fileMenu.Click += ItemOnClick(plugin, "File");
-                        item = (ToolStripMenuItem)menuStrip1.Items["File"];
-                        item.DropDownItems.Add(fileMenu);
-                    }
-                    if (editMenu.DropDown != null)
-                    {
-                        //editMenu.Click += ItemOnClick(plugin, "Edit");
-                        item = (ToolStripMenuItem)menuStrip1.Items["Edit"];
-                        item.DropDownItems.Add(editMenu);
-                    }
-                    if (runMenu.DropDown != null)
-                    {
-                        //runMenu.Click += ItemOnClick(plugin, "Run");
-                        item = (ToolStripMenuItem)menuStrip1.Items["Run"];
-                        item.DropDownItems.Add(runMenu);
-                    }
-                    if (viewMenu.DropDown != null)
-                    {
-                        //viewMenu.Click += ItemOnClick(plugin, "View");
-                        item = (ToolStripMenuItem)menuStrip1.Items["View"];
-                        item.DropDownItems.Add(viewMenu);
-                    }
-                    if (helpMenu.DropDown != null)
-                    {
-                        //helpMenu.Click += ItemOnClick(plugin, "Help");
-                        item = (ToolStripMenuItem)menuStrip1.Items["Help"];
-                        item.DropDownItems.Add(helpMenu);
+                        var fileMenuView = (IServerView)plugin.GetView();
+                        var fileMenu = fileMenuView.CreateMainMenuEntryFile();
+
+                        var editMenuView = (IServerView)plugin.GetView();
+                        var editMenu = editMenuView.CreateMainMenuEntryEdit();
+
+                        var runMenuView = (IServerView)plugin.GetView();
+                        var runMenu = runMenuView.CreateMainMenuEntryEdit();
+
+                        var viewMenuView = (IServerView)plugin.GetView();
+                        var viewMenu = viewMenuView.CreateMainMenuEntryEdit();
+
+                        var helpMenuView = (IServerView)plugin.GetView();
+                        var helpMenu = helpMenuView.CreateMainMenuEntryEdit();
+
+                        if (mainMenu != null) menuStrip1.Items.Add(mainMenu);
+
+                        
+                        // Assign new entries to existing menu
+                        ToolStripMenuItem item;
+                        if (fileMenu != null && fileMenu.DropDown != null)
+                        {
+                            //fileMenu.Click += ItemOnClick(plugin, "File");
+                            item = (ToolStripMenuItem)menuStrip1.Items["File"];
+                            item.DropDownItems.Add(fileMenu);
+                        }
+
+                        if (editMenu != null && editMenu.DropDown != null)
+                        {
+                            //editMenu.Click += ItemOnClick(plugin, "Edit");
+                            item = (ToolStripMenuItem)menuStrip1.Items["Edit"];
+                            item.DropDownItems.Add(editMenu);
+                        }
+                        if (runMenu != null && runMenu.DropDown != null)
+                        {
+                            //runMenu.Click += ItemOnClick(plugin, "Run");
+                            item = (ToolStripMenuItem)menuStrip1.Items["Run"];
+                            item.DropDownItems.Add(runMenu);
+                        }
+                        if (viewMenu != null && viewMenu.DropDown != null)
+                        {
+                            //viewMenu.Click += ItemOnClick(plugin, "View");
+                            item = (ToolStripMenuItem)menuStrip1.Items["View"];
+                            item.DropDownItems.Add(viewMenu);
+                        }
+                        if (helpMenu != null && helpMenu.DropDown != null)
+                        {
+                            //helpMenu.Click += ItemOnClick(plugin, "Help");
+                            item = (ToolStripMenuItem)menuStrip1.Items["Help"];
+                            item.DropDownItems.Add(helpMenu);
+                        }
                     }
                 }
+
+                _taskManager.SetListener(_plugins);
             }
         }
 
