@@ -3,20 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PaceCommon;
 
 namespace PaceClient
 {
     static class Program
     {
-        /// <summary>
-        /// Der Haupteinstiegspunkt für die Anwendung.
-        /// </summary>
+        private static DllLoader _dllLoader;
+        private static MainClientForm _mcf;
+
         [STAThread]
         static void Main()
         {
+            _dllLoader = new DllLoader();
+            IPlugin[] plugins = _dllLoader.LoadDlls(DllLoader.GetDllsPath(AppDomain.CurrentDomain.BaseDirectory));
+            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainClientForm());
+            _mcf = new MainClientForm(plugins);
+            Application.Run(_mcf);
         }
     }
 }

@@ -21,7 +21,7 @@ namespace PaceClient
 
         delegate void UpdateLogFileCallback();
 
-        public MainClientForm()
+        public MainClientForm(IPlugin[] plugins)
         {
             InitializeComponent();
             tray_menu = new ContextMenu();

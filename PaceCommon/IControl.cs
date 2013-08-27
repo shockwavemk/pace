@@ -2,6 +2,6 @@
 {
     public interface IControl
     {
-        string Test();
+        void Initializer(string ip, int port);
     }
 }
