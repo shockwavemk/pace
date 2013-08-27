@@ -51,5 +51,16 @@ namespace PaceCommon
                 TraceOps.Out(exception.ToString());
             }
         }
+
+        public void SetListener(IPlugin[] plugins)
+        {
+            foreach (IPlugin plugin in plugins)
+            {
+                if (plugin != null)
+                {
+                    this.Task += plugin.SetTask;
+                }
+            }
+        }
     }
 }

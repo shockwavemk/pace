@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PaceCommon;
+using Message = PaceCommon.Message;
 
 namespace WebControl
 {
@@ -50,6 +51,11 @@ namespace WebControl
         public void SetForm(Form mainPanel)
         {
             _mainPanel = mainPanel;
+        }
+
+        public void SetTask(Message message)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -17,10 +17,8 @@ namespace PaceClient
         private TaskManager _taskManager;
         private NetworkClient _networkClient;
         private ConfigServer _configServer;
-        private IClientPlugin[] _plugins;
-
-        delegate void UpdateLogFileCallback();
-
+        private IPlugin[] _plugins;
+        
         public MainClientForm(IClientPlugin[] plugins)
         {
             _plugins = plugins;
@@ -91,6 +89,7 @@ namespace PaceClient
                 _networkClient = new NetworkClient(ref _messageQueue, ref _connectionTable, _name);
                 _taskManager = new TaskManager(ref _messageQueue, ref _name);
                 _taskManager.Task += TaskManagerOnTask;
+                _taskManager.SetListener(_plugins);
             }
             catch (Exception ex)
             {

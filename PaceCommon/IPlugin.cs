@@ -12,5 +12,6 @@ namespace PaceCommon
         string Name();
         void SetQueue(ref MessageQueue messageQueue);
         void SetForm(Form mainPanel);
+        void SetTask(Message message);
     }
 }
