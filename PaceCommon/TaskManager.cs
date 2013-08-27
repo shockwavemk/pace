@@ -16,6 +16,8 @@ namespace PaceCommon
         public delegate void TaskEventHandler(Message message);
         public event TaskEventHandler Task;
 
+        delegate void StartFormCallback(Message message);
+
         public TaskManager(ref MessageQueue messageQueue, ref string name)
         {
             _running = true;

@@ -18,6 +18,8 @@ namespace PaceClient
         private NetworkClient _networkClient;
         private ConfigServer _configServer;
         private IPlugin[] _plugins;
+
+        
         
         public MainClientForm(IClientPlugin[] plugins)
         {
@@ -155,6 +157,11 @@ namespace PaceClient
             var rlist = new List<string> { "" };
             var m = new Message(rlist, true, "ping", "Server");
             _messageQueue.SetMessage(m);
+        }
+
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

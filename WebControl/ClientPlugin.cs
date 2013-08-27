@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using PaceCommon;
 using Message = PaceCommon.Message;
@@ -13,6 +15,7 @@ namespace WebControl
         private ClientControl _control;
         private ClientModel _model;
         private ClientView _view;
+        private bool _browserRunning = true;
 
         public IView GetView()
         {
@@ -60,6 +63,22 @@ namespace WebControl
         public void SetTask(Message message)
         {
             TraceOps.Out("WebControl Client recived Message: "+ message.GetCommand());
+            if (message.GetCommand() == "start webcontrol")
+            {
+                var task = new Thread(ShowBrowser);
+                task.Start();
+            }
+        }
+
+        public void ShowBrowser()
+        {
+            var browserForm = new NewBrowser() {TopLevel = true};
+            browserForm.Show();
+
+            while (_browserRunning)
+            {
+                Thread.Sleep(10);
+            }
         }
 
         public EventHandler SetEventHandler(object sender, EventArgs args)
