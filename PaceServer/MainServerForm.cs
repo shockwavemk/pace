@@ -12,14 +12,14 @@ namespace PaceServer
         private MessageQueue _messageQueue;
         private TaskManager _taskManager;
         private string _name;
-        private IPlugin[] _plugins;
+        private IServerPlugin[] _plugins;
         private MainServerForm _msf;
         private ClientsTable _clientsTableForm;
         private int _port;
 
         public delegate void FormResizeEventHandler();
 
-        public MainServerForm(IPlugin[] plugins)
+        public MainServerForm(IServerPlugin[] plugins)
         {
             _msf = this;
             _port = 9090;
@@ -69,7 +69,7 @@ namespace PaceServer
 
                 LoadClientsTable();
 
-                foreach (IPlugin plugin in _plugins)
+                foreach (IServerPlugin plugin in _plugins)
                 {
                     if (plugin != null)
                     {
@@ -122,7 +122,7 @@ namespace PaceServer
         private void LoadPlugIns()
         {
             // Take each plugin object and start initialization methods
-            foreach (IPlugin plugin in _plugins)
+            foreach (IServerPlugin plugin in _plugins)
             {
                 if (plugin != null)
                 {

@@ -13,29 +13,59 @@ namespace PaceCommon
             return filePaths;
         }
 
-        public IPlugin[] LoadDlls(string[] strings)
+        public IServerPlugin[] LoadServerDlls(string[] strings)
         {
-            var list = new List<IPlugin>();
+            var list = new List<IServerPlugin>();
             foreach (var s in strings)
             {
-                list.AddRange(DllLoad(s)); 
+                list.AddRange(ServerDllLoad(s)); 
             }
             return list.ToArray();
         }
 
-        public IPlugin[] DllLoad(string path)
+        public IServerPlugin[] ServerDllLoad(string path)
         {
             var pluginLibrary = Assembly.LoadFrom(path);
             IEnumerable<Type> types = pluginLibrary.GetTypes();
 
-            var list = new List<IPlugin>();
+            var list = new List<IServerPlugin>();
 
             foreach (var type in types)
             {
-                if (type.BaseType != null && type.Name == "Plugin")
+                if (type.BaseType != null && type.Name == "ServerPlugin")
                 {
                     
-                    var plugin = (IPlugin) Activator.CreateInstance(type);
+                    var plugin = (IServerPlugin) Activator.CreateInstance(type);
+                    list.Add(plugin);
+                }
+            }
+            return list.ToArray();
+        }
+
+
+        public IClientPlugin[] LoadClientDlls(string[] strings)
+        {
+            var list = new List<IClientPlugin>();
+            foreach (var s in strings)
+            {
+                list.AddRange(ClientDllLoad(s));
+            }
+            return list.ToArray();
+        }
+
+        public IClientPlugin[] ClientDllLoad(string path)
+        {
+            var pluginLibrary = Assembly.LoadFrom(path);
+            IEnumerable<Type> types = pluginLibrary.GetTypes();
+
+            var list = new List<IClientPlugin>();
+
+            foreach (var type in types)
+            {
+                if (type.BaseType != null && type.Name == "ClientPlugin")
+                {
+
+                    var plugin = (IClientPlugin)Activator.CreateInstance(type);
                     list.Add(plugin);
                 }
             }

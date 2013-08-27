@@ -16,7 +16,7 @@ namespace PaceServer
         static void Main()
         {
             _dllLoader = new DllLoader();
-            IPlugin[] plugins = _dllLoader.LoadDlls(DllLoader.GetDllsPath(AppDomain.CurrentDomain.BaseDirectory));
+            IServerPlugin[] plugins = _dllLoader.LoadServerDlls(DllLoader.GetDllsPath(AppDomain.CurrentDomain.BaseDirectory));
             
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

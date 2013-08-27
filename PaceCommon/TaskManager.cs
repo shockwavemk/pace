@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Threading;
-using PaceCommon;
-using Message = PaceCommon.Message;
 
-namespace PaceServer
+namespace PaceCommon
 {
     public class TaskManager
     {

@@ -7,8 +7,8 @@ namespace PaceCommon
         IView GetView();
         IControl GetControl();
         IModel GetModel();
-        string Test();
         void Start(string name);
+        void Test();
         string Name();
         void SetQueue(ref MessageQueue messageQueue);
         void SetForm(Form mainPanel);

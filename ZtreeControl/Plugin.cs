@@ -3,12 +3,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PaceCommon;
-using PaceServer;
 using Message = PaceCommon.Message;
 
 namespace ZtreeControl
 {
-    class Plugin : IPlugin
+    class Plugin
     {
         public Control Control;
         public View View;
@@ -16,7 +15,7 @@ namespace ZtreeControl
         private TaskManager _taskManager;
         private string _name;
         private MessageQueue _messageQueue;
-        private Form _form;
+        private Form _mainPanel;
 
         public Plugin()
         {
@@ -45,9 +44,9 @@ namespace ZtreeControl
             _messageQueue = messageQueue;
         }
 
-        public void SetForm(Form form)
+        public void SetForm(Form mainPanel)
         {
-            _form = form;
+            _mainPanel = mainPanel;
         }
 
         public string Test()

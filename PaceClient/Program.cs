@@ -16,7 +16,7 @@ namespace PaceClient
         static void Main()
         {
             _dllLoader = new DllLoader();
-            IPlugin[] plugins = _dllLoader.LoadDlls(DllLoader.GetDllsPath(AppDomain.CurrentDomain.BaseDirectory));
+            IClientPlugin[] plugins = _dllLoader.LoadClientDlls(DllLoader.GetDllsPath(AppDomain.CurrentDomain.BaseDirectory));
             
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

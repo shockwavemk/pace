@@ -49,19 +49,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>RZZHQSFOobjYF8khr1cBREWhaTSDowkwAdkwCE96tDU=</dsig:DigestValue>
+        <dsig:DigestValue>S4FPQX+td11qQRJCsKdjklESBctQ+HzTbXtN0npruPA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PaceCommon.dll" size="24064">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PaceCommon.dll" size="24576">
       <assemblyIdentity name="PaceCommon" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>z5QFypTMJRxpr47B9v9Jv6+035oJBzcamO94bhXu/BA=</dsig:DigestValue>
+        <dsig:DigestValue>u8gfagfaPya5CE7Ei7z3Et8mpqrJgWiV3jd0mVbdUCo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

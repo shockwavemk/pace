@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Windows.Forms;
 using PaceCommon;
-using PaceServer;
 using Message = PaceCommon.Message;
 
 namespace PaceClient
@@ -18,17 +17,21 @@ namespace PaceClient
         private TaskManager _taskManager;
         private NetworkClient _networkClient;
         private ConfigServer _configServer;
+        private IClientPlugin[] _plugins;
 
         delegate void UpdateLogFileCallback();
 
-        public MainClientForm(IPlugin[] plugins)
+        public MainClientForm(IClientPlugin[] plugins)
         {
+            _plugins = plugins;
+
             InitializeComponent();
+            LoadPlugIns();
             tray_menu = new ContextMenu();
             tray_menu.MenuItems.Add(0, new MenuItem("Show", notifyIcon_DoubleClick));
             tray_menu.MenuItems.Add(0, new MenuItem("Exit", MainClientForm_Exit));
             LocationChanged += OnLocation;
-
+            
             FormClosing += MainClientForm_FormClosing;
         }
 
@@ -44,6 +47,22 @@ namespace PaceClient
             
             _configServer = new ConfigServer();
             _configServer.Changed += ConfigServerOnChanged;
+        }
+
+        private void LoadPlugIns()
+        {
+            if (_plugins != null)
+            {
+                foreach (IClientPlugin plugin in _plugins)
+                {
+                    if (plugin != null)
+                    {
+                        plugin.SetForm(this);
+                        plugin.SetQueue(ref _messageQueue);
+                        plugin.Start("TODO");
+                    }
+                }
+            }
         }
 
         private void OnLocation(object sender, EventArgs e)

@@ -15,7 +15,7 @@ namespace PaceServer
         private ConnectionTable _connectionTable;
         private MessageQueue _messageQueue;
         private ListViewGroup _local, _remote, _server, _group;
-        private IPlugin[] _plugins;
+        private IServerPlugin[] _plugins;
         private bool _running;
         private NewConnection _newConnectionForm;
         private string _ip = NetworkOps.GetIpString(HashOps.GetFqdn());
@@ -24,7 +24,7 @@ namespace PaceServer
         delegate void UpdateClientTableCallback();
 
 
-        public ClientsTable(IPlugin[] plugins, int port)
+        public ClientsTable(IServerPlugin[] plugins, int port)
         {
             _plugins = plugins;
             _port = port;
@@ -147,7 +147,7 @@ namespace PaceServer
         private void LoadPlugIns()
         {
             // Take each plugin object and start initialization methods
-            foreach (IPlugin plugin in _plugins)
+            foreach (IServerPlugin plugin in _plugins)
             {
                 if (plugin != null)
                 {

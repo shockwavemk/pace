@@ -7,7 +7,7 @@ using PaceCommon;
 
 namespace WebControl
 {
-    public class Control : IControl
+    public class ClientControl : IControl
     {
         private static ConnectionTable _connectionTable;
         private static MessageQueue _messageQueue;
