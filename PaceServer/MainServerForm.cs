@@ -19,11 +19,11 @@ namespace PaceServer
 
         public delegate void FormResizeEventHandler();
 
-        public MainServerForm()
+        public MainServerForm(IServerPlugin[] plugins)
         {
             _msf = this;
             _port = 9090;
-            //_plugins = plugins;
+            _plugins = plugins;
             InitializeComponent();
             LoadPlugIns();
             FormClosing += MainServerForm_FormClosing;
@@ -126,7 +126,6 @@ namespace PaceServer
 
         private void LoadPlugIns()
         {
-            /*
             // Take each plugin object and start initialization methods
             foreach (IServerPlugin plugin in _plugins)
             {
@@ -177,7 +176,6 @@ namespace PaceServer
                     }
                 }
             }
-             * */
         }
 
         private EventHandler ItemOnClick(Type plugin, string action)

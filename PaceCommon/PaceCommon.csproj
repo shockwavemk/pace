@@ -54,11 +54,17 @@
     <Compile Include="ConnectionTable.cs" />
     <Compile Include="DllLoader.cs" />
     <Compile Include="HashOps.cs" />
+    <Compile Include="IClientControl.cs" />
+    <Compile Include="IClientModel.cs" />
     <Compile Include="IClientPlugin.cs" />
+    <Compile Include="IClientView.cs" />
     <Compile Include="IControl.cs" />
     <Compile Include="IModel.cs" />
     <Compile Include="IPlugin.cs" />
+    <Compile Include="IServerControl.cs" />
+    <Compile Include="IServerModel.cs" />
     <Compile Include="IServerPlugin.cs" />
+    <Compile Include="IServerView.cs" />
     <Compile Include="IView.cs" />
     <Compile Include="Log.cs">
       <SubType>Form</SubType>

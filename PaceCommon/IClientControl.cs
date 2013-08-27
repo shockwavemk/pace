@@ -1,6 +1,6 @@
 ﻿namespace PaceCommon
 {
-    public interface IModel
+    public interface IClientControl
     {
     }
 }

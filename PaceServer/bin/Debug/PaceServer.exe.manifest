@@ -54,14 +54,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PaceServer.exe" size="219648">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PaceServer.exe" size="220672">
       <assemblyIdentity name="PaceServer" version="1.0.0.0" publicKeyToken="CCCA99897E8D5282" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>SZ4o41bv/bncrx0VXgyEUZXr+20eBiuIGtZlu/i3NXI=</dsig:DigestValue>
+        <dsig:DigestValue>8KWfyt3zw9uJY0rPv2+dAqnBuIQRc83aYDVadq/TncY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -10,13 +10,13 @@ namespace WebControl
         private Form _mainPanel;
         private MessageQueue _messageQueue;
         private string _name;
-        private ClientControl _control;
-        private ClientModel _model;
-        private ClientView _view;
+        private ServerControl _control;
+        private ServerModel _model;
+        private ServerView _view;
 
         public IView GetView()
         {
-            throw new NotImplementedException();
+            return _view;
         }
 
         public IControl GetControl()
