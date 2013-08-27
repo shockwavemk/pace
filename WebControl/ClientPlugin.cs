@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using PaceCommon;
 using Message = PaceCommon.Message;
@@ -63,7 +59,7 @@ namespace WebControl
 
         public void SetTask(Message message)
         {
-            throw new NotImplementedException();
+            TraceOps.Out("WebControl Client recived Message: "+ message.GetCommand());
         }
     }
 }

@@ -1,9 +1,6 @@
-﻿using System.Windows.Forms;
-
-namespace PaceCommon
+﻿namespace PaceCommon
 {
     public interface IServerPlugin : IPlugin
     {
-        
     }
 }

@@ -89,7 +89,7 @@ namespace PaceClient
                 _networkClient = new NetworkClient(ref _messageQueue, ref _connectionTable, _name);
                 _taskManager = new TaskManager(ref _messageQueue, ref _name);
                 _taskManager.Task += TaskManagerOnTask;
-                _taskManager.SetListener(_plugins);
+                if (_plugins != null) _taskManager.SetListener(_plugins);
             }
             catch (Exception ex)
             {
@@ -112,14 +112,7 @@ namespace PaceClient
                     break;
             }
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            var rlist = new List<string> { "" };
-            var m = new Message(rlist, true, "ping", "Server");
-            _messageQueue.SetMessage(m);
-        }
-
+        
         private void MainClientForm_Resize(object sender, EventArgs e)
         {
             if (FormWindowState.Minimized == WindowState)
@@ -155,6 +148,13 @@ namespace PaceClient
         private void MainClientForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Environment.Exit(0);
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            var rlist = new List<string> { "" };
+            var m = new Message(rlist, true, "ping", "Server");
+            _messageQueue.SetMessage(m);
         }
     }
 }

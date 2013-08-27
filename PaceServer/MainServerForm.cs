@@ -12,18 +12,18 @@ namespace PaceServer
         private MessageQueue _messageQueue;
         private TaskManager _taskManager;
         private string _name;
-        private IServerPlugin[] _plugins;
+        private IPlugin[] _plugins;
         private MainServerForm _msf;
         private ClientsTable _clientsTableForm;
         private int _port;
 
         public delegate void FormResizeEventHandler();
 
-        public MainServerForm(IServerPlugin[] plugins)
+        public MainServerForm()
         {
             _msf = this;
             _port = 9090;
-            _plugins = plugins;
+            //_plugins = plugins;
             InitializeComponent();
             LoadPlugIns();
             FormClosing += MainServerForm_FormClosing;
@@ -69,14 +69,19 @@ namespace PaceServer
 
                 LoadClientsTable();
 
-                foreach (IServerPlugin plugin in _plugins)
+                if (_plugins != null)
                 {
-                    if (plugin != null)
+                    foreach (IServerPlugin plugin in _plugins)
                     {
-                        plugin.SetQueue(ref _messageQueue);
-                        plugin.SetForm(_msf);
-                        plugin.Start(plugin.Name());
+                        if (plugin != null)
+                        {
+                            plugin.SetQueue(ref _messageQueue);
+                            plugin.SetForm(_msf);
+                            plugin.Start(plugin.Name());
+                        }
                     }
+
+                    _taskManager.SetListener(_plugins);
                 }
             }
             catch (Exception ex)
@@ -113,7 +118,7 @@ namespace PaceServer
 
         private void LoadClientsTable()
         {
-            _clientsTableForm = new ClientsTable(_plugins, _port) { TopLevel = false };
+            _clientsTableForm = new ClientsTable(ref _plugins, _port) { TopLevel = false };
                
             mainPanel.Controls.Add(_clientsTableForm);
             _clientsTableForm.Visible = true;
@@ -121,6 +126,7 @@ namespace PaceServer
 
         private void LoadPlugIns()
         {
+            /*
             // Take each plugin object and start initialization methods
             foreach (IServerPlugin plugin in _plugins)
             {
@@ -171,6 +177,7 @@ namespace PaceServer
                     }
                 }
             }
+             * */
         }
 
         private EventHandler ItemOnClick(Type plugin, string action)

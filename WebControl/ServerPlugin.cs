@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using PaceCommon;
 using Message = PaceCommon.Message;
@@ -12,6 +8,11 @@ namespace WebControl
     class ServerPlugin : IServerPlugin
     {
         private Form _mainPanel;
+        private MessageQueue _messageQueue;
+        private string _name;
+        private ClientControl _control;
+        private ClientModel _model;
+        private ClientView _view;
 
         public IView GetView()
         {
@@ -30,7 +31,10 @@ namespace WebControl
 
         public void Start(string name)
         {
-            throw new NotImplementedException();
+            _name = name;
+            _control = new ClientControl();
+            _model = new ClientModel();
+            _view = new ClientView();
         }
 
         public void Test()
@@ -45,7 +49,7 @@ namespace WebControl
 
         public void SetQueue(ref MessageQueue messageQueue)
         {
-            throw new NotImplementedException();
+            _messageQueue = messageQueue;
         }
 
         public void SetForm(Form mainPanel)
@@ -55,7 +59,7 @@ namespace WebControl
 
         public void SetTask(Message message)
         {
-            throw new NotImplementedException();
+            TraceOps.Out("WebControl Server recived Message: " + message.GetCommand());
         }
     }
 }

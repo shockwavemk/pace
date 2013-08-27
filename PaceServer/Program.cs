@@ -11,16 +11,18 @@ namespace PaceServer
     {
         private static DllLoader _dllLoader;
         private static MainServerForm _msf;
+        private static IServerPlugin[] plugins;
         
         [STAThread]
         static void Main()
         {
             _dllLoader = new DllLoader();
-            IServerPlugin[] plugins = _dllLoader.LoadServerDlls(DllLoader.GetDllsPath(AppDomain.CurrentDomain.BaseDirectory));
+            // _dllLoader.LoadServerDlls(DllLoader.GetDllsPath(AppDomain.CurrentDomain.BaseDirectory));
             
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            _msf = new MainServerForm(plugins);
+            _msf = new MainServerForm();
             Application.Run(_msf);
         }
     }

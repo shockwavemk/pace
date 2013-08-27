@@ -3,7 +3,7 @@
   <asmv1:assemblyIdentity name="PaceServer.exe" version="1.0.0.6" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="PaceServer" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="PaceServer" version="1.0.0.0" publicKeyToken="CCCA99897E8D5282" language="neutral" processorArchitecture="msil" />
     <commandLine file="PaceServer.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -42,26 +42,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PaceCommon.dll" size="24064">
-      <assemblyIdentity name="PaceCommon" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PaceCommon.dll" size="25088">
+      <assemblyIdentity name="PaceCommon" version="1.0.0.0" publicKeyToken="CCCA99897E8D5282" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>z5QFypTMJRxpr47B9v9Jv6+035oJBzcamO94bhXu/BA=</dsig:DigestValue>
+        <dsig:DigestValue>c8Qa2Jb48SceCaOvqNRXS29oqRBnJ+/WqVzxiFjhNMQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PaceServer.exe" size="220160">
-      <assemblyIdentity name="PaceServer" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PaceServer.exe" size="219648">
+      <assemblyIdentity name="PaceServer" version="1.0.0.0" publicKeyToken="CCCA99897E8D5282" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>13T9n98fscDvWXRTzNDVh42+21xexx3dkNMu6ri3fAU=</dsig:DigestValue>
+        <dsig:DigestValue>SZ4o41bv/bncrx0VXgyEUZXr+20eBiuIGtZlu/i3NXI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

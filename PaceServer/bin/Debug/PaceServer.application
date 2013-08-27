@@ -14,14 +14,14 @@
     <framework targetVersion="4.5" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="PaceServer.exe.manifest" size="4180">
+    <dependentAssembly dependencyType="install" codebase="PaceServer.exe.manifest" size="4282">
       <assemblyIdentity name="PaceServer.exe" version="1.0.0.6" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>g+9jPJyalDcBqGf6LQhmz326yeWVp6Yc9yRm31sVE+k=</dsig:DigestValue>
+        <dsig:DigestValue>1IV5F2Z0J6+RxSTyuDjtMzak23Y6dxLMZhrl0ys4bV4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
