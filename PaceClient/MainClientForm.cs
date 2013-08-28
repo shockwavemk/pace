@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Threading;
 using System.Windows.Forms;
 using PaceCommon;
 using Message = PaceCommon.Message;
@@ -26,7 +27,6 @@ namespace PaceClient
             _plugins = plugins;
 
             InitializeComponent();
-            LoadPlugIns();
             tray_menu = new ContextMenu();
             tray_menu.MenuItems.Add(0, new MenuItem("Show", notifyIcon_DoubleClick));
             tray_menu.MenuItems.Add(0, new MenuItem("Exit", MainClientForm_Exit));
@@ -47,23 +47,36 @@ namespace PaceClient
             
             _configServer = new ConfigServer();
             _configServer.Changed += ConfigServerOnChanged;
+
+            LoadPlugIns();
         }
 
         private void LoadPlugIns()
         {
             if (_plugins != null)
             {
+                var threads = new Thread[_plugins.Length];
+                var i = 0;
+                
                 foreach (IClientPlugin plugin in _plugins)
                 {
                     if (plugin != null)
                     {
-                        plugin.SetForm(this);
                         plugin.SetQueue(ref _messageQueue);
-                        plugin.Start("TODO");
+                        plugin.SetForm(this);
+                        threads[i] = new Thread(LoadPlugIn);
+                        threads[i].Start(plugin);
                     }
                 }
             }
         }
+
+        private static void LoadPlugIn(object o)
+        {
+            var oplugin = (IClientPlugin) o;
+            oplugin.Start("TODO");
+        }
+
 
         private void OnLocation(object sender, EventArgs e)
         {

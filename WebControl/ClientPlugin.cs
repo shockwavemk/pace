@@ -60,6 +60,12 @@ namespace WebControl
             _mainPanel = mainPanel;
         }
 
+        public void StartBrowser()
+        {
+            var task = new Thread(ShowBrowser);
+            task.Start();
+        }
+
         public void SetTask(Message message)
         {
             TraceOps.Out("WebControl Client recived Message: "+ message.GetCommand());
@@ -74,11 +80,6 @@ namespace WebControl
         {
             var browserForm = new NewBrowser() {TopLevel = true};
             browserForm.Show();
-
-            while (_browserRunning)
-            {
-                Thread.Sleep(10);
-            }
         }
 
         public EventHandler SetEventHandler(object sender, EventArgs args)

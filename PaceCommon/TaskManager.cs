@@ -10,19 +10,15 @@ namespace PaceCommon
         private bool _running = true;
         private Thread _threadTasks;
         private MessageQueue _messageQueue;
-        private Hashtable _hashTable;
         private string _name;
 
         public delegate void TaskEventHandler(Message message);
         public event TaskEventHandler Task;
 
-        delegate void StartFormCallback(Message message);
-
         public TaskManager(ref MessageQueue messageQueue, ref string name)
         {
             _running = true;
             _messageQueue = messageQueue;
-            _hashTable = new Hashtable();
             _threadTasks = new Thread(Tasks);
             _threadTasks.Start();
             _name = name;

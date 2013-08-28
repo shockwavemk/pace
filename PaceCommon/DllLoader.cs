@@ -64,7 +64,7 @@ namespace PaceCommon
             {
                 if (type.BaseType != null && type.Name == "ClientPlugin")
                 {
-
+                    //var t = new Task(() => Console.WriteLine("Hello"));
                     var plugin = (IClientPlugin)Activator.CreateInstance(type);
                     list.Add(plugin);
                 }
