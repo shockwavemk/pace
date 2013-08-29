@@ -24,7 +24,7 @@ namespace WebControl
             {
                 TraceOps.Out(clientInformation.GetName());
                 var rlist = new List<string> { "" };
-                var m = new PaceCommon.Message(rlist, true, "start webcontrol", clientInformation.GetName());
+                var m = new PaceCommon.Message(rlist, true, "start_webcontrol", clientInformation.GetName());
                 _messageQueue.SetMessage(m);
             }
         }

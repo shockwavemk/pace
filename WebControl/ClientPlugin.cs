@@ -17,6 +17,9 @@ namespace WebControl
         private ClientView _view;
         private bool _browserRunning = true;
         private Thread _thread;
+        private Browser _browserForm;
+
+        delegate void PluginCallback();
 
         public IView GetView()
         {
@@ -33,14 +36,13 @@ namespace WebControl
             throw new NotImplementedException();
         }
 
+        [STAThread]
         public void Start(string name)
         {
             _name = name;
             _control = new ClientControl();
             _model = new ClientModel();
             _view = new ClientView();
-
-            ShowBrowser();
         }
 
         public void Test()
@@ -66,17 +68,17 @@ namespace WebControl
         public void SetTask(Message message)
         {
             TraceOps.Out("WebControl Client recived Message: "+ message.GetCommand());
-            if (message.GetCommand() == "start webcontrol")
+            if (message.GetCommand() == "start_webcontrol")
             {
-                var task = new Thread(ShowBrowser);
-                task.Start();
+                var d = new PluginCallback(ShowBrowser);
+                _mainPanel.Invoke(d, new object[] { });
             }
         }
 
         public void ShowBrowser()
         {
-            var browserForm = new Browser() {TopLevel = true};
-            browserForm.Show();
+            _browserForm = new Browser() {TopLevel = true};
+            _browserForm.Show();
         }
 
         public EventHandler SetEventHandler(object sender, EventArgs args)
