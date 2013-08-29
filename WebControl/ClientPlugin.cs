@@ -16,6 +16,7 @@ namespace WebControl
         private ClientModel _model;
         private ClientView _view;
         private bool _browserRunning = true;
+        private Thread _thread;
 
         public IView GetView()
         {
@@ -38,6 +39,8 @@ namespace WebControl
             _control = new ClientControl();
             _model = new ClientModel();
             _view = new ClientView();
+
+            ShowBrowser();
         }
 
         public void Test()
@@ -60,12 +63,6 @@ namespace WebControl
             _mainPanel = mainPanel;
         }
 
-        public void StartBrowser()
-        {
-            var task = new Thread(ShowBrowser);
-            task.Start();
-        }
-
         public void SetTask(Message message)
         {
             TraceOps.Out("WebControl Client recived Message: "+ message.GetCommand());
@@ -78,7 +75,7 @@ namespace WebControl
 
         public void ShowBrowser()
         {
-            var browserForm = new NewBrowser() {TopLevel = true};
+            var browserForm = new Browser() {TopLevel = true};
             browserForm.Show();
         }
 

@@ -46,7 +46,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Controls.Add(this.label1);
+            this.DoubleBuffered = true;
+            this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "NewBrowser";
+            this.ShowInTaskbar = false;
             this.Text = "NewBrowser";
             this.ResumeLayout(false);
             this.PerformLayout();

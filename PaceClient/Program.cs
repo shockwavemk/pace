@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PaceCommon;
@@ -16,12 +17,9 @@ namespace PaceClient
         [STAThread]
         static void Main()
         {
-            _dllLoader = new DllLoader();
-            _plugins = _dllLoader.LoadClientDlls(DllLoader.GetDllsPath(AppDomain.CurrentDomain.BaseDirectory));
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            _mcf = new MainClientForm(_plugins);
+            _mcf = new MainClientForm();
             Application.Run(_mcf);
         }
     }

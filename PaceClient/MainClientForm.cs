@@ -18,37 +18,51 @@ namespace PaceClient
         private TaskManager _taskManager;
         private NetworkClient _networkClient;
         private ConfigServer _configServer;
-        private IPlugin[] _plugins;
+        private IClientPlugin[] _plugins;
 
         
         
-        public MainClientForm(IClientPlugin[] plugins)
+        public MainClientForm()
         {
-            _plugins = plugins;
+            _plugins = LoadPlugins();
 
             InitializeComponent();
+            
+
+            LocationChanged += OnLocation;
+            FormClosing += MainClientForm_FormClosing;
+        }
+
+        private static IClientPlugin[] LoadPlugins()
+        {
+            var dllLoader = new DllLoader();
+            var plugins = dllLoader.LoadClientDlls(DllLoader.GetDllsPath(AppDomain.CurrentDomain.BaseDirectory));
+            return plugins;
+        }
+
+        private void LoadTray()
+        {
             tray_menu = new ContextMenu();
             tray_menu.MenuItems.Add(0, new MenuItem("Show", notifyIcon_DoubleClick));
             tray_menu.MenuItems.Add(0, new MenuItem("Exit", MainClientForm_Exit));
-            LocationChanged += OnLocation;
-            
-            FormClosing += MainClientForm_FormClosing;
         }
 
         private void MainClientForm_Load(object sender, EventArgs e)
         {
             TraceOps.LoadLog();
-            Services.PrepareGetService();
+            //Services.PrepareGetService();
 
-            Resize += MainClientForm_Resize;
-            notifyIcon.DoubleClick += notifyIcon_DoubleClick;
-            notifyIcon.ContextMenu = tray_menu;
-            notifyIcon.MouseClick += notifyIcon_MouseUp;
+            //Resize += MainClientForm_Resize;
+            //notifyIcon.DoubleClick += notifyIcon_DoubleClick;
+            //notifyIcon.ContextMenu = tray_menu;
+            //notifyIcon.MouseClick += notifyIcon_MouseUp;
             
-            _configServer = new ConfigServer();
-            _configServer.Changed += ConfigServerOnChanged;
+            //_configServer = new ConfigServer();
+            //_configServer.Changed += ConfigServerOnChanged;
 
-            LoadPlugIns();
+            //_plugins[0].Start("TODO");
+            //TraceOps.Out("test");
+            //LoadPlugIns();
         }
 
         private void LoadPlugIns()
