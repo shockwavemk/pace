@@ -19,80 +19,47 @@ namespace PaceClient
         private NetworkClient _networkClient;
         private ConfigServer _configServer;
         private IClientPlugin[] _plugins;
-
-        
         
         public MainClientForm()
         {
-            _plugins = LoadPlugins();
+            _plugins = DllLoader.LoadClientPlugIns();
 
             InitializeComponent();
-            
-
-            LocationChanged += OnLocation;
-            FormClosing += MainClientForm_FormClosing;
+            LoadWindowFunctions();
         }
-
-        private static IClientPlugin[] LoadPlugins()
-        {
-            var dllLoader = new DllLoader();
-            var plugins = dllLoader.LoadClientDlls(DllLoader.GetDllsPath(AppDomain.CurrentDomain.BaseDirectory));
-            return plugins;
-        }
-
+        
         private void LoadTray()
         {
             tray_menu = new ContextMenu();
             tray_menu.MenuItems.Add(0, new MenuItem("Show", notifyIcon_DoubleClick));
             tray_menu.MenuItems.Add(0, new MenuItem("Exit", MainClientForm_Exit));
+
+            notifyIcon.DoubleClick += notifyIcon_DoubleClick;
+            notifyIcon.ContextMenu = tray_menu;
+            notifyIcon.MouseClick += notifyIcon_MouseUp;
+        }
+
+        private void LoadWindowFunctions()
+        {
+            Resize += MainClientForm_Resize;
+            LocationChanged += MainClientForm_Location;
+            FormClosing += MainClientForm_FormClosing;
         }
 
         private void MainClientForm_Load(object sender, EventArgs e)
         {
             TraceOps.LoadLog();
-            //Services.PrepareGetService();
-
-            //Resize += MainClientForm_Resize;
-            //notifyIcon.DoubleClick += notifyIcon_DoubleClick;
-            //notifyIcon.ContextMenu = tray_menu;
-            //notifyIcon.MouseClick += notifyIcon_MouseUp;
+            Services.PrepareGetService();
             
-            //_configServer = new ConfigServer();
-            //_configServer.Changed += ConfigServerOnChanged;
+            _configServer = new ConfigServer();
+            _configServer.Changed += ConfigServerOnChanged;
 
-            //_plugins[0].Start("TODO");
-            //TraceOps.Out("test");
-            //LoadPlugIns();
-        }
-
-        private void LoadPlugIns()
-        {
-            if (_plugins != null)
-            {
-                var threads = new Thread[_plugins.Length];
-                var i = 0;
-                
-                foreach (IClientPlugin plugin in _plugins)
-                {
-                    if (plugin != null)
-                    {
-                        plugin.SetQueue(ref _messageQueue);
-                        plugin.SetForm(this);
-                        threads[i] = new Thread(LoadPlugIn);
-                        threads[i].Start(plugin);
-                    }
-                }
-            }
-        }
-
-        private static void LoadPlugIn(object o)
-        {
-            var oplugin = (IClientPlugin) o;
-            oplugin.Start("TODO");
+            DllLoader.InitializeClientPlugIns(_plugins, ref _messageQueue, _name, this);
         }
 
 
-        private void OnLocation(object sender, EventArgs e)
+
+        private void MainClientForm_Location(object sender, EventArgs e)
         {
             var location = Location;
             location.X += Width;
@@ -183,7 +150,14 @@ namespace PaceClient
         {
             var rlist = new List<string> { "" };
             var m = new Message(rlist, true, "ping", "Server");
-            _messageQueue.SetMessage(m);
+            if (_messageQueue != null)
+            {
+                _messageQueue.SetMessage(m);
+            }
+            else
+            {
+                TraceOps.Out("no connection to server message queue");
+            }
         }
 
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Windows.Forms;
 
 namespace PaceCommon
 {
@@ -42,6 +43,13 @@ namespace PaceCommon
             return list.ToArray();
         }
 
+        public static IServerPlugin[] LoadServerPlugIns()
+        {
+            var dllLoader = new DllLoader();
+            var plugins = dllLoader.LoadServerDlls(GetDllsPath(AppDomain.CurrentDomain.BaseDirectory));
+            return plugins;
+        }
+
 
         public IClientPlugin[] LoadClientDlls(string[] strings)
         {
@@ -64,12 +72,34 @@ namespace PaceCommon
             {
                 if (type.BaseType != null && type.Name == "ClientPlugin")
                 {
-                    //var t = new Task(() => Console.WriteLine("Hello"));
                     var plugin = (IClientPlugin)Activator.CreateInstance(type);
                     list.Add(plugin);
                 }
             }
             return list.ToArray();
+        }
+
+        public static IClientPlugin[] LoadClientPlugIns()
+        {
+            var dllLoader = new DllLoader();
+            var plugins = dllLoader.LoadClientDlls(GetDllsPath(AppDomain.CurrentDomain.BaseDirectory));
+            return plugins;
+        }
+
+        public static void InitializeClientPlugIns(IEnumerable<IPlugin> plugins, ref MessageQueue messageQueue, string name, Form mainForm)
+        {
+            if (plugins != null)
+            {
+                foreach (IClientPlugin plugin in plugins)
+                {
+                    if (plugin != null)
+                    {
+                        plugin.SetQueue(ref messageQueue);
+                        plugin.SetForm(mainForm);
+                        plugin.Start(name);
+                    }
+                }
+            }
         }
     }
 }

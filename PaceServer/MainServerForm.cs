@@ -12,26 +12,31 @@ namespace PaceServer
         private MessageQueue _messageQueue;
         private TaskManager _taskManager;
         private string _name;
-        private IPlugin[] _plugins;
+        private IServerPlugin[] _plugins;
         private MainServerForm _msf;
         private ClientsTable _clientsTableForm;
         private int _port;
 
         public delegate void FormResizeEventHandler();
 
-        public MainServerForm(IServerPlugin[] plugins)
+        public MainServerForm()
         {
             _msf = this;
             _port = 9090;
-            _plugins = plugins;
+            _plugins = DllLoader.LoadServerPlugIns();
+
             InitializeComponent();
-            
-            FormClosing += MainServerForm_FormClosing;
-            Resize += OnResize;
-            LocationChanged += OnLocation;
+            LoadWindowFunctions();
         }
 
-        private void OnResize(object sender, EventArgs e)
+        private void LoadWindowFunctions()
+        {
+            Resize += MainServerForm_Resize;
+            LocationChanged += MainServerForm_Location;
+            FormClosing += MainServerForm_FormClosing;
+        }
+
+        private void MainServerForm_Resize(object sender, EventArgs e)
         {
             if (_clientsTableForm.WindowState == FormWindowState.Maximized)
             {
@@ -39,7 +44,7 @@ namespace PaceServer
             }
         }
 
-        private void OnLocation(object sender, EventArgs e)
+        private void MainServerForm_Location(object sender, EventArgs e)
         {
             var location = Location;
             location.X += Width;
@@ -120,7 +125,7 @@ namespace PaceServer
                     {
                         plugin.SetQueue(ref _messageQueue);
                         plugin.SetForm(_msf);
-                        plugin.Start("TODO");
+                        plugin.Start(_name);
 
 
                         var plugInControl = (IServerControl) plugin.GetControl();
