@@ -17,7 +17,7 @@ namespace PaceServer
         private ListViewGroup _local, _remote, _server, _group;
         private IServerPlugin[] _plugins;
         private bool _running;
-        private NewConnection _newConnectionForm;
+        private ConnectionForm _newConnectionForm;
         private string _ip = NetworkOps.GetIpString(HashOps.GetFqdn());
         private int _port = 9090;
 
@@ -196,7 +196,7 @@ namespace PaceServer
 
         private void newConnectionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _newConnectionForm = new NewConnection() { TopLevel = true };
+            _newConnectionForm = new ConnectionForm() { TopLevel = true };
             if (_newConnectionForm.ShowDialog() == DialogResult.OK)
             {
                 var ip = NetworkOps.GetIpString(_newConnectionForm.textBoxUri.Text);

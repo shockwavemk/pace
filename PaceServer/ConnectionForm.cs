@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace PaceServer
 {
-    public partial class NewConnection : Form
+    public partial class ConnectionForm : Form
     {
-        public NewConnection()
+        public ConnectionForm()
         {
             InitializeComponent();
         }

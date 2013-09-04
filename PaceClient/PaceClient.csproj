@@ -23,11 +23,17 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>http://pace.martin-kramer.com/paceclient/</InstallUrl>
+    <SupportUrl>https://github.com/shockwavemk/pace/wiki</SupportUrl>
+    <ErrorReportUrl>https://github.com/shockwavemk/pace/issues</ErrorReportUrl>
+    <ProductName>Pace Client</ProductName>
+    <PublisherName>Universität Paderborn</PublisherName>
+    <SuiteName>PAderborn Control system for economic Experiments</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
-    <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>8</ApplicationRevision>
+    <WebPage>index.htm</WebPage>
+    <ApplicationRevision>13</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -121,6 +127,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="pc.ico" />
+    <Content Include="WebControl.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
@@ -144,6 +153,17 @@
       <Project>{27991f0d-6e24-47df-83d6-08f921a134eb}</Project>
       <Name>PaceCommon</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="WebControl.dll">
+      <Visible>False</Visible>
+      <Group>Plugin</Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>DataFile</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

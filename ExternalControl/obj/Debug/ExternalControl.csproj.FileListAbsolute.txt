@@ -2,3 +2,4 @@ C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\ExternalContro
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\ExternalControl\bin\Debug\ExternalControl.pdb
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\ExternalControl\obj\Debug\ExternalControl.dll
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\ExternalControl\obj\Debug\ExternalControl.pdb
+C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\ExternalControl\obj\Debug\ExternalControl.csprojResolveAssemblyReference.cache

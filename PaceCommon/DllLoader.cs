@@ -10,6 +10,7 @@ namespace PaceCommon
     {
         public static string[] GetDllsPath(string path)
         {
+            TraceOps.Out("Looking for Plugins in: "+path);
             var filePaths = Directory.GetFiles(path, "*.dll");
             return filePaths;
         }
@@ -19,6 +20,7 @@ namespace PaceCommon
             var list = new List<IServerPlugin>();
             foreach (var s in strings)
             {
+                TraceOps.Out("Lade Plugin: "+s);
                 list.AddRange(ServerDllLoad(s)); 
             }
             return list.ToArray();
@@ -35,7 +37,7 @@ namespace PaceCommon
             {
                 if (type.BaseType != null && type.Name == "ServerPlugin")
                 {
-                    
+                    TraceOps.Out("Lade ServerPlugin");
                     var plugin = (IServerPlugin) Activator.CreateInstance(type);
                     list.Add(plugin);
                 }
@@ -50,12 +52,20 @@ namespace PaceCommon
             return plugins;
         }
 
+        public static IServerPlugin[] LoadServerPlugInsExternal(string path)
+        {
+            var dllLoader = new DllLoader();
+            var plugins = dllLoader.LoadServerDlls(GetDllsPath(path));
+            return plugins;
+        }
+
 
         public IClientPlugin[] LoadClientDlls(string[] strings)
         {
             var list = new List<IClientPlugin>();
             foreach (var s in strings)
             {
+                TraceOps.Out("Lade Plugin: " + s);
                 list.AddRange(ClientDllLoad(s));
             }
             return list.ToArray();
@@ -72,6 +82,7 @@ namespace PaceCommon
             {
                 if (type.BaseType != null && type.Name == "ClientPlugin")
                 {
+                    TraceOps.Out("Lade ClientPlugin");
                     var plugin = (IClientPlugin)Activator.CreateInstance(type);
                     list.Add(plugin);
                 }
@@ -83,6 +94,13 @@ namespace PaceCommon
         {
             var dllLoader = new DllLoader();
             var plugins = dllLoader.LoadClientDlls(GetDllsPath(AppDomain.CurrentDomain.BaseDirectory));
+            return plugins;
+        }
+
+        public static IClientPlugin[] LoadClientPlugInsExternal(string path)
+        {
+            var dllLoader = new DllLoader();
+            var plugins = dllLoader.LoadClientDlls(GetDllsPath(path));
             return plugins;
         }
 

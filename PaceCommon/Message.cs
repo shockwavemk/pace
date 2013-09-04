@@ -9,6 +9,7 @@ namespace PaceCommon
     [Serializable]
     public class Message
     {
+        private string Source { get; set; }
         private string Destination { get; set; }
         private string Command { get; set; }
         private Array _parameter;
@@ -35,6 +36,7 @@ namespace PaceCommon
             Acknowledgement = false;
             Command = "ping";
             Destination = "Server";
+            Source = "Server";
         }
 
         public string GetDestination()

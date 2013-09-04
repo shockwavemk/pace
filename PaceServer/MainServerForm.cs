@@ -24,6 +24,10 @@ namespace PaceServer
             _msf = this;
             _port = 9090;
             _plugins = DllLoader.LoadServerPlugIns();
+            if (_plugins.Length < 1)
+            {
+                _plugins = DllLoader.LoadServerPlugInsExternal("C:\\Plugins\\");
+            }
 
             InitializeComponent();
             LoadWindowFunctions();

@@ -11,7 +11,7 @@ namespace PaceClient
     public partial class MainClientForm : Form
     {
         private const int Threshold = 100;
-        private ContextMenu tray_menu;
+        private ContextMenu _trayMenu;
         private ConnectionTable _connectionTable;
         private MessageQueue _messageQueue;
         private string _name;
@@ -23,6 +23,10 @@ namespace PaceClient
         public MainClientForm()
         {
             _plugins = DllLoader.LoadClientPlugIns();
+            if (_plugins.Length < 1)
+            {
+                _plugins = DllLoader.LoadClientPlugInsExternal("C:\\Plugins\\");
+            }
 
             InitializeComponent();
             LoadWindowFunctions();
@@ -30,12 +34,12 @@ namespace PaceClient
         
         private void LoadTray()
         {
-            tray_menu = new ContextMenu();
-            tray_menu.MenuItems.Add(0, new MenuItem("Show", notifyIcon_DoubleClick));
-            tray_menu.MenuItems.Add(0, new MenuItem("Exit", MainClientForm_Exit));
+            _trayMenu = new ContextMenu();
+            _trayMenu.MenuItems.Add(0, new MenuItem("Show", notifyIcon_DoubleClick));
+            _trayMenu.MenuItems.Add(0, new MenuItem("Exit", MainClientForm_Exit));
 
             notifyIcon.DoubleClick += notifyIcon_DoubleClick;
-            notifyIcon.ContextMenu = tray_menu;
+            notifyIcon.ContextMenu = _trayMenu;
             notifyIcon.MouseClick += notifyIcon_MouseUp;
         }
 
@@ -97,12 +101,6 @@ namespace PaceClient
         {
             switch (message.GetCommand())
             {
-                case "":
-                    Console.WriteLine("Case 1");
-                    break;
-                case "a":
-                    Console.WriteLine("Case 2");
-                    break;
                 default:
                     TraceOps.Out(message.GetCommand());
                     break;

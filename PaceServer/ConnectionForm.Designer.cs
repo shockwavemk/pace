@@ -1,6 +1,6 @@
 ﻿namespace PaceServer
 {
-    partial class NewConnection
+    partial class ConnectionForm
     {
         /// <summary>
         /// Required designer variable.
