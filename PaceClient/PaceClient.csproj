@@ -26,11 +26,11 @@
     <SupportUrl>https://github.com/shockwavemk/pace/wiki</SupportUrl>
     <ErrorReportUrl>https://github.com/shockwavemk/pace/issues</ErrorReportUrl>
     <ProductName>Pace Client</ProductName>
-    <PublisherName>Universität Paderborn</PublisherName>
-    <SuiteName>PAderborn Control system for economic Experiments</SuiteName>
+    <PublisherName>University of Paderborn</PublisherName>
+    <SuiteName>Pace</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.htm</WebPage>
-    <ApplicationRevision>13</ApplicationRevision>
+    <ApplicationRevision>17</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>

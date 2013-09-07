@@ -35,7 +35,7 @@ namespace PaceClientUninstall
                 if (MessageBox.Show(Resources.Uninstall_Question, Resources.Uninstall + Globals.ProductName,
                                         MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    var clickOnceHelper = new ClickOnceHelper(Globals.PublisherName, Globals.ProductName);
+                    var clickOnceHelper = new ClickOnceHelper(Globals.PublisherName, Globals.ProductName, Globals.ProductSuite);
                     clickOnceHelper.Uninstall();
 
                     //Delete all files from publisher folder and folder itself on uninstall

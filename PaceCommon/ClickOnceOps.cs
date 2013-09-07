@@ -29,14 +29,17 @@ namespace PaceCommon
 
         public string PublisherName { get; private set; }
         public string ProductName { get; private set; }
+        public string ProductSuite { get; private set; }
         public string UninstallFile { get; private set; }
 
-        public ClickOnceHelper(string publisherName, string productName)
+        public ClickOnceHelper(string publisherName, string productName, string productSuite)
         {
             PublisherName = publisherName;
             ProductName = productName;
+            ProductSuite = productSuite;
 
-            var publisherFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), PublisherName);
+            var publisherCombinedName = PublisherName + "\\" + ProductSuite;
+            var publisherFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), publisherCombinedName);
             if (!Directory.Exists(publisherFolder))
                 Directory.CreateDirectory(publisherFolder);
             UninstallFile = Path.Combine(publisherFolder, UninstallStringFile);
@@ -47,7 +50,8 @@ namespace PaceCommon
         private string GetShortcutPath()
         {
             var allProgramsPath = Environment.GetFolderPath(Environment.SpecialFolder.Programs);
-            var shortcutPath = Path.Combine(allProgramsPath, PublisherName);
+            var publisherCombinedName = PublisherName + "\\" + ProductSuite;
+            var shortcutPath = Path.Combine(allProgramsPath, publisherCombinedName);
             return Path.Combine(shortcutPath, ProductName) + ApprefExtension;
         }
 
@@ -251,6 +255,11 @@ namespace PaceCommon
         public static string ProductName
         {
             get { return "Pace Client"; }
+        }
+
+        public static string ProductSuite
+        {
+            get { return "Pace"; }
         }
 
         public static string Host

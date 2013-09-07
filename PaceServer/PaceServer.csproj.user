@@ -3,10 +3,10 @@
   <PropertyGroup>
     <PublishUrlHistory>ftp://pace.martin-kramer.com/paceserver/|ftp://pace.martin-kramer.com/|V:\paceserver\|veröffentlichen\</PublishUrlHistory>
     <InstallUrlHistory>http://pace.martin-kramer.com/paceserver/|http://pace.martin-kramer.com/</InstallUrlHistory>
-    <SupportUrlHistory />
+    <SupportUrlHistory>https://github.com/shockwavemk/pace/wiki</SupportUrlHistory>
     <UpdateUrlHistory />
     <BootstrapperUrlHistory />
-    <ErrorReportUrlHistory />
+    <ErrorReportUrlHistory>https://github.com/shockwavemk/pace/issues</ErrorReportUrlHistory>
     <FallbackCulture>de-DE</FallbackCulture>
     <VerifyUploadedFiles>false</VerifyUploadedFiles>
   </PropertyGroup>

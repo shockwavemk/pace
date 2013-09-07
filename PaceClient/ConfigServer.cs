@@ -39,77 +39,85 @@ namespace PaceClient
 
         private void ConfigTasks()
         {
-            Byte[] data;
-            String responseData = String.Empty;
-            var server = new TcpListener(IPAddress.Any, _port);
-            server.Start();
-            
-            while (_running)
+            try
             {
-                
+                Byte[] data;
+                String responseData = String.Empty;
+                var server = new TcpListener(IPAddress.Any, _port);
+                server.Start();
 
-                Thread.Sleep(Threshold);
-                while (!server.Pending()) { Thread.Sleep(Threshold); }
-
-                TcpClient client = server.AcceptTcpClient();
-                NetworkStream stream = client.GetStream();
-
-                IPEndPoint remoteIpEndPoint = client.Client.RemoteEndPoint as IPEndPoint;
-                IPEndPoint localIpEndPoint = client.Client.LocalEndPoint as IPEndPoint;
-
-                if (remoteIpEndPoint != null) { TraceOps.Out(remoteIpEndPoint.Address + " : " + remoteIpEndPoint.Port); }
-                if (localIpEndPoint != null) { TraceOps.Out(localIpEndPoint.Address + " : " + localIpEndPoint.Port);
-                }
-
-
-                while (client.Connected)
+                while (_running)
                 {
                     Thread.Sleep(Threshold);
-                    data = new Byte[1024];
-                    var connectIp = "";
-                    var connectPort = 0;
+                    while (!server.Pending()) { Thread.Sleep(Threshold); }
 
-                    Int32 bytes = stream.Read(data, 0, data.Length);
-                    responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
-                    if (responseData != "")
+                    TcpClient client = server.AcceptTcpClient();
+                    NetworkStream stream = client.GetStream();
+
+                    IPEndPoint remoteIpEndPoint = client.Client.RemoteEndPoint as IPEndPoint;
+                    IPEndPoint localIpEndPoint = client.Client.LocalEndPoint as IPEndPoint;
+
+                    if (remoteIpEndPoint != null) { TraceOps.Out(remoteIpEndPoint.Address + " : " + remoteIpEndPoint.Port); }
+                    if (localIpEndPoint != null)
                     {
-                        
-                        if (responseData.IndexOf("<PORT>", StringComparison.Ordinal) > 0)
-                        {
-                            connectPort = Convert.ToInt32(NetworkOps.GetValue("PORT", responseData)); 
-                            TraceOps.Out("Recived PORT: "+connectPort); 
-                        }
-                        if (responseData.IndexOf("<IP>", StringComparison.Ordinal) > 0)
-                        {
-                            connectIp = NetworkOps.GetValue("IP", responseData);
-                            connectIp = NetworkOps.GetIpString(connectIp);
-                            TraceOps.Out("Recived IP: "+connectIp);
-                        }
+                        TraceOps.Out(localIpEndPoint.Address + " : " + localIpEndPoint.Port);
+                    }
 
-                        if (responseData.IndexOf("</XML>", StringComparison.Ordinal) > 0)
-                        {
-                            stream.Close();
-                            client.Close(); 
 
-                            if (connectIp != "" && connectPort != 0 && remoteIpEndPoint != null)
+                    while (client.Connected)
+                    {
+                        Thread.Sleep(Threshold);
+                        data = new Byte[1024];
+                        var connectIp = "";
+                        var connectPort = 0;
+
+                        Int32 bytes = stream.Read(data, 0, data.Length);
+                        responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
+                        if (responseData != "")
+                        {
+
+                            if (responseData.IndexOf("<PORT>", StringComparison.Ordinal) > 0)
                             {
-                                var e = new ChangedEventArgs(remoteIpEndPoint.Address.ToString(), connectPort);
-                                OnChanged(e);
+                                connectPort = Convert.ToInt32(NetworkOps.GetValue("PORT", responseData));
+                                TraceOps.Out("Recived PORT: " + connectPort);
                             }
-                            TraceOps.Out("Recived End");
+                            if (responseData.IndexOf("<IP>", StringComparison.Ordinal) > 0)
+                            {
+                                connectIp = NetworkOps.GetValue("IP", responseData);
+                                connectIp = NetworkOps.GetIpString(connectIp);
+                                TraceOps.Out("Recived IP: " + connectIp);
+                            }
+
+                            if (responseData.IndexOf("</XML>", StringComparison.Ordinal) > 0)
+                            {
+                                stream.Close();
+                                client.Close();
+
+                                if (connectIp != "" && connectPort != 0 && remoteIpEndPoint != null)
+                                {
+                                    var e = new ChangedEventArgs(remoteIpEndPoint.Address.ToString(), connectPort);
+                                    OnChanged(e);
+                                }
+                                TraceOps.Out("Recived End");
+                            }
                         }
                     }
-                }
 
-                TraceOps.Out("Close Stream and TCP Connection");
+                    TraceOps.Out("Close Stream and TCP Connection");
 
-                if (client.Connected)
-                {
-                    stream.Close();
-                    client.Close(); 
+                    if (client.Connected)
+                    {
+                        stream.Close();
+                        client.Close();
+                    }
                 }
+                server.Stop();
             }
-            server.Stop();
+            catch (Exception exception)
+            {
+                TraceOps.Out(exception.ToString());
+            }
+            
         }
     }
 

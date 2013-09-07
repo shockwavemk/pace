@@ -12,7 +12,7 @@ namespace PaceCommon
         {
             try
             {
-                var clickOnceHelper = new ClickOnceHelper(Globals.PublisherName, Globals.ProductName);
+                var clickOnceHelper = new ClickOnceHelper(Globals.PublisherName, Globals.ProductName, Globals.ProductSuite);
                 clickOnceHelper.UpdateUninstallParameters();
                 clickOnceHelper.AddShortcutToStartup();
             }

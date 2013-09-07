@@ -27,10 +27,10 @@
     <ErrorReportUrl>https://github.com/shockwavemk/pace/issues</ErrorReportUrl>
     <ProductName>Pace Server</ProductName>
     <PublisherName>University of Paderborn</PublisherName>
-    <SuiteName>PAderborn Control system for economic Experiments</SuiteName>
+    <SuiteName>Pace</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.htm</WebPage>
-    <ApplicationRevision>12</ApplicationRevision>
+    <ApplicationRevision>14</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
