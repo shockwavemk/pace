@@ -88,11 +88,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClientsTable.cs">
+    <Compile Include="ClientsTableForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ClientsTable.designer.cs">
-      <DependentUpon>ClientsTable.cs</DependentUpon>
+    <Compile Include="ClientsTableForm.designer.cs">
+      <DependentUpon>ClientsTableForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MainServerForm.cs">
       <SubType>Form</SubType>
@@ -106,16 +106,31 @@
     <Compile Include="ConnectionForm.Designer.cs">
       <DependentUpon>ConnectionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PreferencesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PreferencesForm.Designer.cs">
+      <DependentUpon>PreferencesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ClientsTable.resx">
-      <DependentUpon>ClientsTable.cs</DependentUpon>
+    <Compile Include="SecurityOptionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SecurityOptionsForm.Designer.cs">
+      <DependentUpon>SecurityOptionsForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="ClientsTableForm.resx">
+      <DependentUpon>ClientsTableForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainServerForm.resx">
       <DependentUpon>MainServerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ConnectionForm.resx">
       <DependentUpon>ConnectionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PreferencesForm.resx">
+      <DependentUpon>PreferencesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -126,6 +141,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="SecurityOptionsForm.resx">
+      <DependentUpon>SecurityOptionsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="ClassDiagram1.cd" />
     <None Include="PACE.snk" />
     <None Include="PaceServer_TemporaryKey.pfx" />

@@ -35,13 +35,15 @@
             this.Run = new System.Windows.Forms.ToolStripMenuItem();
             this.View = new System.Windows.Forms.ToolStripMenuItem();
             this.clientsTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Help = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutPaCEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.mainPanel = new System.Windows.Forms.Panel();
-            this.logFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.securityOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -63,6 +65,8 @@
             // 
             // File
             // 
+            this.File.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.preferencesToolStripMenuItem});
             this.File.Name = "File";
             this.File.Size = new System.Drawing.Size(37, 20);
             this.File.Text = "File";
@@ -84,7 +88,8 @@
             // 
             this.View.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.clientsTableToolStripMenuItem,
-            this.logFileToolStripMenuItem});
+            this.logFileToolStripMenuItem,
+            this.securityOptionsToolStripMenuItem});
             this.View.Name = "View";
             this.View.Size = new System.Drawing.Size(44, 20);
             this.View.Text = "View";
@@ -92,9 +97,16 @@
             // clientsTableToolStripMenuItem
             // 
             this.clientsTableToolStripMenuItem.Name = "clientsTableToolStripMenuItem";
-            this.clientsTableToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.clientsTableToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.clientsTableToolStripMenuItem.Text = "Clients\' Table";
             this.clientsTableToolStripMenuItem.Click += new System.EventHandler(this.clientsTableToolStripMenuItem_Click);
+            // 
+            // logFileToolStripMenuItem
+            // 
+            this.logFileToolStripMenuItem.Name = "logFileToolStripMenuItem";
+            this.logFileToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.logFileToolStripMenuItem.Text = "Logfile Viewer";
+            this.logFileToolStripMenuItem.Click += new System.EventHandler(this.logFileToolStripMenuItem_Click);
             // 
             // Help
             // 
@@ -144,12 +156,19 @@
             this.mainPanel.TabIndex = 4;
             this.mainPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.mainPanel_Paint);
             // 
-            // logFileToolStripMenuItem
+            // securityOptionsToolStripMenuItem
             // 
-            this.logFileToolStripMenuItem.Name = "logFileToolStripMenuItem";
-            this.logFileToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.logFileToolStripMenuItem.Text = "Logfile Viewer";
-            this.logFileToolStripMenuItem.Click += new System.EventHandler(this.logFileToolStripMenuItem_Click);
+            this.securityOptionsToolStripMenuItem.Name = "securityOptionsToolStripMenuItem";
+            this.securityOptionsToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.securityOptionsToolStripMenuItem.Text = "Security Options";
+            this.securityOptionsToolStripMenuItem.Click += new System.EventHandler(this.securityOptionsToolStripMenuItem_Click);
+            // 
+            // preferencesToolStripMenuItem
+            // 
+            this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
+            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.preferencesToolStripMenuItem.Text = "Preferences";
+            this.preferencesToolStripMenuItem.Click += new System.EventHandler(this.preferencesToolStripMenuItem_Click);
             // 
             // MainServerForm
             // 
@@ -192,6 +211,8 @@
         private System.Windows.Forms.ToolStripMenuItem aboutPaCEToolStripMenuItem;
         private System.Windows.Forms.Panel mainPanel;
         private System.Windows.Forms.ToolStripMenuItem logFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem preferencesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem securityOptionsToolStripMenuItem;
     }
 }
 

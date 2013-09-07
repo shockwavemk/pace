@@ -10,7 +10,7 @@ using PaceCommon;
 
 namespace PaceServer
 {
-    public partial class ClientsTable : Form
+    public partial class ClientsTableForm : Form
     {
         private ConnectionTable _connectionTable;
         private MessageQueue _messageQueue;
@@ -24,7 +24,7 @@ namespace PaceServer
         delegate void UpdateClientTableCallback();
 
 
-        public ClientsTable(ref IServerPlugin[] plugins, int port)
+        public ClientsTableForm(ref IServerPlugin[] plugins, int port)
         {
             _plugins = plugins;
             _port = port;
@@ -158,42 +158,7 @@ namespace PaceServer
                 }
             }
         }
-
-        private void SetUpClientConnectionConfig(string ip, int port)
-        {
-            try
-            {
-                TraceOps.Out("try to connect to "+ ip + " : "+port);
-                var tcpClient = new TcpClient();
-                try
-                {
-                   tcpClient.Connect(ip, port);
-                   TraceOps.Out("Connected with "+ tcpClient.Client.RemoteEndPoint);
-                }
-                catch (Exception e)
-                {
-                    TraceOps.Out(e.ToString());
-                }
-                if (tcpClient.Connected)
-                {
-                    var networkStream = tcpClient.GetStream();
-                    var streamWriter = new StreamWriter(networkStream);
-                    TraceOps.Out("Send data to "+tcpClient.Client.RemoteEndPoint);
-                    streamWriter.WriteLine("<XML>");
-                    streamWriter.WriteLine("<IP>"+_ip+"</IP>");
-                    streamWriter.WriteLine("<PORT>"+_port+"</PORT>");
-                    streamWriter.WriteLine("</XML>");
-                    streamWriter.Flush();
-                    tcpClient.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Cannot establish connection to network. Please try again.\r\n"+ex);
-            }
-        }
-
-
+        
         private void newConnectionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _newConnectionForm = new ConnectionForm() { TopLevel = true };
@@ -202,7 +167,11 @@ namespace PaceServer
                 var ip = NetworkOps.GetIpString(_newConnectionForm.textBoxUri.Text);
                 var port = NetworkOps.GetPort(_newConnectionForm.textBoxPort.Text);
                 
-                SetUpClientConnectionConfig(ip, port);
+                var connected = NetworkOps.SetUpClientConnectionConfig(ip, port,_ip, _port);
+                if (!connected)
+                {
+                    MessageBox.Show("Cannot establish connection to network. Please try again.\r\n");
+                }
             }
         }
 
@@ -248,7 +217,7 @@ namespace PaceServer
                     IPHostEntry he = Dns.GetHostEntry(connection.ip);
                     var dns = he.AddressList[1].ToString();
                     var ip = NetworkOps.GetIpString(dns);
-                    SetUpClientConnectionConfig(ip, connection.port);
+                    NetworkOps.SetUpClientConnectionConfig(ip, connection.port, _ip, _port);
                 }
             }
         }
@@ -311,7 +280,7 @@ namespace PaceServer
 
         private void tempServerConnectionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SetUpClientConnectionConfig("131.234.150.135", 9091);
+            NetworkOps.SetUpClientConnectionConfig("131.234.150.135", 9091, _ip, _port);
         }
 
         private void connectionToolStripMenuItem_Click(object sender, EventArgs e)

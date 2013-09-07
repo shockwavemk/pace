@@ -14,7 +14,7 @@ namespace PaceServer
         private string _name;
         private IServerPlugin[] _plugins;
         private MainServerForm _msf;
-        private ClientsTable _clientsTableForm;
+        private ClientsTableForm _clientsTableForm;
         private int _port;
 
         public delegate void FormResizeEventHandler();
@@ -113,7 +113,7 @@ namespace PaceServer
 
         private void LoadClientsTable()
         {
-            _clientsTableForm = new ClientsTable(ref _plugins, _port) { TopLevel = false };
+            _clientsTableForm = new ClientsTableForm(ref _plugins, _port) { TopLevel = false };
                
             mainPanel.Controls.Add(_clientsTableForm);
             _clientsTableForm.Visible = true;
@@ -224,6 +224,28 @@ namespace PaceServer
         private void logFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             TraceOps.LoadLog();
+        }
+
+        private void preferencesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var preferencesForm = new PreferencesForm() { TopLevel = true };
+            if (preferencesForm.ShowDialog() == DialogResult.OK)
+            {
+                var startOnSystemStart = preferencesForm.checkBoxRunOnStartup.Checked;
+                if (startOnSystemStart)
+                {
+                    TraceOps.Out("Set PaceServer Preferences.\r\n");
+                }
+            }
+        }
+
+        private void securityOptionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var securityOptionsForm = new SecurityOptionsForm() { TopLevel = true };
+            if (securityOptionsForm.ShowDialog() == DialogResult.OK)
+            {
+                    TraceOps.Out("Set PaceServer Security.\r\n");
+            }
         }
     }
 

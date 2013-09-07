@@ -42,26 +42,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PaceCommon.dll" size="26112">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PaceCommon.dll" size="27136">
       <assemblyIdentity name="PaceCommon" version="1.0.0.0" publicKeyToken="CCCA99897E8D5282" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>or08jrGTfQZC7opCqUjoNZxuMOpOsWs24KV0ZPuszWo=</dsig:DigestValue>
+        <dsig:DigestValue>dqcfoH237+Vef3OhQKHOpAhWfsYGUBmk8L0g9lwwL7U=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PaceServer.exe" size="221184">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PaceServer.exe" size="223744">
       <assemblyIdentity name="PaceServer" version="1.0.0.0" publicKeyToken="CCCA99897E8D5282" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>MWsS0IUxWu5huxM381XDUOf3ejbEizoQ/MlD5tUl63c=</dsig:DigestValue>
+        <dsig:DigestValue>7DSyb6+rgvoqL3q2rC6Q00SRbAZKCSxoWyBdv0Yt/6U=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -80,7 +80,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>SrT9cpPeowRoYldUFUmToWrGYkhEwaKaxLc9bTmXJuo=</dsig:DigestValue>
+      <dsig:DigestValue>nIwpxMpaZgVkF8D9ybZ/RKO//wYYQV9uYSHPQVRhudQ=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>
