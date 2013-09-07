@@ -4,6 +4,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaceClient", "PaceClient\PaceClient.csproj", "{BA89B796-3F4C-4B7A-9B75-A753C85A92EF}"
 	ProjectSection(ProjectDependencies) = postProject
 		{F5CE8C1C-CFA4-4997-B73E-BD0A48500700} = {F5CE8C1C-CFA4-4997-B73E-BD0A48500700}
+		{51191999-3427-42BB-8AC5-8B7518D4CF6D} = {51191999-3427-42BB-8AC5-8B7518D4CF6D}
 		{B38E22C4-35D2-4B5A-BD7F-385104A8397A} = {B38E22C4-35D2-4B5A-BD7F-385104A8397A}
 	EndProjectSection
 EndProject
@@ -21,6 +22,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebControl", "WebControl\WebControl.csproj", "{B38E22C4-35D2-4B5A-BD7F-385104A8397A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExternalControl", "ExternalControl\ExternalControl.csproj", "{F5CE8C1C-CFA4-4997-B73E-BD0A48500700}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaceClientUninstall", "PaceClientUninstall\PaceClientUninstall.csproj", "{51191999-3427-42BB-8AC5-8B7518D4CF6D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,6 +55,10 @@ Global
 		{F5CE8C1C-CFA4-4997-B73E-BD0A48500700}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5CE8C1C-CFA4-4997-B73E-BD0A48500700}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5CE8C1C-CFA4-4997-B73E-BD0A48500700}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51191999-3427-42BB-8AC5-8B7518D4CF6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51191999-3427-42BB-8AC5-8B7518D4CF6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51191999-3427-42BB-8AC5-8B7518D4CF6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51191999-3427-42BB-8AC5-8B7518D4CF6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

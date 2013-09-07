@@ -30,6 +30,7 @@ namespace PaceClient
 
             InitializeComponent();
             LoadWindowFunctions();
+            LoadTray();
         }
         
         private void LoadTray()
@@ -54,6 +55,7 @@ namespace PaceClient
         {
             TraceOps.LoadLog();
             Services.PrepareGetService();
+            SystemOps.SetAutoStart();
             
             _configServer = new ConfigServer();
             _configServer.Changed += ConfigServerOnChanged;

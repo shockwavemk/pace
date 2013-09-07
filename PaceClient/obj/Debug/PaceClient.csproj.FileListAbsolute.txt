@@ -25,7 +25,6 @@ C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClient\bin
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClient\bin\Debug\PaceClient.pdb
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClient\bin\Debug\PaceCommon.dll
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClient\bin\Debug\PaceCommon.pdb
-C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClient\obj\Debug\PaceClient.csprojResolveAssemblyReference.cache
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClient\obj\Debug\PaceClient.MainClientForm.resources
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClient\obj\Debug\PaceClient.Properties.Resources.resources
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClient\obj\Debug\PaceClient.csproj.GenerateResource.Cache
@@ -36,3 +35,4 @@ C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClient\bin
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClient\obj\Debug\PaceClient.exe.manifest
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClient\obj\Debug\PaceClient.application
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClient\bin\Debug\WebControl.dll
+C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClient\obj\Debug\PaceClient.csprojResolveAssemblyReference.cache

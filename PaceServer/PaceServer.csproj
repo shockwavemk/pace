@@ -74,6 +74,9 @@
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>PACE.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>ps.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -178,6 +181,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ps.ico" />
     <Content Include="WebControl.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

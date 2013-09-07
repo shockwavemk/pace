@@ -74,6 +74,9 @@
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>PACE.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>pc.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -127,6 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="pc.ico" />
+    <Content Include="uninstall.exe" />
     <Content Include="WebControl.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -154,17 +158,7 @@
       <Name>PaceCommon</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <PublishFile Include="WebControl.dll">
-      <Visible>False</Visible>
-      <Group>Plugin</Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>DataFile</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>File</FileType>
-    </PublishFile>
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
