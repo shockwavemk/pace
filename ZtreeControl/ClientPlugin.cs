@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using PaceCommon;
 using Message = PaceCommon.Message;
 
-namespace WebControl
+namespace ZtreeControl
 {
     class ClientPlugin : IClientPlugin
     {
@@ -14,9 +14,7 @@ namespace WebControl
         private ClientControl _control;
         private ClientModel _model;
         private ClientView _view;
-        private bool _browserRunning = true;
         private Thread _thread;
-        private Browser _browserForm;
 
         delegate void PluginCallback();
 
@@ -66,7 +64,7 @@ namespace WebControl
 
         public void SetTask(Message message)
         {
-            TraceOps.Out("WebControl Client recived Message: "+ message.GetCommand());
+            TraceOps.Out("ZtreeControl Client recived Message: " + message.GetCommand());
             if (message.GetCommand() == "start_webcontrol")
             {
                 var d = new PluginCallback(ShowBrowser);
@@ -76,13 +74,13 @@ namespace WebControl
 
         public void ShowBrowser()
         {
-            _browserForm = new Browser() {TopLevel = true};
-            _browserForm.Show();
+            
         }
 
         public EventHandler SetEventHandler(object sender, EventArgs args)
         {
-            return delegate {
+            return delegate
+            {
                 MessageBox.Show("Test" + sender.ToString());
             };
         }

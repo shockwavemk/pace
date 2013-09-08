@@ -478,7 +478,7 @@ namespace WebControl
                     Stream s = response.GetResponseStream();
                     return Image.FromStream(s);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return Image.FromFile(file);
                 }

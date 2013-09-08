@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PaceCommon;
 
-namespace WebControl
+namespace ZtreeControl
 {
     public class ClientView : IClientView
     {

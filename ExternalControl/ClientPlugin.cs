@@ -3,48 +3,60 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using PaceCommon;
+using Message = PaceCommon.Message;
 
-namespace WebControl
+namespace ExternalControl
 {
-    public class ClientView : IClientView
+    class ClientPlugin : IClientPlugin
     {
-        public string Test()
+        public IView GetView()
         {
             throw new NotImplementedException();
         }
 
-        public System.Windows.Forms.ToolStripMenuItem CreateMainMenu()
+        public IControl GetControl()
         {
             throw new NotImplementedException();
         }
 
-        public System.Windows.Forms.ToolStripMenuItem CreateClientsTableMenu()
+        public IModel GetModel()
         {
             throw new NotImplementedException();
         }
 
-        public System.Windows.Forms.ToolStripMenuItem CreateMainMenuEntryFile()
+        public void Start(string name)
         {
             throw new NotImplementedException();
         }
 
-        public System.Windows.Forms.ToolStripMenuItem CreateMainMenuEntryEdit()
+        public void Test()
         {
             throw new NotImplementedException();
         }
 
-        public System.Windows.Forms.ToolStripMenuItem CreateMainMenuEntryRun()
+        public string Name()
         {
             throw new NotImplementedException();
         }
 
-        public System.Windows.Forms.ToolStripMenuItem CreateMainMenuEntryView()
+        public void SetQueue(ref MessageQueue messageQueue)
         {
             throw new NotImplementedException();
         }
 
-        public System.Windows.Forms.ToolStripMenuItem CreateMainMenuEntryHelp()
+        public void SetForm(Form mainPanel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetTask(Message message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public EventHandler SetEventHandler(object sender, EventArgs args)
         {
             throw new NotImplementedException();
         }

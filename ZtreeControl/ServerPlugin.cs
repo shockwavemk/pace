@@ -7,21 +7,21 @@ using Message = PaceCommon.Message;
 
 namespace ZtreeControl
 {
-    class Plugin
+    class ServerPlugin : IServerPlugin
     {
-        public Control Control;
-        public View View;
-        public Model Model;
+        public ServerControl Control;
+        public ServerView View;
+        public ServerModel Model;
         private TaskManager _taskManager;
         private string _name;
         private MessageQueue _messageQueue;
         private Form _mainPanel;
 
-        public Plugin()
+        public ServerPlugin()
         {
-            Control = new Control();
-            View = new View();
-            Model = new Model();
+            Control = new ServerControl();
+            View = new ServerView();
+            Model = new ServerModel();
         }
 
         public IView GetView()
@@ -49,6 +49,16 @@ namespace ZtreeControl
             _mainPanel = mainPanel;
         }
 
+        public void SetTask(Message message)
+        {
+            throw new NotImplementedException();
+        }
+
+        public EventHandler SetEventHandler(object sender, EventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
         public string Test()
         {
             return "Plugin Test";
@@ -59,6 +69,11 @@ namespace ZtreeControl
             _name = name;
             _taskManager = new TaskManager(ref _messageQueue, ref _name);
             _taskManager.Task += TaskManagerOnTask;
+        }
+
+        void IPlugin.Test()
+        {
+            throw new NotImplementedException();
         }
 
         public string Name()

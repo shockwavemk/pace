@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using PaceCommon;
 
-namespace WebControl
+namespace ExternalControl
 {
-    class ClientModel : IClientModel
+    class ClientControl : IClientControl
     {
     }
 }

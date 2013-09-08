@@ -181,10 +181,12 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ExternalControl.dll" />
     <Content Include="ps.ico" />
     <Content Include="WebControl.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="ZtreeControl.dll" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PaceCommon\PaceCommon.csproj">

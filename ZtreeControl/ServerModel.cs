@@ -2,7 +2,7 @@
 
 namespace ZtreeControl
 {
-    public class Model : PaceCommon.IModel
+    public class ServerModel : IServerModel
     {
         public string Test()
         {

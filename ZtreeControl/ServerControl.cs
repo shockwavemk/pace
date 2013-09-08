@@ -9,7 +9,7 @@ using ZtreeControl.Properties;
 
 namespace ZtreeControl
 {
-    public class Control : IControl
+    public class ServerControl : IServerControl
     {
         private static Process _processZTree;
         private static ConnectionTable _connectionTable;

@@ -1,6 +1,6 @@
 ﻿namespace PaceCommon
 {
-    interface IClientView : IView
+    public interface IClientView : IView
     {
     }
 }

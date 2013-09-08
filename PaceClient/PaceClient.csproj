@@ -138,11 +138,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ExternalControl.dll" />
     <Content Include="pc.ico" />
     <Content Include="uninstall.exe" />
     <Content Include="WebControl.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="ZtreeControl.dll" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
