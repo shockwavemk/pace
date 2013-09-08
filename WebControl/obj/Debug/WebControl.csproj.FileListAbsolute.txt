@@ -7,4 +7,5 @@ C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\WebControl\obj
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\WebControl\obj\Debug\WebControl.csproj.GenerateResource.Cache
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\WebControl\obj\Debug\WebControl.dll
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\WebControl\obj\Debug\WebControl.pdb
-C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\WebControl\obj\Debug\WebControl.NewBrowser.resources
+C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\WebControl\obj\Debug\WebControl.CustomBrowser.resources
+C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\WebControl\obj\Debug\WebControl.ServerChangeUrlForm.resources

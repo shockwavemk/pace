@@ -58,9 +58,21 @@
     <Compile Include="Browser.Designer.cs">
       <DependentUpon>Browser.cs</DependentUpon>
     </Compile>
+    <Compile Include="ServerChangeUrlForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ServerChangeUrlForm.Designer.cs">
+      <DependentUpon>ServerChangeUrlForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ServerControl.cs" />
     <Compile Include="ServerModel.cs" />
     <Compile Include="ServerPlugin.cs" />
+    <Compile Include="ServerPreferencesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ServerPreferencesForm.Designer.cs">
+      <DependentUpon>ServerPreferencesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ServerView.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -69,6 +81,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CustomBrowser.resx">
       <DependentUpon>CustomBrowser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ServerChangeUrlForm.resx">
+      <DependentUpon>ServerChangeUrlForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -733,7 +733,7 @@ namespace WebControl
         //open in new window
         private void openInNewWindowToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Browser new_form = new Browser();
+            CustomBrowser new_form = new CustomBrowser();
             new_form.Show();
             new_form.getCurrentBrowser().Navigate(adress);
         }

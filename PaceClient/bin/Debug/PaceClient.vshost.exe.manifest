@@ -93,13 +93,13 @@
       <dsig:DigestValue>uOsM+aoU71WkYoB/bBASj2K73lJhZzTvZW7nF8WLS6s=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="WebControl.dll" size="216576">
+  <file name="WebControl.dll" size="398848">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>Csn/pEsJp3EHyAn6YCOJHeHk0IPYsc1640Iwe9EeQGQ=</dsig:DigestValue>
+      <dsig:DigestValue>dDyi1bi8N6dK/YFgFSH5h2iMrIKsx8lvckVrEPcEHY8=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

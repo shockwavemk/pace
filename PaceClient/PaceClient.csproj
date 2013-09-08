@@ -91,6 +91,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BlackForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BlackForm.Designer.cs">
+      <DependentUpon>BlackForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ConfigServer.cs" />
     <Compile Include="MainClientForm.cs">
       <SubType>Form</SubType>
@@ -101,6 +107,9 @@
     <Compile Include="NetworkClient.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="BlackForm.resx">
+      <DependentUpon>BlackForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainClientForm.resx">
       <DependentUpon>MainClientForm.cs</DependentUpon>
     </EmbeddedResource>

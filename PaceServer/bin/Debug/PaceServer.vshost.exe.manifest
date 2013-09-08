@@ -50,7 +50,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>JBmFz+NqkzVf4Xbvf2SEV9RrOwDOX6Nv5+ByxjGx4B0=</dsig:DigestValue>
+        <dsig:DigestValue>ZjNxlmOpa9tHUfM6awddvo0Ry5rfyEKyUS8K5TM02fw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -62,7 +62,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>+auJJD/O07K3+JRxhV/aruRmF+aOHPY7peE7XuodZuY=</dsig:DigestValue>
+        <dsig:DigestValue>IUJbh+qySvPPwRXaRkVdvKh+QeJi8Ulgm7HIqVfj6qM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -84,13 +84,13 @@
       <dsig:DigestValue>beNBYjVp8PYqUEpeI+hbwcMCm9mZ3Iag6YOX7EQZoV4=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="WebControl.dll" size="216576" writeableType="applicationData">
+  <file name="WebControl.dll" size="402944" writeableType="applicationData">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>Csn/pEsJp3EHyAn6YCOJHeHk0IPYsc1640Iwe9EeQGQ=</dsig:DigestValue>
+      <dsig:DigestValue>k7hICBm/DmKA8sDM/nKVTYLX9qDywcLMttfc+HnZqSc=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

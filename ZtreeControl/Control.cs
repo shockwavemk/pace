@@ -215,8 +215,8 @@ namespace ZtreeControl
             foreach (ConnectionTable.ClientInformation clientInformation in _connectionTable.GetChecked())
             {
                 TraceOps.Out(clientInformation.GetName());
-                var rlist = new List<string> { "" };
-                var m = new PaceCommon.Message(rlist, true, "start zleaf", clientInformation.GetName());
+                var p = new List<Parameter> { new Parameter("parameter", "value")};
+                var m = new PaceCommon.Message(p, true, "start zleaf", clientInformation.GetName());
                 _messageQueue.SetMessage(m);
             }
         }

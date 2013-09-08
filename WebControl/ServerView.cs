@@ -6,7 +6,11 @@ namespace WebControl
 {
     class ServerView : IServerView
     {
-        private ToolStripMenuItem WebControlMenuItem;
+        private ToolStripMenuItem webControlToolStripMenuItem;
+        private ToolStripMenuItem webbrowserPreferencesToolStripMenuItem;
+        private ToolStripMenuItem openWebbrowserToolStripMenuItem;
+        private ToolStripMenuItem closeWebBrowserToolStripMenuItem;
+        private ToolStripMenuItem changeUrlToolStripMenuItem;
 
         public ToolStripMenuItem CreateMainMenu()
         {
@@ -15,17 +19,44 @@ namespace WebControl
 
         public ToolStripMenuItem CreateClientsTableMenu()
         {
-            var startWebControlMenuItem = new ToolStripMenuItem("Start WebControl");
-            startWebControlMenuItem.Click += ServerControl.StartWebControlToolStripMenuItemOnClick;
+            
 
-            WebControlMenuItem = new ToolStripMenuItem("WebControl");
+            webControlToolStripMenuItem = new ToolStripMenuItem();
+            openWebbrowserToolStripMenuItem = new ToolStripMenuItem();
+            closeWebBrowserToolStripMenuItem = new ToolStripMenuItem();
+            changeUrlToolStripMenuItem = new ToolStripMenuItem();
+            webbrowserPreferencesToolStripMenuItem = new ToolStripMenuItem();
+
+            webControlToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] {
+            webbrowserPreferencesToolStripMenuItem,
+            openWebbrowserToolStripMenuItem,
+            closeWebBrowserToolStripMenuItem,
+            changeUrlToolStripMenuItem});
+            webControlToolStripMenuItem.Name = "webControlToolStripMenuItem";
+            webControlToolStripMenuItem.Size = new System.Drawing.Size(83, 20);
+            webControlToolStripMenuItem.Text = "WebControl";
+             
+            openWebbrowserToolStripMenuItem.Name = "openWebbrowserToolStripMenuItem";
+            openWebbrowserToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            openWebbrowserToolStripMenuItem.Text = "Open Webbrowser";
+            openWebbrowserToolStripMenuItem.Click += ServerControl.OpenBrowser;
+             
+            closeWebBrowserToolStripMenuItem.Name = "closeWebBrowserToolStripMenuItem";
+            closeWebBrowserToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            closeWebBrowserToolStripMenuItem.Text = "Close Webbrowser";
+            closeWebBrowserToolStripMenuItem.Click += ServerControl.CloseBrowser;
             
-            WebControlMenuItem.DropDownItems.AddRange(new ToolStripItem[] 
-            {
-                startWebControlMenuItem
-            });
+            changeUrlToolStripMenuItem.Name = "changeUrlToolStripMenuItem";
+            changeUrlToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            changeUrlToolStripMenuItem.Text = "Change Url";
+            changeUrlToolStripMenuItem.Click += ServerControl.ChangeUrl;
+             
+            webbrowserPreferencesToolStripMenuItem.Name = "webbrowserPreferencesToolStripMenuItem";
+            webbrowserPreferencesToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            webbrowserPreferencesToolStripMenuItem.Text = "Preferences";
+            webbrowserPreferencesToolStripMenuItem.Click += ServerControl.OpenPreferences;
             
-            return WebControlMenuItem;
+            return webControlToolStripMenuItem;
         }
 
         public ToolStripMenuItem CreateMainMenuEntryFile()

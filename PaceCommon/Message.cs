@@ -21,7 +21,7 @@ namespace PaceCommon
             set { _parameter = value; }
         }
 
-        public Message(List<string> parameter, bool acknowledgement, string command, string destination)
+        public Message(List<Parameter> parameter, bool acknowledgement, string command, string destination)
         {
             Parameter = parameter.ToArray();
             Acknowledgement = acknowledgement;
@@ -31,8 +31,8 @@ namespace PaceCommon
 
         public Message()
         {
-            _parameter = new string[1];
-            _parameter.SetValue("testparameter", 0);
+            var p = new List<Parameter> { new Parameter ("parameter", "value") };
+            _parameter = p.ToArray();
             Acknowledgement = false;
             Command = "ping";
             Destination = "Server";

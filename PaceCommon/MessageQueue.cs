@@ -35,7 +35,7 @@ namespace PaceCommon
         private ConcurrentQueue<Message> ConcurrentQueueFactory(string s)
         {
             var cq = new ConcurrentQueue<Message>();
-            var rlist = new List<string> { "" };
+            var rlist = new List<Parameter> { new Parameter("parameter", "value")};
             var m = new Message(rlist, true, "registered as '" + s + "'", "");
             cq.Enqueue(m);
             return cq;
