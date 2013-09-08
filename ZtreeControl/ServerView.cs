@@ -6,7 +6,7 @@ using PaceCommon;
 
 namespace ZtreeControl
 {
-    class ServerView : IView
+    class ServerView : IServerView
     {
         private ToolStripMenuItem zTreeControlToolStripMenuItem;
         private ToolStripMenuItem startZTreeToolStripMenuItem;
@@ -31,6 +31,12 @@ namespace ZtreeControl
 
         public ToolStripMenuItem CreateClientsTableMenu()
         {
+            this.zTreeControlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openZLeafToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.closeZLeafToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.startZTreeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+
             zTreeControlToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] {
             preferencesToolStripMenuItem,
             startZTreeToolStripMenuItem,

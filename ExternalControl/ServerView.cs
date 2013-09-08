@@ -18,6 +18,11 @@ namespace ExternalControl
 
         public ToolStripMenuItem CreateClientsTableMenu()
         {
+            externalProcessToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.startProcessToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stopProcessToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showClientDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            
             externalProcessToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] {
             startProcessToolStripMenuItem,
             stopProcessToolStripMenuItem,
@@ -37,8 +42,8 @@ namespace ExternalControl
             showClientDetailsToolStripMenuItem.Name = "showClientDetailsToolStripMenuItem";
             showClientDetailsToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             showClientDetailsToolStripMenuItem.Text = "Show Client Details";
-            
-            throw new NotImplementedException();
+
+            return externalProcessToolStripMenuItem;
         }
 
         public ToolStripMenuItem CreateMainMenuEntryFile()

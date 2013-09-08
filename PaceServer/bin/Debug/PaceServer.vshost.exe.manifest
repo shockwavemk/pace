@@ -50,7 +50,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>izw4+pLz4nwd4luCjEH9cOnFWXTwqTMUTwS65Jql1NA=</dsig:DigestValue>
+        <dsig:DigestValue>sGBNB7/X1R4zBCBp1QtvzvcQDBgzJnvrviCx4zLZcv8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -62,10 +62,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>jaot5PY/gQdxXhceJSbzl/hbx325Bb4j+h988FZCU1I=</dsig:DigestValue>
+        <dsig:DigestValue>tD322YAuCVc7T+NZtm1liyMAEnaGYBRzkp1TZ2LUtf4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
+  <file name="ExternalControl.dll" size="9216">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>x9IEhFqjg02JfBBr/PXtAgVqyBOEe/WYllTTZAZoiQU=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="PaceServer.exe.config" size="284">
     <hash>
       <dsig:Transforms>
@@ -90,7 +99,16 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>MaR9vPPXQ/9r15AXndAQmDdPOcZJiW7IUZD1W9BY0g0=</dsig:DigestValue>
+      <dsig:DigestValue>SYGY8TtcX2MdEjWL3/jFteF4dDvPYn89J4uL8RnmHFI=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="ZtreeControl.dll" size="2747904">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>G2Balat/WJq6dsZ30boJH+wxTuMYWqZmQJr4onlyUWU=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

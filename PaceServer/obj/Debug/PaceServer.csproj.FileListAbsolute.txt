@@ -39,3 +39,5 @@ C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj\Debug\PaceServer.ClientsTableForm.resources
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj\Debug\PaceServer.PreferencesForm.resources
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj\Debug\PaceServer.SecurityOptionsForm.resources
+C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceServer\bin\Debug\ZtreeControl.dll
+C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceServer\bin\Debug\ExternalControl.dll

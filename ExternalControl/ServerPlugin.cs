@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using PaceCommon;
 using Message = PaceCommon.Message;
@@ -11,54 +7,74 @@ namespace ExternalControl
 {
     class ServerPlugin : IServerPlugin
     {
+        private Form _mainPanel;
+        private MessageQueue _messageQueue;
+        private string _name;
+        private ServerControl _control;
+        private ServerModel _model;
+        private ServerView _view;
+
         public IView GetView()
         {
-            throw new NotImplementedException();
+            return _view;
         }
 
         public IControl GetControl()
         {
-            throw new NotImplementedException();
+            return _control;
         }
 
         public IModel GetModel()
         {
-            throw new NotImplementedException();
+            return _model;
+        }
+
+        public ServerPlugin()
+        {
+            _control = new ServerControl();
+            _model = new ServerModel();
+            _view = new ServerView();
         }
 
         public void Start(string name)
         {
-            throw new NotImplementedException();
+            _name = name;
         }
 
         public void Test()
         {
-            throw new NotImplementedException();
+            MessageBox.Show("Test Server Plugin");
         }
 
         public string Name()
         {
-            throw new NotImplementedException();
+            return _name;
         }
 
         public void SetQueue(ref MessageQueue messageQueue)
         {
-            throw new NotImplementedException();
+            _messageQueue = messageQueue;
         }
 
         public void SetForm(Form mainPanel)
         {
-            throw new NotImplementedException();
+            _mainPanel = mainPanel;
         }
 
         public void SetTask(Message message)
         {
-            throw new NotImplementedException();
+            TraceOps.Out("ExternalControl Server recived Message: " + message.GetCommand());
         }
 
         public EventHandler SetEventHandler(object sender, EventArgs args)
         {
-            throw new NotImplementedException();
+            return delegate
+            {
+
+
+
+                MessageBox.Show("Test" + sender.ToString());
+            };
         }
     }
 }
