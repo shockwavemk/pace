@@ -47,7 +47,7 @@ namespace ExternalControl
 
         public void Test()
         {
-            TraceOps.Out("WebControl Client Plugin");
+            TraceOps.Out("ExternalControl Client Plugin");
         }
 
         public string Name()
@@ -72,8 +72,8 @@ namespace ExternalControl
 
         public void SetTask(Message message)
         {
-            TraceOps.Out("WebControl Client recived Message: " + message.GetCommand());
-            if (message.GetCommand() == "start_webcontrol")
+            TraceOps.Out("ExternalControl Client recived Message: " + message.GetCommand());
+            if (message.GetCommand() == "start_externalcontrol")
             {
                 var d = new PluginCallback(StartExtern);
                 _mainPanel.Invoke(d, new object[] { });

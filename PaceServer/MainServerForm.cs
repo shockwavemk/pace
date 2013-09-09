@@ -237,8 +237,7 @@ namespace PaceServer
         private void Edit_Click(object sender, EventArgs e)
         {
             var clientInformations = _connectionTable.GetChecked();
-            var _emptyList = new List<Parameter> { new Parameter("parameter", "value") };
-
+            
             var m = new Message();
             _messageQueue.SetMessage(m);
             

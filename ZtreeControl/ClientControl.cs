@@ -15,13 +15,11 @@ namespace ZtreeControl
         private static ConnectionTable _connectionTable;
         private static MessageQueue _messageQueue;
         private static Process _processZLeaf;
-        private List<Parameter> _emptyList;
-
+        
         public void Initializer(string ip, int port)
         {
-            _emptyList = new List<Parameter> { new Parameter("parameter", "value") };
-            _connectionTable = ConnectionTable.GetRemote("localhost", 9090);
-            _messageQueue = MessageQueue.GetRemote("localhost", 9090);
+            _connectionTable = ConnectionTable.GetRemote(ip, port);
+            _messageQueue = MessageQueue.GetRemote(ip, port);
         }
 
         public void StartZLeaf()

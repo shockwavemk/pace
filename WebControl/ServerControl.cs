@@ -15,12 +15,10 @@ namespace WebControl
         private static MessageQueue _messageQueue;
         private static Form _mainForm;
 
-        private static List<Parameter> _emptyList;
         private static Panel _mainPanel;
 
         public void Initializer(string ip, int port)
         {
-            _emptyList = new List<Parameter> { new Parameter("parameter", "value") };
             _connectionTable = ConnectionTable.GetRemote(ip, port);
             _messageQueue = MessageQueue.GetRemote(ip, port);
         }
