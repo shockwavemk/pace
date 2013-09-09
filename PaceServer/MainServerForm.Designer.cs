@@ -75,7 +75,7 @@
             // preferencesToolStripMenuItem
             // 
             this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
-            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.preferencesToolStripMenuItem.Text = "Preferences";
             this.preferencesToolStripMenuItem.Click += new System.EventHandler(this.preferencesToolStripMenuItem_Click);
             // 
@@ -84,6 +84,7 @@
             this.Edit.Name = "Edit";
             this.Edit.Size = new System.Drawing.Size(39, 20);
             this.Edit.Text = "Edit";
+            this.Edit.Click += new System.EventHandler(this.Edit_Click);
             // 
             // Run
             // 

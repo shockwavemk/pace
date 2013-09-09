@@ -33,7 +33,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>PACE.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>PACE2.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -96,10 +96,13 @@
     <ProjectReference Include="..\PaceCommon\PaceCommon.csproj">
       <Project>{27991F0D-6E24-47DF-83D6-08F921A134EB}</Project>
       <Name>PaceCommon</Name>
+      <Private>True</Private>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="PACE.snk" />
+    <None Include="PACE2.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

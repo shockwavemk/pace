@@ -18,42 +18,32 @@ namespace WebControl
         private static List<Parameter> _emptyList;
         private static Panel _mainPanel;
 
-        delegate void PluginCallback();
-
-        public void Initializer(string ip, int port, ref MessageQueue messageQueue, ref ConnectionTable connectionTable)
+        public void Initializer(string ip, int port)
         {
-            _connectionTable = connectionTable;
-            _messageQueue = messageQueue;
-
-            _emptyList = new List<Parameter> { new Parameter("parameter", "value")};
+            _emptyList = new List<Parameter> { new Parameter("parameter", "value") };
+            _connectionTable = ConnectionTable.GetRemote(ip, port);
+            _messageQueue = MessageQueue.GetRemote(ip, port);
         }
         
 
         public static void OpenBrowser(object sender, EventArgs e)
         {
-
-            var d = new PluginCallback(SetMessage);
-            _mainForm.Invoke(d, new object[] { });
-
-            /*
-            foreach (var m in from ConnectionTable.ClientInformation clientInformation in _connectionTable.GetChecked() select new Message(_emptyList, true, "open_browser", clientInformation.GetName()))
+            var clientInformations = _connectionTable.GetChecked();
+            foreach (ConnectionTable.ClientInformation clientInformation in clientInformations)
             {
+                var p = new string[,] { { "p1", "v1" }, { "p2", "v2" } };
+                var m = new Message(p, true, "open_browser", clientInformation.GetName());
                 _messageQueue.SetMessage(m);
             }
-             */
         }
 
         public static void CloseBrowser(object sender, EventArgs e)
         {
-            foreach (var m in from ConnectionTable.ClientInformation clientInformation in _connectionTable.GetChecked() select new Message(_emptyList, true, "close_browser", clientInformation.GetName()))
+            var p = new string[,] { { "p1", "v1" }, { "p2", "v2" } };
+            foreach (var m in from ConnectionTable.ClientInformation clientInformation in _connectionTable.GetChecked() select new Message(p, true, "close_browser", clientInformation.GetName()))
             {
                 _messageQueue.SetMessage(m);
             }
-        }
-
-        public static void SetMessage()
-        {
-            _messageQueue.SetMessage(new Message());
         }
 
         public static void ChangeUrl(object sender, EventArgs e)
@@ -64,7 +54,7 @@ namespace WebControl
                 if (changeUrlForm.textBoxUrl.Text != null)
                 {
                     var url = changeUrlForm.textBoxUrl.Text;
-                    var p = new List<Parameter> { new Parameter("url", url)};
+                    var p = new string[,] { { "p1", "v1" }, { "p2", "v2" } };
                 
                     foreach (var m in from ConnectionTable.ClientInformation clientInformation in _connectionTable.GetChecked() select new Message(p, true, "start_browser", clientInformation.GetName()))
                     {

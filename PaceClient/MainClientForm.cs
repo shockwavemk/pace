@@ -148,8 +148,9 @@ namespace PaceClient
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            var rlist = new List<string> { "" };
-            var m = new Message(true, "ping", "Server");
+            var p = new string[,] { { "p1", "v1" }, { "p2", "v2" } };
+            var m = new Message(p, true, "ping", "Server");
+            
             if (_messageQueue != null)
             {
                 _messageQueue.SetMessage(m);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using PaceCommon;
 using Message = PaceCommon.Message;
@@ -132,10 +133,6 @@ namespace PaceServer
                         plugin.SetPanel(mainPanel);
                         plugin.Start(_name);
 
-
-                        var plugInControl = (IServerControl) plugin.GetControl();
-                        plugInControl.Initializer("localhost", _port, ref _messageQueue, ref _connectionTable);
-
                         var view = (IServerView)plugin.GetView();
                         var mainMenu = view.CreateMainMenu();
                         var fileMenu = view.CreateMainMenuEntryFile();
@@ -207,7 +204,7 @@ namespace PaceServer
 
         private void File_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void logFileToolStripMenuItem_Click(object sender, EventArgs e)
@@ -234,6 +231,20 @@ namespace PaceServer
             if (securityOptionsForm.ShowDialog() == DialogResult.OK)
             {
                     TraceOps.Out("Set PaceServer Security.\r\n");
+            }
+        }
+
+        private void Edit_Click(object sender, EventArgs e)
+        {
+            var clientInformations = _connectionTable.GetChecked();
+            var _emptyList = new List<Parameter> { new Parameter("parameter", "value") };
+
+            var m = new Message();
+            _messageQueue.SetMessage(m);
+            
+            foreach (ConnectionTable.ClientInformation clientInformation in clientInformations)
+            {
+                
             }
         }
     }

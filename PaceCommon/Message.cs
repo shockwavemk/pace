@@ -12,36 +12,21 @@ namespace PaceCommon
         private string Source { get; set; }
         private string Destination { get; set; }
         private string Command { get; set; }
-        private Array _parameter;
+        private string[,] Parameter { get; set; }
         private bool Acknowledgement { get; set; }
+        
 
-        public Array Parameter
+        public Message(string[,] parameter, bool acknowledgement, string command, string destination)
         {
-            get { return _parameter; }
-            set { _parameter = value; }
-        }
-
-        public Message(List<Parameter> parameter, bool acknowledgement, string command, string destination)
-        {
-            Parameter = parameter.ToArray();
             Acknowledgement = acknowledgement;
             Command = command;
             Destination = destination;
-        }
-
-        public Message(bool acknowledgement, string command, string destination)
-        {
-            var p = new List<Parameter> { };
-            Parameter = p.ToArray();
-            Acknowledgement = acknowledgement;
-            Command = command;
-            Destination = destination;
+            Parameter = parameter;
         }
 
         public Message()
         {
-            var p = new List<Parameter> { new Parameter ("parameter", "value") };
-            _parameter = p.ToArray();
+            Parameter = null;
             Acknowledgement = false;
             Command = "ping";
             Destination = "Server";

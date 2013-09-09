@@ -9,6 +9,7 @@ namespace PaceCommon
     public class MessageQueue : MarshalByRefObject
     {
         private ConcurrentDictionary<string, ConcurrentQueue<Message>> _concurrentDictionary;
+        private static MessageQueue _messageQueue;
 
         public MessageQueue()
         {
@@ -17,7 +18,14 @@ namespace PaceCommon
 
         public static MessageQueue GetRemote(string ip, int port)
         {
-            return (MessageQueue)Activator.GetObject(typeof(MessageQueue), "http://"+ip+":"+port+"/MessageQueue.rem");
+            if (_messageQueue == null)
+            {
+                _messageQueue =
+                    (MessageQueue)
+                    Activator.GetObject(typeof (MessageQueue), "http://" + ip + ":" + port + "/MessageQueue.rem");
+            }
+
+            return _messageQueue;
         }
         
         public Message GetMessage(string destination)
@@ -35,8 +43,8 @@ namespace PaceCommon
         private ConcurrentQueue<Message> ConcurrentQueueFactory(string s)
         {
             var cq = new ConcurrentQueue<Message>();
-            var rlist = new List<Parameter> { new Parameter("parameter", "value")};
-            var m = new Message(rlist, true, "registered as '" + s + "'", "");
+            var p = new string[,] {{"p1", "v1"}, {"p2", "v2"}};
+            var m = new Message(p, true, "registered as '" + s + "'", "");
             cq.Enqueue(m);
             return cq;
         }

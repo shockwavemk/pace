@@ -72,7 +72,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>PACE.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>PACE2.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>ps.ico</ApplicationIcon>
@@ -148,7 +148,7 @@
       <DependentUpon>SecurityOptionsForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="ClassDiagram1.cd" />
-    <None Include="PACE.snk" />
+    <None Include="PACE2.snk" />
     <None Include="PaceServer_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

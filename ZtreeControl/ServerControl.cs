@@ -7,6 +7,7 @@ using System.Threading;
 using System.Windows.Forms;
 using PaceCommon;
 using ZtreeControl.Properties;
+using Message = PaceCommon.Message;
 
 namespace ZtreeControl
 {
@@ -20,13 +21,15 @@ namespace ZtreeControl
         private static MessageQueue _messageQueue;
         private static Form _mainForm;
         private static Panel _mainPanel;
+        private List<Parameter> _emptyList;
 
         delegate void PluginCallback();
 
-        public void Initializer(string ip, int port, ref MessageQueue messageQueue, ref ConnectionTable connectionTable)
+        public void Initializer(string ip, int port)
         {
-            _connectionTable = connectionTable;
-            _messageQueue = messageQueue;
+            _emptyList = new List<Parameter> { new Parameter("parameter", "value") };
+            _connectionTable = ConnectionTable.GetRemote("localhost", 9090);
+            _messageQueue = MessageQueue.GetRemote("localhost", 9090);
         }
 
         public static string[] GetGsfPaths(string path)

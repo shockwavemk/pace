@@ -1,10 +1,3 @@
-C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\ExternalControl\bin\Debug\ExternalControl.dll
-C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\ExternalControl\bin\Debug\ExternalControl.pdb
-C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\ExternalControl\obj\Debug\ExternalControl.dll
-C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\ExternalControl\obj\Debug\ExternalControl.pdb
-C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\ExternalControl\bin\Debug\PaceCommon.dll
-C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\ExternalControl\bin\Debug\PaceCommon.pdb
-C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\ExternalControl\obj\Debug\ExternalControl.csprojResolveAssemblyReference.cache
 M:\Documents\Visual Studio 2012\Projects\Pace\ExternalControl\bin\Debug\ExternalControl.dll
 M:\Documents\Visual Studio 2012\Projects\Pace\ExternalControl\bin\Debug\ExternalControl.pdb
 M:\Documents\Visual Studio 2012\Projects\Pace\ExternalControl\bin\Debug\PaceCommon.dll
@@ -12,3 +5,10 @@ M:\Documents\Visual Studio 2012\Projects\Pace\ExternalControl\bin\Debug\PaceComm
 M:\Documents\Visual Studio 2012\Projects\Pace\ExternalControl\obj\Debug\ExternalControl.csprojResolveAssemblyReference.cache
 M:\Documents\Visual Studio 2012\Projects\Pace\ExternalControl\obj\Debug\ExternalControl.dll
 M:\Documents\Visual Studio 2012\Projects\Pace\ExternalControl\obj\Debug\ExternalControl.pdb
+C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\ExternalControl\bin\Debug\ExternalControl.dll
+C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\ExternalControl\bin\Debug\ExternalControl.pdb
+C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\ExternalControl\bin\Debug\PaceCommon.dll
+C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\ExternalControl\bin\Debug\PaceCommon.pdb
+C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\ExternalControl\obj\Debug\ExternalControl.csprojResolveAssemblyReference.cache
+C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\ExternalControl\obj\Debug\ExternalControl.dll
+C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\ExternalControl\obj\Debug\ExternalControl.pdb

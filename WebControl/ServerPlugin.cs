@@ -15,6 +15,8 @@ namespace WebControl
         private ServerView _view;
         private Form _mainForm;
 
+        delegate void PluginCallback();
+
         public IView GetView()
         {
             return _view;
@@ -52,6 +54,7 @@ namespace WebControl
         public void Start(string name)
         {
             _name = name;
+            _control.Initializer("localhost", 9090);
         }
 
         public void Test()

@@ -14,11 +14,11 @@ namespace ExternalControl
 
         private static List<Parameter> _emptyList;
 
-        public void Initializer(string ip, int port, ref MessageQueue messageQueue, ref ConnectionTable connectionTable)
+        public void Initializer(string ip, int port)
         {
-            _connectionTable = connectionTable;
-            _messageQueue = messageQueue;
             _emptyList = new List<Parameter> { new Parameter("parameter", "value") };
+            _connectionTable = ConnectionTable.GetRemote("localhost", 9090);
+            _messageQueue = MessageQueue.GetRemote("localhost", 9090);
         }
     }
 }

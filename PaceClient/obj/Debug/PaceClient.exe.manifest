@@ -4,7 +4,7 @@
   <description asmv2:iconFile="pc.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="PaceClient" version="1.0.0.0" publicKeyToken="CCCA99897E8D5282" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="PaceClient" version="1.0.0.0" publicKeyToken="ADBD968CC8BEA995" language="neutral" processorArchitecture="msil" />
     <commandLine file="PaceClient.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -44,25 +44,25 @@
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PaceClient.exe" size="309760">
-      <assemblyIdentity name="PaceClient" version="1.0.0.0" publicKeyToken="CCCA99897E8D5282" language="neutral" processorArchitecture="msil" />
+      <assemblyIdentity name="PaceClient" version="1.0.0.0" publicKeyToken="ADBD968CC8BEA995" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>x+iWtj/gEnTNbejXfyrRZNTSCGzttpQXL05sy658Nl8=</dsig:DigestValue>
+        <dsig:DigestValue>GhhY9Wm2qtYrufQER1g3CQ1gcMXa5sEWFKw6zFxtCrE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PaceCommon.dll" size="34304">
-      <assemblyIdentity name="PaceCommon" version="1.0.0.0" publicKeyToken="CCCA99897E8D5282" language="neutral" processorArchitecture="msil" />
+      <assemblyIdentity name="PaceCommon" version="1.0.0.0" publicKeyToken="ADBD968CC8BEA995" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Vir/Ogdv0LA20q1oe9kEtWBP/I4DRN6gpFihwT37vd0=</dsig:DigestValue>
+        <dsig:DigestValue>Oj0eCzE6bhFnhMz9cuRJzFeuiAYisXT82y56C1ZpmYM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -72,7 +72,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>jswyOTVT6UxX3RAE1coPKtsDcujU1Le+uOqh16+Z5n8=</dsig:DigestValue>
+      <dsig:DigestValue>l2g/FJVymzz4EN1lOuE1efbB81/2OLUL5NVWQqGmrtc=</dsig:DigestValue>
     </hash>
   </file>
   <file name="PaceClient.exe.config" size="284">
@@ -93,13 +93,13 @@
       <dsig:DigestValue>8c7KvEKWoaDApczjbDatoLd4je2oxgdUG07KaU2TtX4=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="uninstall.exe" size="108032">
+  <file name="uninstall.exe" size="105984">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>aGwF312blku+nQRYvaCcq8YhN8Nh1RsnbuWQs3UcdFA=</dsig:DigestValue>
+      <dsig:DigestValue>Lb+HqDV9FKZS+rqIPquSVFJORPF+fvO/BWb+WrVafL8=</dsig:DigestValue>
     </hash>
   </file>
   <file name="WebControl.dll" size="403456">
@@ -108,7 +108,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>v+/UAY0eEOZpq39g99Itk8hY93mglhuvsIcmiMYvWmQ=</dsig:DigestValue>
+      <dsig:DigestValue>Qm7GheKzcoW2BFAetSp/a8HwESJjTy69iX6lN8tUkig=</dsig:DigestValue>
     </hash>
   </file>
   <file name="ZtreeControl.dll" size="2750464">
@@ -117,7 +117,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>MFUtVjXfF/IgyTOiHbtqOEE4NV18qq+65L5/ym5jRrc=</dsig:DigestValue>
+      <dsig:DigestValue>isrxeyEe/kD9BiiJTCTMxdB0Md10lfqF8XMgc/cneVw=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>
