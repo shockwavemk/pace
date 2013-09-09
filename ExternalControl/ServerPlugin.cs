@@ -7,12 +7,13 @@ namespace ExternalControl
 {
     class ServerPlugin : IServerPlugin
     {
-        private Form _mainPanel;
+        private Panel _mainPanel;
         private MessageQueue _messageQueue;
         private string _name;
         private ServerControl _control;
         private ServerModel _model;
         private ServerView _view;
+        private Form _mainForm;
 
         public IView GetView()
         {
@@ -56,7 +57,12 @@ namespace ExternalControl
             _messageQueue = messageQueue;
         }
 
-        public void SetForm(Form mainPanel)
+        public void SetForm(Form mainForm)
+        {
+            _mainForm = mainForm;
+        }
+
+        public void SetPanel(Panel mainPanel)
         {
             _mainPanel = mainPanel;
         }
@@ -73,7 +79,7 @@ namespace ExternalControl
 
 
 
-                MessageBox.Show("Test" + sender.ToString());
+                //MessageBox.Show("Test" + sender.ToString());
             };
         }
     }

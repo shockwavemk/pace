@@ -12,7 +12,8 @@ namespace PaceCommon
         void Test();
         string Name();
         void SetQueue(ref MessageQueue messageQueue);
-        void SetForm(Form mainPanel);
+        void SetForm(Form mainForm);
+        void SetPanel(Panel mainPanel);
         void SetTask(Message message);
         EventHandler SetEventHandler(object sender, EventArgs args);
     }

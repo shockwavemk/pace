@@ -8,3 +8,13 @@ C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClientUnin
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClientUninstall\obj\Debug\PaceClientUninstall.csproj.GenerateResource.Cache
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClientUninstall\obj\Debug\uninstall.exe
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClientUninstall\obj\Debug\uninstall.pdb
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceClientUninstall\bin\Debug\uninstall.exe.config
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceClientUninstall\bin\Debug\uninstall.exe
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceClientUninstall\bin\Debug\uninstall.pdb
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceClientUninstall\bin\Debug\PaceCommon.dll
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceClientUninstall\bin\Debug\PaceCommon.pdb
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceClientUninstall\obj\Debug\PaceClientUninstall.csprojResolveAssemblyReference.cache
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceClientUninstall\obj\Debug\PaceClientUninstall.Properties.Resources.resources
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceClientUninstall\obj\Debug\PaceClientUninstall.csproj.GenerateResource.Cache
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceClientUninstall\obj\Debug\uninstall.exe
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceClientUninstall\obj\Debug\uninstall.pdb

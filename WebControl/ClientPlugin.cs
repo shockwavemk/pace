@@ -8,7 +8,7 @@ namespace WebControl
 {
     class ClientPlugin : IClientPlugin
     {
-        private Form _mainPanel;
+        private Form _mainForm;
         private MessageQueue _messageQueue;
         private string _name;
         private ClientControl _control;
@@ -17,22 +17,23 @@ namespace WebControl
         private bool _browserRunning = true;
         private Thread _thread;
         private Browser _browserForm;
+        private Panel _mainPanel;
 
         delegate void PluginCallback();
 
         public IView GetView()
         {
-            throw new NotImplementedException();
+            return _view;
         }
 
         public IControl GetControl()
         {
-            throw new NotImplementedException();
+            return _control;
         }
 
         public IModel GetModel()
         {
-            throw new NotImplementedException();
+            return _model;
         }
 
         [STAThread]
@@ -51,7 +52,7 @@ namespace WebControl
 
         public string Name()
         {
-            throw new NotImplementedException();
+            return _name;
         }
 
         public void SetQueue(ref MessageQueue messageQueue)
@@ -59,7 +60,12 @@ namespace WebControl
             _messageQueue = messageQueue;
         }
 
-        public void SetForm(Form mainPanel)
+        public void SetForm(Form mainForm)
+        {
+            _mainForm = mainForm;
+        }
+
+        public void SetPanel(Panel mainPanel)
         {
             _mainPanel = mainPanel;
         }
@@ -70,7 +76,7 @@ namespace WebControl
             if (message.GetCommand() == "start_webcontrol")
             {
                 var d = new PluginCallback(ShowBrowser);
-                _mainPanel.Invoke(d, new object[] { });
+                _mainForm.Invoke(d, new object[] { });
             }
         }
 
@@ -83,7 +89,7 @@ namespace WebControl
         public EventHandler SetEventHandler(object sender, EventArgs args)
         {
             return delegate {
-                MessageBox.Show("Test" + sender.ToString());
+                //MessageBox.Show("Test" + sender.ToString());
             };
         }
     }

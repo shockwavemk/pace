@@ -35,11 +35,9 @@ namespace ZtreeControl
             this.openZLeafToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeZLeafToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.startZTreeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-
+            
             zTreeControlToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] {
             preferencesToolStripMenuItem,
-            startZTreeToolStripMenuItem,
             openZLeafToolStripMenuItem,
             closeZLeafToolStripMenuItem});
             zTreeControlToolStripMenuItem.Name = "zTreeControlToolStripMenuItem";
@@ -58,12 +56,6 @@ namespace ZtreeControl
             closeZLeafToolStripMenuItem.Size = new Size(152, 22);
             closeZLeafToolStripMenuItem.Text = "Close z-Leaf";
 
-            startZTreeToolStripMenuItem.Name = "startZTreeToolStripMenuItem";
-            startZTreeToolStripMenuItem.Size = new Size(152, 22);
-            startZTreeToolStripMenuItem.Text = "Start z-Tree";
-            
-            
-
             return zTreeControlToolStripMenuItem;
         }
 
@@ -79,7 +71,13 @@ namespace ZtreeControl
 
         public ToolStripMenuItem CreateMainMenuEntryRun()
         {
-            return null;
+            this.startZTreeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            startZTreeToolStripMenuItem.Name = "startZTreeToolStripMenuItem";
+            startZTreeToolStripMenuItem.Size = new Size(152, 22);
+            startZTreeToolStripMenuItem.Text = "Start z-Tree";
+            startZTreeToolStripMenuItem.Click += ServerControl.StartZTree;
+
+            return startZTreeToolStripMenuItem;
         }
 
         public ToolStripMenuItem CreateMainMenuEntryView()

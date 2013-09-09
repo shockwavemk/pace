@@ -7,15 +7,15 @@ using PaceCommon;
 
 namespace WebControl
 {
-    public class ClientControl : IControl
+    public class ClientControl : IClientControl
     {
         private static ConnectionTable _connectionTable;
         private static MessageQueue _messageQueue;
 
-        public void Initializer(string ip, int port)
+        public void Initializer(string ip, int port, ref MessageQueue messageQueue, ref ConnectionTable connectionTable)
         {
-            _connectionTable = ConnectionTable.GetRemote(ip, port);
-            _messageQueue = MessageQueue.GetRemote(ip, port);
+            _connectionTable = connectionTable;
+            _messageQueue = messageQueue;
         }
     }
 }

@@ -29,6 +29,15 @@ namespace PaceCommon
             Destination = destination;
         }
 
+        public Message(bool acknowledgement, string command, string destination)
+        {
+            var p = new List<Parameter> { };
+            Parameter = p.ToArray();
+            Acknowledgement = acknowledgement;
+            Command = command;
+            Destination = destination;
+        }
+
         public Message()
         {
             var p = new List<Parameter> { new Parameter ("parameter", "value") };

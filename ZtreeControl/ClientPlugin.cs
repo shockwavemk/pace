@@ -8,13 +8,14 @@ namespace ZtreeControl
 {
     class ClientPlugin : IClientPlugin
     {
-        private Form _mainPanel;
+        private Panel _mainPanel;
         private MessageQueue _messageQueue;
         private string _name;
         private ClientControl _control;
         private ClientModel _model;
         private ClientView _view;
         private Thread _thread;
+        private Form _mainForm;
 
         delegate void PluginCallback();
 
@@ -57,7 +58,12 @@ namespace ZtreeControl
             _messageQueue = messageQueue;
         }
 
-        public void SetForm(Form mainPanel)
+        public void SetForm(Form mainForm)
+        {
+            _mainForm = mainForm;
+        }
+
+        public void SetPanel(Panel mainPanel)
         {
             _mainPanel = mainPanel;
         }
@@ -65,23 +71,23 @@ namespace ZtreeControl
         public void SetTask(Message message)
         {
             TraceOps.Out("ZtreeControl Client recived Message: " + message.GetCommand());
-            if (message.GetCommand() == "start_webcontrol")
+            if (message.GetCommand() == "start_zleaf")
             {
-                var d = new PluginCallback(ShowBrowser);
+                var d = new PluginCallback(StartZleaf);
                 _mainPanel.Invoke(d, new object[] { });
             }
         }
 
-        public void ShowBrowser()
+        public void StartZleaf()
         {
-            
+            _control.StartZLeaf();
         }
 
         public EventHandler SetEventHandler(object sender, EventArgs args)
         {
             return delegate
             {
-                MessageBox.Show("Test" + sender.ToString());
+                //MessageBox.Show("Test" + sender.ToString());
             };
         }
     }

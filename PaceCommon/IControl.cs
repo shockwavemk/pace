@@ -2,6 +2,6 @@
 {
     public interface IControl
     {
-        void Initializer(string ip, int port);
+        void Initializer(string ip, int port, ref MessageQueue messageQueue, ref ConnectionTable connectionTable);
     }
 }

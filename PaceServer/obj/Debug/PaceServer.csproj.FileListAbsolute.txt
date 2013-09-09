@@ -7,18 +7,6 @@ c:\users\martin kramer\documents\visual studio 2012\Projects\Pace3\PaceServer\ob
 c:\users\martin kramer\documents\visual studio 2012\Projects\Pace3\PaceServer\obj\Debug\PaceServer.exe
 c:\users\martin kramer\documents\visual studio 2012\Projects\Pace3\PaceServer\obj\Debug\PaceServer.pdb
 c:\users\martin kramer\documents\visual studio 2012\Projects\Pace3\PaceServer\obj\Debug\PaceServer.MainServerForm.resources
-M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\bin\Debug\PaceServer.exe.config
-M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\bin\Debug\PaceServer.exe
-M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\bin\Debug\PaceServer.pdb
-M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\bin\Debug\PaceCommon.dll
-M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\bin\Debug\PaceCommon.pdb
-M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj\Debug\PaceServer.csprojResolveAssemblyReference.cache
-M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj\Debug\PaceServer.ClientsTable.resources
-M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj\Debug\PaceServer.MainServerForm.resources
-M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj\Debug\PaceServer.Properties.Resources.resources
-M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj\Debug\PaceServer.csproj.GenerateResource.Cache
-M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj\Debug\PaceServer.exe
-M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj\Debug\PaceServer.pdb
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceServer\bin\Debug\PaceServer.exe.config
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceServer\bin\Debug\PaceServer.exe.manifest
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceServer\bin\Debug\PaceServer.application
@@ -41,3 +29,25 @@ C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj\Debug\PaceServer.SecurityOptionsForm.resources
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceServer\bin\Debug\ZtreeControl.dll
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceServer\bin\Debug\ExternalControl.dll
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\bin\Debug\ExternalControl.dll
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\bin\Debug\WebControl.dll
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\bin\Debug\ZtreeControl.dll
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\bin\Debug\PaceServer.exe.config
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\bin\Debug\PaceServer.exe.manifest
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\bin\Debug\PaceServer.application
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\bin\Debug\PaceServer.exe
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\bin\Debug\PaceServer.pdb
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\bin\Debug\PaceCommon.dll
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\bin\Debug\PaceCommon.pdb
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj\Debug\PaceServer.csprojResolveAssemblyReference.cache
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj\Debug\PaceServer.ClientsTableForm.resources
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj\Debug\PaceServer.MainServerForm.resources
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj\Debug\PaceServer.ConnectionForm.resources
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj\Debug\PaceServer.PreferencesForm.resources
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj\Debug\PaceServer.Properties.Resources.resources
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj\Debug\PaceServer.SecurityOptionsForm.resources
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj\Debug\PaceServer.csproj.GenerateResource.Cache
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj\Debug\PaceServer.exe.manifest
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj\Debug\PaceServer.application
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj\Debug\PaceServer.exe
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceServer\obj\Debug\PaceServer.pdb

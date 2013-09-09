@@ -15,7 +15,8 @@ namespace ZtreeControl
         private TaskManager _taskManager;
         private string _name;
         private MessageQueue _messageQueue;
-        private Form _mainPanel;
+        private Panel _mainPanel;
+        private Form _mainForm;
 
         public ServerPlugin()
         {
@@ -44,9 +45,16 @@ namespace ZtreeControl
             _messageQueue = messageQueue;
         }
 
-        public void SetForm(Form mainPanel)
+        public void SetForm(Form mainForm)
+        {
+            _mainForm = mainForm;
+            Control.SetForm(mainForm);
+        }
+
+        public void SetPanel(Panel mainPanel)
         {
             _mainPanel = mainPanel;
+            Control.SetPanel(mainPanel);
         }
 
         public void SetTask(Message message)
@@ -59,9 +67,9 @@ namespace ZtreeControl
             throw new NotImplementedException();
         }
 
-        public string Test()
+        public void Test()
         {
-            return "Plugin Test";
+            
         }
 
         public void Start(string name)
@@ -70,12 +78,7 @@ namespace ZtreeControl
             _taskManager = new TaskManager(ref _messageQueue, ref _name);
             _taskManager.Task += TaskManagerOnTask;
         }
-
-        void IPlugin.Test()
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public string Name()
         {
             return "ztree";

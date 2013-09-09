@@ -129,31 +129,20 @@ namespace PaceServer
                     {
                         plugin.SetQueue(ref _messageQueue);
                         plugin.SetForm(_msf);
+                        plugin.SetPanel(mainPanel);
                         plugin.Start(_name);
 
 
                         var plugInControl = (IServerControl) plugin.GetControl();
-                        plugInControl.Initializer("localhost", _port);
-                        
-                        
-                        var mainMenuView = (IServerView)plugin.GetView();
-                        var mainMenu = mainMenuView.CreateMainMenu();
+                        plugInControl.Initializer("localhost", _port, ref _messageQueue, ref _connectionTable);
 
-
-                        var fileMenuView = (IServerView)plugin.GetView();
-                        var fileMenu = fileMenuView.CreateMainMenuEntryFile();
-
-                        var editMenuView = (IServerView)plugin.GetView();
-                        var editMenu = editMenuView.CreateMainMenuEntryEdit();
-
-                        var runMenuView = (IServerView)plugin.GetView();
-                        var runMenu = runMenuView.CreateMainMenuEntryEdit();
-
-                        var viewMenuView = (IServerView)plugin.GetView();
-                        var viewMenu = viewMenuView.CreateMainMenuEntryEdit();
-
-                        var helpMenuView = (IServerView)plugin.GetView();
-                        var helpMenu = helpMenuView.CreateMainMenuEntryEdit();
+                        var view = (IServerView)plugin.GetView();
+                        var mainMenu = view.CreateMainMenu();
+                        var fileMenu = view.CreateMainMenuEntryFile();
+                        var editMenu = view.CreateMainMenuEntryEdit();
+                        var runMenu = view.CreateMainMenuEntryRun();
+                        var viewMenu = view.CreateMainMenuEntryView();
+                        var helpMenu = view.CreateMainMenuEntryHelp();
 
                         if (mainMenu != null) menuStrip1.Items.Add(mainMenu);
 
@@ -202,7 +191,7 @@ namespace PaceServer
         {
             return delegate(object sender, EventArgs args)
             {
-                MessageBox.Show("Test");
+                //MessageBox.Show("Test");
             };
         }
 

@@ -7,13 +7,14 @@ namespace WebControl
 {
     class ServerPlugin : IServerPlugin
     {
-        private Form _mainPanel;
+        private Panel _mainPanel;
         private MessageQueue _messageQueue;
         private string _name;
         private ServerControl _control;
         private ServerModel _model;
         private ServerView _view;
-        
+        private Form _mainForm;
+
         public IView GetView()
         {
             return _view;
@@ -36,6 +37,18 @@ namespace WebControl
             _view = new ServerView();
         }
 
+        public void SetForm(Form mainForm)
+        {
+            _mainForm = mainForm;
+            _control.SetForm(mainForm);
+        }
+
+        public void SetPanel(Panel mainPanel)
+        {
+            _mainPanel = mainPanel;
+            _control.SetPanel(mainPanel);
+        }
+
         public void Start(string name)
         {
             _name = name;
@@ -43,7 +56,7 @@ namespace WebControl
 
         public void Test()
         {
-            MessageBox.Show("Test Server Plugin");
+            //MessageBox.Show("Test Server Plugin");
         }
 
         public string Name()
@@ -54,11 +67,7 @@ namespace WebControl
         public void SetQueue(ref MessageQueue messageQueue)
         {
             _messageQueue = messageQueue;
-        }
 
-        public void SetForm(Form mainPanel)
-        {
-            _mainPanel = mainPanel;
         }
 
         public void SetTask(Message message)
@@ -73,7 +82,7 @@ namespace WebControl
                 
                 
                 
-                MessageBox.Show("Test"+ sender.ToString());
+                //MessageBox.Show("Test"+ sender.ToString());
             };
         }
     }

@@ -12,6 +12,8 @@ namespace WebControl
         private ToolStripMenuItem closeWebBrowserToolStripMenuItem;
         private ToolStripMenuItem changeUrlToolStripMenuItem;
 
+        delegate void PluginCallback();
+
         public ToolStripMenuItem CreateMainMenu()
         {
             return null;

@@ -9,3 +9,14 @@ C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\WebControl\obj
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\WebControl\obj\Debug\WebControl.csproj.GenerateResource.Cache
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\WebControl\obj\Debug\WebControl.dll
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\WebControl\obj\Debug\WebControl.pdb
+M:\Documents\Visual Studio 2012\Projects\Pace\WebControl\bin\Debug\WebControl.dll
+M:\Documents\Visual Studio 2012\Projects\Pace\WebControl\bin\Debug\WebControl.pdb
+M:\Documents\Visual Studio 2012\Projects\Pace\WebControl\bin\Debug\PaceCommon.dll
+M:\Documents\Visual Studio 2012\Projects\Pace\WebControl\bin\Debug\PaceCommon.pdb
+M:\Documents\Visual Studio 2012\Projects\Pace\WebControl\obj\Debug\WebControl.csprojResolveAssemblyReference.cache
+M:\Documents\Visual Studio 2012\Projects\Pace\WebControl\obj\Debug\WebControl.Browser.resources
+M:\Documents\Visual Studio 2012\Projects\Pace\WebControl\obj\Debug\WebControl.CustomBrowser.resources
+M:\Documents\Visual Studio 2012\Projects\Pace\WebControl\obj\Debug\WebControl.ServerChangeUrlForm.resources
+M:\Documents\Visual Studio 2012\Projects\Pace\WebControl\obj\Debug\WebControl.csproj.GenerateResource.Cache
+M:\Documents\Visual Studio 2012\Projects\Pace\WebControl\obj\Debug\WebControl.dll
+M:\Documents\Visual Studio 2012\Projects\Pace\WebControl\obj\Debug\WebControl.pdb

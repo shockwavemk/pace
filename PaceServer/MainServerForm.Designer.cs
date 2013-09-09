@@ -31,19 +31,19 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainServerForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.File = new System.Windows.Forms.ToolStripMenuItem();
+            this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Edit = new System.Windows.Forms.ToolStripMenuItem();
             this.Run = new System.Windows.Forms.ToolStripMenuItem();
             this.View = new System.Windows.Forms.ToolStripMenuItem();
             this.clientsTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.securityOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Help = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutPaCEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.mainPanel = new System.Windows.Forms.Panel();
-            this.securityOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -71,6 +71,13 @@
             this.File.Size = new System.Drawing.Size(37, 20);
             this.File.Text = "File";
             this.File.Click += new System.EventHandler(this.File_Click);
+            // 
+            // preferencesToolStripMenuItem
+            // 
+            this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
+            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.preferencesToolStripMenuItem.Text = "Preferences";
+            this.preferencesToolStripMenuItem.Click += new System.EventHandler(this.preferencesToolStripMenuItem_Click);
             // 
             // Edit
             // 
@@ -107,6 +114,13 @@
             this.logFileToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.logFileToolStripMenuItem.Text = "Logfile Viewer";
             this.logFileToolStripMenuItem.Click += new System.EventHandler(this.logFileToolStripMenuItem_Click);
+            // 
+            // securityOptionsToolStripMenuItem
+            // 
+            this.securityOptionsToolStripMenuItem.Name = "securityOptionsToolStripMenuItem";
+            this.securityOptionsToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.securityOptionsToolStripMenuItem.Text = "Security Options";
+            this.securityOptionsToolStripMenuItem.Click += new System.EventHandler(this.securityOptionsToolStripMenuItem_Click);
             // 
             // Help
             // 
@@ -156,20 +170,6 @@
             this.mainPanel.TabIndex = 4;
             this.mainPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.mainPanel_Paint);
             // 
-            // securityOptionsToolStripMenuItem
-            // 
-            this.securityOptionsToolStripMenuItem.Name = "securityOptionsToolStripMenuItem";
-            this.securityOptionsToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
-            this.securityOptionsToolStripMenuItem.Text = "Security Options";
-            this.securityOptionsToolStripMenuItem.Click += new System.EventHandler(this.securityOptionsToolStripMenuItem_Click);
-            // 
-            // preferencesToolStripMenuItem
-            // 
-            this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
-            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.preferencesToolStripMenuItem.Text = "Preferences";
-            this.preferencesToolStripMenuItem.Click += new System.EventHandler(this.preferencesToolStripMenuItem_Click);
-            // 
             // MainServerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -209,10 +209,10 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripMenuItem clientsTableToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutPaCEToolStripMenuItem;
-        private System.Windows.Forms.Panel mainPanel;
         private System.Windows.Forms.ToolStripMenuItem logFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem preferencesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem securityOptionsToolStripMenuItem;
+        public System.Windows.Forms.Panel mainPanel;
     }
 }
 

@@ -9,3 +9,12 @@ C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\ZtreeControl\b
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\ZtreeControl\bin\Debug\PaceCommon.pdb
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\ZtreeControl\obj\Debug\ZtreeControl.dll
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\ZtreeControl\obj\Debug\ZtreeControl.pdb
+M:\Documents\Visual Studio 2012\Projects\Pace\ZtreeControl\bin\Debug\ZtreeControl.dll
+M:\Documents\Visual Studio 2012\Projects\Pace\ZtreeControl\bin\Debug\ZtreeControl.pdb
+M:\Documents\Visual Studio 2012\Projects\Pace\ZtreeControl\bin\Debug\PaceCommon.dll
+M:\Documents\Visual Studio 2012\Projects\Pace\ZtreeControl\bin\Debug\PaceCommon.pdb
+M:\Documents\Visual Studio 2012\Projects\Pace\ZtreeControl\obj\Debug\ZtreeControl.csprojResolveAssemblyReference.cache
+M:\Documents\Visual Studio 2012\Projects\Pace\ZtreeControl\obj\Debug\ZtreeControl.Properties.Resources.resources
+M:\Documents\Visual Studio 2012\Projects\Pace\ZtreeControl\obj\Debug\ZtreeControl.csproj.GenerateResource.Cache
+M:\Documents\Visual Studio 2012\Projects\Pace\ZtreeControl\obj\Debug\ZtreeControl.dll
+M:\Documents\Visual Studio 2012\Projects\Pace\ZtreeControl\obj\Debug\ZtreeControl.pdb

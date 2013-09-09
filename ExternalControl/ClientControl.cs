@@ -9,5 +9,13 @@ namespace ExternalControl
 {
     class ClientControl : IClientControl
     {
+        private static ConnectionTable _connectionTable;
+        private static MessageQueue _messageQueue;
+
+        public void Initializer(string ip, int port, ref MessageQueue messageQueue, ref ConnectionTable connectionTable)
+        {
+            _connectionTable = connectionTable;
+            _messageQueue = messageQueue;
+        }
     }
 }

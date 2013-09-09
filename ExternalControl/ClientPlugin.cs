@@ -11,54 +11,86 @@ namespace ExternalControl
 {
     class ClientPlugin : IClientPlugin
     {
+        private Panel _mainPanel;
+        private MessageQueue _messageQueue;
+        private ClientControl _control;
+        private ClientModel _model;
+        private ClientView _view;
+        private string _name;
+        private Form _mainForm;
+
+        delegate void PluginCallback();
+        
         public IView GetView()
         {
-            throw new NotImplementedException();
+            return _view;
         }
 
         public IControl GetControl()
         {
-            throw new NotImplementedException();
+            return _control;
         }
 
         public IModel GetModel()
         {
-            throw new NotImplementedException();
+            return _model;
         }
 
+        [STAThread]
         public void Start(string name)
         {
-            throw new NotImplementedException();
+            _name = name;
+            _control = new ClientControl();
+            _model = new ClientModel();
+            _view = new ClientView();
         }
 
         public void Test()
         {
-            throw new NotImplementedException();
+            TraceOps.Out("WebControl Client Plugin");
         }
 
         public string Name()
         {
-            throw new NotImplementedException();
+            return _name;
         }
 
         public void SetQueue(ref MessageQueue messageQueue)
         {
-            throw new NotImplementedException();
+            _messageQueue = messageQueue;
         }
 
-        public void SetForm(Form mainPanel)
+        public void SetForm(Form mainForm)
         {
-            throw new NotImplementedException();
+            _mainForm = mainForm;
+        }
+
+        public void SetPanel(Panel mainPanel)
+        {
+            _mainPanel = mainPanel;
         }
 
         public void SetTask(Message message)
         {
-            throw new NotImplementedException();
+            TraceOps.Out("WebControl Client recived Message: " + message.GetCommand());
+            if (message.GetCommand() == "start_webcontrol")
+            {
+                var d = new PluginCallback(StartExtern);
+                _mainPanel.Invoke(d, new object[] { });
+            }
+        }
+
+        public void StartExtern()
+        {
+            
         }
 
         public EventHandler SetEventHandler(object sender, EventArgs args)
         {
-            throw new NotImplementedException();
+            return delegate
+            {
+                //MessageBox.Show("Test" + sender.ToString());
+            };
         }
     }
 }
