@@ -73,15 +73,18 @@ namespace ZtreeControl
             TraceOps.Out("ZtreeControl Client recived Message: " + message.GetCommand());
             if (message.GetCommand() == "start_zleaf")
             {
-                var d = new PluginCallback(StartZleaf);
+                var d = new PluginCallback(_control.StartZLeaf);
+                _mainPanel.Invoke(d, new object[] { });
+            }
+
+            if (message.GetCommand() == "stop_zleaf")
+            {
+                var d = new PluginCallback(_control.StopZLeaf);
                 _mainPanel.Invoke(d, new object[] { });
             }
         }
 
-        public void StartZleaf()
-        {
-            _control.StartZLeaf();
-        }
+        
 
         public EventHandler SetEventHandler(object sender, EventArgs args)
         {

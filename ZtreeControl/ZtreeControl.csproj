@@ -52,6 +52,7 @@
     <Compile Include="ClientModel.cs" />
     <Compile Include="ClientPlugin.cs" />
     <Compile Include="ClientView.cs" />
+    <Compile Include="ProcessControl.cs" />
     <Compile Include="ServerControl.cs" />
     <Compile Include="ServerModel.cs" />
     <Compile Include="ServerPlugin.cs" />

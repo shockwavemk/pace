@@ -31,10 +31,10 @@ namespace ZtreeControl
 
         public ToolStripMenuItem CreateClientsTableMenu()
         {
-            this.zTreeControlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openZLeafToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.closeZLeafToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            zTreeControlToolStripMenuItem = new ToolStripMenuItem();
+            openZLeafToolStripMenuItem = new ToolStripMenuItem();
+            preferencesToolStripMenuItem = new ToolStripMenuItem();
+            closeZLeafToolStripMenuItem = new ToolStripMenuItem();
             
             zTreeControlToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] {
             preferencesToolStripMenuItem,
@@ -47,14 +47,17 @@ namespace ZtreeControl
             openZLeafToolStripMenuItem.Name = "openZLeafToolStripMenuItem";
             openZLeafToolStripMenuItem.Size = new Size(152, 22);
             openZLeafToolStripMenuItem.Text = "Open z-Leaf";
+            openZLeafToolStripMenuItem.Click += ServerControl.RemoteStartZLeaf;
             
             preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
             preferencesToolStripMenuItem.Size = new Size(152, 22);
             preferencesToolStripMenuItem.Text = "Preferences";
+            preferencesToolStripMenuItem.Click += ServerControl.OpenPreferences;
             
             closeZLeafToolStripMenuItem.Name = "closeZLeafToolStripMenuItem";
             closeZLeafToolStripMenuItem.Size = new Size(152, 22);
             closeZLeafToolStripMenuItem.Text = "Close z-Leaf";
+            closeZLeafToolStripMenuItem.Click += ServerControl.RemoteStopLeaf;
 
             return zTreeControlToolStripMenuItem;
         }

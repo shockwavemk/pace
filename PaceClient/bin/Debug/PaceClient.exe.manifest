@@ -50,7 +50,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>wl/3FzjC+gTY2i2Suc5Fc5EO/WGXDViCfqicnfQQh6M=</dsig:DigestValue>
+        <dsig:DigestValue>6WmSkEQF/lLagSH7+bsvMGi4p+1EkNyh/aUCtIc/wvo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -62,7 +62,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>wDQrv+pxOFmZ8lQkvSUnOm1n36xqEGmGTrh4gRYTHI8=</dsig:DigestValue>
+        <dsig:DigestValue>1crglGqkTFLi5DUbe8qzE+yFMV/EwfknFeujGVi3tz0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -72,7 +72,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>NGs4GbsT1uhITRg3a0Rh7RHstRJdIvaPBpHUvqKzbvQ=</dsig:DigestValue>
+      <dsig:DigestValue>Tc3/UgzYtmDVJ/yGbL98BXQ8uzxdXjMfQdukgdIh/8o=</dsig:DigestValue>
     </hash>
   </file>
   <file name="PaceClient.exe.config" size="284">
@@ -99,7 +99,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>4aLcKQ4GmGOsj4qxoheqloiID+SGPkL3vE8uM+NNrDc=</dsig:DigestValue>
+      <dsig:DigestValue>GnI6faiwgjL0OOJ/EQZ9ArWcokm4YMnP0F2wFKXJ2lc=</dsig:DigestValue>
     </hash>
   </file>
   <file name="WebControl.dll" size="403456">
@@ -108,7 +108,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>rqhEhGReKTwEKZYmmjeCbwDU+1IsnQNLa2d/xNIZlhk=</dsig:DigestValue>
+      <dsig:DigestValue>Z8hmznMadsNuoRA4v6Sd53DcAR2F6oef/yGIPYny0tQ=</dsig:DigestValue>
     </hash>
   </file>
   <file name="ZtreeControl.dll" size="2750464">
@@ -117,7 +117,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>isrxeyEe/kD9BiiJTCTMxdB0Md10lfqF8XMgc/cneVw=</dsig:DigestValue>
+      <dsig:DigestValue>BoiTr8PH70OpyY/mDh4bqJysxuQePBrX0X64cb4Lq3Q=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

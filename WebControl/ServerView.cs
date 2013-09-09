@@ -35,6 +35,7 @@ namespace WebControl
             webControlToolStripMenuItem.Name = "webControlToolStripMenuItem";
             webControlToolStripMenuItem.Size = new System.Drawing.Size(83, 20);
             webControlToolStripMenuItem.Text = "WebControl";
+            
              
             openWebbrowserToolStripMenuItem.Name = "openWebbrowserToolStripMenuItem";
             openWebbrowserToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
@@ -44,14 +45,17 @@ namespace WebControl
             closeWebBrowserToolStripMenuItem.Name = "closeWebBrowserToolStripMenuItem";
             closeWebBrowserToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             closeWebBrowserToolStripMenuItem.Text = "Close Webbrowser";
+            closeWebBrowserToolStripMenuItem.Click += ServerControl.CloseBrowser;
             
             changeUrlToolStripMenuItem.Name = "changeUrlToolStripMenuItem";
             changeUrlToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             changeUrlToolStripMenuItem.Text = "Change Url";
+            changeUrlToolStripMenuItem.Click += ServerControl.ChangeUrl;
              
             webbrowserPreferencesToolStripMenuItem.Name = "webbrowserPreferencesToolStripMenuItem";
             webbrowserPreferencesToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             webbrowserPreferencesToolStripMenuItem.Text = "Preferences";
+            webbrowserPreferencesToolStripMenuItem.Click += ServerControl.OpenPreferences;
             
             return webControlToolStripMenuItem;
         }

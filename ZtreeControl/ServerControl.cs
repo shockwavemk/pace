@@ -242,12 +242,12 @@ namespace ZtreeControl
 
         // Actions performed by GUI
 
-        public static void StartZLeafToolStripMenuItemOnClick(object sender, EventArgs e)
+        public static void RemoteStartZLeaf(object sender, EventArgs e)
         {
             foreach (ConnectionTable.ClientInformation clientInformation in _connectionTable.GetChecked())
             {
                 TraceOps.Out(clientInformation.GetName());
-                var p = new string[,] { { "p1", "v1" }, { "p2", "v2" } };
+                var p = new string[,] { { }, { } };
                 var m = new PaceCommon.Message(p, true, "start_zleaf", clientInformation.GetName());
                 _messageQueue.SetMessage(m);
             }
@@ -261,6 +261,22 @@ namespace ZtreeControl
         public void SetPanel(Panel mainPanel)
         {
             _mainPanel = mainPanel;
+        }
+
+        public static void OpenPreferences(object sender, EventArgs e)
+        {
+            
+        }
+
+        public static void RemoteStopLeaf(object sender, EventArgs e)
+        {
+            foreach (ConnectionTable.ClientInformation clientInformation in _connectionTable.GetChecked())
+            {
+                TraceOps.Out(clientInformation.GetName());
+                var p = new string[,] { { }, { } };
+                var m = new Message(p, true, "stop_zleaf", clientInformation.GetName());
+                _messageQueue.SetMessage(m);
+            }
         }
     }
 }
