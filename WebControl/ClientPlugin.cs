@@ -73,7 +73,13 @@ namespace WebControl
         public void SetTask(Message message)
         {
             TraceOps.Out("WebControl Client recived Message: "+ message.GetCommand());
-            if (message.GetCommand() == "start_webcontrol")
+            if (message.GetCommand() == "open_browser")
+            {
+                var d = new PluginCallback(ShowBrowser);
+                _mainForm.Invoke(d, new object[] { });
+            }
+
+            if (message.GetCommand() == "close_browser")
             {
                 var d = new PluginCallback(ShowBrowser);
                 _mainForm.Invoke(d, new object[] { });

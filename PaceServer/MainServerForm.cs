@@ -133,6 +133,9 @@ namespace PaceServer
                         plugin.SetPanel(mainPanel);
                         plugin.Start(_name);
 
+                        var control = (IServerControl) plugin.GetControl();
+                        control.Initializer("localhost", _port);
+
                         var view = (IServerView)plugin.GetView();
                         var mainMenu = view.CreateMainMenu();
                         var fileMenu = view.CreateMainMenuEntryFile();

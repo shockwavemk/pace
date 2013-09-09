@@ -29,7 +29,7 @@ namespace WebControl
             var clientInformations = _connectionTable.GetChecked();
             foreach (ConnectionTable.ClientInformation clientInformation in clientInformations)
             {
-                var p = new string[,] { { "p1", "v1" }, { "p2", "v2" } };
+                var p = new string[,] { };
                 var m = new Message(p, true, "open_browser", clientInformation.GetName());
                 _messageQueue.SetMessage(m);
             }
@@ -37,7 +37,7 @@ namespace WebControl
 
         public static void CloseBrowser(object sender, EventArgs e)
         {
-            var p = new string[,] { { "p1", "v1" }, { "p2", "v2" } };
+            var p = new string[,] { };
             foreach (var m in from ConnectionTable.ClientInformation clientInformation in _connectionTable.GetChecked() select new Message(p, true, "close_browser", clientInformation.GetName()))
             {
                 _messageQueue.SetMessage(m);
@@ -52,9 +52,9 @@ namespace WebControl
                 if (changeUrlForm.textBoxUrl.Text != null)
                 {
                     var url = changeUrlForm.textBoxUrl.Text;
-                    var p = new string[,] { { "p1", "v1" }, { "p2", "v2" } };
+                    var p = new string[,] { { "url", url } };
                 
-                    foreach (var m in from ConnectionTable.ClientInformation clientInformation in _connectionTable.GetChecked() select new Message(p, true, "start_browser", clientInformation.GetName()))
+                    foreach (var m in from ConnectionTable.ClientInformation clientInformation in _connectionTable.GetChecked() select new Message(p, true, "change_url", clientInformation.GetName()))
                     {
                         _messageQueue.SetMessage(m);
                     }

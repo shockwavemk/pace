@@ -14,6 +14,7 @@ namespace WebControl
         private ServerModel _model;
         private ServerView _view;
         private Form _mainForm;
+        private TaskManager _taskManager;
 
         delegate void PluginCallback();
 
@@ -54,7 +55,8 @@ namespace WebControl
         public void Start(string name)
         {
             _name = name;
-            _control.Initializer("localhost", 9090);
+            _taskManager = new TaskManager(ref _messageQueue, ref _name);
+            _taskManager.Task += TaskManagerOnTask;
         }
 
         public void Test()
@@ -87,6 +89,19 @@ namespace WebControl
                 
                 //MessageBox.Show("Test"+ sender.ToString());
             };
+        }
+
+        private void TaskManagerOnTask(Message message)
+        {
+            switch (message.GetCommand())
+            {
+                case "":
+                    TraceOps.Out("Case 1");
+                    break;
+                default:
+                    TraceOps.Out(message.GetCommand());
+                    break;
+            }
         }
     }
 }

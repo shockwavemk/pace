@@ -14,3 +14,7 @@ C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\ZtreeControl\o
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\ZtreeControl\obj\Debug\ZtreeControl.Properties.Resources.resources
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\ZtreeControl\obj\Debug\ZtreeControl.csproj.GenerateResource.Cache
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\ZtreeControl\obj\Debug\ZtreeControl.pdb
+C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\ZtreeControl\bin\Debug\ZtreeControl.dll
+C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\ZtreeControl\bin\Debug\ZtreeControl.pdb
+C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\ZtreeControl\bin\Debug\PaceCommon.dll
+C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\ZtreeControl\bin\Debug\PaceCommon.pdb

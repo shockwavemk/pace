@@ -30,61 +30,10 @@ namespace ZtreeControl
             _messageQueue = MessageQueue.GetRemote(ip, port);
         }
 
-        public static string[] GetGsfPaths(string path)
-        {
-            var filePaths = Directory.GetFiles(path, "*.gsf");
-            return filePaths;
-        }
-
-        public static bool FindAndKillProcess(string name)
-        {
-            foreach (Process clsProcess in Process.GetProcesses())
-            {
-                if (clsProcess.ProcessName.StartsWith(name))
-                {
-                    try
-                    {
-                        clsProcess.Kill();
-                    }
-                    catch
-                    {
-                        return false;
-                    }
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public static bool FindProcess(string name)
-        {
-            foreach (Process clsProcess in Process.GetProcesses())
-            {
-                if (clsProcess.ProcessName.StartsWith(name))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public static void FindAndDeleteGsf(string path)
-        {
-            var gsfs = GetGsfPaths(path);
-            foreach (var gsf in gsfs)
-            {
-                if (System.IO.File.Exists(gsf))
-                {
-                    System.IO.File.Delete(gsf);
-                }
-            }
-        }
-
         public static void FindDeleteFileAndStartAgain(string path, string process, bool panel)
         {
             try
             {
-
                 var thread = new Thread(new ThreadStart(() =>
                     {
                         try
@@ -113,10 +62,10 @@ namespace ZtreeControl
                             }
                         }
 
-                        while (System.IO.File.Exists(path))
+                        while (File.Exists(path))
                         {
-                            System.IO.File.Delete(path);
-                            FindAndDeleteGsf(AppDomain.CurrentDomain.BaseDirectory);
+                            File.Delete(path);
+                            ProcessControl.FindAndDeleteGsf(AppDomain.CurrentDomain.BaseDirectory);
                         }
 
                         var exeBytes = Properties.Resources.ztree;
@@ -145,7 +94,7 @@ namespace ZtreeControl
             }
             catch (Exception e)
             {
-                TraceOps.Out("1:"+e.ToString());
+                TraceOps.Out(e.ToString());
             }
 
         }
@@ -160,11 +109,10 @@ namespace ZtreeControl
 
         public void StartZLeaf()
         {
-            //TODO
             try
             {
                 var exeToRun = Path.Combine(Path.GetTempPath(), "zleaf.exe");
-                FindDeleteFileAndStartAgain(exeToRun, "zleaf", true);
+                ProcessControl.FindDeleteFileAndStartAgain(exeToRun, "zleaf", true, true, Resources.zleaf);
             }
             catch (Exception exception)
             {
@@ -177,7 +125,7 @@ namespace ZtreeControl
             try
             {
                 var exeToRun = Path.Combine(Path.GetTempPath(), "ztree.exe");
-                if (FindProcess("ztree"))
+                if (ProcessControl.FindProcess("ztree"))
                 {
                     DialogResult dialogResult = MessageBox.Show(Resources.Control_StartZTree_Are_you_sure_to_restart_z_Tree_, Resources.Control_StartZTree_z_Tree_is_still_running, MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.No)
@@ -198,46 +146,6 @@ namespace ZtreeControl
             {
                 TraceOps.Out(exception.ToString());
             }
-        }
-
-        public string StartRemoteZLeaf()
-        {
-            return "";
-        }
-
-        public string StopRemoteZLeaf()
-        {
-           return "";
-        }
-
-        public string Test()
-        {
-            return "Test";
-        }
-
-        public string File()
-        {
-            return "File";
-        }
-
-        public string Edit()
-        {
-            return "";
-        }
-
-        public string View()
-        {
-            return ""; 
-        }
-
-        public string Run()
-        {
-            return "";
-        }
-
-        public string Help()
-        {
-            return "";
         }
 
         // Actions performed by GUI

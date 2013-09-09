@@ -32,7 +32,7 @@ namespace ZtreeControl
         
         public void StopZLeaf()
         {
-            TraceOps.Out("Stop ZLeaf TODO");
+            ProcessControl.FindAndKillProcess("zleaf");
         }
     }
 }

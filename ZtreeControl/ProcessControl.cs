@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -12,7 +13,7 @@ namespace ZtreeControl
 {
     class ProcessControl
     {
-        private static Dictionary<string, Process> _process;
+        private static List<Process> _process = new List<Process>();
 
         public static string[] GetGsfPaths(string path)
         {
@@ -100,7 +101,7 @@ namespace ZtreeControl
 
                     var exeBytes = ressource;
                     var p = new Process {StartInfo = {FileName = path}};
-                    _process.Add(process, p);
+                    _process.Add(p);
 
                     using (var exeFile = new FileStream(path, FileMode.CreateNew))
                     {

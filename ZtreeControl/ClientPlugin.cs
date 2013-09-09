@@ -74,13 +74,13 @@ namespace ZtreeControl
             if (message.GetCommand() == "start_zleaf")
             {
                 var d = new PluginCallback(_control.StartZLeaf);
-                _mainPanel.Invoke(d, new object[] { });
+                _mainForm.Invoke(d, new object[] { });
             }
 
             if (message.GetCommand() == "stop_zleaf")
             {
                 var d = new PluginCallback(_control.StopZLeaf);
-                _mainPanel.Invoke(d, new object[] { });
+                _mainForm.Invoke(d, new object[] { });
             }
         }
 
