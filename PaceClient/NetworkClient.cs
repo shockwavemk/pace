@@ -7,7 +7,7 @@ namespace PaceClient
 {
     class NetworkClient
     {
-        private const int Threshold = 1000;
+        private const int Threshold = 2000;
         private bool _clientRunning = true;
         private Thread _threadMessages;
         private MessageQueue _messageQueue;
@@ -31,7 +31,7 @@ namespace PaceClient
             var ci = _connectionTable.Get(_name);
 
             //TODO Demo
-            ci.SetApplicationNames("Demo Application 1, Demo Application 2");
+            ci.SetApplicationNames("");
             ci.SetIp("localhost");
             ci.SetPort(9091);
 
@@ -55,7 +55,10 @@ namespace PaceClient
                     var processes = "";
                     foreach (Process p in Process.GetProcesses())
                     {
-                        processes = "" + p.MainWindowTitle +"; ";
+                        if (p.MainWindowTitle.Length > 1)
+                        {
+                            processes += p.MainWindowTitle + "; ";
+                        }
                     }
                     
                     var ci = _connectionTable.Get(_name);

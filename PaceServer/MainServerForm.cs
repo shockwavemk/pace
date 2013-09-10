@@ -114,10 +114,11 @@ namespace PaceServer
 
         private void LoadClientsTable()
         {
-            _clientsTableForm = new ClientsTableForm(ref _plugins, _port) { TopLevel = false };
-               
-            mainPanel.Controls.Add(_clientsTableForm);
+            _clientsTableForm = new ClientsTableForm(ref _plugins, _port);
+            _clientsTableForm.TopLevel = false;
             _clientsTableForm.Visible = true;
+            mainPanel.Controls.Add(_clientsTableForm);
+            
         }
 
         private void LoadPlugIns()
