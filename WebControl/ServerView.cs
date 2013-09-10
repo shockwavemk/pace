@@ -9,6 +9,7 @@ namespace WebControl
         private ToolStripMenuItem webControlToolStripMenuItem;
         private ToolStripMenuItem webbrowserPreferencesToolStripMenuItem;
         private ToolStripMenuItem openWebbrowserToolStripMenuItem;
+        private ToolStripMenuItem openCustomWebbrowserToolStripMenuItem;
         private ToolStripMenuItem closeWebBrowserToolStripMenuItem;
         private ToolStripMenuItem changeUrlToolStripMenuItem;
 
@@ -23,6 +24,7 @@ namespace WebControl
 
             webControlToolStripMenuItem = new ToolStripMenuItem();
             openWebbrowserToolStripMenuItem = new ToolStripMenuItem();
+            openCustomWebbrowserToolStripMenuItem = new ToolStripMenuItem();
             closeWebBrowserToolStripMenuItem = new ToolStripMenuItem();
             changeUrlToolStripMenuItem = new ToolStripMenuItem();
             webbrowserPreferencesToolStripMenuItem = new ToolStripMenuItem();
@@ -30,6 +32,7 @@ namespace WebControl
             webControlToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] {
             webbrowserPreferencesToolStripMenuItem,
             openWebbrowserToolStripMenuItem,
+            openCustomWebbrowserToolStripMenuItem,
             closeWebBrowserToolStripMenuItem,
             changeUrlToolStripMenuItem});
             webControlToolStripMenuItem.Name = "webControlToolStripMenuItem";
@@ -41,6 +44,11 @@ namespace WebControl
             openWebbrowserToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             openWebbrowserToolStripMenuItem.Text = "Open Webbrowser";
             openWebbrowserToolStripMenuItem.Click += ServerControl.OpenBrowser;
+
+            openCustomWebbrowserToolStripMenuItem.Name = "openCustomWebbrowserToolStripMenuItem";
+            openCustomWebbrowserToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            openCustomWebbrowserToolStripMenuItem.Text = "Open Custom Webbrowser";
+            openCustomWebbrowserToolStripMenuItem.Click += ServerControl.OpenCustomBrowser;
              
             closeWebBrowserToolStripMenuItem.Name = "closeWebBrowserToolStripMenuItem";
             closeWebBrowserToolStripMenuItem.Size = new System.Drawing.Size(172, 22);

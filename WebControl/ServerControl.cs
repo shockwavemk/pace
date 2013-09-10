@@ -16,11 +16,31 @@ namespace WebControl
         private static Form _mainForm;
 
         private static Panel _mainPanel;
+        private string _name;
 
-        public void Initializer(string ip, int port)
+        public void SetName(ref string name)
         {
-            _connectionTable = ConnectionTable.GetRemote(ip, port);
-            _messageQueue = MessageQueue.GetRemote(ip, port);
+            _name = name;
+        }
+
+        public void SetQueue(ref MessageQueue messageQueue)
+        {
+            _messageQueue = messageQueue;
+        }
+
+        public void SetTable(ref ConnectionTable connectionTable)
+        {
+            _connectionTable = connectionTable;
+        }
+
+        public void SetForm(Form mainForm)
+        {
+            _mainForm = mainForm;
+        }
+
+        public void SetPanel(Panel mainPanel)
+        {
+            _mainPanel = mainPanel;
         }
         
 
@@ -31,6 +51,17 @@ namespace WebControl
             {
                 var p = new string[,] { };
                 var m = new Message(p, true, "open_browser", clientInformation.GetName());
+                _messageQueue.SetMessage(m);
+            }
+        }
+
+        public static void OpenCustomBrowser(object sender, EventArgs e)
+        {
+            var clientInformations = _connectionTable.GetChecked();
+            foreach (ConnectionTable.ClientInformation clientInformation in clientInformations)
+            {
+                var p = new string[,] { };
+                var m = new Message(p, true, "open_custom_browser", clientInformation.GetName());
                 _messageQueue.SetMessage(m);
             }
         }
@@ -47,8 +78,8 @@ namespace WebControl
         public static void ChangeUrl(object sender, EventArgs e)
         {
             var changeUrlForm = new ServerChangeUrlForm() { TopLevel = true };
-            if (changeUrlForm.ShowDialog() == DialogResult.OK)
-            {
+
+            TraceOps.Out("result"+changeUrlForm.ShowDialog().ToString());
                 if (changeUrlForm.textBoxUrl.Text != null)
                 {
                     var url = changeUrlForm.textBoxUrl.Text;
@@ -59,22 +90,12 @@ namespace WebControl
                         _messageQueue.SetMessage(m);
                     }
                 }
-            }
+            
         }
 
         public static void OpenPreferences(object sender, EventArgs e)
         {
             
-        }
-
-        public void SetForm(Form mainForm)
-        {
-            _mainForm = mainForm;
-        }
-
-        public void SetPanel(Panel mainPanel)
-        {
-            _mainPanel = mainPanel;
         }
     }
 }

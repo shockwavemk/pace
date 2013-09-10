@@ -104,7 +104,7 @@ namespace PaceCommon
             return plugins;
         }
 
-        public static void InitializeClientPlugIns(IEnumerable<IPlugin> plugins, ref MessageQueue messageQueue, string name, Form mainForm)
+        public static void InitializeClientPlugIns(IEnumerable<IPlugin> plugins)
         {
             if (plugins != null)
             {
@@ -112,9 +112,7 @@ namespace PaceCommon
                 {
                     if (plugin != null)
                     {
-                        plugin.SetQueue(ref messageQueue);
-                        plugin.SetForm(mainForm);
-                        plugin.Start(name);
+                        plugin.Start();
                     }
                 }
             }

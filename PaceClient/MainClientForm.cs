@@ -60,7 +60,7 @@ namespace PaceClient
             _configServer = new ConfigServer();
             _configServer.Changed += ConfigServerOnChanged;
 
-            DllLoader.InitializeClientPlugIns(_plugins, ref _messageQueue, _name, this);
+            DllLoader.InitializeClientPlugIns(_plugins);
         }
 
 
@@ -88,6 +88,14 @@ namespace PaceClient
             
             try
             {
+                foreach (IClientPlugin plugin in _plugins)
+                {
+                    plugin.SetForm(this);
+                    plugin.SetName(ref _name);
+                    plugin.SetQueue(ref _messageQueue);
+                    plugin.SetTable(ref _connectionTable);
+                }
+                
                 _networkClient = new NetworkClient(ref _messageQueue, ref _connectionTable, _name);
                 _taskManager = new TaskManager(ref _messageQueue, ref _name);
                 _taskManager.Task += TaskManagerOnTask;

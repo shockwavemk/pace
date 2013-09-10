@@ -42,5 +42,32 @@ namespace PaceCommon
         {
             return Command;
         }
+
+        public string[,] GetParameter()
+        {
+            return Parameter;
+        }
+
+        public static string GetAttribute(string[,] strings, string needle)
+        {
+            try
+            {
+                for (int i = 0; i < strings.GetLength(0); i++)
+                {
+                    var key = strings[i, 0];
+                    var value = strings[i, 1];
+                    if (key.Equals(needle))
+                    {
+                        return value;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                TraceOps.Out(e.ToString());
+            }
+            
+            return "";
+        }
     }
 }

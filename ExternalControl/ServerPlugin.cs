@@ -14,6 +14,7 @@ namespace ExternalControl
         private ServerModel _model;
         private ServerView _view;
         private Form _mainForm;
+        private ConnectionTable _connectionTable;
 
         public IView GetView()
         {
@@ -37,9 +38,9 @@ namespace ExternalControl
             _view = new ServerView();
         }
 
-        public void Start(string name)
+        public void Start()
         {
-            _name = name;
+            
         }
 
         public void Test()
@@ -52,19 +53,34 @@ namespace ExternalControl
             return _name;
         }
 
+        public void SetName(ref string name)
+        {
+            _name = name;
+            _control.SetName(ref name);
+        }
+
         public void SetQueue(ref MessageQueue messageQueue)
         {
             _messageQueue = messageQueue;
+            _control.SetQueue(ref messageQueue);
+        }
+
+        public void SetTable(ref ConnectionTable connectionTable)
+        {
+            _connectionTable = connectionTable;
+            _control.SetTable(ref connectionTable);
         }
 
         public void SetForm(Form mainForm)
         {
             _mainForm = mainForm;
+            _control.SetForm(mainForm);
         }
 
         public void SetPanel(Panel mainPanel)
         {
             _mainPanel = mainPanel;
+            _control.SetPanel(mainPanel);
         }
 
         public void SetTask(Message message)

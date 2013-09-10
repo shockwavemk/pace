@@ -15,6 +15,7 @@ namespace WebControl
         private ServerView _view;
         private Form _mainForm;
         private TaskManager _taskManager;
+        private ConnectionTable _connectionTable;
 
         delegate void PluginCallback();
 
@@ -40,6 +41,24 @@ namespace WebControl
             _view = new ServerView();
         }
 
+        public void SetName(ref string name)
+        {
+            _name = name;
+            _control.SetName(ref name);
+        }
+
+        public void SetQueue(ref MessageQueue messageQueue)
+        {
+            _messageQueue = messageQueue;
+            _control.SetQueue(ref messageQueue);
+        }
+
+        public void SetTable(ref ConnectionTable connectionTable)
+        {
+            _connectionTable = connectionTable;
+            _control.SetTable(ref connectionTable);
+        }
+
         public void SetForm(Form mainForm)
         {
             _mainForm = mainForm;
@@ -51,12 +70,10 @@ namespace WebControl
             _mainPanel = mainPanel;
             _control.SetPanel(mainPanel);
         }
-
-        public void Start(string name)
+        
+        public void Start()
         {
-            _name = name;
-            _taskManager = new TaskManager(ref _messageQueue, ref _name);
-            _taskManager.Task += TaskManagerOnTask;
+
         }
 
         public void Test()
@@ -67,12 +84,6 @@ namespace WebControl
         public string Name()
         {
             return _name;
-        }
-
-        public void SetQueue(ref MessageQueue messageQueue)
-        {
-            _messageQueue = messageQueue;
-
         }
 
         public void SetTask(Message message)
@@ -89,19 +100,6 @@ namespace WebControl
                 
                 //MessageBox.Show("Test"+ sender.ToString());
             };
-        }
-
-        private void TaskManagerOnTask(Message message)
-        {
-            switch (message.GetCommand())
-            {
-                case "":
-                    TraceOps.Out("Case 1");
-                    break;
-                default:
-                    TraceOps.Out(message.GetCommand());
-                    break;
-            }
         }
     }
 }

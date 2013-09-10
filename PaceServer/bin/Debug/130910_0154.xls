@@ -1,0 +1,8 @@
+130910_0154	1	globals	Period	NumPeriods	RepeatTreatment	
+130910_0154	1	globals	1	1	0	
+130910_0154	1	subjects	Period	Subject	Group	Profit	TotalProfit	Participate	
+130910_0154	1	subjects	1	1	1	0	0	1	
+130910_0154	1	summary	Period	
+130910_0154	1	summary	1	
+130910_0154	1	session	Subject	FinalProfit	ShowUpFee	ShowUpFeeInvested	MoneyAdded	MoneyToPay	MoneyEarned	
+130910_0154	1	session	1	0	0	0	0	0	0	

@@ -16,5 +16,10 @@ namespace WebControl
         {
             InitializeComponent();
         }
+
+        private void buttonAccept_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

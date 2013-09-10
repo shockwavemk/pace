@@ -21,13 +21,33 @@ namespace ZtreeControl
         private static MessageQueue _messageQueue;
         private static Form _mainForm;
         private static Panel _mainPanel;
-        
+        private string _name;
+
         delegate void PluginCallback();
 
-        public void Initializer(string ip, int port)
+        public void SetName(ref string name)
         {
-            _connectionTable = ConnectionTable.GetRemote(ip, port);
-            _messageQueue = MessageQueue.GetRemote(ip, port);
+            _name = name;
+        }
+
+        public void SetQueue(ref MessageQueue messageQueue)
+        {
+            _messageQueue = messageQueue;
+        }
+
+        public void SetTable(ref ConnectionTable connectionTable)
+        {
+            _connectionTable = connectionTable;
+        }
+
+        public void SetForm(Form mainForm)
+        {
+            _mainForm = mainForm;
+        }
+
+        public void SetPanel(Panel mainPanel)
+        {
+            _mainPanel = mainPanel;
         }
 
         public static void FindDeleteFileAndStartAgain(string path, string process, bool panel)
@@ -159,16 +179,6 @@ namespace ZtreeControl
                 var m = new PaceCommon.Message(p, true, "start_zleaf", clientInformation.GetName());
                 _messageQueue.SetMessage(m);
             }
-        }
-
-        public void SetForm(Form mainForm)
-        {
-            _mainForm = mainForm;
-        }
-
-        public void SetPanel(Panel mainPanel)
-        {
-            _mainPanel = mainPanel;
         }
 
         public static void OpenPreferences(object sender, EventArgs e)

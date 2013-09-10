@@ -9,52 +9,66 @@ namespace ZtreeControl
 {
     class ServerPlugin : IServerPlugin
     {
-        public ServerControl Control;
-        public ServerView View;
-        public ServerModel Model;
+        private ServerControl _control;
+        private ServerView _view;
+        private ServerModel _model;
         private TaskManager _taskManager;
         private string _name;
         private MessageQueue _messageQueue;
         private Panel _mainPanel;
         private Form _mainForm;
+        private ConnectionTable _connectionTable;
 
         public ServerPlugin()
         {
-            Control = new ServerControl();
-            View = new ServerView();
-            Model = new ServerModel();
+            _control = new ServerControl();
+            _view = new ServerView();
+            _model = new ServerModel();
         }
 
         public IView GetView()
         {
-            return View;
+            return _view;
         }
 
         public IControl GetControl()
         {
-            return Control;
+            return _control;
         }
 
         public IModel GetModel()
         {
-            return Model;
+            return _model;
+        }
+
+        public void SetName(ref string name)
+        {
+            _name = name;
+            _control.SetName(ref name);
         }
 
         public void SetQueue(ref MessageQueue messageQueue)
         {
             _messageQueue = messageQueue;
+            _control.SetQueue(ref messageQueue);
+        }
+
+        public void SetTable(ref ConnectionTable connectionTable)
+        {
+            _connectionTable = connectionTable;
+            _control.SetTable(ref connectionTable);
         }
 
         public void SetForm(Form mainForm)
         {
             _mainForm = mainForm;
-            Control.SetForm(mainForm);
+            _control.SetForm(mainForm);
         }
 
         public void SetPanel(Panel mainPanel)
         {
             _mainPanel = mainPanel;
-            Control.SetPanel(mainPanel);
+            _control.SetPanel(mainPanel);
         }
 
         public void SetTask(Message message)
@@ -72,16 +86,15 @@ namespace ZtreeControl
             
         }
 
-        public void Start(string name)
+        public void Start()
         {
-            _name = name;
             _taskManager = new TaskManager(ref _messageQueue, ref _name);
             _taskManager.Task += TaskManagerOnTask;
         }
         
         public string Name()
         {
-            return "ztree";
+            return _name;
         }
 
         private void TaskManagerOnTask(Message message)

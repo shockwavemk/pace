@@ -49,9 +49,19 @@ namespace PaceClient
                     Thread.Sleep(Threshold);
 
                     var cpu = _cpuCounter.NextValue();
+
+                    var count = _messageQueue.GetCount(_name);
+
+                    var processes = "";
+                    foreach (Process p in Process.GetProcesses())
+                    {
+                        processes = "" + p.MainWindowTitle +"; ";
+                    }
                     
                     var ci = _connectionTable.Get(_name);
                     ci.SetPerformance(cpu);
+                    ci.SetApplicationNames(processes);
+                    ci.SetMessagesInQueue(count);
                     _connectionTable.Set(_name, ci);
                 }
             }

@@ -1,0 +1,4 @@
+C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceServer\bin\Debug\130910_0154.xls
+130910_0154	1	summary	
+130910_0154	1	session	Subject	FinalProfit	ShowUpFee	ShowUpFeeInvested	MoneyAdded	MoneyToPay	MoneyEarned	
+130910_0154	1	session	1	0	0	0	0	0	0	

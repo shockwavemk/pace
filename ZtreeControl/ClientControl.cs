@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Windows.Forms;
 using PaceCommon;
 
 namespace ZtreeControl
@@ -10,11 +11,33 @@ namespace ZtreeControl
         private static ConnectionTable _connectionTable;
         private static MessageQueue _messageQueue;
         private static Process _processZLeaf;
-        
-        public void Initializer(string ip, int port)
+        private Form _mainForm;
+        private string _name;
+        private Panel _mainPanel;
+
+        public void SetName(ref string name)
         {
-            _connectionTable = ConnectionTable.GetRemote(ip, port);
-            _messageQueue = MessageQueue.GetRemote(ip, port);
+            _name = name;
+        }
+
+        public void SetQueue(ref MessageQueue messageQueue)
+        {
+            _messageQueue = messageQueue;
+        }
+
+        public void SetTable(ref ConnectionTable connectionTable)
+        {
+            _connectionTable = connectionTable;
+        }
+
+        public void SetForm(Form mainForm)
+        {
+            _mainForm = mainForm;
+        }
+
+        public void SetPanel(Panel mainPanel)
+        {
+            _mainPanel = mainPanel;
         }
 
         public void StartZLeaf()

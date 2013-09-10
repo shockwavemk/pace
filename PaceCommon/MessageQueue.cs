@@ -40,6 +40,17 @@ namespace PaceCommon
             return null;
         }
 
+        public int GetCount(string destination)
+        {
+            if (destination != null)
+            {
+                Message m;
+                var cq = _concurrentDictionary.GetOrAdd(destination, ConcurrentQueueFactory);
+                return cq.Count;
+            }
+            return 0;
+        }
+
         private ConcurrentQueue<Message> ConcurrentQueueFactory(string s)
         {
             var cq = new ConcurrentQueue<Message>();

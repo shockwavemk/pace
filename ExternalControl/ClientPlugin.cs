@@ -18,6 +18,7 @@ namespace ExternalControl
         private ClientView _view;
         private string _name;
         private Form _mainForm;
+        private ConnectionTable _connectionTable;
 
         delegate void PluginCallback();
         
@@ -37,9 +38,8 @@ namespace ExternalControl
         }
 
         [STAThread]
-        public void Start(string name)
+        public void Start()
         {
-            _name = name;
             _control = new ClientControl();
             _model = new ClientModel();
             _view = new ClientView();
@@ -55,19 +55,34 @@ namespace ExternalControl
             return _name;
         }
 
+        public void SetName(ref string name)
+        {
+            _name = name;
+            _control.SetName(ref name);
+        }
+
         public void SetQueue(ref MessageQueue messageQueue)
         {
             _messageQueue = messageQueue;
+            _control.SetQueue(ref messageQueue);
+        }
+
+        public void SetTable(ref ConnectionTable connectionTable)
+        {
+            _connectionTable = connectionTable;
+            _control.SetTable(ref connectionTable);
         }
 
         public void SetForm(Form mainForm)
         {
             _mainForm = mainForm;
+            _control.SetForm(mainForm);
         }
 
         public void SetPanel(Panel mainPanel)
         {
             _mainPanel = mainPanel;
+            _control.SetPanel(mainPanel);
         }
 
         public void SetTask(Message message)

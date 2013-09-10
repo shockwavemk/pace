@@ -10,3 +10,4 @@ C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceCommon\obj
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceCommon\obj\Debug\PaceCommon.csproj.GenerateResource.Cache
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceCommon\obj\Debug\PaceCommon.dll
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceCommon\obj\Debug\PaceCommon.pdb
+C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceCommon\obj\Debug\PaceCommon.csprojResolveAssemblyReference.cache

@@ -361,6 +361,23 @@ namespace WebControl
         #region TABURI
         /*TAB-uri*/
 
+        public void addNewExTab(string url)
+        {
+            TabPage tpage = new TabPage();
+            tpage.BorderStyle = BorderStyle.Fixed3D;
+            browserTabControl.TabPages.Insert(browserTabControl.TabCount - 1, tpage);
+            WebBrowser browser = new WebBrowser();
+            browser.Navigate(url);
+            tpage.Controls.Add(browser);
+            browser.Dock = DockStyle.Fill;
+            browserTabControl.SelectTab(tpage);
+            browser.ProgressChanged += new WebBrowserProgressChangedEventHandler(Form1_ProgressChanged);
+            browser.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(Form1_DocumentCompleted);
+            browser.Navigating += new WebBrowserNavigatingEventHandler(Form1_Navigating);
+            browser.CanGoBackChanged += new EventHandler(browser_CanGoBackChanged);
+            browser.CanGoForwardChanged += new EventHandler(browser_CanGoForwardChanged);
+        }
+
         //addNewTab method
         private void addNewTab()
         {

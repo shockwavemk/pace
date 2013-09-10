@@ -129,12 +129,11 @@ namespace PaceServer
                     if (plugin != null)
                     {
                         plugin.SetQueue(ref _messageQueue);
+                        plugin.SetTable(ref _connectionTable);
                         plugin.SetForm(_msf);
                         plugin.SetPanel(mainPanel);
-                        plugin.Start(_name);
-
-                        var control = (IServerControl) plugin.GetControl();
-                        control.Initializer("localhost", _port);
+                        plugin.SetName(ref _name);
+                        plugin.Start();
 
                         var view = (IServerView)plugin.GetView();
                         var mainMenu = view.CreateMainMenu();
