@@ -16,5 +16,18 @@ namespace WebControl
         {
             InitializeComponent();
         }
+
+        private void ServerPreferencesForm_Load(object sender, EventArgs e)
+        {
+            XPos.Value = ServerModel.X;
+            YPos.Value = ServerModel.Y;
+            Width.Value = ServerModel.W;
+            Height.Value = ServerModel.H;
+        }
+
+        private void buttonAccept_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

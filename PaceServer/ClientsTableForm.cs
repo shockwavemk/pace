@@ -30,6 +30,10 @@ namespace PaceServer
             _port = port;
             _ip = HashOps.GetFqdn();
             InitializeComponent();
+            handle.MouseDown += handle_MouseDown;
+            handle.MouseMove += handle_MouseMove;
+            handle.MouseUp += handle_MouseUp;
+
             LoadPlugIns();
         }
 
@@ -59,17 +63,6 @@ namespace PaceServer
             thread.Start();
         }
 
-        private void clientListView_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            var strings = new string[clientListView.SelectedItems.Count];
-
-            for (var index = 0; index < clientListView.SelectedItems.Count; index++)
-            {
-                strings[index] = clientListView.SelectedItems[index].Text;
-            }
-            _connectionTable.SetSelection(strings);
-        }
-
         private void clientListView_CheckedIndexChanged(object sender, EventArgs e)
         {
             var strings = new string[clientListView.CheckedItems.Count];
@@ -79,6 +72,27 @@ namespace PaceServer
                 strings[index] = clientListView.CheckedItems[index].Text;
             }
             _connectionTable.SetChecked(strings);
+        }
+
+        bool mouseClicked = false;
+
+        private void handle_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            mouseClicked = true;
+        }
+
+        private void handle_MouseUp(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            mouseClicked = false;
+        }
+
+        private void handle_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            if (mouseClicked)
+            {
+                this.Height = handle.Top + 70 + e.Y;
+                this.Width = handle.Left + 20 + e.X;
+            }
         }
 
         private void CreateGroups()
@@ -158,55 +172,6 @@ namespace PaceServer
                 }
             }
         }
-        
-        private void newConnectionToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _newConnectionForm = new ConnectionForm() { TopLevel = true };
-            if (_newConnectionForm.ShowDialog() == DialogResult.OK)
-            {
-                var ip = NetworkOps.GetIpString(_newConnectionForm.textBoxUri.Text);
-                var port = NetworkOps.GetPort(_newConnectionForm.textBoxPort.Text);
-                
-                var connected = NetworkOps.SetUpClientConnectionConfig(ip, port,_ip, _port);
-                if (!connected)
-                {
-                    MessageBox.Show("Cannot establish connection to network. Please try again.\r\n");
-                }
-            }
-        }
-
-        private void loadConnectionsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var openFileDialog = new OpenFileDialog
-                {
-                    RestoreDirectory = true,
-                    Filter = "All Connection Xml files (*.PXML)|*.PXML"
-                };
-
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                var fileName = openFileDialog.FileName;
-
-                if (File.Exists(fileName) == true)
-                {
-                    Connections connections = ObjectToXml<Connections>.Load(fileName);
-
-                    if (connections == null)
-                    {
-                        MessageBox.Show("Unable to load customer object from file '" + fileName + "'!", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    else
-                    {
-                        this.LoadConnections(connections);
-                        MessageBox.Show("Customer loaded from file '" + fileName + "'!", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("File does not exist. Please try again.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-        }
 
         private void LoadConnections(Connections connections)
         {
@@ -222,13 +187,62 @@ namespace PaceServer
             }
         }
 
-        
 
-        private void saveConnectionsToolStripMenuItem_Click(object sender, EventArgs e)
+        private ArrayList CreateConnections()
+        {
+            var ctall = _connectionTable.GetAll();
+            var connections = new ArrayList();
+
+            foreach (ConnectionTable.ClientInformation ct in ctall)
+            {
+                if (ct.GetName() != "Server")
+                {
+                    var connection = new Connection {ip = ct.GetIp(), name = ct.GetName(), port = ct.GetPort()};
+                    connections.Add(connection);
+                }
+            }
+            return connections;
+        }
+        
+        private bool ConnectionsIsValid()
+        {
+            return true; //TODO
+        }
+
+        //NetworkOps.SetUpClientConnectionConfig("131.234.150.135", 9091, _ip, _port);
+
+        private void clientListView_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            var strings = new string[clientListView.SelectedItems.Count];
+
+            for (var index = 0; index < clientListView.SelectedItems.Count; index++)
+            {
+                strings[index] = clientListView.SelectedItems[index].Text;
+            }
+            _connectionTable.SetSelection(strings);
+        }
+
+        private void newConnectionToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            _newConnectionForm = new ConnectionForm() { TopLevel = true };
+            if (_newConnectionForm.ShowDialog() == DialogResult.OK)
+            {
+                var ip = NetworkOps.GetIpString(_newConnectionForm.textBoxUri.Text);
+                var port = NetworkOps.GetPort(_newConnectionForm.textBoxPort.Text);
+
+                var connected = NetworkOps.SetUpClientConnectionConfig(ip, port, _ip, _port);
+                if (!connected)
+                {
+                    MessageBox.Show("Cannot establish connection to network. Please try again.\r\n");
+                }
+            }
+        }
+
+        private void saveConnectionsToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             if (this.ConnectionsIsValid())
             {
-                var connections = new Connections {ConnectionList = CreateConnections()};
+                var connections = new Connections { ConnectionList = CreateConnections() };
 
                 try
                 {
@@ -257,40 +271,37 @@ namespace PaceServer
             }
         }
 
-        private ArrayList CreateConnections()
+        private void loadConnectionsToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            var ctall = _connectionTable.GetAll();
-            var connections = new ArrayList();
-
-            foreach (ConnectionTable.ClientInformation ct in ctall)
+            var openFileDialog = new OpenFileDialog
             {
-                if (ct.GetName() != "Server")
+                RestoreDirectory = true,
+                Filter = "All Connection Xml files (*.PXML)|*.PXML"
+            };
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                var fileName = openFileDialog.FileName;
+
+                if (File.Exists(fileName) == true)
                 {
-                    var connection = new Connection {ip = ct.GetIp(), name = ct.GetName(), port = ct.GetPort()};
-                    connections.Add(connection);
+                    Connections connections = ObjectToXml<Connections>.Load(fileName);
+
+                    if (connections == null)
+                    {
+                        MessageBox.Show("Unable to load customer object from file '" + fileName + "'!", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        this.LoadConnections(connections);
+                        MessageBox.Show("Customer loaded from file '" + fileName + "'!", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("File does not exist. Please try again.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
-            return connections;
-        }
-        
-        private bool ConnectionsIsValid()
-        {
-            return true; //TODO
-        }
-
-        private void tempServerConnectionToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            NetworkOps.SetUpClientConnectionConfig("131.234.150.135", 9091, _ip, _port);
-        }
-
-        private void connectionToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void clientListView_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
-
         }
     }
 }

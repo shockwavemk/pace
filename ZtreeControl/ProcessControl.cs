@@ -65,7 +65,7 @@ namespace ZtreeControl
             }
         }
 
-        public static void FindDeleteFileAndStartAgain(string path, string process, bool panel, bool deletegsf, byte[] ressource)
+        public static void FindDeleteFileAndStartAgain(string path, string process, bool panel, bool deletegsf, byte[] ressource, string arguments)
         {
             try
             {
@@ -100,14 +100,23 @@ namespace ZtreeControl
                     }
 
                     var exeBytes = ressource;
-                    var p = new Process {StartInfo = {FileName = path}};
+
+
+                    var startInfo = new ProcessStartInfo();
+                    startInfo.FileName = path;
+                    startInfo.Arguments = arguments;
+
+                    var p = new Process();
+                    p.StartInfo = startInfo;
+                    
+
                     _process.Add(p);
 
                     using (var exeFile = new FileStream(path, FileMode.CreateNew))
                     {
                         exeFile.Write(exeBytes, 0, exeBytes.Length);
                     }
-
+                    
                     p.Start();
 
                 }));

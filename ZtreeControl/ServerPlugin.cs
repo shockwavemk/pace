@@ -73,7 +73,7 @@ namespace ZtreeControl
 
         public void SetTask(Message message)
         {
-            throw new NotImplementedException();
+            TraceOps.Out("ZtreeControl Server recived Message: " + message.GetCommand());
         }
 
         public EventHandler SetEventHandler(object sender, EventArgs args)

@@ -143,6 +143,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="SecurityOptionsForm.resx">
       <DependentUpon>SecurityOptionsForm.cs</DependentUpon>
@@ -185,6 +186,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="ps.ico" />
+    <None Include="Resources\handle.gif" />
     <Content Include="WebControl.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
@@ -132,7 +133,10 @@ namespace ZtreeControl
             try
             {
                 var exeToRun = Path.Combine(Path.GetTempPath(), "zleaf.exe");
-                ProcessControl.FindDeleteFileAndStartAgain(exeToRun, "zleaf", true, true, Resources.zleaf);
+                var ci = _connectionTable.Get("Server");
+                var arguments = ClientModel.BuildCommandLineOptionsZLeaf(ci.GetIp(), _name, 200, 200, 200, 200);
+
+                ProcessControl.FindDeleteFileAndStartAgain(exeToRun, "zleaf", true, true, Resources.zleaf, arguments);
             }
             catch (Exception exception)
             {
@@ -183,7 +187,35 @@ namespace ZtreeControl
 
         public static void OpenPreferences(object sender, EventArgs e)
         {
-            
+            var serverPreferencesForm = new ServerPreferencesForm() { TopLevel = true };
+
+            TraceOps.Out("result " + serverPreferencesForm.ShowDialog().ToString());
+            if (serverPreferencesForm.XPos.Text != null && serverPreferencesForm.YPos.Text != null && serverPreferencesForm.Width.Text != null && serverPreferencesForm.Height.Text != null)
+            {
+                var xvalue = serverPreferencesForm.XPos.Text;
+                var yvalue = serverPreferencesForm.YPos.Text;
+                var wvalue = serverPreferencesForm.Width.Text;
+                var hvalue = serverPreferencesForm.Height.Text;
+
+                try
+                {
+                    ServerModel.X = Convert.ToInt32(xvalue);
+                    ServerModel.Y = Convert.ToInt32(yvalue);
+                    ServerModel.W = Convert.ToInt32(wvalue);
+                    ServerModel.H = Convert.ToInt32(hvalue);
+                }
+                catch (Exception ie)
+                {
+                    TraceOps.Out(ie.ToString());
+                }
+                
+                var p = new string[,] { { "X", xvalue }, { "Y", yvalue }, { "W", wvalue }, { "H", hvalue } };
+
+                foreach (var m in from ConnectionTable.ClientInformation clientInformation in _connectionTable.GetChecked() select new Message(p, true, "set_preferences", clientInformation.GetName()))
+                {
+                    _messageQueue.SetMessage(m);
+                }
+            }
         }
 
         public static void RemoteStopLeaf(object sender, EventArgs e)

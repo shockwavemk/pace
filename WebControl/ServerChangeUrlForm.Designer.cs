@@ -84,6 +84,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ServerChangeUrlForm";
             this.Text = "Change url on client browser";
+            this.Load += new System.EventHandler(this.ServerChangeUrlForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

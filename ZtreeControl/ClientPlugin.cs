@@ -97,6 +97,51 @@ namespace ZtreeControl
                 var d = new PluginCallback(_control.StopZLeaf);
                 _mainForm.Invoke(d, new object[] { });
             }
+
+            if (message.GetCommand() == "set_preferences")
+            {
+                var p = message.GetParameter();
+                var xvalue = "";
+                var yvalue = "";
+                var wvalue = "";
+                var hvalue = "";
+
+                if (p.GetLength(0) > 0 && p.GetLength(1) > 1)
+                {
+                    xvalue = Message.GetAttribute(p, "X");
+                }
+
+                if (p.GetLength(0) > 0 && p.GetLength(1) > 1)
+                {
+                    yvalue = Message.GetAttribute(p, "Y");
+                }
+
+                if (p.GetLength(0) > 0 && p.GetLength(1) > 1)
+                {
+                    wvalue = Message.GetAttribute(p, "W");
+                }
+                
+                if (p.GetLength(0) > 0 && p.GetLength(1) > 1)
+                {
+                    hvalue = Message.GetAttribute(p, "H");
+                }
+
+                try
+                {
+                    if (xvalue != "") ClientModel.X = Convert.ToInt32(xvalue);
+                    if (yvalue != "") ClientModel.Y = Convert.ToInt32(yvalue);
+                    if (wvalue != "") ClientModel.W = Convert.ToInt32(wvalue);
+                    if (hvalue != "") ClientModel.H = Convert.ToInt32(hvalue);
+
+                    var np = new string[,] { { }, { } };
+                    var nm = new Message(np, true, "zleaf_config_changed", "Server");
+                    _messageQueue.SetMessage(nm);
+                }
+                catch (Exception e)
+                {
+                    TraceOps.Out(e.ToString());
+                }
+            }
         }
 
         

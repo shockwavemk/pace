@@ -21,5 +21,10 @@ namespace WebControl
         {
             this.Close();
         }
+
+        private void ServerChangeUrlForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

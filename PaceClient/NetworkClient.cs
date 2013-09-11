@@ -32,7 +32,7 @@ namespace PaceClient
 
             //TODO Demo
             ci.SetApplicationNames("");
-            ci.SetIp("localhost");
+            ci.SetIp(NetworkOps.GetIpString(HashOps.GetFqdn()));
             ci.SetPort(9091);
 
             _connectionTable.Set(_name, ci);

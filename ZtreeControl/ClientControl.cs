@@ -45,7 +45,10 @@ namespace ZtreeControl
             try
             {
                 var exeToRun = Path.Combine(Path.GetTempPath(), "zleaf.exe");
-                ProcessControl.FindDeleteFileAndStartAgain(exeToRun, "zleaf", true, false, Properties.Resources.zleaf);
+                var ci = _connectionTable.Get("Server");
+                var arguments = ClientModel.BuildCommandLineOptionsZLeaf(ci.GetIp(), _name, ClientModel.W, ClientModel.H, ClientModel.X, ClientModel.Y);
+
+                ProcessControl.FindDeleteFileAndStartAgain(exeToRun, "zleaf", true, false, Properties.Resources.zleaf, arguments);
             }
             catch (Exception exception)
             {

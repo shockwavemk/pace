@@ -33,8 +33,8 @@
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Client 1, test", 0);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClientsTableForm));
             this.clientListImageList = new System.Windows.Forms.ImageList(this.components);
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
+            this.handle = new System.Windows.Forms.PictureBox();
             this.clientListView = new System.Windows.Forms.ListView();
             this.CName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CCpu = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -45,11 +45,10 @@
             this.newConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveConnectionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadConnectionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tempServerConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripContainer1.BottomToolStripPanel.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.handle)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,30 +58,18 @@
             this.clientListImageList.ImageSize = new System.Drawing.Size(64, 64);
             this.clientListImageList.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Dock = System.Windows.Forms.DockStyle.None;
-            this.statusStrip1.Location = new System.Drawing.Point(0, 0);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(502, 22);
-            this.statusStrip1.TabIndex = 2;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
             // toolStripContainer1
             // 
             // 
-            // toolStripContainer1.BottomToolStripPanel
-            // 
-            this.toolStripContainer1.BottomToolStripPanel.Controls.Add(this.statusStrip1);
-            // 
             // toolStripContainer1.ContentPanel
             // 
+            this.toolStripContainer1.ContentPanel.Controls.Add(this.handle);
             this.toolStripContainer1.ContentPanel.Controls.Add(this.clientListView);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(502, 213);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(519, 239);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
             this.toolStripContainer1.Name = "toolStripContainer1";
-            this.toolStripContainer1.Size = new System.Drawing.Size(502, 259);
+            this.toolStripContainer1.Size = new System.Drawing.Size(519, 263);
             this.toolStripContainer1.TabIndex = 3;
             this.toolStripContainer1.Text = "toolStripContainer1";
             // 
@@ -90,15 +77,27 @@
             // 
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.menuStrip1);
             // 
+            // handle
+            // 
+            this.handle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.handle.Image = global::PaceServer.Properties.Resources.handle;
+            this.handle.Location = new System.Drawing.Point(504, 224);
+            this.handle.Name = "handle";
+            this.handle.Size = new System.Drawing.Size(15, 15);
+            this.handle.TabIndex = 2;
+            this.handle.TabStop = false;
+            // 
             // clientListView
             // 
+            this.clientListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.clientListView.CheckBoxes = true;
             this.clientListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.CName,
             this.CCpu,
             this.CQueue,
             this.CApplications});
-            this.clientListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.clientListView.FullRowSelect = true;
             this.clientListView.GridLines = true;
             listViewGroup1.Header = "Local clients";
@@ -115,7 +114,7 @@
             this.clientListView.LargeImageList = this.clientListImageList;
             this.clientListView.Location = new System.Drawing.Point(0, 0);
             this.clientListView.Name = "clientListView";
-            this.clientListView.Size = new System.Drawing.Size(502, 213);
+            this.clientListView.Size = new System.Drawing.Size(519, 218);
             this.clientListView.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.clientListView.TabIndex = 1;
             this.clientListView.UseCompatibleStateImageBehavior = false;
@@ -147,7 +146,7 @@
             this.connectionToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(502, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(519, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -156,8 +155,7 @@
             this.connectionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newConnectionToolStripMenuItem,
             this.saveConnectionsToolStripMenuItem,
-            this.loadConnectionsToolStripMenuItem,
-            this.tempServerConnectionToolStripMenuItem});
+            this.loadConnectionsToolStripMenuItem});
             this.connectionToolStripMenuItem.Name = "connectionToolStripMenuItem";
             this.connectionToolStripMenuItem.Size = new System.Drawing.Size(81, 20);
             this.connectionToolStripMenuItem.Text = "Connection";
@@ -165,38 +163,37 @@
             // newConnectionToolStripMenuItem
             // 
             this.newConnectionToolStripMenuItem.Name = "newConnectionToolStripMenuItem";
-            this.newConnectionToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.newConnectionToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.newConnectionToolStripMenuItem.Text = "New Connection";
+            this.newConnectionToolStripMenuItem.Click += new System.EventHandler(this.newConnectionToolStripMenuItem_Click_1);
             // 
             // saveConnectionsToolStripMenuItem
             // 
             this.saveConnectionsToolStripMenuItem.Name = "saveConnectionsToolStripMenuItem";
-            this.saveConnectionsToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.saveConnectionsToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.saveConnectionsToolStripMenuItem.Text = "Save Connections";
+            this.saveConnectionsToolStripMenuItem.Click += new System.EventHandler(this.saveConnectionsToolStripMenuItem_Click_1);
             // 
             // loadConnectionsToolStripMenuItem
             // 
             this.loadConnectionsToolStripMenuItem.Name = "loadConnectionsToolStripMenuItem";
-            this.loadConnectionsToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.loadConnectionsToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.loadConnectionsToolStripMenuItem.Text = "Load Connections";
-            // 
-            // tempServerConnectionToolStripMenuItem
-            // 
-            this.tempServerConnectionToolStripMenuItem.Name = "tempServerConnectionToolStripMenuItem";
-            this.tempServerConnectionToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
-            this.tempServerConnectionToolStripMenuItem.Text = "Temp: Server Connection";
+            this.loadConnectionsToolStripMenuItem.Click += new System.EventHandler(this.loadConnectionsToolStripMenuItem_Click_1);
             // 
             // ClientsTableForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(502, 259);
+            this.ClientSize = new System.Drawing.Size(519, 263);
             this.Controls.Add(this.toolStripContainer1);
             this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Location = new System.Drawing.Point(50, 50);
+            this.MainMenuStrip = this.menuStrip1;
             this.MaximumSize = new System.Drawing.Size(1600, 1200);
             this.MinimumSize = new System.Drawing.Size(300, 200);
             this.Name = "ClientsTableForm";
@@ -205,13 +202,12 @@
             this.Text = "Client\'s Table";
             this.Load += new System.EventHandler(this.ClientsTable_Load);
             this.Resize += new System.EventHandler(this.OnResize);
-            this.toolStripContainer1.BottomToolStripPanel.ResumeLayout(false);
-            this.toolStripContainer1.BottomToolStripPanel.PerformLayout();
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);
             this.toolStripContainer1.TopToolStripPanel.ResumeLayout(false);
             this.toolStripContainer1.TopToolStripPanel.PerformLayout();
             this.toolStripContainer1.ResumeLayout(false);
             this.toolStripContainer1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.handle)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -221,7 +217,6 @@
         #endregion
 
         private System.Windows.Forms.ImageList clientListImageList;
-        private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripContainer toolStripContainer1;
         private System.Windows.Forms.ListView clientListView;
         private System.Windows.Forms.ColumnHeader CName;
@@ -233,7 +228,7 @@
         private System.Windows.Forms.ToolStripMenuItem newConnectionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveConnectionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadConnectionsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem tempServerConnectionToolStripMenuItem;
+        public System.Windows.Forms.PictureBox handle;
 
 
     }

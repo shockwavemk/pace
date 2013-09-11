@@ -91,6 +91,9 @@
     <EmbeddedResource Include="ServerChangeUrlForm.resx">
       <DependentUpon>ServerChangeUrlForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ServerPreferencesForm.resx">
+      <DependentUpon>ServerPreferencesForm.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PaceCommon\PaceCommon.csproj">

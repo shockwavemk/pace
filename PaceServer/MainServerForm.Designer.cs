@@ -81,7 +81,7 @@
             // preferencesToolStripMenuItem
             // 
             this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
-            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.preferencesToolStripMenuItem.Text = "Preferences";
             this.preferencesToolStripMenuItem.Click += new System.EventHandler(this.preferencesToolStripMenuItem_Click);
             // 
@@ -140,7 +140,7 @@
             // aboutPaCEToolStripMenuItem
             // 
             this.aboutPaCEToolStripMenuItem.Name = "aboutPaCEToolStripMenuItem";
-            this.aboutPaCEToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutPaCEToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.aboutPaCEToolStripMenuItem.Text = "About PaCE";
             // 
             // mainPanel
@@ -206,6 +206,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(708, 398);
             this.Controls.Add(this.toolStripContainer1);
             this.DoubleBuffered = true;
@@ -214,8 +215,10 @@
             this.Location = new System.Drawing.Point(501, 0);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainServerForm";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PaCE Server Application";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.MainServerForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

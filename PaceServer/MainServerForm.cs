@@ -75,6 +75,8 @@ namespace PaceServer
 
                 var ci = new ConnectionTable.ClientInformation(_name);
                 ci.SetGroup("server");
+                ci.SetIp(NetworkOps.GetIpString(HashOps.GetFqdn()));
+                ci.SetPort(_port);
                 _connectionTable.Set(_name, ci);
 
                 LoadClientsTable();
@@ -117,6 +119,7 @@ namespace PaceServer
             _clientsTableForm = new ClientsTableForm(ref _plugins, _port);
             _clientsTableForm.TopLevel = false;
             _clientsTableForm.Visible = true;
+            
             mainPanel.Controls.Add(_clientsTableForm);
             
         }
