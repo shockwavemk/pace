@@ -71,7 +71,7 @@
             this.clientListView.LargeImageList = this.clientListImageList;
             this.clientListView.Location = new System.Drawing.Point(0, 24);
             this.clientListView.Name = "clientListView";
-            this.clientListView.Size = new System.Drawing.Size(384, 537);
+            this.clientListView.Size = new System.Drawing.Size(402, 437);
             this.clientListView.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.clientListView.TabIndex = 0;
             this.clientListView.UseCompatibleStateImageBehavior = false;
@@ -108,7 +108,7 @@
             this.connectionToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(384, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(402, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -152,13 +152,13 @@
             this.tempServerConnectionToolStripMenuItem.Text = "Temp: Server Connection";
             this.tempServerConnectionToolStripMenuItem.Click += new System.EventHandler(this.tempServerConnectionToolStripMenuItem_Click);
             // 
-            // ClientsTable
+            // ClientsTableForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(384, 561);
+            this.ClientSize = new System.Drawing.Size(402, 461);
             this.Controls.Add(this.clientListView);
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
@@ -166,10 +166,10 @@
             this.MainMenuStrip = this.menuStrip1;
             this.MaximumSize = new System.Drawing.Size(1600, 1200);
             this.MinimumSize = new System.Drawing.Size(300, 500);
-            this.Name = "ClientsTable";
+            this.Name = "ClientsTableForm";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Client\'s Table";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.ClientsTable_Load);
             this.Resize += new System.EventHandler(this.OnResize);
             this.menuStrip1.ResumeLayout(false);
