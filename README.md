@@ -16,7 +16,7 @@ THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS “AS IS” AND ANY EX
 
 z-Tree licence
 ===
-PaCE is using z-Tree as part of its software. In order to use PaCE with z-Tree Plugin you must agree to its licence (http://www.iew.uzh.ch/ztree/howtoget.php). The program can be licensed free of charge. When you report results of experiments conducted with z-Tree, the licence requires that you mention it's use in the publication and cite the article forthcoming in Experimental Economics.
+PaCE is able to use z-Tree as part of its software-system. In order to use PaCE with z-Tree Plugin you must agree to its licence (http://www.iew.uzh.ch/ztree/howtoget.php). The program can be licensed free of charge. When you report results of experiments conducted with z-Tree, the licence requires that you mention it's use in the publication and cite the article forthcoming in Experimental Economics.
 
 The correct citation is:
 
