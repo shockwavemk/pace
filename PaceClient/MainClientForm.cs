@@ -67,9 +67,16 @@ namespace PaceClient
 
         private void MainClientForm_Location(object sender, EventArgs e)
         {
-            var location = Location;
-            location.X += Width;
-            TraceOps.SetLogPosition(location);
+            if (Visible == true)
+            {
+                var location = Location;
+                location.X += Width;
+                TraceOps.SetLogPosition(location);
+            }
+            else
+            {
+                TraceOps.SetLogHidden();
+            }
         }
 
         private void ConfigServerOnChanged(object sender, ChangedEventArgs eventArgs)
@@ -136,6 +143,7 @@ namespace PaceClient
             if (FormWindowState.Minimized == WindowState)
             {
                 Show();
+                TraceOps.SetLogVisible();
                 WindowState = FormWindowState.Normal;
             }
         }
@@ -143,6 +151,23 @@ namespace PaceClient
         private void notifyIcon_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
+            {
+                var btext = "No network connection";
+                try
+                {
+                    btext = NetworkOps.GetIpString(HashOps.GetFqdn());
+                }
+                catch (Exception)
+                {
+
+                    btext = "No network connection";
+                }
+                
+                
+                notifyIcon.ShowBalloonTip(1000, "Pace Configuration", btext, ToolTipIcon.None);
+            }
+
+            if (e.Button == MouseButtons.Right)
             {
                 MethodInfo mi = typeof(NotifyIcon).GetMethod("ShowContextMenu", BindingFlags.Instance | BindingFlags.NonPublic);
                 mi.Invoke(notifyIcon, null);

@@ -50,7 +50,6 @@
             this.ClientSize = new System.Drawing.Size(425, 435);
             this.Controls.Add(this.LogFile);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.MinimizeBox = false;
             this.Name = "Log";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;

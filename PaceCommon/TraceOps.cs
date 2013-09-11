@@ -25,7 +25,7 @@ namespace PaceCommon
 
         public static void LoadLog()
         {
-            SetLogPosition(new Point(0, 0));
+            SetLogHidden();
         }
 
         public static void SetLogPosition(Point location)
@@ -33,11 +33,45 @@ namespace PaceCommon
             if (_logForm == null)
             {
                 _logForm = new Log();
+                _logForm.TopLevel = true;
             }
 
-            _logForm.TopLevel = true;
-            if(location!= new Point(0,0)) {_logForm.Location = location;}
-            _logForm.Show();
+            if (_logForm != null && _logForm.Visible)
+            {
+                if (location != new Point(0, 0))
+                {
+                    _logForm.Location = location;
+                }
+                _logForm.Show();
+            }
+        }
+
+        public static void SetLogHidden()
+        {
+            if (_logForm == null)
+            {
+                _logForm = new Log();
+                _logForm.TopLevel = true;
+            }
+
+            if (_logForm == null || _logForm.Visible == false || _logForm.IsDisposed)
+            {
+                _logForm = new Log();
+                _logForm.TopLevel = true;
+                _logForm.Visible = false;
+            }
+            
+        }
+
+        public static void SetLogVisible()
+        {
+            if (_logForm == null || _logForm.Visible == false || _logForm.IsDisposed)
+            {
+                _logForm = new Log();
+                _logForm.TopLevel = true;
+                _logForm.Visible = true;
+            }
+            
         }
     }
 

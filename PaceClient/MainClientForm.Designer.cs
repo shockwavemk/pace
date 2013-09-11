@@ -73,6 +73,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PaceClient Console";
+            this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.Load += new System.EventHandler(this.MainClientForm_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);

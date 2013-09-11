@@ -23,14 +23,14 @@ namespace PaceCommon
 
         public void UpdateLogFile()
         {
-            if (LogFile.InvokeRequired)
+            if (LogFile != null && LogFile.InvokeRequired)
             {
                 var d = new UpdateLogFileCallback(UpdateLogFile);
                 Invoke(d, new object[] { });
             }
             else
             {
-                LogFile.Text = TraceOps.GetLog();
+                if (LogFile != null) LogFile.Text = TraceOps.GetLog();
             }
         }
 
@@ -40,20 +40,29 @@ namespace PaceCommon
             while (_running)
             {
                 Thread.Sleep(1000);
-                Invoke(d, new object[] { });
+                if (_running && this.Visible && LogFile != null)
+                {
+                    Invoke(d, new object[] {});
+                }
             }
         }
 
         private void UpdateLogFileCB()
         {
-            LogFile.Text = TraceOps.GetLog();
+            if (LogFile != null) LogFile.Text = TraceOps.GetLog();
         }
-
 
 
         private void Log_Load(object sender, EventArgs e)
         {
+            FormClosing += Log_FormClosing;
+            _running = true;
             Task.Factory.StartNew(UpdateLogFileInternal);
+        }
+
+        private void Log_FormClosing(object sender, EventArgs e)
+        {
+            _running = false;
         }
     }
 }

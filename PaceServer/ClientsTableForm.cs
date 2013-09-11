@@ -287,5 +287,10 @@ namespace PaceServer
         {
 
         }
+
+        private void clientListView_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

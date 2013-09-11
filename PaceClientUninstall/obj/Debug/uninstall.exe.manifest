@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PaceCommon.dll" size="34816">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PaceCommon.dll" size="35328">
       <assemblyIdentity name="PaceCommon" version="1.0.0.0" publicKeyToken="ADBD968CC8BEA995" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>dTPGzP1upyIdqrpeOP33XdEVY8BE2iIJFvxZ+qzaxQg=</dsig:DigestValue>
+        <dsig:DigestValue>f9LovDrxLvY3MsD2DdqAIs0QDUr5PdZKr6GkTHZ5CCc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -62,7 +62,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>0xF1Hy04d76gbVz/Me0Od3Vfkg3K+LeSSDDVWssI6YE=</dsig:DigestValue>
+        <dsig:DigestValue>BrR0ce6utg7FKkLHSBmQ5PnRxBOb9MY8JE3b3HRbDho=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

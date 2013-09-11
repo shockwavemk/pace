@@ -239,15 +239,12 @@ namespace PaceServer
 
         private void Edit_Click(object sender, EventArgs e)
         {
-            var clientInformations = _connectionTable.GetChecked();
-            
-            var m = new Message();
-            _messageQueue.SetMessage(m);
-            
-            foreach (ConnectionTable.ClientInformation clientInformation in clientInformations)
-            {
-                
-            }
+           
+        }
+
+        private void toolStripContainer1_ContentPanel_Load(object sender, EventArgs e)
+        {
+
         }
     }
 

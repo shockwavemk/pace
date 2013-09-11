@@ -23,3 +23,8 @@ C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClientUnin
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClientUninstall\obj\Debug\uninstall.application
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClientUninstall\obj\Debug\uninstall.exe
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\PaceClientUninstall\obj\Debug\uninstall.pdb
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceClientUninstall\bin\Debug\uninstall.exe.manifest
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceClientUninstall\bin\Debug\uninstall.application
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceClientUninstall\obj\Debug\uninstall.TrustInfo.xml
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceClientUninstall\obj\Debug\uninstall.exe.manifest
+M:\Documents\Visual Studio 2012\Projects\Pace\PaceClientUninstall\obj\Debug\uninstall.application

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <asmv1:assemblyIdentity name="PaceClient.exe" version="1.0.0.18" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
+  <asmv1:assemblyIdentity name="PaceClient.exe" version="1.0.0.19" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
   <description asmv2:iconFile="pc.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
@@ -50,19 +50,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>CkiSBrhwGlQ7bRcibIbWnW8BC+gPDlUOHqflxz+1RS8=</dsig:DigestValue>
+        <dsig:DigestValue>rm4y5xoTIb4QFY84HvrBx5Dg5c4k2ewHkDq9yVUP04A=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PaceCommon.dll" size="34816">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PaceCommon.dll" size="35328">
       <assemblyIdentity name="PaceCommon" version="1.0.0.0" publicKeyToken="ADBD968CC8BEA995" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>dTPGzP1upyIdqrpeOP33XdEVY8BE2iIJFvxZ+qzaxQg=</dsig:DigestValue>
+        <dsig:DigestValue>f9LovDrxLvY3MsD2DdqAIs0QDUr5PdZKr6GkTHZ5CCc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -72,7 +72,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>tlBcYZkYvLe7qTM+IkbphImZJZ5oj1rYdCWdfJVLhSU=</dsig:DigestValue>
+      <dsig:DigestValue>FNJRWSYpCkUNwyeLmlhCmnZqtuAm9zXBBuVtKNCgn0Y=</dsig:DigestValue>
     </hash>
   </file>
   <file name="PaceClient.exe.config" size="284">
@@ -99,7 +99,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>0xF1Hy04d76gbVz/Me0Od3Vfkg3K+LeSSDDVWssI6YE=</dsig:DigestValue>
+      <dsig:DigestValue>BrR0ce6utg7FKkLHSBmQ5PnRxBOb9MY8JE3b3HRbDho=</dsig:DigestValue>
     </hash>
   </file>
   <file name="WebControl.dll" size="223744">
@@ -108,7 +108,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>8bZwGsWQ+BhH/E5/nFtSFE+XrvpF7qUBOqHoR5OMRRo=</dsig:DigestValue>
+      <dsig:DigestValue>mIRplvQvpswQDLbffPVslkeWXFr8UZBO8WV7ERJXaDo=</dsig:DigestValue>
     </hash>
   </file>
   <file name="ZtreeControl.dll" size="2750464">
@@ -117,7 +117,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>Kd1NIisRrGMDM2M58teOJ6gXN8RbQwq+IgC3orr3v9M=</dsig:DigestValue>
+      <dsig:DigestValue>fFij6d1PNd1/OGGOKRJDo4+JOJPyvVUgxWeX/QSnxlM=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>
