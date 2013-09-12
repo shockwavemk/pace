@@ -215,10 +215,8 @@
             this.Location = new System.Drawing.Point(501, 0);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainServerForm";
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PaCE Server Application";
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.MainServerForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

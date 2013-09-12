@@ -69,6 +69,8 @@
             this.textBoxUrl.Name = "textBoxUrl";
             this.textBoxUrl.Size = new System.Drawing.Size(275, 20);
             this.textBoxUrl.TabIndex = 3;
+            this.textBoxUrl.Text = "http://wiwi.uni-paderborn.de/dep1/bwl-insb-corporate-governance-prof-fahr/baer-la" +
+    "b/";
             // 
             // ServerChangeUrlForm
             // 

@@ -93,7 +93,7 @@
             this.textBoxPort.Text = "9091";
             this.textBoxPort.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
-            // NewConnection
+            // ConnectionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -109,8 +109,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "NewConnection";
-            this.ShowInTaskbar = false;
+            this.Name = "ConnectionForm";
             this.Text = "Establish a new connection";
             this.Load += new System.EventHandler(this.NewConnection_Load);
             this.ResumeLayout(false);

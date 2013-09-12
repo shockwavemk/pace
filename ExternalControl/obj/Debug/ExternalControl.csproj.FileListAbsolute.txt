@@ -14,3 +14,5 @@ C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\ExternalContro
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\ExternalControl\obj\Debug\ExternalControl.pdb
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\ExternalControl\obj\Debug\ExternalControl.ServerClientDetailForm.resources
 C:\Users\Martin Kramer\Documents\Visual Studio 2012\Projects\Pace\ExternalControl\obj\Debug\ExternalControl.csproj.GenerateResource.Cache
+M:\Documents\Visual Studio 2012\Projects\Pace\ExternalControl\obj\Debug\ExternalControl.ServerClientDetailForm.resources
+M:\Documents\Visual Studio 2012\Projects\Pace\ExternalControl\obj\Debug\ExternalControl.csproj.GenerateResource.Cache
