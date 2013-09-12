@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,6 +40,25 @@ namespace ExternalControl
         public void SetPanel(Panel mainPanel)
         {
             _mainPanel = mainPanel;
+        }
+
+        public void StartProcess(string fileName, string arguments)
+        {
+            var proc = new ProcessStartInfo();
+            proc.FileName = fileName;
+            proc.WindowStyle = ProcessWindowStyle.Hidden;
+            proc.Arguments = arguments;
+            Process.Start(proc);
+        }
+
+        public void RemoteStartProcess()
+        {
+            TraceOps.Out("TODO: Remote Start");
+        }
+
+        public void RemoteStopProcess()
+        {
+            TraceOps.Out("TODO: Remote Start");
         }
     }
 }

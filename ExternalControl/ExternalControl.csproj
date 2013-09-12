@@ -72,6 +72,11 @@
   <ItemGroup>
     <None Include="PACE2.snk" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ServerClientDetailForm.resx">
+      <DependentUpon>ServerClientDetailForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /y "$(ProjectDir)$(OutDir)$(TargetFileName)" "$(SolutionDir)PaceClient\"

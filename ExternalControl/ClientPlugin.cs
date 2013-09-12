@@ -90,14 +90,33 @@ namespace ExternalControl
             TraceOps.Out("ExternalControl Client recived Message: " + message.GetCommand());
             if (message.GetCommand() == "start_externalcontrol")
             {
-                var d = new PluginCallback(StartExtern);
+                var d = new PluginCallback(_control.RemoteStartProcess);
                 _mainPanel.Invoke(d, new object[] { });
             }
-        }
 
-        public void StartExtern()
-        {
-            
+            if (message.GetCommand() == "start_externalcontrol")
+            {
+                var d = new PluginCallback(_control.RemoteStopProcess);
+                _mainPanel.Invoke(d, new object[] { });
+            }
+
+            if (message.GetCommand() == "restart_windows")
+            {
+                var d = new PluginCallback(_control.RemoteStartProcess);
+                _mainPanel.Invoke(d, new object[] { });
+            }
+
+            if (message.GetCommand() == "logoff_windows")
+            {
+                var d = new PluginCallback(_control.RemoteStartProcess);
+                _mainPanel.Invoke(d, new object[] { });
+            }
+
+            if (message.GetCommand() == "shutdown_windows")
+            {
+                var d = new PluginCallback(_control.RemoteStartProcess);
+                _mainPanel.Invoke(d, new object[] { });
+            }
         }
 
         public EventHandler SetEventHandler(object sender, EventArgs args)

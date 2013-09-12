@@ -6,11 +6,14 @@ namespace ExternalControl
 {
     class ServerView : IServerView
     {
-        private ToolStripMenuItem startProcessToolStripMenuItem;
-        private ToolStripMenuItem stopProcessToolStripMenuItem;
-        private ToolStripMenuItem showClientDetailsToolStripMenuItem;
-        private ToolStripMenuItem externalProcessToolStripMenuItem;
-        
+        private ToolStripMenuItem _startProcessToolStripMenuItem;
+        private ToolStripMenuItem _stopProcessToolStripMenuItem;
+        private ToolStripMenuItem _showClientDetailsToolStripMenuItem;
+        private ToolStripMenuItem _externalProcessToolStripMenuItem;
+        private ToolStripMenuItem _restartWindowsToolStripMenuItem;
+        private ToolStripMenuItem _logOffWindowsToolStripMenuItem;
+        private ToolStripMenuItem _shutDownWindowsToolStripMenuItem;
+
         public ToolStripMenuItem CreateMainMenu()
         {
             return null;
@@ -18,32 +21,58 @@ namespace ExternalControl
 
         public ToolStripMenuItem CreateClientsTableMenu()
         {
-            externalProcessToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.startProcessToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.stopProcessToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.showClientDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            _externalProcessToolStripMenuItem = new ToolStripMenuItem();
+            this._startProcessToolStripMenuItem = new ToolStripMenuItem();
+            this._stopProcessToolStripMenuItem = new ToolStripMenuItem();
+            this._showClientDetailsToolStripMenuItem = new ToolStripMenuItem();
+            this._restartWindowsToolStripMenuItem = new ToolStripMenuItem();
+            this._logOffWindowsToolStripMenuItem = new ToolStripMenuItem();
+            this._shutDownWindowsToolStripMenuItem = new ToolStripMenuItem();
             
-            externalProcessToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] {
-            startProcessToolStripMenuItem,
-            stopProcessToolStripMenuItem,
-            showClientDetailsToolStripMenuItem});
-            externalProcessToolStripMenuItem.Name = "externalProcessToolStripMenuItem";
-            externalProcessToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
-            externalProcessToolStripMenuItem.Text = "ExternalControl";
+            _externalProcessToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] {
+            _startProcessToolStripMenuItem,
+            _stopProcessToolStripMenuItem,
+            _restartWindowsToolStripMenuItem,
+            _logOffWindowsToolStripMenuItem,
+            _shutDownWindowsToolStripMenuItem,
+            _showClientDetailsToolStripMenuItem});
+            _externalProcessToolStripMenuItem.Name = "externalProcessToolStripMenuItem";
+            _externalProcessToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
+            _externalProcessToolStripMenuItem.Text = "ExternalControl";
 
-            startProcessToolStripMenuItem.Name = "startProcessToolStripMenuItem";
-            startProcessToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
-            startProcessToolStripMenuItem.Text = "Start Process";
+            _startProcessToolStripMenuItem.Name = "startProcessToolStripMenuItem";
+            _startProcessToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            _startProcessToolStripMenuItem.Text = "Start Process";
+            _startProcessToolStripMenuItem.Click += ServerControl.RemoteStartProcess;
             
-            stopProcessToolStripMenuItem.Name = "stopProcessToolStripMenuItem";
-            stopProcessToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
-            stopProcessToolStripMenuItem.Text = "Stop Process";
+            _stopProcessToolStripMenuItem.Name = "stopProcessToolStripMenuItem";
+            _stopProcessToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            _stopProcessToolStripMenuItem.Text = "Stop Process";
+            _stopProcessToolStripMenuItem.Click += ServerControl.RemoteStopProcess;
              
-            showClientDetailsToolStripMenuItem.Name = "showClientDetailsToolStripMenuItem";
-            showClientDetailsToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
-            showClientDetailsToolStripMenuItem.Text = "Show Client Details";
+            _showClientDetailsToolStripMenuItem.Name = "showClientDetailsToolStripMenuItem";
+            _showClientDetailsToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            _showClientDetailsToolStripMenuItem.Text = "Show Client Details";
+            _showClientDetailsToolStripMenuItem.Click += ServerControl.ShowClientDetails;
 
-            return externalProcessToolStripMenuItem;
+            // System
+            _restartWindowsToolStripMenuItem.Name = "restartWindowsToolStripMenuItem";
+            _restartWindowsToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            _restartWindowsToolStripMenuItem.Text = "Restart Windows";
+            _restartWindowsToolStripMenuItem.Click += ServerControl.RemoteRestartWindows;
+
+            _logOffWindowsToolStripMenuItem.Name = "logOffWindowsToolStripMenuItem";
+            _logOffWindowsToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            _logOffWindowsToolStripMenuItem.Text = "Log Off Windows";
+            _logOffWindowsToolStripMenuItem.Click += ServerControl.RemoteLogOffWindows;
+
+            _shutDownWindowsToolStripMenuItem.Name = "shutDownWindowsToolStripMenuItem";
+            _shutDownWindowsToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            _shutDownWindowsToolStripMenuItem.Text = "Shut Down Windows";
+            _shutDownWindowsToolStripMenuItem.Click += ServerControl.RemoteShutDownWindows;
+
+
+            return _externalProcessToolStripMenuItem;
         }
 
         public ToolStripMenuItem CreateMainMenuEntryFile()
