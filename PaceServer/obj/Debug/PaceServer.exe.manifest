@@ -50,7 +50,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>eB9UgG6AK5m+IxVbmrm53pZilQtH9Guxkbq2FrS1RyE=</dsig:DigestValue>
+        <dsig:DigestValue>JWd/plOf+eJAE+wPX/GsePUohFrML8oPDwOqDjP0JzQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -62,7 +62,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Bi2h53Yd1VjQoNft1bgwXA0HnQf9EqJcI8mA7/qtrkA=</dsig:DigestValue>
+        <dsig:DigestValue>FaK7Qvt2kKuROihPJAAmqTAhSqsKWox78WeUC8l5EEU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -72,7 +72,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>KTw2BIF/fRFvKF4YoByHVqqB8gmYWX3MbGV+M+DV/CY=</dsig:DigestValue>
+      <dsig:DigestValue>QFad5x9H/7SrCNAdnz2Y3IYTY9fcu9sARdz/e/WXO3A=</dsig:DigestValue>
     </hash>
   </file>
   <file name="PaceServer.exe.config" size="284">
@@ -99,7 +99,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>9ET/b770gnfont6Vh2hvbbNLW8bnbbK4hTVy4Rjk8Qw=</dsig:DigestValue>
+      <dsig:DigestValue>XneDI1xou5ahYL9RlKI6dPJu9uYH5ZRTfBZ7dHRnxAk=</dsig:DigestValue>
     </hash>
   </file>
   <file name="ZtreeControl.dll" size="2756608">
@@ -108,7 +108,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>qyKfM5wp5Qg3qzU/wcGpfKRsfqzR7eJ0uOSPpCbMILE=</dsig:DigestValue>
+      <dsig:DigestValue>MmMCX6fogpnUcuHsZ3gg5TD1UV1dWD60m9NtF7KHDuk=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>
