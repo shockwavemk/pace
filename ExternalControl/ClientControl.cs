@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 using PaceCommon;
+using Keys = System.Windows.Forms.Keys;
 
 namespace ExternalControl
 {
@@ -16,7 +14,7 @@ namespace ExternalControl
         private Form _mainForm;
         private string _name;
         private Panel _mainPanel;
-
+        
         public void SetName(ref string name)
         {
             _name = name;
@@ -40,6 +38,11 @@ namespace ExternalControl
         public void SetPanel(Panel mainPanel)
         {
             _mainPanel = mainPanel;
+        }
+
+        public void RemoteKeyLogging()
+        {
+            TraceOps.Out("TODO: Remote Keylogging");
         }
 
         public void StartProcess(string fileName, string arguments)

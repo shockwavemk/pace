@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 using PaceCommon;
+using Keys = System.Windows.Forms.Keys;
 using Message = PaceCommon.Message;
 
 namespace PaceClient
@@ -19,7 +21,11 @@ namespace PaceClient
         private NetworkClient _networkClient;
         private ConfigServer _configServer;
         private IClientPlugin[] _plugins;
-        
+        private KeyboardControl _keyboard;
+
+        [DllImport("user32.dll")] private static extern bool RegisterHotKey(IntPtr hWnd, int id, uint fsModifiers, uint vk);
+        [DllImport("user32.dll")] private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
+
         public MainClientForm()
         {
             _plugins = DllLoader.LoadClientPlugIns();
@@ -60,10 +66,19 @@ namespace PaceClient
             _configServer = new ConfigServer();
             _configServer.Changed += ConfigServerOnChanged;
 
+            _keyboard = new KeyboardControl();
+            _keyboard.RegisterGlobalHotKey(Constants.NOMOD, Keys.Left, this);
+            _keyboard.RegisterGlobalHotKey(Constants.NOMOD, Keys.Right, this);
+            _keyboard.KeyPressed += HandleHotkey;
+
+
             DllLoader.InitializeClientPlugIns(_plugins);
         }
 
-
+        private void HandleHotkey(object sender, KeyPressedEventArgs keyPressedEventArgs)
+        {
+            TraceOps.Out("Hotkey pressed: "+keyPressedEventArgs.Key.ToString());
+        }
 
         private void MainClientForm_Location(object sender, EventArgs e)
         {
@@ -198,5 +213,18 @@ namespace PaceClient
         {
 
         }
+    }
+        
+    public static class Constants
+    {
+        //modifiers
+        public const int NOMOD = 0x0000;
+        public const int ALT = 0x0001;
+        public const int CTRL = 0x0002;
+        public const int SHIFT = 0x0004;
+        public const int WIN = 0x0008;
+
+        //windows message id for hotkey
+        public const int WM_HOTKEY_MSG_ID = 0x0312;
     }
 }

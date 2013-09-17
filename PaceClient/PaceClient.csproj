@@ -98,6 +98,7 @@
       <DependentUpon>BlackForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ConfigServer.cs" />
+    <Compile Include="KeyboardControl.cs" />
     <Compile Include="MainClientForm.cs">
       <SubType>Form</SubType>
     </Compile>

